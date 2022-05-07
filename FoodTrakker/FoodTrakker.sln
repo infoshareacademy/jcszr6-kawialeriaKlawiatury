@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTrakker.BusinessLogic", "FoodTrakker\FoodTrakker.BusinessLogic.csproj", "{B010CB77-3623-4DB6-967F-75D84FA51000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTrakker.GUI", "FoodTrakker.GUI\FoodTrakker.GUI.csproj", "{2A45C82F-D993-440A-9610-79E90E823F3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B010CB77-3623-4DB6-967F-75D84FA51000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B010CB77-3623-4DB6-967F-75D84FA51000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B010CB77-3623-4DB6-967F-75D84FA51000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B010CB77-3623-4DB6-967F-75D84FA51000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A45C82F-D993-440A-9610-79E90E823F3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A45C82F-D993-440A-9610-79E90E823F3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A45C82F-D993-440A-9610-79E90E823F3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A45C82F-D993-440A-9610-79E90E823F3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE044338-7FFB-4E75-86A8-5276A8424AC8}
+	EndGlobalSection
+EndGlobal
