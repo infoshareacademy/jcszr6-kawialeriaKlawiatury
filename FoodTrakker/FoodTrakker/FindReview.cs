@@ -14,24 +14,21 @@ namespace FoodTrakker.BusinessLogic
         public void FindReviewByDate(string dateRev)
         {
             DateTime date = Convert.ToDateTime(dateRev);
-            foreach (var rev in reviews)
+            var reviewsByDate = reviews.Where(r => r.Date == date);
+            foreach (var revByDate in reviewsByDate)
             {
-                if (rev.Date.Equals(date))
-                {
-                    Console.WriteLine(rev);
-                }
+                Console.WriteLine(revByDate);
             }
         }
 
         public void FindReviewForFoodTruck(int id)
         {
-            foreach (var rev in reviews)
+            var reviewsByFoodTruckId = reviews.Where(r => r.FoodTruckId == id);
+            foreach (var revByFoodTruckId in reviewsByFoodTruckId)
             {
-                if (rev.FoodTruckId.Equals(id))
-                {
-                    Console.WriteLine(rev);
-                }
+                Console.WriteLine(revByFoodTruckId);
             }
+
         }
     }
 }
