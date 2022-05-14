@@ -11,8 +11,9 @@ namespace FoodTrakker.BusinessLogic
     {
         private readonly List<Review> reviews = new List<Review>();
 
-        public void FindReviewByDate(DateTime date)
+        public void FindReviewByDate(string dateRev)
         {
+            DateTime date = Convert.ToDateTime(dateRev);
             foreach (var rev in reviews)
             {
                 if (rev.Date.Equals(date))
