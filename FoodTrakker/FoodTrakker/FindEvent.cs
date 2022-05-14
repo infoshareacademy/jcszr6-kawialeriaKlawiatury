@@ -11,18 +11,8 @@ namespace FoodTrakker.BusinessLogic
     {
         public static List<Event> FindEventsForFoodTruck(FoodTruck foodTruck, List<Event> eventList)
         {
-            List<Event> events = new List<Event>();
-            foreach (var eEvent in eventList)
-            {
-                foreach (var eEventFoodTruck in eEvent.FoodTrucks)
-                {
-                    if (foodTruck.ID == eEventFoodTruck.ID)
-                    {
-                        events.Add(eEvent);
-                        break;
-                    }
-                }
-            }
+            List<Event> events = eventList.FindAll(e => e.FoodTrucks.Any(f => f.ID == foodTruck.ID));
+
             return events;
         }
     }
