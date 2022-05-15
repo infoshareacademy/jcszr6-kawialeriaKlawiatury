@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.BusinessLogic
 {
-    class FoodTruck
+    public class FoodTruck
     {
         public int ID { get;set; }
         [MinLength(3)]
