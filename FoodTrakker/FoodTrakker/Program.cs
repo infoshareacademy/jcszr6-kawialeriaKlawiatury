@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using FoodTrakker.BusinessLogic;
 using FoodTrakker.BusinessLogic.Models;
 
@@ -11,61 +13,33 @@ namespace FoodTrakker
         {
             Console.WriteLine("Hello World!");
 
-            var events = new EventRepository();
+            var eventsRepo = new EventRepository();
+            eventsRepo.GetEventsFromJSON();
 
-            var event1 = new Event();
-
-            var event2 = new Event();
-
-            var event3 = new Event();
-            var event4 = new Event();
-
-            event1.ID = 1;
-            event2.ID = 2;
-            event3.ID = 3;
-            event4.ID = 4;
-
-            
-            var foodTruck1 = new FoodTruck
+            foreach (Event @event in eventsRepo.GetAllEvents())
             {
-                ID = 1
-            };
+                Console.WriteLine($"Name: {@event.Name}, Id: {@event.Id}, Location: {@event.Location}");
+            }
 
-            var foodTruck2 = new FoodTruck
+            foreach (Event @event in eventsRepo.GetAllEvents())
+            {
+                foreach (FoodTruck foodTruck in @event.FoodTrucks)
+                {
+                    Console.WriteLine($"Food truck Id: {foodTruck.ID}");
+                }
+            }
+
+            var foodtruck = new FoodTruck()
             {
                 ID = 2
             };
 
-            var foodTruck3 = new FoodTruck
+            var listResult = FindEvent.FindEventsForFoodTruck(foodtruck, eventsRepo.GetAllEvents());
+            foreach (Event @event in listResult)
             {
-                ID = 3
-            };
-
-            events.AddEvent(event1);
-            events.AddEvent(event2);
-            events.AddEvent(event3);
-            events.AddEvent(event4);
-
-            event1.FoodTrucks = new List<FoodTruck>();
-            event3.FoodTrucks = new List<FoodTruck>();
-            event2.FoodTrucks = new List<FoodTruck>();
-            event4.FoodTrucks = new List<FoodTruck>();
-
-            event1.FoodTrucks.Add(foodTruck1);
-            event1.FoodTrucks.Add(foodTruck2);
-
-            event2.FoodTrucks.Add(foodTruck1);
-
-            event3.FoodTrucks.Add(foodTruck2);
-            event3.FoodTrucks.Add(foodTruck1);
-
-            event4.FoodTrucks.Add(foodTruck2);
-
-            var foundEvents = FindEvent.FindEventsForFoodTruck(foodTruck2, events.GetAllEvents());
-            foreach (var eEvent in foundEvents)
-            {
-                Console.WriteLine(eEvent.ID);
+                Console.WriteLine($"{@event.Name}");
             }
+
         }
     }
 }
