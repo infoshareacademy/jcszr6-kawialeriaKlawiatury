@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.BusinessLogic.Models
 {
-    internal class Location
+    public class Location
     {
         public string Street { get; set; }  
         public string City { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.BusinessLogic.Models
 {
-    internal class FoodTruckType
+    public class FoodTruckType
     {
         public int ID { get; private set; }
         public string Name { get; set; }

@@ -11,27 +11,19 @@ using FoodTrakker.BusinessLogic.Models;
 
 namespace FoodTrakker.BusinessLogic
 {
-    class EventRepository
+    class  EventRepository
     {
-        private readonly List<Event> _events = new List<Event>();
+        private static readonly List<Event> _events = new List<Event>();
 
 
-        public List<Event> GetAllEvents()
+        public static List<Event> GetAllEvents()
         {
-            return this._events;
+            return _events;
         }
 
-        public void AddEvent(Event eEvent)
+        public static void AddEvent(Event eEvent)
         {
-            this._events.Add(eEvent);
+            _events.Add(eEvent);
         }
-
-        public void GetEventsFromJSON()
-        {
-            var eventsJson = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Events.json"));
-            var events = JsonSerializer.Deserialize<List<Event>>(eventsJson);
-            _events.AddRange(events);
-        }
-
     }
 }

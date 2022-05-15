@@ -13,32 +13,35 @@ namespace FoodTrakker
         {
             Console.WriteLine("Hello World!");
 
-            var eventsRepo = new EventRepository();
-            eventsRepo.GetEventsFromJSON();
+            //var eventsRepo = new EventRepository();
+            //eventsRepo.GetEventsFromJSON();
 
-            foreach (Event @event in eventsRepo.GetAllEvents())
-            {
-                Console.WriteLine($"Name: {@event.Name}, Id: {@event.Id}, Location: {@event.Location}");
-            }
+            //foreach (Event @event in eventsRepo.GetAllEvents())
+            //{
+            //    Console.WriteLine($"Name: {@event.Name}, Id: {@event.Id}, Location: {@event.Location}");
+            //}
 
-            foreach (Event @event in eventsRepo.GetAllEvents())
-            {
-                foreach (FoodTruck foodTruck in @event.FoodTrucks)
-                {
-                    Console.WriteLine($"Food truck Id: {foodTruck.ID}");
-                }
-            }
+            //foreach (Event @event in eventsRepo.GetAllEvents())
+            //{
+            //    foreach (FoodTruck foodTruck in @event.FoodTrucks)
+            //    {
+            //        Console.WriteLine($"Food truck Id: {foodTruck.ID}");
+            //    }
+            //}
 
-            var foodtruck = new FoodTruck()
-            {
-                ID = 2
-            };
+            //var foodtruck = new FoodTruck()
+            //{
+            //    ID = 2
+            //};
 
-            var listResult = FindEvent.FindEventsForFoodTruck(foodtruck, eventsRepo.GetAllEvents());
-            foreach (Event @event in listResult)
-            {
-                Console.WriteLine($"{@event.Name}");
-            }
+            //var listResult = FindEvent.FindEventsForFoodTruck(foodtruck, eventsRepo.GetAllEvents());
+            //foreach (Event @event in listResult)
+            //{
+            //    Console.WriteLine($"{@event.Name}");
+            //}
+
+            string info = Environment.CurrentDirectory;
+            Console.WriteLine(info);
 
         }
     }
