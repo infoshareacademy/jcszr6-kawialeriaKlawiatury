@@ -18,10 +18,12 @@ namespace FoodTrakker
             var event2 = new Event();
 
             var event3 = new Event();
+            var event4 = new Event();
 
             event1.ID = 1;
             event2.ID = 2;
             event3.ID = 3;
+            event4.ID = 4;
 
             
             var foodTruck1 = new FoodTruck
@@ -42,10 +44,12 @@ namespace FoodTrakker
             events.AddEvent(event1);
             events.AddEvent(event2);
             events.AddEvent(event3);
+            events.AddEvent(event4);
 
             event1.FoodTrucks = new List<FoodTruck>();
             event3.FoodTrucks = new List<FoodTruck>();
             event2.FoodTrucks = new List<FoodTruck>();
+            event4.FoodTrucks = new List<FoodTruck>();
 
             event1.FoodTrucks.Add(foodTruck1);
             event1.FoodTrucks.Add(foodTruck2);
@@ -55,9 +59,9 @@ namespace FoodTrakker
             event3.FoodTrucks.Add(foodTruck2);
             event3.FoodTrucks.Add(foodTruck1);
 
+            event4.FoodTrucks.Add(foodTruck2);
 
-
-            var foundEvents = FindEvent.FindEventsForFoodTruck(foodTruck3, events.GetAllEvents());
+            var foundEvents = FindEvent.FindEventsForFoodTruck(foodTruck2, events.GetAllEvents());
             foreach (var eEvent in foundEvents)
             {
                 Console.WriteLine(eEvent.ID);
