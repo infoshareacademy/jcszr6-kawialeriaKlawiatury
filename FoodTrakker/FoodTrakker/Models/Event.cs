@@ -14,5 +14,6 @@ namespace FoodTrakker.BusinessLogic.Models
         public string Location { get;set; } 
         public DateTime StartDate { get;set; }    
         public DateTime EndDate { get; set; }
+        public List<FoodTruck> FoodTrucks { get; set; }
     }
 }
