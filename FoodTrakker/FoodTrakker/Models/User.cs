@@ -14,7 +14,6 @@ namespace FoodTrakker.BusinessLogic.Models
         public string Name { get; set; }
         public List<FoodTruck> FavouriteFoodTrucks { get; set; }
         public List<Review> Reviews { get; set; }
-       
-
+        
     }
 }
