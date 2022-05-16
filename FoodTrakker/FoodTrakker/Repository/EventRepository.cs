@@ -11,7 +11,7 @@ using FoodTrakker.BusinessLogic.Models;
 
 namespace FoodTrakker.BusinessLogic
 {
-    class  EventRepository
+    public class  EventRepository
     {
         private static readonly List<Event> _events = new List<Event>();
 

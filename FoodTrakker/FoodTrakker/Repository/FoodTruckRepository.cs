@@ -11,7 +11,7 @@ using FoodTrakker.BusinessLogic.Models;
 
 namespace FoodTrakker.BusinessLogic
 {
-    class  FoodTruckRepository
+    public class  FoodTruckRepository
     {
         private static readonly List<FoodTruck> _foodTrucks = new List<FoodTruck>();
 

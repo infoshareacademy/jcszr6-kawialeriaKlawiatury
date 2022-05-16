@@ -1,32 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FoodTrakker.BusinessLogic;
 
-namespace FoodTrakker.BusinessLogic.ConsoleInput
+namespace FoodTrakker.GUI.ConsoleInput
 {
     internal class AddingFoodTruck
     {
-       
-        public void AddTruckName (string truckName)
+        
+        public void InputNewFoodTruck ()
         {
+            FoodTruck newFoodTruck = new FoodTruck();
+            
+            Console.Clear();
+            // jak dodać ID?
+
             Console.WriteLine("Enter the name of a new Food Truck:");
-            truckName = Console.ReadLine();
-        }
+            newFoodTruck.Name = Console.ReadLine();
+       
+            Console.WriteLine("\nIn which town it is usually located:"); 
+            Console.WriteLine("\n\ton what street?:");
+            newFoodTruck.Location.Street = Console.ReadLine();
+                        // co z wartościami: ZipCode, StartDate i EndDate
 
-        public void AddTruckLocation(string truckLocation)
-        {
-            Console.WriteLine("enter it's usual location:"); //czy w apce nie powinny być 2 lokazlizacje? (stała i w trakcie eventu)?
-            truckLocation = Console.ReadLine();
-        }
+            Console.WriteLine("\nEnter the Owner:");  
+            newFoodTruck.Owner.Name = Console.ReadLine();
+            // dodawanie ID?;
 
-        public void AddTruckOwner(string truckOwner)
-        {
-            Console.WriteLine("Enter the Owner:");  //tylko Owner User?
-            truckOwner = Console.ReadLine();
-        }
+            Console.Clear();
+            Console.WriteLine("To enter type of this FoodTruck, please chose from tle list:");
+            // dodanie 'menu' typów FT do wyboru??
 
+            FoodTruckRepository.AddFoodTruck(newFoodTruck);
+        }
 
     }
 }
