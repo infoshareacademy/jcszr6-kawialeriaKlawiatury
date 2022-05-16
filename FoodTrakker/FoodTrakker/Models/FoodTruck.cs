@@ -10,7 +10,7 @@ namespace FoodTrakker.BusinessLogic
 {
     public class FoodTruck
     {
-        public int ID { get;set; }
+        public int Id { get; set; }
         [MinLength(3)]
         [MaxLength(100)]
         public string Name { get; set; }
@@ -19,7 +19,7 @@ namespace FoodTrakker.BusinessLogic
         public string Description { get; set; }
         public Location Location { get; set; }
         public FoodTruckType Type { get; set; }
-        public User Owner { get; set; }    
+        public int OwnerId { get; set; }    
        
     }
 }

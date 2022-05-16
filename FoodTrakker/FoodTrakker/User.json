@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "Login": "login1",
+    "Password": "trudne",
+    "Name": "Tytus",
+    "FavouriteFoodTrucksID": [ 1, 2, 3 ],
+    "Reviews": [
+      {
+        "Id": 1,
+        "Date": "2022-05-16T19:03:22.1936297+02:00",
+        "Title": "Good Job",
+        "Description": "Very Good",
+        "Rating": 9,
+        "AuthorID": 1,
+        "FoodTruckId": 1
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Login": "login2",
+    "Password": "bardzotrudne",
+    "Name": "Romek",
+    "FavouriteFoodTrucksID": [ 2, 3 ],
+    "Reviews": [
+      {
+        "Id": 3,
+        "Date": "2022-05-17T19:03:22.1936297+02:00",
+        "Title": "It s ok",
+        "Description": "Could be better",
+        "Rating": 5,
+        "AuthorID": 2,
+        "FoodTruckId": 3
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "Login": "atomektoziomek",
+    "Password": "1234trudne",
+    "Name": "Atomek",
+    "FavouriteFoodTrucksID": [ 1 ],
+    "Reviews": [
+      {
+        "Id": 2,
+        "Date": "2022-05-21T19:03:22.1936297+02:00",
+        "Title": "Mojaopinia",
+        "Description": "Co ja tu robie",
+        "Rating": 5,
+        "AuthorID": 3,
+        "FoodTruckId": 2
+      }
+    ]
+  }
+]

@@ -12,14 +12,14 @@ namespace FoodTrakker.BusinessLogic
 
         public void Update(FoodTruck foodTruckToUpdate)
         {
-            var foodTruck = foodTrucks.FirstOrDefault(f => f.ID == foodTruckToUpdate.ID);
+            var foodTruck = foodTrucks.FirstOrDefault(f => f.Id == foodTruckToUpdate.Id);
             if (foodTruck == null)
             {
                 Console.WriteLine("Your FoodTruck doesn't exist.Please choose Add. ");
             }
             else
             {
-                foodTruck.Owner = foodTruckToUpdate.Owner;
+                foodTruck.OwnerId = foodTruckToUpdate.OwnerId;
                 foodTruck.Type = foodTruckToUpdate.Type;
                 foodTruck.Description = foodTruckToUpdate.Description;
                 foodTruck.Location = foodTruckToUpdate.Location;

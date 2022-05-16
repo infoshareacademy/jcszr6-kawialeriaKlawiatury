@@ -8,7 +8,7 @@ namespace FoodTrakker.BusinessLogic.Models
 {
     public class FoodTruckType
     {
-        public int ID { get; private set; }
+        public int Id { get; private set; }
         public string Name { get; set; }
     }
 }

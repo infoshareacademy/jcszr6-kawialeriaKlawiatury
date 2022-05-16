@@ -11,14 +11,14 @@ using FoodTrakker.BusinessLogic.Models;
 
 namespace FoodTrakker.BusinessLogic
 {
-    class  ReviewRepository
+    public class  ReviewRepository
     {
         private static readonly List<Review> _reviews = new List<Review>();
 
 
         public static List<Review> GetAllReviews()
         {
-            return _reviews;
+            return _reviews.OrderBy(r => r.Id).ToList();
         }
 
         public static void AddReview(Review review)

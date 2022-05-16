@@ -12,7 +12,7 @@ namespace FoodTrakker.BusinessLogic
         public static List<Event> FindEventsForFoodTruck(int foodTruckID)
         {
             var eventList = EventRepository.GetAllEvents();
-            List<Event> events = eventList.FindAll(e => e.FoodTrucks.Any(f => f.ID == foodTruckID));
+            List<Event> events = eventList.FindAll(e => e.FoodTrucks.Any(f => f.Id == foodTruckID));
 
             return events;
         }

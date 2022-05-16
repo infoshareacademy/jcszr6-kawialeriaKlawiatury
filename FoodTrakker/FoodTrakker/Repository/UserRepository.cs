@@ -11,19 +11,19 @@ using FoodTrakker.BusinessLogic.Models;
 
 namespace FoodTrakker.BusinessLogic
 {
-    public class  EventRepository
+    public class UserRepository
     {
-        private static readonly List<Event> _events = new List<Event>();
+        private static readonly List<User> _users = new List<User>();
 
 
-        public static List<Event> GetAllEvents()
+        public static List<User> GetAllUsers()
         {
-            return _events;
+            return _users;
         }
 
-        public static void AddEvent(Event eEvent)
+        public static void AddUser(User user)
         {
-            _events.Add(eEvent);
+            _users.Add(user);
         }
     }
 }
