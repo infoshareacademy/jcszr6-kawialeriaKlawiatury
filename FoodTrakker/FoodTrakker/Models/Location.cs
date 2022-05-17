@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrakker.BusinessLogic.Repository;
 
 namespace FoodTrakker.BusinessLogic.Models
 {
-    public class Location
+    public class Location 
     {
         public string Street { get; set; }  
         public string City { get; set; }

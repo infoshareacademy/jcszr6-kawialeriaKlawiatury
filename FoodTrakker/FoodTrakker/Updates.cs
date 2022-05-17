@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.BusinessLogic
 {
-    internal class Updates
+    public class Updates
     {
         private readonly List<FoodTruck> foodTrucks = new List<FoodTruck>();
 

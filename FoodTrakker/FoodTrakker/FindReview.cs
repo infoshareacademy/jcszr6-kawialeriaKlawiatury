@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.BusinessLogic
 {
-    internal class FindReview
+    public class FindReview
     {
         private readonly List<Review> reviews = new List<Review>();
 

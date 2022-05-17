@@ -8,6 +8,7 @@ using System.Threading;
 using FoodTrakker.BusinessLogic;
 using FoodTrakker.BusinessLogic.ConsoleInput;
 using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Repository;
 using Newtonsoft.Json;
 
 namespace ConsoleApp
@@ -77,21 +78,29 @@ namespace ConsoleApp
             Console.WriteLine("Hello World!");
 
             GetDataFromFile.DeserializeData();
-            
-            var reviews = ReviewRepository.GetAllReviews();
 
-            
+            var reviews = DataRepository<Review>.GetData();
+
+
             foreach (var r in reviews)
             {
-                Console.WriteLine(r.Id);
+                Console.WriteLine(r.Title);
             }
 
-            var foodTrucks = FoodTruckRepository.GetAllFoodTrucks().OrderBy(r => r.Id).ToList();
+            var foodTrucks = DataRepository<FoodTruck>.GetData().OrderBy(r => r.Id).ToList();
 
             foreach (var foodTruck in foodTrucks)
             {
                 Console.WriteLine($"Food Truck Id: {foodTruck.Id} with name {foodTruck.Name}, {foodTruck.Type.Name}");
             }
+
+            var events = FindEvent.FindEventsForFoodTruck(foodTrucks[0].Id);
+
+            foreach (var @event in events)
+            {
+                Console.WriteLine($"Here is some Events for {foodTrucks[0].Id} Food Truck: {@event.Name} with ID {@event.Id} ");
+            }
+            
 
             Console.WriteLine("eventStringJSON");
         }

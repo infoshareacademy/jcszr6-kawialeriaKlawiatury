@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrakker.BusinessLogic.Repository;
 
 namespace FoodTrakker.BusinessLogic.Models
 {
-    public class Event
+    public class Event : Iindexable
     {
         public int Id { get; internal set; }
         public string Name { get;set; } 
@@ -15,5 +16,10 @@ namespace FoodTrakker.BusinessLogic.Models
         public DateTime StartDate { get;set; }    
         public DateTime EndDate { get; set; }
         public List<FoodTruck> FoodTrucks { get; set; }
+
+        public void UpdateIndex(int i)
+        {
+            Id = i;
+        }
     }
 }

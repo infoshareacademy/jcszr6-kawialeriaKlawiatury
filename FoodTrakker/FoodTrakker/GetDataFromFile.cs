@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrakker.BusinessLogic.Repository;
 
 namespace FoodTrakker.BusinessLogic.Models
 {
@@ -18,14 +19,10 @@ namespace FoodTrakker.BusinessLogic.Models
 
             foreach (var user1 in userJson)
             {
-                UserRepository.AddUser(user1);
+                DataRepository<User>.AddElement(user1);
                 for (int i = 0; i < user1.Reviews.Count; i++)
                 {
-                    if (ReviewRepository.GetAllReviews().Exists(r => r.Id == user1.Reviews[i].Id))
-                    {
-                        break;
-                    }
-                    ReviewRepository.AddReview(user1.Reviews[i]);
+                    DataRepository<Review>.AddElement(user1.Reviews[i]);
                 }
             }
 
@@ -35,14 +32,10 @@ namespace FoodTrakker.BusinessLogic.Models
 
             foreach (var @event in eventJson)
             {
-                EventRepository.AddEvent(@event);
+                DataRepository<Event>.AddElement(@event);
                 for (int i = 0; i < @event.FoodTrucks.Count; i++)
                 {
-                    if (FoodTruckRepository.GetAllFoodTrucks().Exists(r => r.Id == @event.FoodTrucks[i].Id))
-                    {
-                        break;
-                    }
-                    FoodTruckRepository.AddFoodTruck(@event.FoodTrucks[i]);
+                    DataRepository<FoodTruck>.AddElement(@event.FoodTrucks[i]);
                 }
             }
         }

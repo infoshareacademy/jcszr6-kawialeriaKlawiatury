@@ -5,12 +5,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrakker.BusinessLogic.Repository;
 
 namespace FoodTrakker.BusinessLogic
 {
-    public class FoodTruck
+    public class FoodTruck : Iindexable
     {
-        public int Id { get; set; }
+        public int Id { get; internal set; }
         [MinLength(3)]
         [MaxLength(100)]
         public string Name { get; set; }
@@ -19,7 +20,11 @@ namespace FoodTrakker.BusinessLogic
         public string Description { get; set; }
         public Location Location { get; set; }
         public FoodTruckType Type { get; set; }
-        public int OwnerId { get; set; }    
-       
+        public int OwnerId { get; set; }
+
+        public void UpdateIndex(int i)
+        {
+            Id = i;
+        }
     }
 }
