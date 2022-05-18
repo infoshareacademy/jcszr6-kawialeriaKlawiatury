@@ -9,6 +9,7 @@ using FoodTrakker.BusinessLogic;
 using FoodTrakker.BusinessLogic.ConsoleInput;
 using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
+using FoodTrakker.GUI;
 using Newtonsoft.Json;
 
 namespace ConsoleApp
@@ -16,94 +17,66 @@ namespace ConsoleApp
     class Program
     {
         public static List<Option> options;
-        //static void Main(string[] args)
-        //{
-        //    Console.WriteLine("Welcome in FoodTrakker App, press any key to enter the main menu.");
-        //    Console.WriteLine("Use arrows (UP and Down) to navigate on main menu.");
-        //    Console.ReadKey();
-
-        //    options = new List<Option>
-        //    {
-        //        new Option("Find FoodTruck", () => FindTruck("")),
-        //        new Option("Log-In", () =>  WriteTemporaryMessage("You are trying to Log-In")),
-        //        new Option("Create Account", () =>  WriteTemporaryMessage("You are tryinig to crate account")),
-        //        new Option("Exit", () => Environment.Exit(0)),
-        //    };
-
-        //    // Set the index of the selected item to be the first
-        //    int index = 0;
-
-        //    // Write the menu out
-        //    WriteMenu(options, options[index]);
-
-        //    // Store key info in here
-        //    ConsoleKeyInfo keyinfo;
-        //    do
-        //    {
-        //        keyinfo = Console.ReadKey();
-
-        //        // Handle each key input (down arrow will write the menu again with a different selected item)
-        //        if (keyinfo.Key == ConsoleKey.DownArrow)
-        //        {
-        //            if (index + 1 < options.Count)
-        //            {
-        //                index++;
-        //                WriteMenu(options, options[index]);
-        //            }
-        //        }
-        //        if (keyinfo.Key == ConsoleKey.UpArrow)
-        //        {
-        //            if (index - 1 >= 0)
-        //            {
-        //                index--;
-        //                WriteMenu(options, options[index]);
-        //            }
-        //        }
-        //        // Handle different action for the option
-        //        if (keyinfo.Key == ConsoleKey.Enter)
-        //        {
-        //            options[index].Selected.Invoke();
-        //            index = 0;
-        //        }
-        //    }
-        //    while (keyinfo.Key != ConsoleKey.X);
-
-        //    Console.ReadKey();
-
-        //}
-        // Default action of all the options. 
-
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Welcome in FoodTrakker App, press any key to enter the main menu.");
+            Console.WriteLine("Use arrows (UP and Down) to navigate on main menu.");
+            Console.ReadKey();
 
             GetDataFromFile.DeserializeData();
 
-            var reviews = DataRepository<Review>.GetData();
-
-
-            foreach (var r in reviews)
+            options = new List<Option>
             {
-                Console.WriteLine(r.Title);
-            }
+                new Option("Find FoodTruck", () => FindTruck("")),
+                new Option("Log-In", () =>  WriteTemporaryMessage("You are trying to Log-In")),
+                new Option("Create Account", () =>  FindEventGUI.FindEventMenu()),   //WriteTemporaryMessage("You are tryinig to crate account")),
+                new Option("Exit", () => Environment.Exit(0)),
+            };
 
-            var foodTrucks = DataRepository<FoodTruck>.GetData().OrderBy(r => r.Id).ToList();
+            // Set the index of the selected item to be the first
+            int index = 0;
 
-            foreach (var foodTruck in foodTrucks)
+            // Write the menu out
+            WriteMenu(options, options[index]);
+
+            // Store key info in here
+            ConsoleKeyInfo keyinfo;
+            do
             {
-                Console.WriteLine($"Food Truck Id: {foodTruck.Id} with name {foodTruck.Name}, {foodTruck.Type.Name}");
+                keyinfo = Console.ReadKey();
+
+                // Handle each key input (down arrow will write the menu again with a different selected item)
+                if (keyinfo.Key == ConsoleKey.DownArrow)
+                {
+                    if (index + 1 < options.Count)
+                    {
+                        index++;
+                        WriteMenu(options, options[index]);
+                    }
+                }
+                if (keyinfo.Key == ConsoleKey.UpArrow)
+                {
+                    if (index - 1 >= 0)
+                    {
+                        index--;
+                        WriteMenu(options, options[index]);
+                    }
+                }
+                // Handle different action for the option
+                if (keyinfo.Key == ConsoleKey.Enter)
+                {
+                    options[index].Selected.Invoke();
+                    index = 0;
+                }
             }
+            while (keyinfo.Key != ConsoleKey.X);
 
-            var events = FindEvent.FindEventsForFoodTruck(foodTrucks[0].Id);
+            Console.ReadKey();
 
-            foreach (var @event in events)
-            {
-                Console.WriteLine($"Here is some Events for {foodTrucks[0].Id} Food Truck: {@event.Name} with ID {@event.Id} ");
-            }
-            
-
-            Console.WriteLine("eventStringJSON");
         }
+        // Default action of all the options. 
+
+
 
         static void WriteTemporaryMessage(string message)
         {
@@ -133,7 +106,7 @@ namespace ConsoleApp
 
 
 
-        static void WriteMenu(List<Option> options, Option selectedOption)
+        public static void WriteMenu(List<Option> options, Option selectedOption)
         {
             Console.Clear();
 

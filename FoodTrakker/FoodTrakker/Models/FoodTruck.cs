@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FoodTrakker.BusinessLogic.Repository;
 
-namespace FoodTrakker.BusinessLogic
+namespace FoodTrakker.BusinessLogic.Models
 {
     public class FoodTruck : Iindexable
     {
