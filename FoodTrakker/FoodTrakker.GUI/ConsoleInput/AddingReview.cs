@@ -15,7 +15,7 @@ namespace FoodTrakker.BusinessLogic.ConsoleInput
             Console.WriteLine("Enter name of FoodTruck you'd like to share your review on:");
             reviewedTruckName = Console.ReadLine();
 
-            reviewTitle = ($"{ /*użytkownik wpisujący recenzję*/}'s review on {reviewedTruckName}.");
+            reviewTitle = ($"'s review on {reviewedTruckName}.");
         }
 
         public void TruckRating(int truckRating)

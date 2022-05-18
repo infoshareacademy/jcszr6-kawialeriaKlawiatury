@@ -11,13 +11,14 @@ using FoodTrakker.BusinessLogic.Models;
 
 namespace FoodTrakker.BusinessLogic
 {
-    class  FoodTruckRepository
+  public  class  FoodTruckRepository
     {
         private static readonly List<FoodTruck> _foodTrucks = new List<FoodTruck>();
 
 
         public static List<FoodTruck> GetAllFoodTrucks()
         {
+            _foodTrucks.Add(new FoodTruck() { ID = 1, Description = "bla bla bla,", Name = "nat" });
             return _foodTrucks;
         }
 

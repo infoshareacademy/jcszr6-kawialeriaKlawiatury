@@ -4,17 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrakker.BusinessLogic;
 
 namespace FoodTrakker.BusinessLogic
 {
     internal class FindReview
     {
-        private readonly List<Review> reviews = new List<Review>();
+       
 
         public void FindReviewByDate(string dateRev)
         {
             DateTime date = Convert.ToDateTime(dateRev);
-            var reviewsByDate = reviews.Where(r => r.Date == date);
+            var reviewList = ReviewRepository.GetAllReviews();
+            var reviewsByDate = reviewList.Where(r => r.Date == date);
             foreach (var revByDate in reviewsByDate)
             {
                 Console.WriteLine(revByDate);
@@ -23,7 +25,8 @@ namespace FoodTrakker.BusinessLogic
 
         public void FindReviewForFoodTruck(int id)
         {
-            var reviewsByFoodTruckId = reviews.Where(r => r.FoodTruckId == id);
+            var reviewList = ReviewRepository.GetAllReviews();
+            var reviewsByFoodTruckId = reviewList.Where(r => r.FoodTruckId == id);
             foreach (var revByFoodTruckId in reviewsByFoodTruckId)
             {
                 Console.WriteLine(revByFoodTruckId);

@@ -2,6 +2,8 @@
 using System;
 using System.Linq;
 using System.Threading;
+using FoodTrakker.BusinessLogic;
+using FoodTrakker.GUI;
 
 namespace ConsoleApp
 {
@@ -10,12 +12,15 @@ namespace ConsoleApp
         public static List<Option> options;
         static void Main(string[] args)
         {
+           // UpdateFoodTruck update = new UpdateFoodTruck();
+            //update.FoodTruckUpdate();
             Console.WriteLine("Welcome in FoodTrakker App, press any key to enter the main menu.");
             Console.WriteLine("Use arrows (UP and Down) to navigate on main menu.");
             Console.ReadKey();
 
             options = new List<Option>
             {
+                
                 new Option("Find FoodTruck", () => FindTruck("")),
                 new Option("Log-In", () =>  WriteTemporaryMessage("You are trying to Log-In")),
                 new Option("Create Account", () =>  WriteTemporaryMessage("You are tryinig to crate account")),
