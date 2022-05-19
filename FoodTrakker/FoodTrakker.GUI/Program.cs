@@ -12,7 +12,7 @@ using FoodTrakker.BusinessLogic.Repository;
 using FoodTrakker.GUI;
 using Newtonsoft.Json;
 
-namespace ConsoleApp
+namespace FoodTrakker.GUI
 {
     class Program
     {
@@ -24,6 +24,20 @@ namespace ConsoleApp
             Console.ReadKey();
 
             GetDataFromFile.DeserializeData();
+
+            var testEvent = new Event()
+            {
+                Name = "Testowy1",
+                Description = "Taki tam tescik",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                FoodTrucks = new List<FoodTruck>()
+                {
+                    DataRepository<FoodTruck>.GetData().First(f => f.Id == 1)
+                }
+            };
+
+            DataRepository<Event>.AddElement(testEvent);
 
             options = new List<Option>
             {
@@ -38,7 +52,7 @@ namespace ConsoleApp
 
             // Write the menu out
             WriteMenu(options, options[index]);
-
+            
             // Store key info in here
             ConsoleKeyInfo keyinfo;
             do
@@ -67,6 +81,7 @@ namespace ConsoleApp
                 {
                     options[index].Selected.Invoke();
                     index = 0;
+                    break;
                 }
             }
             while (keyinfo.Key != ConsoleKey.X);
