@@ -18,6 +18,7 @@ namespace FoodTrakker.BusinessLogic
 
         public static List<Review> GetAllReviews()
         {
+            _reviews.Add(new Review() { ID = 1,Title= "bla bla",Description = "bla bla bla" });
             return _reviews;
         }
 

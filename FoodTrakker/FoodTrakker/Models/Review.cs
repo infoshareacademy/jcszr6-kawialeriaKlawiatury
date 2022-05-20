@@ -8,7 +8,7 @@ namespace FoodTrakker.BusinessLogic.Models
 {
     public class Review
     {
-        public int ID { get; private set; }
+        public int ID { get;  set; }
         public DateTime Date { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

@@ -18,6 +18,7 @@ namespace FoodTrakker.BusinessLogic
 
         public static List<Event> GetAllEvents()
         {
+            _events.Add(new Event() {ID = 1, Description = "hfeihfiofho" });
             return _events;
         }
 

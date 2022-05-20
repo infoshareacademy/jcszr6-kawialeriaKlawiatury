@@ -1,9 +1,6 @@
 ﻿using FoodTrakker.BusinessLogic;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodTrakker.GUI
 {
@@ -29,43 +26,50 @@ namespace FoodTrakker.GUI
             }
             else
             {
-                char input2;
+                Console.WriteLine("Write number which property want to change and press enter.");
+                Console.WriteLine("Press 1 to update name of FoodTruck.");
+                Console.WriteLine("Press 2 to update description of FoodTruck.");
+                Console.WriteLine("Press 3 to update location of FoodTruck.");
+                Console.WriteLine("Press 4 to update the owner.");
+                Console.WriteLine("Press Q when you do all changes to quit.");
+
                 do
                 {
-                    Console.WriteLine("Write number which property want to change and press enter.");
-                    Console.WriteLine("Press 1 to update name of FoodTruck.");
-                    Console.WriteLine("Press 2 to update description of FoodTruck.");
-                    Console.WriteLine("Press 3 to update location of FoodTruck.");
-                    Console.WriteLine("Press 4 to update the owner.");
-
-                    var input3 = Console.ReadLine();
+                    var input2 = Console.ReadLine();
+                    if (input2 == "q" || input2 == "Q")
+                    {
+                        // foodTruckList.Add(foodTruck);
+                        return;
+                    }
                     int inputAsInt;
-                    bool isinputInt2 = int.TryParse(input3, out inputAsInt);
+                    bool isinputInt2 = int.TryParse(input2, out inputAsInt);
                     while (!isinputInt2)
                     {
                         Console.WriteLine("It isn't a number. Please enter value from 1 to 4.");
-                        input3 = Console.ReadLine();
-                        isinputInt2 = int.TryParse(input3, out inputAsInt);
+                        input2 = Console.ReadLine();
+                        isinputInt2 = int.TryParse(input2, out inputAsInt);
                     }
                     while (inputAsInt != 1 && inputAsInt != 2 && inputAsInt != 3 && inputAsInt != 4)
                     {
                         Console.WriteLine("You type wrong value.Please select from 1 to 4.");
-                        input3 = Console.ReadLine();
-                        isinputInt2 = int.TryParse(input3, out inputAsInt);
+                        input2 = Console.ReadLine();
+                        isinputInt2 = int.TryParse(input2, out inputAsInt);
                     }
-                    if(inputAsInt == 1)
+
+
+                    if (inputAsInt == 1)
                     {
                         foodTruck.Name = Console.ReadLine();
                     }
-                    if(inputAsInt == 2)
+                    if (inputAsInt == 2)
                     {
                         foodTruck.Description = Console.ReadLine();
                     }
-                    if(inputAsInt == 3)
+                    if (inputAsInt == 3)
                     {
-                       // foodTruck.Location = Console.ReadLine();
+                        // foodTruck.Location = Console.ReadLine();
                     }
-                    if(inputAsInt == 4)
+                    if (inputAsInt == 4)
                     {
                         foodTruck.Owner = new BusinessLogic.Models.User
                         {
@@ -73,19 +77,9 @@ namespace FoodTrakker.GUI
 
                         };
                     }
-                    Console.WriteLine("If it is all your changes, please press Q to quit.");
-                    input2 = Console.ReadKey().KeyChar;
-                    Console.ReadLine();
                 }
-                while (input2 != 'q' && input2 != 'Q');
-                if(input2 == 'q' || input2 == 'Q')
-                {
-                   // foodTruckList.Add(foodTruck);
-                    return;
-                }
+                while (true);
             }
-
-
         }
     }
 }

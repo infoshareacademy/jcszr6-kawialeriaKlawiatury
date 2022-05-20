@@ -5,6 +5,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Menu_main\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties data_1json__JsonSchema="https://github.com/go-vela/types/releases/latest/download/schema.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

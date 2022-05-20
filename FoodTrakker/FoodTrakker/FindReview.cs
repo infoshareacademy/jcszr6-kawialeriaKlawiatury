@@ -11,7 +11,6 @@ namespace FoodTrakker.BusinessLogic
     internal class FindReview
     {
        
-
         public void FindReviewByDate(string dateRev)
         {
             DateTime date = Convert.ToDateTime(dateRev);
