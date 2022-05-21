@@ -32,11 +32,20 @@ namespace FoodTrakker.GUI.ConsoleInput
                               $"\n\t\t1 - very bad;" +
                               $"\n\t\t9 - ecstasy of tastes!!");
 
-            
-            bool isTrue = false;  //stworzyć wewnętrzną metodę?
+            GiveRate(newReview);
+
+            Console.Clear();
+
+
+            ReviewRepository.AddReview(newReview);
+        }
+
+        private static void GiveRate(Review newReview)
+        {
+            int rating;
+            bool isValid = false; 
             do
             {
-                int rating;
                 var ratingParseResult = int.TryParse(Console.ReadLine(), out rating);
 
                 if (!ratingParseResult)
@@ -49,21 +58,15 @@ namespace FoodTrakker.GUI.ConsoleInput
                 }
                 else if (ratingParseResult && rating > 9)
                 {
-                    Console.WriteLine("\n\tI envy you  experiencing this culinary heaven, but let's try to keep on our grading scale;");
+                    Console.WriteLine(
+                        "\n\tI envy you  experiencing this culinary heaven, but let's try to keep on our grading scale;");
                 }
                 else
                 {
-                    newReview.Rating = rating;                              //czy umieszczenie tego tutaj nie jest błędem logicznym?
+                    newReview.Rating = rating; //czy umieszczenie tego tutaj nie jest błędem logicznym?
                     Console.WriteLine("\n\n\tThanks for rating this Food Truck!");
                 }
-            } while (!isTrue);
-            Console.Clear();
-
-
-            ReviewRepository.AddReview(newReview);
+            } while (!isValid);
         }
-
-
-
     }
 }
