@@ -1,16 +1,20 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System;
 using System.ComponentModel.Design.Serialization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+<<<<<<< HEAD
 using FoodTrakker.BusinessLogic;
 using FoodTrakker.BusinessLogic.ConsoleInput;
 using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
 using FoodTrakker.GUI;
 using Newtonsoft.Json;
+=======
+using FoodTrakker.GUI;
+>>>>>>> natalia_cygan
 
 namespace FoodTrakker.GUI
 {
@@ -19,6 +23,12 @@ namespace FoodTrakker.GUI
         public static List<Option> options;
         static void Main(string[] args)
         {
+            UpdateFoodTruck update = new UpdateFoodTruck();
+            update.FoodTruckUpdate();
+            UpdateEvent updateEvent = new UpdateEvent();
+            updateEvent.EventUpdate();
+            UpdateReview updateReview = new UpdateReview();
+            updateReview.ReviewUpdate();
             Console.WriteLine("Welcome in FoodTrakker App, press any key to enter the main menu.");
             Console.WriteLine("Use arrows (UP and Down) to navigate on main menu.");
             Console.ReadKey();

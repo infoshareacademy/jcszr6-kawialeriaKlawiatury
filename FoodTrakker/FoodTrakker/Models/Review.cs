@@ -9,7 +9,11 @@ namespace FoodTrakker.BusinessLogic.Models
 {
     public class Review : Iindexable
     {
+<<<<<<< HEAD
         public int Id { get; internal set; }
+=======
+        public int ID { get;  set; }
+>>>>>>> natalia_cygan
         public DateTime Date { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

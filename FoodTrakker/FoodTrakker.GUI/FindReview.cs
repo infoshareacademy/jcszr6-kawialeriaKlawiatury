@@ -1,14 +1,10 @@
-﻿using FoodTrakker.BusinessLogic.Models;
+﻿using FoodTrakker.BusinessLogic;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FoodTrakker.BusinessLogic;
 
-namespace FoodTrakker.BusinessLogic
+namespace FoodTrakker.GUI
 {
-    public class FindReview
+    internal class FindReview
     {
        
         public void FindReviewByDate(string dateRev)
