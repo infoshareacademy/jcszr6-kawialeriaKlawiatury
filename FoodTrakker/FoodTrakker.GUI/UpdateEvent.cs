@@ -41,7 +41,7 @@ namespace FoodTrakker.GUI
                 do
                 {
                     var input2 = Console.ReadLine();
-                    
+
                     if (input2 == "q" || input2 == "Q")
                     {
                         // eventList.Add(eventToUpdate);
@@ -88,13 +88,15 @@ namespace FoodTrakker.GUI
                     }
                     if (inputAsInt == 5)
                     {
-                        Console.ReadLine();
+                        DateTime date = Convert.ToDateTime(Console.ReadLine());
+                        eventToUpdate.StartDate = date;
                     }
                     if (inputAsInt == 6)
                     {
-                        Console.ReadLine();
+                        DateTime date = Convert.ToDateTime(Console.ReadLine());
+                        eventToUpdate.EndDate = date;
                     }
-                   
+
                 }
                 while (true);
 

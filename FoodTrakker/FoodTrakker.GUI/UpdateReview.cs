@@ -75,7 +75,6 @@ namespace FoodTrakker.GUI
                         }
                         review.Rating = intInput;
                     }
-                   // Console.WriteLine("If it is all your changes, please press Q to quit.");
                  
                 }
                while (true);
