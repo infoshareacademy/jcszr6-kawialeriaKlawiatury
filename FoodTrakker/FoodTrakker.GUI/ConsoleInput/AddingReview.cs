@@ -7,7 +7,7 @@ namespace FoodTrakker.GUI.ConsoleInput
 {
     internal class AddingReview
     {
-        public void AddReviewTitle()
+        public void AddReviewTitle() //zmienia stan czy nie
         {
             //jak pobrać ID FT do ktorego chcemy dodać opinię?  Jak dodać autora?
             Review newReview = new Review();
