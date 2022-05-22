@@ -5,7 +5,16 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-
+<<<<<<< HEAD
+using FoodTrakker.BusinessLogic;
+using FoodTrakker.BusinessLogic.ConsoleInput;
+using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Repository;
+using FoodTrakker.GUI;
+using Newtonsoft.Json;
+=======
+using FoodTrakker.GUI;
+>>>>>>> natalia_cygan
 
 namespace FoodTrakker.GUI
 {
