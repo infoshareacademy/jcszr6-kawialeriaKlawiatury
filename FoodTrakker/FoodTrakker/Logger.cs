@@ -17,7 +17,7 @@ namespace FoodTrakker.BusinessLogic
             checkIfFileExists(loggerDirectory);
             using (var writer = File.CreateText(loggerDirectory))
             {
-                writer.WriteLine("Files where not loaded\nPlease make sure you have User.json and Events.json files in your directory!");
+                writer.WriteLine("Files were not loaded\nPlease make sure you have User.json and Events.json files in your directory!");
             }
         }
 
