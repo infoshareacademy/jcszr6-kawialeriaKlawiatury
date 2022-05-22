@@ -19,8 +19,6 @@ namespace FoodTrakker.BusinessLogic
             {
                 writer.WriteLine("Files where not loaded\nPlease make sure you have User.json and Events.json files in your directory!");
             }
-
-
         }
 
         private static void checkIfFileExists(string filePath)
