@@ -23,21 +23,21 @@ namespace FoodTrakker.GUI
             Console.WriteLine("Use arrows (UP and Down) to navigate on main menu.");
             Console.ReadKey();
 
-            GetDataFromFile.DeserializeData();
+            GetFiles();
 
-            var testEvent = new Event()
-            {
-                Name = "Testowy1",
-                Description = "Taki tam tescik",
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now,
-                FoodTrucks = new List<FoodTruck>()
-                {
-                    DataRepository<FoodTruck>.GetData().First(f => f.Id == 1)
-                }
-            };
+            //var testEvent = new Event()
+            //{
+            //    Name = "Testowy1",
+            //    Description = "Taki tam tescik",
+            //    StartDate = DateTime.Now,
+            //    EndDate = DateTime.Now,
+            //    FoodTrucks = new List<FoodTruck>()
+            //    {
+            //        DataRepository<FoodTruck>.GetData().First(f => f.Id == 1)
+            //    }
+            //};
 
-            DataRepository<Event>.AddElement(testEvent);
+            //DataRepository<Event>.AddElement(testEvent);
 
             options = new List<Option>
             {
@@ -52,7 +52,7 @@ namespace FoodTrakker.GUI
 
             // Write the menu out
             WriteMenu(options, options[index]);
-            
+
             // Store key info in here
             ConsoleKeyInfo keyinfo;
             do
@@ -89,6 +89,19 @@ namespace FoodTrakker.GUI
             Console.ReadKey();
 
         }
+
+        private static void GetFiles()
+        {
+            var uploadFiles = GetDataFromFile.DeserializeData();
+            if (!uploadFiles)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Data not loaded!\nCheck log file");
+                Console.ForegroundColor = ConsoleColor.White;
+                Thread.Sleep(2000);
+            }
+        }
+
         // Default action of all the options. 
 
 

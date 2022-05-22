@@ -25,39 +25,46 @@ namespace FoodTrakker.GUI
 
 
             int index = 0;
-            WriteMenuFindEvent(foodTruckOptions, foodTruckOptions[index]);
-
-            ConsoleKeyInfo keyinfo;
-            do
+            if (foodTruckOptions.Count > 0)
             {
-                keyinfo = Console.ReadKey();
 
-                // Handle each key input (down arrow will write the menu again with a different selected item)
-                if (keyinfo.Key == ConsoleKey.DownArrow)
+                WriteMenuFindEvent(foodTruckOptions, foodTruckOptions[index]);
+                ConsoleKeyInfo keyinfo;
+                do
                 {
-                    if (index + 1 < foodTruckOptions.Count)
+                    keyinfo = Console.ReadKey();
+
+                    // Handle each key input (down arrow will write the menu again with a different selected item)
+                    if (keyinfo.Key == ConsoleKey.DownArrow)
                     {
-                        index++;
-                        WriteMenuFindEvent(foodTruckOptions, foodTruckOptions[index]);
+                        if (index + 1 < foodTruckOptions.Count)
+                        {
+                            index++;
+                            WriteMenuFindEvent(foodTruckOptions, foodTruckOptions[index]);
+                        }
+                    }
+                    if (keyinfo.Key == ConsoleKey.UpArrow)
+                    {
+                        if (index - 1 >= 0)
+                        {
+                            index--;
+                            WriteMenuFindEvent(foodTruckOptions, foodTruckOptions[index]);
+                        }
+                    }
+                    // Handle different action for the option
+                    if (keyinfo.Key == ConsoleKey.Enter)
+                    {
+                        foodTruckOptions[index].Selected.Invoke();
+                        index = 0;
+                        break;
                     }
                 }
-                if (keyinfo.Key == ConsoleKey.UpArrow)
-                {
-                    if (index - 1 >= 0)
-                    {
-                        index--;
-                        WriteMenuFindEvent(foodTruckOptions, foodTruckOptions[index]);
-                    }
-                }
-                // Handle different action for the option
-                if (keyinfo.Key == ConsoleKey.Enter)
-                {
-                    foodTruckOptions[index].Selected.Invoke();
-                    index = 0;
-                    break;
-                }
-            }
-            while (keyinfo.Key != ConsoleKey.X);
+                while (keyinfo.Key != ConsoleKey.X);
+            }            
+            else
+                Console.WriteLine("List is empty");
+
+
         }
 
         private static void EventsMenuGUI(int Id)
