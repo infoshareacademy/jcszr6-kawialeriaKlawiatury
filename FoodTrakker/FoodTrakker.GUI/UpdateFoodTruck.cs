@@ -1,4 +1,6 @@
 ﻿
+using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Repository;
 using System;
 using System.Linq;
 
@@ -18,7 +20,7 @@ namespace FoodTrakker.GUI
                 input = Console.ReadLine();
                 isinputInt = int.TryParse(input, out id);
             }
-            var foodTruckList = FoodTruckRepository.GetAllFoodTrucks();
+            var foodTruckList = DataRepository<FoodTruck>.GetAllFoodTrucks();
             var foodTruck = foodTruckList.FirstOrDefault(f => f.ID == id);
             if (foodTruck == null)
             {

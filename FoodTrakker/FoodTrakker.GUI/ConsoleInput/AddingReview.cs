@@ -12,18 +12,11 @@ namespace FoodTrakker.GUI.ConsoleInput
             //jak pobrać ID FT do ktorego chcemy dodać opinię?  Jak dodać autora?
             Review newReview = new Review();
 
-<<<<<<< HEAD
-            newReview.Date = DateTime.Now;
-=======
-            reviewTitle = ($"'s review on {reviewedTruckName}.");
-        }
->>>>>>> natalia_cygan
-
             Console.Clear();
             /*Console.WriteLine("Enter name of FoodTruck you'd like to share your review on:");
             reviewedTruck. = Console.ReadLine();*/
 
-            newReview.Title = (/*$"{ //użytkownik wpisujący recenzję/}'s review on {//FT recenzjonowany}."*/);
+          //  newReview.Title = (/*$"{ //użytkownik wpisujący recenzję/}'s review on {//FT recenzjonowany}."*/);
 
 
             Console.Clear();
