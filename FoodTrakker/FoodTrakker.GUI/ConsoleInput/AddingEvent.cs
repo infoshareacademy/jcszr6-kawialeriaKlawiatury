@@ -26,11 +26,11 @@ namespace FoodTrakker.GUI.ConsoleInput
             //jak przypisać Startdate i EndDate może jakieś API z kalendarzem?
             Console.Clear();
             Console.WriteLine($"\nWhen does the {newEvent.Name} start?\n");
-            newEvent.StartDate = DateTime.????;
+            newEvent.StartDate = DateTime.UtcNow; //do poprawy
 
             Console.Clear();
             Console.WriteLine($"\nWhen does it end?\n");
-            newEvent.EndDate = DateTime.???;
+            newEvent.EndDate = DateTime.UtcNow;//do poprawy
 
             EventRepository.AddEvent(newEvent);
         }
