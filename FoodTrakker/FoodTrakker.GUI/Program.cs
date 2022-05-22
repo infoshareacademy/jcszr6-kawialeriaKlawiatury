@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-
+using FoodTrakker.BusinessLogic.Models;
 
 namespace FoodTrakker.GUI
 {
@@ -14,12 +14,12 @@ namespace FoodTrakker.GUI
         public static List<Option> options;
         static void Main(string[] args)
         {
-            UpdateFoodTruck update = new UpdateFoodTruck();
-            update.FoodTruckUpdate();
-            UpdateEvent updateEvent = new UpdateEvent();
-            updateEvent.EventUpdate();
-            UpdateReview updateReview = new UpdateReview();
-            updateReview.ReviewUpdate();
+            //UpdateFoodTruck update = new UpdateFoodTruck();
+            //update.FoodTruckUpdate();
+            //UpdateEvent updateEvent = new UpdateEvent();
+            //updateEvent.EventUpdate();
+            //UpdateReview updateReview = new UpdateReview();
+            //updateReview.ReviewUpdate();
             Console.WriteLine("Welcome in FoodTrakker App, press any key to enter the main menu.");
             Console.WriteLine("Use arrows (UP and Down) to navigate on main menu.");
             Console.ReadKey();
