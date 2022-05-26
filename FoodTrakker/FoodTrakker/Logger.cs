@@ -13,7 +13,7 @@ namespace FoodTrakker.BusinessLogic
         {      
             int hour = DateTime.Now.Hour;
             int minute = DateTime.Now.Minute;
-            var loggerDirectory = Path.Combine("Log", "LogF", $"Logfile_at_{hour}_{minute}.txt");
+            var loggerDirectory = Path.Combine("Log", "Raports", $"Logfile_at_{hour}_{minute}.txt");
             checkIfFileExists(loggerDirectory);
             using (var writer = File.CreateText(loggerDirectory))
             {

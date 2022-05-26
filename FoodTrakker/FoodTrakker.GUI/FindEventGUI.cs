@@ -10,76 +10,80 @@ namespace FoodTrakker.GUI
 {
     public class FindEventGUI
     {
+        private static List<Event> _events = DataRepository<Event>.GetData();
+        private static List<FoodTruck> _foodTrucks = DataRepository<FoodTruck>.GetData();
+
         public static void FindEventMenu()
         {
-            var eventList = DataRepository<Event>.GetData();
-            var foodTruckList = DataRepository<FoodTruck>.GetData();
-
             var foodTruckOptions = new List<Option>();
 
-            foreach (var foodTruck in foodTruckList)
+            foreach (var foodTruck in _foodTrucks)
             {
                 var message = $"{foodTruck.Id}. {foodTruck.Name} located: {foodTruck.Location.City} ";
                 foodTruckOptions.Add(new Option(name: message, () => EventsMenuGUI(foodTruck.Id)));
             }
 
-
-            int index = 0;
             if (foodTruckOptions.Count > 0)
             {
+                PrintMenu(foodTruckOptions);
+            }
+            else
+            {
+                Console.WriteLine("No food trucks available"); //Add method to come back to main menu :-)
+            }
+        }
 
-                WriteMenuFindEvent(foodTruckOptions, foodTruckOptions[index]);
-                ConsoleKeyInfo keyinfo;
-                do
+        private static void PrintMenu(List<Option> options)
+        {
+            int index = 0;
+
+            WriteMenuFindEvent(options, options[index]);
+            ConsoleKeyInfo keyinfo;
+            do
+            {
+                keyinfo = Console.ReadKey();
+
+                // Handle each key input (down arrow will write the menu again with a different selected item)
+                if (keyinfo.Key == ConsoleKey.DownArrow)
                 {
-                    keyinfo = Console.ReadKey();
-
-                    // Handle each key input (down arrow will write the menu again with a different selected item)
-                    if (keyinfo.Key == ConsoleKey.DownArrow)
+                    if (index + 1 < options.Count)
                     {
-                        if (index + 1 < foodTruckOptions.Count)
-                        {
-                            index++;
-                            WriteMenuFindEvent(foodTruckOptions, foodTruckOptions[index]);
-                        }
-                    }
-                    if (keyinfo.Key == ConsoleKey.UpArrow)
-                    {
-                        if (index - 1 >= 0)
-                        {
-                            index--;
-                            WriteMenuFindEvent(foodTruckOptions, foodTruckOptions[index]);
-                        }
-                    }
-                    // Handle different action for the option
-                    if (keyinfo.Key == ConsoleKey.Enter)
-                    {
-                        foodTruckOptions[index].Selected.Invoke();
-                        index = 0;
-                        break;
+                        index++;
+                        WriteMenuFindEvent(options, options[index]);
                     }
                 }
-                while (keyinfo.Key != ConsoleKey.X);
-            }            
-            else
-                Console.WriteLine("List is empty");
-
+                if (keyinfo.Key == ConsoleKey.UpArrow)
+                {
+                    if (index - 1 >= 0)
+                    {
+                        index--;
+                        WriteMenuFindEvent(options, options[index]);
+                    }
+                }
+                // Handle different action for the option
+                if (keyinfo.Key == ConsoleKey.Enter)
+                {
+                    options[index].Selected.Invoke();
+                    index = 0;
+                    break;
+                }
+            }
+            while (keyinfo.Key != ConsoleKey.X);
 
         }
 
         private static void EventsMenuGUI(int Id)
         {
             var eventList = FindEvent.FindEventsForFoodTruck(Id);
-            var foodTruck = DataRepository<FoodTruck>.GetData().First(f => f.Id == Id);
+            var foodTruck = _foodTrucks.First(f => f.Id == Id);
             var messages = new List<string>();
             Console.Clear();
 
-            var optionsNewOptions = new List<Option>
+            var eventOptions = new List<Option>
             {
                 new Option("Find events for another food truck", () => FindEventMenu()),
-                new Option("Exit to main menu", () => WriteTemporaryMessage("Exists to main menu!"))
+                new Option("Exit to main menu", () => WriteTemporaryMessage("Exists to main menu!")) //Add method to come back to main menu :-)
             };
-
 
             foreach (var @event in eventList)
             {
@@ -89,47 +93,10 @@ namespace FoodTrakker.GUI
                               $"Description: {@event.Description}\n" +
                               $"Starts at: {@event.StartDate}\n" +
                               $"Ends at: {@event.EndDate}";
-                optionsNewOptions.Add(new Option(message, () => EventsMenuGUI(Id)));
+                eventOptions.Add(new Option(message, () => EventsMenuGUI(Id)));
             }
 
-            int index = 0;
-            WriteMenuFindEvent(optionsNewOptions, optionsNewOptions[index]);
-            ConsoleKeyInfo keyinfo;
-            
-            do
-            {
-                keyinfo = Console.ReadKey();
-
-                // Handle each key input (down arrow will write the menu again with a different selected item)
-                if (keyinfo.Key == ConsoleKey.DownArrow)
-                {
-                    if (index + 1 < optionsNewOptions.Count)
-                    {
-                        index++;
-                        WriteMenuFindEvent(optionsNewOptions, optionsNewOptions[index]);
-                    }
-                }
-                if (keyinfo.Key == ConsoleKey.UpArrow)
-                {
-                    if (index - 1 >= 0)
-                    {
-                        index--;
-                        WriteMenuFindEvent(optionsNewOptions, optionsNewOptions[index]);
-                    }
-                }
-                // Handle different action for the option
-                if (keyinfo.Key == ConsoleKey.Enter)
-                {
-                    optionsNewOptions[index].Selected.Invoke();
-                    index = 0;
-                    break;
-                }
-            }
-            while (keyinfo.Key != ConsoleKey.X);
-
-            
-
-
+            PrintMenu(eventOptions);
         }
 
         private static void WriteMenuFindEvent(List<Option> options, Option selectedOption)

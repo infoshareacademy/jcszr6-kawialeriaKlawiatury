@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Repository;
 
 namespace FoodTrakker.GUI
 {
@@ -26,19 +27,19 @@ namespace FoodTrakker.GUI
 
             GetFiles();
 
-            //var testEvent = new Event()
-            //{
-            //    Name = "Testowy1",
-            //    Description = "Taki tam tescik",
-            //    StartDate = DateTime.Now,
-            //    EndDate = DateTime.Now,
-            //    FoodTrucks = new List<FoodTruck>()
-            //    {
-            //        DataRepository<FoodTruck>.GetData().First(f => f.Id == 1)
-            //    }
-            //};
+            var testEvent = new Event()
+            {
+                Name = "Testowy1",
+                Description = "Taki tam tescik",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                FoodTrucks = new List<FoodTruck>()
+                {
+                    DataRepository<FoodTruck>.GetData().First(f => f.Id == 1)
+                }
+            };
 
-            //DataRepository<Event>.AddElement(testEvent);
+            DataRepository<Event>.AddElement(testEvent);
 
             options = new List<Option>
             {
