@@ -1,4 +1,6 @@
 ﻿using FoodTrakker.BusinessLogic;
+using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Repository;
 using System;
 using System.Linq;
 
@@ -18,8 +20,8 @@ namespace FoodTrakker.GUI
                 input = Console.ReadLine();
                 isinputInt = int.TryParse(input, out id);
             }
-            var reviewsList = ReviewRepository.GetAllReviews();
-            var review = reviewsList.FirstOrDefault(r => r.ID == id);
+            var reviewsList = DataRepository<Review>.GetData();
+            var review = reviewsList.FirstOrDefault(r => r.Id == id);
             if (review == null)
             {
                 Console.WriteLine("Your Review doesn't exist.Please choose Add.");
@@ -36,7 +38,7 @@ namespace FoodTrakker.GUI
                     var input2 = Console.ReadLine();
                     if (input2 == "q" || input2 == "Q")
                     {
-                        // reviewsList.Add(review);
+                       // DataRepository<Review>.AddElement(review);
                         return;
                     }
                     int inputAsInt;

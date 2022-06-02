@@ -1,4 +1,6 @@
 ﻿using FoodTrakker.BusinessLogic;
+using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +23,8 @@ namespace FoodTrakker.GUI
                 input = Console.ReadLine();
                 isinputInt = int.TryParse(input, out id);
             }
-            var eventList = EventRepository.GetAllEvents();
-            var eventToUpdate = eventList.FirstOrDefault(e => e.ID == id);
+            var eventList = DataRepository<Event>.GetData();
+            var eventToUpdate = eventList.FirstOrDefault(e => e.Id == id);
             if (eventToUpdate == null)
             {
                 Console.WriteLine("Your Event doesn't exist.Please choose Add.");
@@ -44,7 +46,7 @@ namespace FoodTrakker.GUI
 
                     if (input2 == "q" || input2 == "Q")
                     {
-                        // eventList.Add(eventToUpdate);
+                       // DataRepository<Event>.AddElement(eventToUpdate);
                         return;
                     }
                     int inputAsInt;
@@ -73,7 +75,12 @@ namespace FoodTrakker.GUI
                     }
                     if (inputAsInt == 3)
                     {
-                        //   eventToUpdate.Location = Console.ReadLine();
+                        Location location = new Location();
+                        Console.WriteLine("Enter the new city");
+                        location.City = Console.ReadLine();
+                        Console.WriteLine("Enter the new street");
+                        location.Street = Console.ReadLine();
+
                     }
                     if (inputAsInt == 4)
                     {
@@ -88,13 +95,29 @@ namespace FoodTrakker.GUI
                     }
                     if (inputAsInt == 5)
                     {
-                        DateTime date = Convert.ToDateTime(Console.ReadLine());
-                        eventToUpdate.StartDate = date;
+                        var date = Console.ReadLine();
+                        DateTime dateTime;
+                        bool isInputDate = DateTime.TryParse(date, out dateTime);
+                        while (!isInputDate)
+                        {
+                            Console.WriteLine("You type wrong date.");
+                            date = Console.ReadLine();
+                            isInputDate = DateTime.TryParse(date, out dateTime);
+                        }
+                        eventToUpdate.StartDate = dateTime;
                     }
                     if (inputAsInt == 6)
                     {
-                        DateTime date = Convert.ToDateTime(Console.ReadLine());
-                        eventToUpdate.EndDate = date;
+                        var date = Console.ReadLine();
+                        DateTime dateTime;
+                        bool isInputDate = DateTime.TryParse(date, out dateTime);
+                        while (!isInputDate)
+                        {
+                            Console.WriteLine("You type wrong date.");
+                            date = Console.ReadLine();
+                            isInputDate = DateTime.TryParse(date, out dateTime);
+                        }
+                        eventToUpdate.EndDate = dateTime;
                     }
 
                 }

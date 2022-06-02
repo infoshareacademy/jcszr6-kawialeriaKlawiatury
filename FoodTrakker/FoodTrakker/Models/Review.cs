@@ -9,7 +9,7 @@ namespace FoodTrakker.BusinessLogic.Models
 {
     public class Review : Iindexable
     {
-
+       
         public int Id { get; internal set; }
 
         public DateTime Date { get; set; }
@@ -22,5 +22,11 @@ namespace FoodTrakker.BusinessLogic.Models
         {
             Id = i;
         }
+
+        public override string ToString()
+        {
+            return $" Review : {Id},{Date},{Title},{Description},{Rating},{AuthorID},{FoodTruckId}";
+        }
+
     }
 }

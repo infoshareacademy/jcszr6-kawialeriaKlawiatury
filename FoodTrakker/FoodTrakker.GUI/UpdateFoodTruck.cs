@@ -20,8 +20,8 @@ namespace FoodTrakker.GUI
                 input = Console.ReadLine();
                 isinputInt = int.TryParse(input, out id);
             }
-            var foodTruckList = DataRepository<FoodTruck>.GetAllFoodTrucks();
-            var foodTruck = foodTruckList.FirstOrDefault(f => f.ID == id);
+            var foodTruckList = DataRepository<FoodTruck>.GetData();
+            var foodTruck = foodTruckList.FirstOrDefault(f => f.Id == id);
             if (foodTruck == null)
             {
                 Console.WriteLine("Your FoodTruck doesn't exist.Please choose Add.");
@@ -40,7 +40,7 @@ namespace FoodTrakker.GUI
                     var input2 = Console.ReadLine();
                     if (input2 == "q" || input2 == "Q")
                     {
-                        // foodTruckList.Add(foodTruck);
+                       // DataRepository<FoodTruck>.AddElement(foodTruck);
                         return;
                     }
                     int inputAsInt;
@@ -57,8 +57,6 @@ namespace FoodTrakker.GUI
                         input2 = Console.ReadLine();
                         isinputInt2 = int.TryParse(input2, out inputAsInt);
                     }
-
-
                     if (inputAsInt == 1)
                     {
                         foodTruck.Name = Console.ReadLine();
@@ -69,15 +67,15 @@ namespace FoodTrakker.GUI
                     }
                     if (inputAsInt == 3)
                     {
-                        // foodTruck.Location = Console.ReadLine();
+                        Location location = new Location();
+                        Console.WriteLine("Enter the new city");
+                        location.City = Console.ReadLine();
+                        Console.WriteLine("Enter the new street");
+                        location.Street = Console.ReadLine();
                     }
                     if (inputAsInt == 4)
                     {
-                        foodTruck.Owner = new BusinessLogic.Models.User
-                        {
-                            Name = Console.ReadLine()
-
-                        };
+                        foodTruck.OwnerId = Convert.ToInt32(Console.ReadLine());
                     }
                 }
                 while (true);
