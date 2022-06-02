@@ -25,7 +25,7 @@ namespace FoodTrakker.GUI
             Console.WriteLine("Use arrows (UP and Down) to navigate on main menu.");
             Console.ReadKey();
 
-            GetFiles();
+            LoadData.Load();
 
             var testEvent = new Event()
             {
@@ -92,17 +92,7 @@ namespace FoodTrakker.GUI
 
         }
 
-        private static void GetFiles()
-        {
-            var uploadFiles = GetDataFromFile.DeserializeData();
-            if (!uploadFiles)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Data not loaded!\nCheck log file");
-                Console.ForegroundColor = ConsoleColor.White;
-                Thread.Sleep(2000);
-            }
-        }
+        
 
         // Default action of all the options. 
 

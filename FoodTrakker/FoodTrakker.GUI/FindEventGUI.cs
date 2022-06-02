@@ -33,6 +33,33 @@ namespace FoodTrakker.GUI
             }
         }
 
+        private static void EventsMenuGUI(int Id)
+        {
+            var eventList = FindEvent.FindEventsForFoodTruck(Id);
+            var foodTruck = _foodTrucks.First(f => f.Id == Id);
+            var messages = new List<string>();
+            Console.Clear();
+
+            var eventOptions = new List<Option>
+            {
+                new Option("Find events for another food truck", () => FindEventMenu()),
+                new Option("Exit to main menu", () => WriteTemporaryMessage("Exists to main menu!")) //Add method to come back to main menu :-)
+            };
+
+            foreach (var @event in eventList)
+            {
+                var message = $"----------------------------------" +
+                              $"\nThe event list for {foodTruck.Name}:\n" +
+                              $"Event name: {@event.Name} in {@event.Location}\n" +
+                              $"Description: {@event.Description}\n" +
+                              $"Starts at: {@event.StartDate}\n" +
+                              $"Ends at: {@event.EndDate}";
+                eventOptions.Add(new Option(message, () => EventsMenuGUI(Id)));
+            }
+
+            PrintMenu(eventOptions);
+        }
+
         private static void PrintMenu(List<Option> options)
         {
             int index = 0;
@@ -71,32 +98,6 @@ namespace FoodTrakker.GUI
             while (keyinfo.Key != ConsoleKey.X);
         }
 
-        private static void EventsMenuGUI(int Id)
-        {
-            var eventList = FindEvent.FindEventsForFoodTruck(Id);
-            var foodTruck = _foodTrucks.First(f => f.Id == Id);
-            var messages = new List<string>();
-            Console.Clear();
-
-            var eventOptions = new List<Option>
-            {
-                new Option("Find events for another food truck", () => FindEventMenu()),
-                new Option("Exit to main menu", () => WriteTemporaryMessage("Exists to main menu!")) //Add method to come back to main menu :-)
-            };
-
-            foreach (var @event in eventList)
-            {
-                var message = $"----------------------------------" +
-                              $"\nThe event list for {foodTruck.Name}:\n" +
-                              $"Event name: {@event.Name} in {@event.Location}\n" +
-                              $"Description: {@event.Description}\n" +
-                              $"Starts at: {@event.StartDate}\n" +
-                              $"Ends at: {@event.EndDate}";
-                eventOptions.Add(new Option(message, () => EventsMenuGUI(Id)));
-            }
-
-            PrintMenu(eventOptions);
-        }
 
         private static void WriteMenuFindEvent(List<Option> options, Option selectedOption)
         {
