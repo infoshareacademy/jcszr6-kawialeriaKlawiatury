@@ -69,7 +69,6 @@ namespace FoodTrakker.GUI
                 }
             }
             while (keyinfo.Key != ConsoleKey.X);
-
         }
 
         private static void EventsMenuGUI(int Id)
