@@ -16,7 +16,7 @@ namespace FoodTrakker.BusinessLogic.Models
             try
             {
                 //Adding User & Review
-                var userString = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "User.json"));
+                var userString = File.ReadAllText(Path.Combine(Environment.CurrentDirectory,"DataJSON","User.json"));
                 var userJson = JsonConvert.DeserializeObject<List<User>>(userString);
 
                 foreach (var user1 in userJson)
@@ -29,7 +29,7 @@ namespace FoodTrakker.BusinessLogic.Models
                 }
 
                 //Adding Event & Food Truck
-                var eventString = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Events.json"));
+                var eventString = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "DataJSON", "Events.json"));
                 var eventJson = JsonConvert.DeserializeObject<List<Event>>(eventString);
 
                 foreach (var @event in eventJson)

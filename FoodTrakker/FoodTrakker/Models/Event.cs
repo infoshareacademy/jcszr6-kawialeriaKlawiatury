@@ -12,7 +12,7 @@ namespace FoodTrakker.BusinessLogic.Models
         public int Id { get; internal set; }
         public string Name { get;set; } 
         public string Description { get;set; }
-        public Location Location { get;set; } 
+        public string Location { get;set; } 
         public DateTime StartDate { get;set; }    
         public DateTime EndDate { get; set; }
         public List<FoodTruck> FoodTrucks { get; set; }
