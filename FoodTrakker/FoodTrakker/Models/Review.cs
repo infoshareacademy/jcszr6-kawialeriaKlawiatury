@@ -21,5 +21,11 @@ namespace FoodTrakker.BusinessLogic.Models
         {
             Id = i;
         }
+
+        public override string ToString()
+        {
+            return $" Review : {Id},{Date},{Title},{Description},{Rating},{AuthorID},{FoodTruckId}";
+        }
+
     }
 }
