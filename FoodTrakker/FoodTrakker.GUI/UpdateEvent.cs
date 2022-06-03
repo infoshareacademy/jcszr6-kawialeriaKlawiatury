@@ -46,8 +46,8 @@ namespace FoodTrakker.GUI
 
                     if (input2 == "q" || input2 == "Q")
                     {
-                       // DataRepository<Event>.AddElement(eventToUpdate);
-                        return;
+                        // DataRepository<Event>.AddElement(eventToUpdate);
+                        MainMenu.Create();
                     }
                     int inputAsInt;
                     bool isinputInt2 = int.TryParse(input2, out inputAsInt);

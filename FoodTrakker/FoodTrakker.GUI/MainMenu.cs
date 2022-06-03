@@ -15,7 +15,11 @@ namespace FoodTrakker.GUI
             {
                 new Option("Find FoodTruck", () => TruckMenuGUI.TruckMenu()),//Metoda Mateusz
                 new Option("Find Event", () => FindEventGUI.FindEventMenu()),//Metoda Pawel
-                new Option("Edit FoodTruck", () => WriteTemporaryMessage("")),//Metoda Natalii
+                new Option("Find Review for FoodTruck",()=>FindReviewGUI.FindReviewForFoodTruck()),
+                new Option("Find Review by date",()=>FindReviewGUI.FindReviewByDate()),
+                new Option("Edit FoodTruck", () => UpdateFoodTruck.FoodTruckUpdate()),//Metoda Natalii
+                new Option("Edit Event",()=> UpdateEvent.EventUpdate()),
+                new Option("Edit Review",()=> UpdateReview.ReviewUpdate()),
                 new Option("Add new FoodTruck", () => WriteTemporaryMessage("")),//Metoda Marka
                 new Option("Add new Event", () => WriteTemporaryMessage("")),//Metoda Marka
                 new Option("Add new Review", () => WriteTemporaryMessage("")),//Metoda Marka

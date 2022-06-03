@@ -38,8 +38,8 @@ namespace FoodTrakker.GUI
                     var input2 = Console.ReadLine();
                     if (input2 == "q" || input2 == "Q")
                     {
-                       // DataRepository<Review>.AddElement(review);
-                        return;
+                        // DataRepository<Review>.AddElement(review);
+                        MainMenu.Create();
                     }
                     int inputAsInt;
                     bool isinputInt2 = int.TryParse(input2, out inputAsInt);
