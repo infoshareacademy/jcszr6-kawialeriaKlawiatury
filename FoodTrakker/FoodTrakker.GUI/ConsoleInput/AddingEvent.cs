@@ -1,13 +1,15 @@
 ﻿using System;
 using FoodTrakker.BusinessLogic;
 using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Repository;
+using System.Threading;
 
 namespace FoodTrakker.GUI.ConsoleInput
 {
     internal class AddingEvent
     {
 
-        public void AddNewEvent()
+        public static void AddNewEvent()
         {
             Event newEvent = new Event();
 
@@ -23,16 +25,42 @@ namespace FoodTrakker.GUI.ConsoleInput
             Console.WriteLine($"\nEnter the location of the {newEvent.Name}:"); 
             newEvent.Location = Console.ReadLine();
 
-            //jak przypisać Startdate i EndDate może jakieś API z kalendarzem?
+            
             Console.Clear();
             Console.WriteLine($"\nWhen does the {newEvent.Name} start?\n");
-            newEvent.StartDate = DateTime.UtcNow; //do poprawy
+            var date = Console.ReadLine();
+            DateTime startDateTime;
+            bool isInputDate = DateTime.TryParse(date, out startDateTime);
+            while (!isInputDate)
+            {
+                Console.WriteLine("You type wrong date.");
+                date = Console.ReadLine();
+                isInputDate = DateTime.TryParse(date, out startDateTime);
+            }
+            newEvent.StartDate = startDateTime; 
 
             Console.Clear();
             Console.WriteLine($"\nWhen does it end?\n");
-            newEvent.EndDate = DateTime.UtcNow;//do poprawy
+            var endDate = Console.ReadLine();
+            DateTime endDateTime;
+            bool isDate = DateTime.TryParse(endDate, out endDateTime);
+            while (!isDate)
+            {
+                Console.WriteLine("You type wrong date.");
+                date = Console.ReadLine();
+                isDate = DateTime.TryParse(endDate, out endDateTime);
+            }
+            
+            newEvent.EndDate = endDateTime;
+            var message =
+                ($"The event is {newEvent.Name}. \nIt will take place in {newEvent.Location}." +
+                 $"\n\nHere's a little description of what it has to offer: \n\t{newEvent.Description}. " +
+                 $"\nIt starts on {startDateTime} and ends {endDateTime}.");
+            Console.Clear();
+            Console.WriteLine(message);
+            Thread.Sleep(2000);
 
-            EventRepository.AddEvent(newEvent);
+            DataRepository<Event>.AddElement(newEvent);
         }
     }
 }

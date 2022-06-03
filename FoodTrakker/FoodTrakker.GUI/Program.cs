@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-
+using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Repository;
+using FoodTrakker.GUI.ConsoleInput;
 
 namespace FoodTrakker.GUI
 {
@@ -14,37 +16,37 @@ namespace FoodTrakker.GUI
         public static List<Option> options;
         static void Main(string[] args)
         {
-            UpdateFoodTruck update = new UpdateFoodTruck();
-            update.FoodTruckUpdate();
-            UpdateEvent updateEvent = new UpdateEvent();
-            updateEvent.EventUpdate();
-            UpdateReview updateReview = new UpdateReview();
-            updateReview.ReviewUpdate();
+            //UpdateFoodTruck update = new UpdateFoodTruck();
+            //update.FoodTruckUpdate();
+            //UpdateEvent updateEvent = new UpdateEvent();
+            //updateEvent.EventUpdate();
+            //UpdateReview updateReview = new UpdateReview();
+            //updateReview.ReviewUpdate();
             Console.WriteLine("Welcome in FoodTrakker App, press any key to enter the main menu.");
             Console.WriteLine("Use arrows (UP and Down) to navigate on main menu.");
             Console.ReadKey();
 
             GetFiles();
 
-            //var testEvent = new Event()
-            //{
-            //    Name = "Testowy1",
-            //    Description = "Taki tam tescik",
-            //    StartDate = DateTime.Now,
-            //    EndDate = DateTime.Now,
-            //    FoodTrucks = new List<FoodTruck>()
-            //    {
-            //        DataRepository<FoodTruck>.GetData().First(f => f.Id == 1)
-            //    }
-            //};
+            var testEvent = new Event()
+            {
+                Name = "Testowy1",
+                Description = "Taki tam tescik",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                FoodTrucks = new List<FoodTruck>()
+                {
+                    DataRepository<FoodTruck>.GetData().First(f => f.Id == 1)
+                }
+            };
 
-            //DataRepository<Event>.AddElement(testEvent);
+            DataRepository<Event>.AddElement(testEvent);
 
             options = new List<Option>
             {
                 new Option("Find FoodTruck", () => FindTruck("")),
                 new Option("Log-In", () =>  WriteTemporaryMessage("You are trying to Log-In")),
-                new Option("Create Account", () =>  FindEventGUI.FindEventMenu()),   //WriteTemporaryMessage("You are tryinig to crate account")),
+                new Option("Create Account", () =>  AddingEvent.AddNewEvent()),   //WriteTemporaryMessage("You are tryinig to crate account")),
                 new Option("Exit", () => Environment.Exit(0)),
             };
 

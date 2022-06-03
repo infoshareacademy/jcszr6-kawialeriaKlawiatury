@@ -69,63 +69,63 @@ namespace FoodTrakker.GUI
 
         private static void EventsMenuGUI(int Id)
         {
-            var eventList = FindEvent.FindEventsForFoodTruck(Id);
-            var foodTruck = DataRepository<FoodTruck>.GetData().First(f => f.Id == Id);
-            var messages = new List<string>();
-            Console.Clear();
+            //var eventList = FindEvent.FindEventsForFoodTruck(Id);
+            //var foodTruck = DataRepository<FoodTruck>.GetData().First(f => f.Id == Id);
+            //var messages = new List<string>();
+            //Console.Clear();
 
-            var optionsNewOptions = new List<Option>
-            {
-                new Option("Find events for another food truck", () => FindEventMenu()),
-                new Option("Exit to main menu", () => WriteTemporaryMessage("Exists to main menu!"))
-            };
+            //var optionsNewOptions = new List<Option>
+            //{
+            //    new Option("Find events for another food truck", () => FindEventMenu()),
+            //    new Option("Exit to main menu", () => WriteTemporaryMessage("Exists to main menu!"))
+            //};
 
 
-            foreach (var @event in eventList)
-            {
-                var message = $"----------------------------------" +
-                              $"\nThe event list for {foodTruck.Name}:\n" +
-                              $"Event name: {@event.Name} in {@event.Location}\n" +
-                              $"Description: {@event.Description}\n" +
-                              $"Starts at: {@event.StartDate}\n" +
-                              $"Ends at: {@event.EndDate}";
-                optionsNewOptions.Add(new Option(message, () => EventsMenuGUI(Id)));
-            }
+            //foreach (var @event in eventList)
+            //{
+            //    var message = $"----------------------------------" +
+            //                  $"\nThe event list for {foodTruck.Name}:\n" +
+            //                  $"Event name: {@event.Name} in {@event.Location}\n" +
+            //                  $"Description: {@event.Description}\n" +
+            //                  $"Starts at: {@event.StartDate}\n" +
+            //                  $"Ends at: {@event.EndDate}";
+            //    optionsNewOptions.Add(new Option(message, () => EventsMenuGUI(Id)));
+            //}
 
-            int index = 0;
-            WriteMenuFindEvent(optionsNewOptions, optionsNewOptions[index]);
-            ConsoleKeyInfo keyinfo;
+            //int index = 0;
+            //WriteMenuFindEvent(optionsNewOptions, optionsNewOptions[index]);
+            //ConsoleKeyInfo keyinfo;
             
-            do
-            {
-                keyinfo = Console.ReadKey();
+            //do
+            //{
+            //    keyinfo = Console.ReadKey();
 
-                // Handle each key input (down arrow will write the menu again with a different selected item)
-                if (keyinfo.Key == ConsoleKey.DownArrow)
-                {
-                    if (index + 1 < optionsNewOptions.Count)
-                    {
-                        index++;
-                        WriteMenuFindEvent(optionsNewOptions, optionsNewOptions[index]);
-                    }
-                }
-                if (keyinfo.Key == ConsoleKey.UpArrow)
-                {
-                    if (index - 1 >= 0)
-                    {
-                        index--;
-                        WriteMenuFindEvent(optionsNewOptions, optionsNewOptions[index]);
-                    }
-                }
-                // Handle different action for the option
-                if (keyinfo.Key == ConsoleKey.Enter)
-                {
-                    optionsNewOptions[index].Selected.Invoke();
-                    index = 0;
-                    break;
-                }
-            }
-            while (keyinfo.Key != ConsoleKey.X);
+            //    // Handle each key input (down arrow will write the menu again with a different selected item)
+            //    if (keyinfo.Key == ConsoleKey.DownArrow)
+            //    {
+            //        if (index + 1 < optionsNewOptions.Count)
+            //        {
+            //            index++;
+            //            WriteMenuFindEvent(optionsNewOptions, optionsNewOptions[index]);
+            //        }
+            //    }
+            //    if (keyinfo.Key == ConsoleKey.UpArrow)
+            //    {
+            //        if (index - 1 >= 0)
+            //        {
+            //            index--;
+            //            WriteMenuFindEvent(optionsNewOptions, optionsNewOptions[index]);
+            //        }
+            //    }
+            //    // Handle different action for the option
+            //    if (keyinfo.Key == ConsoleKey.Enter)
+            //    {
+            //        optionsNewOptions[index].Selected.Invoke();
+            //        index = 0;
+            //        break;
+            //    }
+            //}
+            //while (keyinfo.Key != ConsoleKey.X);
 
             
 
