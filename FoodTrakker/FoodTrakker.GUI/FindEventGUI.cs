@@ -35,7 +35,8 @@ namespace FoodTrakker.GUI
 
         private static void EventsMenuGUI(int Id)
         {
-            var eventList = FindEvent.FindEventsForFoodTruck(Id);
+            var search = new FindEvent();
+            var eventList = search.FindEventsForFoodTruck(Id);
             var foodTruck = _foodTrucks.First(f => f.Id == Id);
             var messages = new List<string>();
             Console.Clear();

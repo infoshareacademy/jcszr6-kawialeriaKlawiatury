@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
+using FoodTrakker.GUI.ConsoleInput;
 
 namespace FoodTrakker.GUI
 {
@@ -22,7 +23,7 @@ namespace FoodTrakker.GUI
             {
                 new Option("Find FoodTruck", () => FindTruck("")),
                 new Option("Log-In", () =>  WriteTemporaryMessage("You are trying to Log-In")),
-                new Option("Create Account", () =>  AddingEvent.AddNewEvent()),   //WriteTemporaryMessage("You are tryinig to crate account")),
+                new Option("Create Account", () =>  FindEventGUI.FindEventMenu()),   //WriteTemporaryMessage("You are tryinig to crate account")),
                 new Option("Exit", () => Environment.Exit(0)),
             };
 
