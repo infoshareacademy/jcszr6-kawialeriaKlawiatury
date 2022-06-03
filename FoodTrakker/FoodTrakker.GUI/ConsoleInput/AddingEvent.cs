@@ -32,7 +32,7 @@ namespace FoodTrakker.GUI.ConsoleInput
             Console.WriteLine($"\nWhen does it end?\n");
             newEvent.EndDate = DateTime.UtcNow;//do poprawy
 
-            EventRepository.AddEvent(newEvent);
+            //EventRepository.AddEvent(newEvent);
         }
     }
 }
