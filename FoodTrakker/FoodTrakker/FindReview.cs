@@ -1,4 +1,4 @@
-﻿using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
 using System;
 using System.Collections.Generic;
