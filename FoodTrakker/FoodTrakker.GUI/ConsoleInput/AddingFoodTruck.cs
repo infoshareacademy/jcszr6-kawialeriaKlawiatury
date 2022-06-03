@@ -40,9 +40,9 @@ namespace FoodTrakker.GUI.ConsoleInput
             string decision = Console.ReadLine().ToLower();
             string owner;
             if (decision == "y")
-
             {
                 owner = _users[0].Name;
+                newFoodTruck.OwnerId = _users[0].Id;
             }
             else
             {
@@ -57,11 +57,12 @@ namespace FoodTrakker.GUI.ConsoleInput
 
             Console.Clear();
             var message =
-                ($"The new food truck is {newFoodTruck.Name}. \nUsually it is located in {newFoodTruck.Location}." +
+                ($"The new food truck is {newFoodTruck.Name}. \nUsually it is located in {newFoodTruck.Location.City} on {newFoodTruck.Location.Street}." +
                  $"\n\nHere's a little description: \n\t{newFoodTruck.Description}. \nIt serves {cousineType.Name}" +
                  $"\nIt's owned by {owner}.");
             Console.WriteLine(message);
             Thread.Sleep(2500);
+            DataRepository<FoodTruck>.AddElement(newFoodTruck);
 
             Console.Clear();
             Console.WriteLine("Do you want to add another truck (Y/N)?");
@@ -75,8 +76,8 @@ namespace FoodTrakker.GUI.ConsoleInput
                 MainMenu.Create();
             }
 
-            DataRepository<FoodTruck>.AddElement(newFoodTruck);
-            MainMenu.Create();
+            
+            
         }
     }
 }

@@ -63,6 +63,7 @@ namespace FoodTrakker.GUI.ConsoleInput
             Console.Clear();
             Console.WriteLine(message);
             Thread.Sleep(2500);
+            DataRepository<Event>.AddElement(newEvent);
 
             Console.Clear();
             Console.WriteLine("Do you want to add another event(Y/N)?");
@@ -75,9 +76,6 @@ namespace FoodTrakker.GUI.ConsoleInput
             {
                 MainMenu.Create();
             }
-
-            DataRepository<Event>.AddElement(newEvent);
-            MainMenu.Create();
         }
     }
 }

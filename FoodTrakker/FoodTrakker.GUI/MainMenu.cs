@@ -14,6 +14,7 @@ namespace FoodTrakker.GUI
         {
             _options = new List<Option>()
             {
+                new Option("Show FoodTruck", () => DisplayGUI.ShowFoodTrucks()),
                 new Option("Find FoodTruck", () => TruckMenuGUI.TruckMenu()),//Metoda Mateusz
                 new Option("Find Event", () => FindEventGUI.FindEventMenu()),//Metoda Pawel
                 new Option("Add new FoodTruck", () => AddingFoodTruck.AddFoodTruck()),//Metoda Marka
@@ -24,6 +25,10 @@ namespace FoodTrakker.GUI
                 new Option("Edit FoodTruck", () => UpdateFoodTruck.FoodTruckUpdate()),//Metoda Natalii
                 new Option("Edit Event",()=> UpdateEvent.EventUpdate()),
                 new Option("Edit Review",()=> UpdateReview.ReviewUpdate()),
+                new Option("---------------------", () => MainMenu.Create()),
+                new Option("Save", () => FileManagementGUI.Save()),
+                new Option("Load", () => FileManagementGUI.Load()),
+                new Option("Delete", () => FileManagementGUI.Delete()),
                 new Option("Exit", () => Environment.Exit(0)),
             };
 

@@ -16,6 +16,7 @@ namespace FoodTrakker.BusinessLogic
         private static DirectoryInfo currentDirectory = new DirectoryInfo(Environment.CurrentDirectory);
         private static string pathUser = Path.Combine(currentDirectory.FullName, "DataJSON", "Saved", "savedUser.json");
         private static string pathEvents = Path.Combine(currentDirectory.FullName, "DataJSON", "Saved", "savedEvents.json");
+        private static string pathFoodTrucks = Path.Combine(currentDirectory.FullName, "DataJSON", "Saved", "savedFoodTrucks.json");
         public static void SaveDataToFile()
         {
             checkIfFileExists(pathUser);
@@ -25,6 +26,9 @@ namespace FoodTrakker.BusinessLogic
             //checkIfFileExists(pathEvents);
             string savedEventsJson = JsonConvert.SerializeObject(DataRepository<Event>.GetData());
             File.WriteAllText(pathEvents, savedEventsJson);
+
+            string savedFoodTrucksJson = JsonConvert.SerializeObject(DataRepository<FoodTruck>.GetData());
+            File.WriteAllText(pathFoodTrucks, savedFoodTrucksJson);
         }
 
         public static bool LoadSavedFiles()
@@ -50,12 +54,22 @@ namespace FoodTrakker.BusinessLogic
 
                 foreach (var @event in eventJson)
                 {
-                    DataRepository<Event>.AddElement(@event);
-                    for (int i = 0; i < @event.FoodTrucks.Count; i++)
+                    if (EventValidate(@event))
                     {
-                        DataRepository<FoodTruck>.AddElement(@event.FoodTrucks[i]);
+                        DataRepository<Event>.AddElement(@event);
                     }
                 }
+
+                var foodTrucks = File.ReadAllText(pathFoodTrucks);
+                var foodTrucksJson = JsonConvert.DeserializeObject<List<FoodTruck>>(foodTrucks);
+                foreach (var foodTruck in foodTrucksJson)
+                {
+                    if (FoodTruckValidate(foodTruck))
+                    {
+                        DataRepository<FoodTruck>.AddElement(foodTruck);
+                    }
+                }
+
                 return true;
             }
             catch (Exception)
@@ -69,6 +83,7 @@ namespace FoodTrakker.BusinessLogic
         {
             File.Delete(pathUser);
             File.Delete(pathEvents);
+            File.Delete(pathFoodTrucks);
         }
 
 
@@ -79,6 +94,27 @@ namespace FoodTrakker.BusinessLogic
             {
                 Directory.CreateDirectory(dirName);
             }
+        }
+
+        private static bool FoodTruckValidate(FoodTruck foodTruck)
+        {
+            var foodtrucks = DataRepository<FoodTruck>.GetData();
+            var found = foodtrucks.FirstOrDefault(f => f.Name == foodTruck.Name);
+            if (found != null)
+            {
+                return false;
+            }
+            return true;
+        }
+        private static bool EventValidate(Event @event)
+        {
+            var events = DataRepository<Event>.GetData();
+            var found = events.FirstOrDefault(f => f.Name == @event.Name);
+            if (found != null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
