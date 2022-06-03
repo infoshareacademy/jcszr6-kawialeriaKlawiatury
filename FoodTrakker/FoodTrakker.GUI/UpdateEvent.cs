@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.GUI
 {
-    internal class UpdateEvent
+    public static class UpdateEvent
     {
-        public void EventUpdate()
+        public static void EventUpdate()
         {
             int id;
             Console.WriteLine("Enter the id of Event.");
@@ -75,11 +75,7 @@ namespace FoodTrakker.GUI
                     }
                     if (inputAsInt == 3)
                     {
-                        Location location = new Location();
-                        Console.WriteLine("Enter the new city");
-                        location.City = Console.ReadLine();
-                        Console.WriteLine("Enter the new street");
-                        location.Street = Console.ReadLine();
+                        eventToUpdate.Location = Console.ReadLine();
 
                     }
                     if (inputAsInt == 4)

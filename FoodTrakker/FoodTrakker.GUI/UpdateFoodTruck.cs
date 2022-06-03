@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace FoodTrakker.GUI
 {
-    public class UpdateFoodTruck
+    public static class UpdateFoodTruck
     {
-        public void FoodTruckUpdate()
+        public static void FoodTruckUpdate()
         {
             int id;
             Console.WriteLine("Enter the id of FoodTruck.");

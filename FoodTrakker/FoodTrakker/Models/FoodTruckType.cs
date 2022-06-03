@@ -10,5 +10,9 @@ namespace FoodTrakker.BusinessLogic.Models
     {
         public int Id { get; internal set; }
         public string Name { get; set; }
+        public override string ToString()
+        {
+            return $" Review : {Id},{Name}";
+        }
     }
 }

@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace FoodTrakker.GUI
 {
-    internal class FindReviewGUI
+    public static class FindReviewGUI
     {
-        public void FindReviewByDate()
+        public static void FindReviewByDate()
         {
             Console.WriteLine("Type the date of reviews.");
             var date = Console.ReadLine();
@@ -34,7 +34,7 @@ namespace FoodTrakker.GUI
 
         }
 
-        public void FindReviewForFoodTruck()
+        public static void FindReviewForFoodTruck()
         {
             int id;
             Console.WriteLine("Enter the id of FoodTruck.");
