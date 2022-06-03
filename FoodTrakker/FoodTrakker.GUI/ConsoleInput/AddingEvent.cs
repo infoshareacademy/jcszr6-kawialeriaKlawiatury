@@ -3,6 +3,7 @@ using FoodTrakker.BusinessLogic;
 using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
 using System.Threading;
+using System.Globalization;
 
 
 namespace FoodTrakker.GUI.ConsoleInput
@@ -53,13 +54,27 @@ namespace FoodTrakker.GUI.ConsoleInput
             }
 
             newEvent.EndDate = endDateTime;
+
             var message =
                 ($"The event is {newEvent.Name}. \nIt will take place in {newEvent.Location}." +
                  $"\n\nHere's a little description of what it has to offer: \n\t{newEvent.Description}. " +
-                 $"\nIt starts on {newEvent.StartDate} and ends {newEvent.EndDate}.");
+                 $"\nIt starts on {newEvent.StartDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} and ends " +
+                 $"{newEvent.EndDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}.");
             Console.Clear();
             Console.WriteLine(message);
             Thread.Sleep(2500);
+
+            Console.Clear();
+            Console.WriteLine("Do you want to add another event(Y/N)?");
+            string decision = Console.ReadLine().ToLower();
+            if (decision == "y")
+            {
+                AddNewEvent();
+            }
+            else
+            {
+                MainMenu.Create();
+            }
 
             DataRepository<Event>.AddElement(newEvent);
             MainMenu.Create();
