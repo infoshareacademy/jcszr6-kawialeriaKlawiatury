@@ -143,7 +143,7 @@ namespace FoodTrakker.GUI.ConsoleInput
             }
             else
             {
-                Console.WriteLine("wracamy do main menu"); //dodać wyjście do MM
+                MainMenu.Create();
             }
         }
 

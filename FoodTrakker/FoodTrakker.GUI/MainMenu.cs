@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using FoodTrakker.GUI.ConsoleInput;
 
 namespace FoodTrakker.GUI
 {
@@ -16,9 +17,9 @@ namespace FoodTrakker.GUI
                 new Option("Find FoodTruck", () => TruckMenuGUI.TruckMenu()),//Metoda Mateusz
                 new Option("Find Event", () => FindEventGUI.FindEventMenu()),//Metoda Pawel
                 new Option("Edit FoodTruck", () => WriteTemporaryMessage("")),//Metoda Natalii
-                new Option("Add new FoodTruck", () => WriteTemporaryMessage("")),//Metoda Marka
-                new Option("Add new Event", () => WriteTemporaryMessage("")),//Metoda Marka
-                new Option("Add new Review", () => WriteTemporaryMessage("")),//Metoda Marka
+                new Option("Add new FoodTruck", () => AddingFoodTruck.AddFoodTruck()),//Metoda Marka
+                new Option("Add new Event", () => AddingEvent.AddNewEvent()),//Metoda Marka
+                new Option("Add new Review", () =>AddingReview.AddingReviewGui()),//Metoda Marka
                 new Option("Exit", () => Environment.Exit(0)),
             };
 
