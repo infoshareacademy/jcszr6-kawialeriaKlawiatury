@@ -13,18 +13,31 @@ namespace FoodTrakker.GUI.ConsoleInput
         {
             Event newEvent = new Event();
 
-            Console.Clear();
-            Console.WriteLine("Please specify the name of the Event you wish to add:\n");
-            newEvent.Name = Console.ReadLine();
+            //Console.Clear();
+            //Console.WriteLine("Please specify the name of the Event you wish to add:\n");
+            //newEvent.Name = Console.ReadLine();
 
-            Console.Clear();
-            Console.WriteLine($"\nPlease describe {newEvent.Name} in few sentences.\n");
-            newEvent.Description = Console.ReadLine();
+            //Console.Clear();
+            //Console.WriteLine($"\nPlease describe {newEvent.Name} in few sentences.\n");
+            //newEvent.Description = Console.ReadLine();
 
-            Console.Clear();
-            Console.WriteLine($"\nEnter the location of the {newEvent.Name}:"); 
-            newEvent.Location = Console.ReadLine();
+            //Console.Clear();
+            //Console.WriteLine($"\nEnter the location of the {newEvent.Name}:"); 
+            //newEvent.Location = Console.ReadLine();
 
+<<<<<<< HEAD
+            ////jak przypisać Startdate i EndDate może jakieś API z kalendarzem?
+            //Console.Clear();
+            //Console.WriteLine($"\nWhen does the {newEvent.Name} start?\n");
+            //newEvent.StartDate = DateTime.UtcNow; //do poprawy
+
+            //Console.Clear();
+            //Console.WriteLine($"\nWhen does it end?\n");
+            //newEvent.EndDate = DateTime.UtcNow;//do poprawy
+
+            //EventRepository.AddEvent(newEvent);
+=======
+            
             Console.Clear();
             Console.WriteLine($"\nWhen does the {newEvent.Name} start?\n");
             var date = Console.ReadLine();
@@ -60,6 +73,7 @@ namespace FoodTrakker.GUI.ConsoleInput
             Thread.Sleep(2000);
 
             DataRepository<Event>.AddElement(newEvent);
+>>>>>>> fd174fbd62ef0a154900b42cd627660d7aead23d
         }
     }
 }

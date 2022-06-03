@@ -1,16 +1,50 @@
 ﻿using System;
 using FoodTrakker.BusinessLogic;
 using FoodTrakker.BusinessLogic.Models;
+<<<<<<< HEAD
+=======
 using FoodTrakker.BusinessLogic.Repository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
+
+>>>>>>> fd174fbd62ef0a154900b42cd627660d7aead23d
+
 namespace FoodTrakker.GUI.ConsoleInput
 {
     internal class AddingFoodTruck
     {
+<<<<<<< HEAD
+        
+        //public void InputNewFoodTruck ()
+        //{
+        //    FoodTruck newFoodTruck = new FoodTruck();
+            
+        //    Console.Clear();
+        //    // jak dodać ID?
+
+        //    Console.WriteLine("Enter the name of a new Food Truck:");
+        //    newFoodTruck.Name = Console.ReadLine();
+       
+        //    Console.WriteLine("\nIn which town it is usually located:"); 
+        //    Console.WriteLine("\n\ton what street?:");
+        //    newFoodTruck.Location.Street = Console.ReadLine();
+        //                // co z wartościami: ZipCode, StartDate i EndDate
+
+        //    Console.WriteLine("\nEnter the Owner:");  
+        //    newFoodTruck.Owner.Name = Console.ReadLine();
+        //    // dodawanie ID?;
+
+        //    Console.Clear();
+        //    Console.WriteLine("To enter type of this FoodTruck, please chose from tle list:");
+        //    // dodanie 'menu' typów FT do wyboru??
+
+        //    FoodTruckRepository.AddFoodTruck(newFoodTruck);
+        //}
+
+=======
         private static List<User> _users = DataRepository<User>.GetData();
 
 
@@ -65,5 +99,6 @@ namespace FoodTrakker.GUI.ConsoleInput
             
             DataRepository<FoodTruck>.AddElement(newFoodTruck);
         }
+>>>>>>> fd174fbd62ef0a154900b42cd627660d7aead23d
     }
 }

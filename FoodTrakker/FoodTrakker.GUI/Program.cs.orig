@@ -7,6 +7,10 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
+<<<<<<< HEAD
+=======
+using FoodTrakker.GUI.ConsoleInput;
+>>>>>>> fd174fbd62ef0a154900b42cd627660d7aead23d
 
 namespace FoodTrakker.GUI
 {
@@ -15,8 +19,36 @@ namespace FoodTrakker.GUI
         public static List<Option> options;
         static void Main(string[] args)
         {
+<<<<<<< HEAD
             WelcomeMessage.Run();
             LoadData.Load();
+=======
+            //UpdateFoodTruck update = new UpdateFoodTruck();
+            //update.FoodTruckUpdate();
+            //UpdateEvent updateEvent = new UpdateEvent();
+            //updateEvent.EventUpdate();
+            //UpdateReview updateReview = new UpdateReview();
+            //updateReview.ReviewUpdate();
+            Console.WriteLine("Welcome in FoodTrakker App, press any key to enter the main menu.");
+            Console.WriteLine("Use arrows (UP and Down) to navigate on main menu.");
+            Console.ReadKey();
+
+            GetFiles();
+
+            var testEvent = new Event()
+            {
+                Name = "Testowy1",
+                Description = "Taki tam tescik",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                FoodTrucks = new List<FoodTruck>()
+                {
+                    DataRepository<FoodTruck>.GetData().First(f => f.Id == 1)
+                }
+            };
+
+            DataRepository<Event>.AddElement(testEvent);
+>>>>>>> fd174fbd62ef0a154900b42cd627660d7aead23d
 
             options = new List<Option>
             {
