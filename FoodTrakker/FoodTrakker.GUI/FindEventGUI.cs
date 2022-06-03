@@ -44,7 +44,7 @@ namespace FoodTrakker.GUI
             var eventOptions = new List<Option>
             {
                 new Option("Find events for another food truck", () => FindEventMenu()),
-                new Option("Exit to main menu", () => WriteTemporaryMessage("Exists to main menu!")) //Add method to come back to main menu :-)
+                new Option("Exit to main menu", () => MainMenu.Create()) 
             };
 
             foreach (var @event in eventList)

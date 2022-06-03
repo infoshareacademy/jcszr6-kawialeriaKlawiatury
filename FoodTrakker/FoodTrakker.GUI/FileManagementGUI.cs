@@ -13,19 +13,19 @@ namespace FoodTrakker.GUI
         public static void Save()
         {
             FileManagement.SaveDataToFile();
-            FindEventGUI.FindEventMenu();
+            MainMenu.Create();
         }
 
         public static void Load()
         {
             FileManagement.LoadSavedFiles();
-            FindEventGUI.FindEventMenu();
+            MainMenu.Create();
         }
 
         public static void Delete()
         {
             FileManagement.DeleteSavedData();
-            FindEventGUI.FindEventMenu();
+            MainMenu.Create();
         }
 
     }
