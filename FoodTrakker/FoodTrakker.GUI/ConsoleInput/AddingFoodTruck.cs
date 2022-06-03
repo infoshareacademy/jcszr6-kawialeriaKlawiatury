@@ -61,9 +61,10 @@ namespace FoodTrakker.GUI.ConsoleInput
                  $"\n\nHere's a little description: \n\t{newFoodTruck.Description}. \nIt serves {cousineType.Name}" +
                  $"\nIt's owned by {owner}.");
             Console.WriteLine(message);
-            Thread.Sleep(2000);
+            Thread.Sleep(2500);
             
             DataRepository<FoodTruck>.AddElement(newFoodTruck);
+            MainMenu.Create();
         }
     }
 }

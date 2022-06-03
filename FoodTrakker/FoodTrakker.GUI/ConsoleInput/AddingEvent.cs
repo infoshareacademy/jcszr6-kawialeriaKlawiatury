@@ -4,6 +4,7 @@ using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
 using System.Threading;
 
+
 namespace FoodTrakker.GUI.ConsoleInput
 {
     internal class AddingEvent
@@ -36,6 +37,7 @@ namespace FoodTrakker.GUI.ConsoleInput
                 date = Console.ReadLine();
                 isInputDate = DateTime.TryParse(date, out startDateTime);
             }
+
             newEvent.StartDate = startDateTime; 
 
             Console.Clear();
@@ -49,17 +51,18 @@ namespace FoodTrakker.GUI.ConsoleInput
                 date = Console.ReadLine();
                 isDate = DateTime.TryParse(endDate, out endDateTime);
             }
-            
+
             newEvent.EndDate = endDateTime;
             var message =
                 ($"The event is {newEvent.Name}. \nIt will take place in {newEvent.Location}." +
                  $"\n\nHere's a little description of what it has to offer: \n\t{newEvent.Description}. " +
-                 $"\nIt starts on {startDateTime} and ends {endDateTime}.");
+                 $"\nIt starts on {newEvent.StartDate} and ends {newEvent.EndDate}.");
             Console.Clear();
             Console.WriteLine(message);
-            Thread.Sleep(2000);
+            Thread.Sleep(2500);
 
             DataRepository<Event>.AddElement(newEvent);
+            MainMenu.Create();
         }
     }
 }

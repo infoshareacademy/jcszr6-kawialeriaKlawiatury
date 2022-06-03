@@ -3,6 +3,7 @@ using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace FoodTrakker.GUI
 {
@@ -25,10 +26,14 @@ namespace FoodTrakker.GUI
             foreach (Review review in reviewsByDate)
             {
                 Console.WriteLine($"Reviews from {date}: {review}");
+                Thread.Sleep(3000);
+                MainMenu.Create();
             }
             if (reviewsByDate.Count == 0)
             {
                 Console.WriteLine("There aren't any reviews.");
+                Thread.Sleep(3000);
+                MainMenu.Create();
             }
 
 
@@ -51,11 +56,15 @@ namespace FoodTrakker.GUI
             foreach (Review foodTruckReview in reviewsByFoodTruckId)
             {
                 Console.WriteLine($"Reviews for FoodTruck are : {foodTruckReview}");
+                Thread.Sleep(3000);
+                MainMenu.Create();
             }
             if (reviewsByFoodTruckId.Count == 0)
             {
 
                 Console.WriteLine("There aren't any reviews.");
+                Thread.Sleep(3000);
+                MainMenu.Create();
             }
         }
     }
