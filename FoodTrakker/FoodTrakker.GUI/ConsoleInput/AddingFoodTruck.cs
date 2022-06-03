@@ -62,7 +62,19 @@ namespace FoodTrakker.GUI.ConsoleInput
                  $"\nIt's owned by {owner}.");
             Console.WriteLine(message);
             Thread.Sleep(2500);
-            
+
+            Console.Clear();
+            Console.WriteLine("Do you want to add another truck (Y/N)?");
+            string truckDecision = Console.ReadLine().ToLower();
+            if (truckDecision == "y")
+            {
+                AddFoodTruck();
+            }
+            else
+            {
+                MainMenu.Create();
+            }
+
             DataRepository<FoodTruck>.AddElement(newFoodTruck);
             MainMenu.Create();
         }
