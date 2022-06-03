@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "45gHC0JgCnuuqGR9N32SqMal2P17Ql+U9Ex7cuWI3BBin7pogWkqCoiQ16/Q5cRMZDobZAkEFNu/kvs1gAlNuQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mateu\\Desktop\\ISA\\Kawialeria\\jcszr6-kawialeriaKlawiatury\\FoodTrakker\\FoodTrakker\\FoodTrakker.BusinessLogic.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mateu\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

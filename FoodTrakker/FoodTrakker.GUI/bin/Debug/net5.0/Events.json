@@ -1,0 +1,73 @@
+[
+  {
+    "Id": 1,
+    "Name": "Mexican Party",
+    "Description": "Mexican Party in the heart of Gdansk!!",
+    "Location": "Gdansk",
+    "StartDate": "2022-05-20T20:54:09.6806625+02:00",
+    "EndDate": "2022-05-22T20:54:09.6810224+02:00",
+    "FoodTrucks": [
+      {
+        "Id": 1,
+        "Name": "Mexican truck",
+        "Description": "Best mexican food in Europe! made in Poland",
+        "Location": {
+          "Street": "Gdanska",
+          "City": "Gdansk",
+          "ZIPCode": 23133,
+          "StartDate": "2022-05-16T20:54:09.6817223+02:00",
+          "EndDate": "2022-05-23T20:54:09.6817863+02:00"
+        },
+        "Type": {
+          "Id": 1,
+          "Name": "Mexican"
+        },
+        "OwnerId": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Polski Meksyk",
+        "Description": "Polish cuisine in mexican flavour",
+        "Location": {
+          "Street": "Gdanska",
+          "City": "Gdansk",
+          "ZIPCode": 23133,
+          "StartDate": "2022-05-21T20:54:09.6821826+02:00",
+          "EndDate": "2022-05-23T20:54:09.6821862+02:00"
+        },
+        "Type": {
+          "Id": 2,
+          "Name": "Polish"
+        },
+        "OwnerId": 3
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Name": "MixIt",
+    "Description": "Lets try dishes from all the places!",
+    "Location": "Berlin",
+    "StartDate": "2022-06-20T20:54:09.6806625+02:00",
+    "EndDate": "2022-06-22T20:54:09.6810224+02:00",
+    "FoodTrucks": [
+      {
+        "Id": 3,
+        "Name": "Sushi Place",
+        "Description": "GetYourSushi2Go",
+        "Location": {
+          "Street": "Gdanska",
+          "City": "Gdansk",
+          "ZIPCode": 23133,
+          "StartDate": "2022-05-21T20:54:09.6821826+02:00",
+          "EndDate": "2022-05-23T20:54:09.6821862+02:00"
+        },
+        "Type": {
+          "Id": 3,
+          "Name": "Chinese"
+        },
+        "OwnerId": 3
+      }
+    ]
+  }
+]
