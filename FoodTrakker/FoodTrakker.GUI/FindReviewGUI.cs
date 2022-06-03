@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace FoodTrakker.GUI
 {
-    internal class FindReview
+    internal class FindReviewGUI
     {
         public void FindReviewByDate()
         {
