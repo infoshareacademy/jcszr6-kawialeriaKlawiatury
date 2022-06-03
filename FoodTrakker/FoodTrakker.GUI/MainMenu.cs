@@ -19,6 +19,8 @@ namespace FoodTrakker.GUI
                 new Option("Add new FoodTruck", () => WriteTemporaryMessage("")),//Metoda Marka
                 new Option("Add new Event", () => WriteTemporaryMessage("")),//Metoda Marka
                 new Option("Add new Review", () => WriteTemporaryMessage("")),//Metoda Marka
+                new Option("--------------------", () => MainMenu.Create()),
+                new Option("Save",() => FileManagementGUI.Save()),
                 new Option("Exit", () => Environment.Exit(0)),
             };
 
