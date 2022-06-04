@@ -54,6 +54,7 @@ namespace FoodTrakker.GUI.ConsoleInput
             var cousineType = new FoodTruckType();
             Console.WriteLine("Enter type of this FoodTruck:");
             cousineType.Name = Console.ReadLine();
+            newFoodTruck.Type = new FoodTruckType();
             newFoodTruck.Type.Name = cousineType.Name;
 
             Console.Clear();
