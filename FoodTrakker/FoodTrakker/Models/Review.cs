@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace FoodTrakker.BusinessLogic.Models
 
         public override string ToString()
         {
-            return $" Review : {Id},{Date},{Title},{Description},{Rating},{AuthorID},{FoodTruckId}";
+            return $"Review: Id:{Id} Title:{Title} ({Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}),\nDescription: {Description},\nRate: {Rating},\nAuthor: {AuthorID},Food Truck Id: {FoodTruckId}";
         }
 
     }

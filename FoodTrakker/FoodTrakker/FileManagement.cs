@@ -17,6 +17,7 @@ namespace FoodTrakker.BusinessLogic
         private static string pathUser = Path.Combine(currentDirectory.FullName, "DataJSON", "Saved", "savedUser.json");
         private static string pathEvents = Path.Combine(currentDirectory.FullName, "DataJSON", "Saved", "savedEvents.json");
         private static string pathFoodTrucks = Path.Combine(currentDirectory.FullName, "DataJSON", "Saved", "savedFoodTrucks.json");
+        private static string pathReviews = Path.Combine(currentDirectory.FullName, "DataJSON", "Saved", "savedReviews.json");
         public static void SaveDataToFile()
         {
             checkIfFileExists(pathUser);
@@ -29,6 +30,9 @@ namespace FoodTrakker.BusinessLogic
 
             string savedFoodTrucksJson = JsonConvert.SerializeObject(DataRepository<FoodTruck>.GetData());
             File.WriteAllText(pathFoodTrucks, savedFoodTrucksJson);
+
+            string savedReviews = JsonConvert.SerializeObject(DataRepository<Review>.GetData());
+            File.WriteAllText(pathReviews, savedReviews);
         }
 
         public static bool LoadSavedFiles()
@@ -42,10 +46,7 @@ namespace FoodTrakker.BusinessLogic
                 foreach (var user1 in userJson)
                 {
                     DataRepository<User>.AddElement(user1);
-                    for (int i = 0; i < user1.Reviews.Count; i++)
-                    {
-                        DataRepository<Review>.AddElement(user1.Reviews[i]);
-                    }
+                    
                 }
 
                 //Adding Event & Food Truck
@@ -67,6 +68,16 @@ namespace FoodTrakker.BusinessLogic
                     if (FoodTruckValidate(foodTruck))
                     {
                         DataRepository<FoodTruck>.AddElement(foodTruck);
+                    }
+                }
+
+                var reviews = File.ReadAllText(pathReviews);
+                var reviewsJson = JsonConvert.DeserializeObject<List<Review>>(reviews);
+                foreach (var review in reviewsJson)
+                {
+                    if (ReviewValidate(review))
+                    {
+                        DataRepository<Review>.AddElement(review);
                     }
                 }
 
@@ -110,6 +121,17 @@ namespace FoodTrakker.BusinessLogic
         {
             var events = DataRepository<Event>.GetData();
             var found = events.FirstOrDefault(f => f.Name == @event.Name);
+            if (found != null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private static bool ReviewValidate(Review review)
+        {
+            var reviews = DataRepository<Review>.GetData();
+            var found = reviews.FirstOrDefault(f => f.Description == review.Description);
             if (found != null)
             {
                 return false;
