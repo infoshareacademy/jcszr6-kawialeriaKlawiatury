@@ -54,11 +54,12 @@ namespace FoodTrakker.GUI.ConsoleInput
             var cousineType = new FoodTruckType();
             Console.WriteLine("Enter type of this FoodTruck:");
             cousineType.Name = Console.ReadLine();
+            newFoodTruck.Type.Name = cousineType.Name;
 
             Console.Clear();
             var message =
                 ($"The new food truck is {newFoodTruck.Name}. \nUsually it is located in {newFoodTruck.Location.City} on {newFoodTruck.Location.Street}." +
-                 $"\n\nHere's a little description: \n\t{newFoodTruck.Description}. \nIt serves {cousineType.Name}" +
+                 $"\n\nHere's a little description: \n\t{newFoodTruck.Description}. \nIt serves {newFoodTruck.Type.Name}" +
                  $"\nIt's owned by {owner}.");
             Console.WriteLine(message);
             Thread.Sleep(2500);
