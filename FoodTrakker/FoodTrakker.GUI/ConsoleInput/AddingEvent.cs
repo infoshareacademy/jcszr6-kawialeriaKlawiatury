@@ -5,6 +5,7 @@ using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
 using System.Threading;
 using System.Globalization;
+using System.Linq;
 
 
 namespace FoodTrakker.GUI.ConsoleInput
@@ -62,7 +63,46 @@ namespace FoodTrakker.GUI.ConsoleInput
                  $"\n\nHere's a little description of what it has to offer: \n\t{newEvent.Description}. " +
                  $"\nIt starts on {newEvent.StartDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} and ends " +
                  $"{newEvent.EndDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}.");
+            
             Console.Clear();
+            Console.WriteLine("Would you like do add a FoodTruck to his event (Y/N)? ");
+            string truckToEventDecision = Console.ReadLine().ToLower();
+            if (truckToEventDecision == "y")
+            {
+                var foodTrucks = DataRepository<FoodTruck>.GetData();
+                Console.Clear();
+                foreach (var foodTruck in foodTrucks)
+                {
+                   var foodTruckMessage =
+                        $"Id: {foodTruck.Id} Name: {foodTruck.Name}, Type {foodTruck.Type.Name}, Located: {foodTruck.Location.City}, Street: {foodTruck.Location.Street}";
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"{foodTruckMessage}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
+                int truckId;
+                Console.WriteLine("Enter the id of FoodTruck.");
+                var addingTruckToEvent = Console.ReadLine();
+                bool isInptInt = int.TryParse(addingTruckToEvent, out truckId);
+                while (!isInptInt)
+                {
+                    Console.WriteLine("It isn't a number.");
+                    addingTruckToEvent = Console.ReadLine();
+                    isInptInt = int.TryParse(addingTruckToEvent, out truckId);
+                }
+                var foodTruckList = DataRepository<FoodTruck>.GetData();
+                var foodTruckToAdd = foodTruckList.FirstOrDefault(f => f.Id == truckId);
+                newEvent.FoodTrucks.Add(foodTruckToAdd);
+            }
+            else
+            {
+                DataRepository<Event>.AddElement(newEvent);
+                MainMenu.Create();
+                
+            }
+
+            
+
             Console.WriteLine(message);
             Thread.Sleep(2500);
             DataRepository<Event>.AddElement(newEvent);
