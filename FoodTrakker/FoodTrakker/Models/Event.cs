@@ -26,5 +26,10 @@ namespace FoodTrakker.BusinessLogic.Models
         {
             return $" Event : {Id},{Name},{Description},{Location},{StartDate},{EndDate},{FoodTrucks}";
         }
+
+        public Event()
+        {
+            FoodTrucks = new List<FoodTruck>();
+        }
     }
 }

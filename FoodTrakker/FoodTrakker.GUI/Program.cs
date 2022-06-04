@@ -12,8 +12,6 @@ namespace FoodTrakker.GUI
             LoadData.Load();
             LogInMenuGUI.LogIn();
             MainMenu.Create();
-
         }
-
     }
 }

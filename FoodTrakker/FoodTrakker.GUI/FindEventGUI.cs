@@ -105,7 +105,9 @@ namespace FoodTrakker.GUI
         private static void WriteMenuFindEvent(List<Option> options, Option selectedOption)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Please select for which food truck would You like to find an event:\n ");
+            Console.ForegroundColor = ConsoleColor.White;
             foreach (Option option in options)
             {
                 if (option == selectedOption)
