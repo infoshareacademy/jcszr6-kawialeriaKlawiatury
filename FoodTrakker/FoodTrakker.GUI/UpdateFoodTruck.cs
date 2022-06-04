@@ -3,6 +3,7 @@ using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace FoodTrakker.GUI
 {
@@ -25,6 +26,8 @@ namespace FoodTrakker.GUI
             if (foodTruck == null)
             {
                 Console.WriteLine("Your FoodTruck doesn't exist.Please choose Add.");
+                Thread.Sleep(3000);
+                MainMenu.Create();
             }
             else
             {
@@ -75,7 +78,17 @@ namespace FoodTrakker.GUI
                     }
                     if (inputAsInt == 4)
                     {
-                        foodTruck.OwnerId = Convert.ToInt32(Console.ReadLine());
+                        var checkInput = Console.ReadLine();
+                        int intInput;
+                        bool isInputInt = int.TryParse(checkInput, out intInput);
+                        while (!isInputInt)
+                        {
+                            Console.WriteLine("It isn't a number.");
+                            checkInput = Console.ReadLine();
+                            isInputInt = int.TryParse(checkInput, out intInput);
+                            foodTruck.OwnerId = intInput;
+                        }
+                        foodTruck.OwnerId = intInput;
                     }
                 }
                 while (true);

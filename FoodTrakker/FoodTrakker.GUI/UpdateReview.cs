@@ -3,6 +3,7 @@ using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace FoodTrakker.GUI
 {
@@ -25,6 +26,8 @@ namespace FoodTrakker.GUI
             if (review == null)
             {
                 Console.WriteLine("Your Review doesn't exist.Please choose Add.");
+                Thread.Sleep(3000);
+                MainMenu.Create();
             }
             else
             {
@@ -65,7 +68,7 @@ namespace FoodTrakker.GUI
                     }
                     if (inputAsInt == 3)
                     {
-                        var checkInput = Console.ReadLine();
+                       var checkInput = Console.ReadLine();
                        int intInput;
                         bool isInputInt = int.TryParse(checkInput, out intInput);
                         while (!isInputInt)

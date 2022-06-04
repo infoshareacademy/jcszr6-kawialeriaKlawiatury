@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FoodTrakker.GUI
@@ -28,6 +29,8 @@ namespace FoodTrakker.GUI
             if (eventToUpdate == null)
             {
                 Console.WriteLine("Your Event doesn't exist.Please choose Add.");
+                Thread.Sleep(3000);
+                MainMenu.Create();
             }
             else
             {
