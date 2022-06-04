@@ -8,7 +8,7 @@ namespace FoodTrakker.GUI
     {
         static void Main(string[] args)
         {
-            //WelcomeMessage.Run();
+            WelcomeMessage.Run();
             LoadData.Load();
             LogInMenuGUI.LogIn();
             MainMenu.Create();

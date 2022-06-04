@@ -56,7 +56,7 @@ namespace FoodTrakker.GUI.ConsoleInput
             
 
             newEvent.EndDate = endDateTime;
-            newEvent.FoodTrucks = new List<FoodTruck>();
+            
             var message =
                 ($"The event is {newEvent.Name}. \nIt will take place in {newEvent.Location}." +
                  $"\n\nHere's a little description of what it has to offer: \n\t{newEvent.Description}. " +
