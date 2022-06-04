@@ -41,7 +41,11 @@ namespace FoodTrakker.GUI
                     var input2 = Console.ReadLine();
                     if (input2 == "q" || input2 == "Q")
                     {
-                        // DataRepository<Review>.AddElement(review);
+                        Console.WriteLine("This is your updated Review: ");
+                        Console.WriteLine($"{review.Title}");
+                        Console.WriteLine($"{review.Description}");
+                        Console.WriteLine($"{review.Rating}");
+                        Thread.Sleep(5000);
                         MainMenu.Create();
                     }
                     int inputAsInt;

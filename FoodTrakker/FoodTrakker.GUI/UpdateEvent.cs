@@ -35,21 +35,32 @@ namespace FoodTrakker.GUI
             else
             {
 
-               Console.WriteLine("Write number which property want to change and press enter.");
-               Console.WriteLine("Press 1 to update name of Event.");
-               Console.WriteLine("Press 2 to update description of Event.");
-               Console.WriteLine("Press 3 to update location of Event.");
-               Console.WriteLine("Press 4 to update the List of FoodTrucks.");
-               Console.WriteLine("Press 5 to update start date.");
-               Console.WriteLine("Press 6 to update the end date");
-               Console.WriteLine("Press Q when you do all changes to quit.");
-               do
-               {
-                   var input2 = Console.ReadLine();
+                Console.WriteLine("Write number which property want to change and press enter.");
+                Console.WriteLine("Press 1 to update name of Event.");
+                Console.WriteLine("Press 2 to update description of Event.");
+                Console.WriteLine("Press 3 to update location of Event.");
+                Console.WriteLine("Press 4 to update the List of FoodTrucks.");
+                Console.WriteLine("Press 5 to update start date.");
+                Console.WriteLine("Press 6 to update the end date");
+                Console.WriteLine("Press Q when you do all changes to quit.");
+                do
+                {
+                    var input2 = Console.ReadLine();
 
                     if (input2 == "q" || input2 == "Q")
                     {
-                        // DataRepository<Event>.AddElement(eventToUpdate);
+                        Console.WriteLine("This is your updated Event");
+                        Console.WriteLine($"{eventToUpdate.Name}");
+                        Console.WriteLine($"{eventToUpdate.Description}");
+                        Console.WriteLine($"{eventToUpdate.Location}");
+                        Console.WriteLine($"FoodTrucks in Event: ");
+                        foreach (var item in eventToUpdate.FoodTrucks)
+                        {
+                            Console.WriteLine($"{item}");
+                        }
+                        Console.WriteLine($"Start Date:{eventToUpdate.StartDate}");
+                        Console.WriteLine($"End Date:{eventToUpdate.EndDate}");
+                        Thread.Sleep(10000);
                         MainMenu.Create();
                     }
                     int inputAsInt;
@@ -83,14 +94,52 @@ namespace FoodTrakker.GUI
                     }
                     if (inputAsInt == 4)
                     {
-                        eventToUpdate.FoodTrucks = new List<FoodTruck>()
+                        Console.WriteLine("Press 1 to add FoodTruck");
+                        Console.WriteLine("Press 2 to remove FoodTruck");
+                        int input3AsInt;
+                        var input3 = Console.ReadLine();
+                        bool isinputInt3 = int.TryParse(input3, out input3AsInt);
+                        while (!isinputInt)
                         {
-                            new FoodTruck()
-                            {
-                                Name = Console.ReadLine(),
-                            }
-                        };
+                            Console.WriteLine("It isn't a number.");
+                            input = Console.ReadLine();
+                            isinputInt = int.TryParse(input3, out input3AsInt);
+                        }
+                        while (input3AsInt != 1 && input3AsInt != 2)
+                        {
+                            Console.WriteLine("You type wrong value.Please select 1 or 2.");
+                            input3 = Console.ReadLine();
+                            isinputInt3 = int.TryParse(input3, out input3AsInt);
+                        }
+                        if (input3AsInt == 1)
+                        {
 
+                            int id2;
+                            Console.WriteLine("Enter the id of FoodTruck.");
+                            var input5 = Console.ReadLine();
+                            bool isinputInt5 = int.TryParse(input5, out id2);
+                            while (!isinputInt5)
+                            {
+                                Console.WriteLine("It isn't a number.");
+                                input5 = Console.ReadLine();
+                                isinputInt5 = int.TryParse(input5, out id2);
+                            }
+                            var foodTruckList = DataRepository<FoodTruck>.GetData();
+                            var foodTruckToAdd = foodTruckList.FirstOrDefault(f => f.Id == id2);
+                            eventToUpdate.FoodTrucks.Add(foodTruckToAdd);
+                            if (foodTruckToAdd == null)
+                            {
+                                Console.WriteLine("You should first add FoodTruck");
+
+                            }
+                        }
+                        if (input3AsInt == 2)
+                        {
+                            Console.WriteLine("Type the name of FoodTruck");
+                            string foodTruckName = Console.ReadLine();
+                            var foodTruckToRemove = eventToUpdate.FoodTrucks.FirstOrDefault(f => f.Name == foodTruckName);
+                            eventToUpdate.FoodTrucks.Remove(foodTruckToRemove);
+                        }
                     }
                     if (inputAsInt == 5)
                     {
@@ -118,13 +167,9 @@ namespace FoodTrakker.GUI
                         }
                         eventToUpdate.EndDate = dateTime;
                     }
-
-               }
-               while (true);
-
-           }
-
-
-       }
+                }
+                while (true);
+            }
+        }
     }
 }
