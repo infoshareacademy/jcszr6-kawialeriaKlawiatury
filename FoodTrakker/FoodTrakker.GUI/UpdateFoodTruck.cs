@@ -43,7 +43,12 @@ namespace FoodTrakker.GUI
                     var input2 = Console.ReadLine();
                     if (input2 == "q" || input2 == "Q")
                     {
-                        // DataRepository<FoodTruck>.AddElement(foodTruck);
+                        Console.WriteLine("This is your updated FoodTruck: ");
+                        Console.WriteLine($"{foodTruck.Name}");
+                        Console.WriteLine($"{foodTruck.Description}");
+                        Console.WriteLine($"{foodTruck.Location}");
+                        Console.WriteLine($"{foodTruck.OwnerId}");
+                        Thread.Sleep(10000);
                         MainMenu.Create();
                     }
                     int inputAsInt;
