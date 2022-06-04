@@ -25,7 +25,7 @@ namespace FoodTrakker.GUI
             var review = reviewsList.FirstOrDefault(r => r.Id == id);
             if (review == null)
             {
-                Console.WriteLine("Your Review doesn't exist.Please choose Add.");
+                Console.WriteLine("Your Review doesn't exist.Please choose AddReview.");
                 Thread.Sleep(3000);
                 MainMenu.Create();
             }
@@ -39,28 +39,28 @@ namespace FoodTrakker.GUI
                 do
                 {
                     var input2 = Console.ReadLine();
-                    if (input2 == "q" || input2 == "Q")
-                    {
-                        Console.WriteLine("This is your updated Review: ");
-                        Console.WriteLine($"{review.Title}");
-                        Console.WriteLine($"{review.Description}");
-                        Console.WriteLine($"{review.Rating}");
-                        Thread.Sleep(5000);
-                        MainMenu.Create();
-                    }
+                    Quit(review, input2);
                     int inputAsInt;
                     bool isinputInt2 = int.TryParse(input2, out inputAsInt);
                     while (!isinputInt2)
                     {
-                        Console.WriteLine("It isn't a number. Please enter value from 1 to 3.");
+                        Console.WriteLine("It isn't a number. Please enter value from 1 to 3, or Q to quit");
                         input2 = Console.ReadLine();
                         isinputInt2 = int.TryParse(input2, out inputAsInt);
+                        if (input2 == "q" || input2 == "Q")
+                        {
+                            Quit(review, input2);
+                        }
                     }
                     while (inputAsInt != 1 && inputAsInt != 2 && inputAsInt != 3)
                     {
-                        Console.WriteLine("You type wrong value.Please select from 1 to 3.");
+                        Console.WriteLine("You type wrong value.Please select from 1 to 3, or Q to quit.");
                         input2 = Console.ReadLine();
                         isinputInt2 = int.TryParse(input2, out inputAsInt);
+                        if (input2 == "q" || input2 == "Q")
+                        {
+                            Quit(review, input2);
+                        }
                     }
                     if (inputAsInt == 1)
                     {
@@ -72,8 +72,8 @@ namespace FoodTrakker.GUI
                     }
                     if (inputAsInt == 3)
                     {
-                       var checkInput = Console.ReadLine();
-                       int intInput;
+                        var checkInput = Console.ReadLine();
+                        int intInput;
                         bool isInputInt = int.TryParse(checkInput, out intInput);
                         while (!isInputInt)
                         {
@@ -84,13 +84,25 @@ namespace FoodTrakker.GUI
                         }
                         review.Rating = intInput;
                     }
-                 
-               }
-              while (true);
+
+                }
+                while (true);
                 
            }
         }
 
+        public static void Quit(Review review, string input2)
+        {
+            if (input2 == "q" || input2 == "Q")
+            {
+                Console.WriteLine("This is your updated Review: ");
+                Console.WriteLine($"{review.Title}");
+                Console.WriteLine($"{review.Description}");
+                Console.WriteLine($"{review.Rating}");
+                Thread.Sleep(5000);
+                MainMenu.Create();
+            }
+        }
     }
 
 }
