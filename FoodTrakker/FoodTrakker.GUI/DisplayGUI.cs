@@ -46,9 +46,12 @@ namespace FoodTrakker.GUI
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"{eventMessage}\nFood Trucks:");
                 Console.ForegroundColor = ConsoleColor.White;
-                foreach (var foodTruck in eEvent.FoodTrucks)
+                if (eEvent.FoodTrucks != null)
                 {
-                    Console.WriteLine($"Name: {foodTruck.Name},Type: {foodTruck.Type.Name},\nDescription: {foodTruck.Description}");
+                    foreach (var foodTruck in eEvent.FoodTrucks)
+                    {
+                        Console.WriteLine($"Name: {foodTruck.Name},Type: {foodTruck.Type.Name},\nDescription: {foodTruck.Description}");
+                    }
                 }
                 Console.WriteLine();
             }

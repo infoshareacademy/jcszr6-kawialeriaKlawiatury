@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FoodTrakker.BusinessLogic;
 using FoodTrakker.BusinessLogic.Models;
 using FoodTrakker.BusinessLogic.Repository;
@@ -52,10 +53,10 @@ namespace FoodTrakker.GUI.ConsoleInput
                 date = Console.ReadLine();
                 isDate = DateTime.TryParse(endDate, out endDateTime);
             }
-            //DODAC foodTrucka do Eventa!
+            
 
             newEvent.EndDate = endDateTime;
-
+            newEvent.FoodTrucks = new List<FoodTruck>();
             var message =
                 ($"The event is {newEvent.Name}. \nIt will take place in {newEvent.Location}." +
                  $"\n\nHere's a little description of what it has to offer: \n\t{newEvent.Description}. " +
