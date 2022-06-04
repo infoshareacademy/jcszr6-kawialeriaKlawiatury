@@ -52,6 +52,7 @@ namespace FoodTrakker.GUI.ConsoleInput
                 date = Console.ReadLine();
                 isDate = DateTime.TryParse(endDate, out endDateTime);
             }
+            //DODAC foodTrucka do Eventa!
 
             newEvent.EndDate = endDateTime;
 

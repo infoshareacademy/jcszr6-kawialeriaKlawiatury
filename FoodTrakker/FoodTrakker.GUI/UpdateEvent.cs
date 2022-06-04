@@ -90,7 +90,7 @@ namespace FoodTrakker.GUI
                                 Name = Console.ReadLine(),
                             }
                         };
-
+                        
                     }
                     if (inputAsInt == 5)
                     {
@@ -118,7 +118,6 @@ namespace FoodTrakker.GUI
                         }
                         eventToUpdate.EndDate = dateTime;
                     }
-
                }
                while (true);
 

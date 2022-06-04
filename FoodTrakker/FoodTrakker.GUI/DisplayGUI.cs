@@ -21,7 +21,7 @@ namespace FoodTrakker.GUI
                     $"Id: {foodTruck.Id} Name: {foodTruck.Name}, Located {foodTruck.Location.City}, Street: {foodTruck.Location.Street}";
                 Console.WriteLine(foodTruckMessage);
             }
-            Console.WriteLine("To main Menu");
+            Console.WriteLine("Press Enter for main menu!");
             string decision = Console.ReadLine().ToLower();
             MainMenu.Create();
             

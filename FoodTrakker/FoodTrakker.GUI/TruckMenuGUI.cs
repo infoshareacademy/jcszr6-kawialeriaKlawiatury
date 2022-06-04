@@ -19,7 +19,7 @@ namespace FoodTrakker.GUI
             truckOptions = new List<TruckOption>
                 {
                     new TruckOption("Find Food Truck by name", () => SearchTruckGUI.SearchTruckByName()),
-                    new TruckOption("Find a Food Truck by user reviews", () => WriteTemporaryMessage("")),//Metoda Natalii
+                    new TruckOption("Find review for a Food Truck", () => FindReviewGUI.FindReviewForFoodTruck()),//Metoda Natalii
                 };
 
 

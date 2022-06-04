@@ -29,7 +29,9 @@ namespace FoodTrakker.GUI
             }
             else
             {
-                Console.WriteLine("No food trucks available"); //Add method to come back to main menu :-)
+                Console.WriteLine("No food trucks available");
+                Thread.Sleep(3000);
+                MainMenu.Create();
             }
         }
 
