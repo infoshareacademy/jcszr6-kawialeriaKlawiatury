@@ -21,5 +21,15 @@ namespace FoodTrakker.BusinessLogic.Models
         {
             Id = i;
         }
+
+        public override string ToString()
+        {
+            return $" Event : {Id},{Name},{Description},{Location},{StartDate},{EndDate},{FoodTrucks}";
+        }
+
+        public Event()
+        {
+            FoodTrucks = new List<FoodTruck>();
+        }
     }
 }

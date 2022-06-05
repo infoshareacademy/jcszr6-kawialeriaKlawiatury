@@ -1,10 +1,4 @@
-﻿using FoodTrakker.BusinessLogic.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using FoodTrakker.BusinessLogic.Repository;
 
 namespace FoodTrakker.BusinessLogic.Models
@@ -25,6 +19,10 @@ namespace FoodTrakker.BusinessLogic.Models
         public void UpdateIndex(int i)
         {
             Id = i;
+        }
+        public override string ToString()
+        {
+            return $" FoodTruck : {Id},{Name},{Description},{Location},{Type},{OwnerId}";
         }
     }
 }

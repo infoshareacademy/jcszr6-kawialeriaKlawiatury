@@ -2,10 +2,9 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-<<<<<<< HEAD
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
   <ItemGroup>
@@ -13,19 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Events.json">
+    <None Update="DataJSON\Events.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="User.json">
+    <None Update="DataJSON\User.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-=======
-  <ItemGroup>
-    <Folder Include="Menu_main\" />
-  </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties data_1json__JsonSchema="https://github.com/go-vela/types/releases/latest/download/schema.json" /></VisualStudio></ProjectExtensions>
->>>>>>> natalia_cygan
 
 </Project>

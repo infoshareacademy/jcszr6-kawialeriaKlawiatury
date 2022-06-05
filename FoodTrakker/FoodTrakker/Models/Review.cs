@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,7 @@ namespace FoodTrakker.BusinessLogic.Models
 {
     public class Review : Iindexable
     {
-<<<<<<< HEAD
         public int Id { get; internal set; }
-=======
-        public int ID { get;  set; }
->>>>>>> natalia_cygan
         public DateTime Date { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -24,5 +21,11 @@ namespace FoodTrakker.BusinessLogic.Models
         {
             Id = i;
         }
+
+        public override string ToString()
+        {
+            return $"Review: Id:{Id} Title:{Title} ({Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}),\nDescription: {Description},\nRate: {Rating},\nAuthor: {AuthorID},Food Truck Id: {FoodTruckId}";
+        }
+
     }
 }

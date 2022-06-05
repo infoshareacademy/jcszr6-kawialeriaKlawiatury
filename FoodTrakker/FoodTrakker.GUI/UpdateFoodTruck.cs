@@ -1,12 +1,15 @@
 ﻿
+using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Repository;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace FoodTrakker.GUI
 {
-    public class UpdateFoodTruck
+    public static class UpdateFoodTruck
     {
-        public void FoodTruckUpdate()
+        public static void FoodTruckUpdate()
         {
             int id;
             Console.WriteLine("Enter the id of FoodTruck.");
@@ -18,11 +21,13 @@ namespace FoodTrakker.GUI
                 input = Console.ReadLine();
                 isinputInt = int.TryParse(input, out id);
             }
-            var foodTruckList = FoodTruckRepository.GetAllFoodTrucks();
-            var foodTruck = foodTruckList.FirstOrDefault(f => f.ID == id);
+            var foodTruckList = DataRepository<FoodTruck>.GetData();
+            var foodTruck = foodTruckList.FirstOrDefault(f => f.Id == id);
             if (foodTruck == null)
             {
-                Console.WriteLine("Your FoodTruck doesn't exist.Please choose Add.");
+                Console.WriteLine("Your FoodTruck doesn't exist.Please choose AddFoodTruck.");
+                Thread.Sleep(3000);
+                MainMenu.Create();
             }
             else
             {
@@ -36,26 +41,29 @@ namespace FoodTrakker.GUI
                 do
                 {
                     var input2 = Console.ReadLine();
-                    if (input2 == "q" || input2 == "Q")
-                    {
-                        // foodTruckList.Add(foodTruck);
-                        return;
-                    }
+                    Quit(foodTruck, input2);
                     int inputAsInt;
                     bool isinputInt2 = int.TryParse(input2, out inputAsInt);
                     while (!isinputInt2)
                     {
-                        Console.WriteLine("It isn't a number. Please enter value from 1 to 4.");
+                        Console.WriteLine("It isn't a number. Please enter value from 1 to 4,or Q to quit.");
                         input2 = Console.ReadLine();
                         isinputInt2 = int.TryParse(input2, out inputAsInt);
+                        if (input2 == "q" || input2 == "Q")
+                        {
+                            Quit(foodTruck, input2);
+                        }
                     }
                     while (inputAsInt != 1 && inputAsInt != 2 && inputAsInt != 3 && inputAsInt != 4)
                     {
-                        Console.WriteLine("You type wrong value.Please select from 1 to 4.");
+                        Console.WriteLine("You type wrong value.Please select from 1 to 4,or Q to quit.");
                         input2 = Console.ReadLine();
                         isinputInt2 = int.TryParse(input2, out inputAsInt);
+                        if (input2 == "q" || input2 == "Q")
+                        {
+                            Quit(foodTruck, input2);
+                        }
                     }
-
 
                     if (inputAsInt == 1)
                     {
@@ -67,18 +75,42 @@ namespace FoodTrakker.GUI
                     }
                     if (inputAsInt == 3)
                     {
-                        // foodTruck.Location = Console.ReadLine();
+                        Location location = new Location();
+                        Console.WriteLine("Enter the new city");
+                        location.City = Console.ReadLine();
+                        Console.WriteLine("Enter the new street");
+                        location.Street = Console.ReadLine();
                     }
                     if (inputAsInt == 4)
                     {
-                        foodTruck.Owner = new BusinessLogic.Models.User
+                        var checkInput = Console.ReadLine();
+                        int intInput;
+                        bool isInputInt = int.TryParse(checkInput, out intInput);
+                        while (!isInputInt)
                         {
-                            Name = Console.ReadLine()
-
-                        };
+                            Console.WriteLine("It isn't a number.");
+                            checkInput = Console.ReadLine();
+                            isInputInt = int.TryParse(checkInput, out intInput);
+                            foodTruck.OwnerId = intInput;
+                        }
+                        foodTruck.OwnerId = intInput;
                     }
                 }
                 while (true);
+            }
+        }
+
+        public static void Quit(FoodTruck foodTruck, string input2)
+        {
+            if (input2 == "q" || input2 == "Q")
+            {
+                Console.WriteLine("This is your updated FoodTruck: ");
+                Console.WriteLine($"{foodTruck.Name}");
+                Console.WriteLine($"{foodTruck.Description}");
+                Console.WriteLine($"{foodTruck.Location}");
+                Console.WriteLine($"{foodTruck.OwnerId}");
+                Thread.Sleep(8000);
+                MainMenu.Create();
             }
         }
     }
