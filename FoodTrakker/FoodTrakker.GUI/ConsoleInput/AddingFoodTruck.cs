@@ -12,10 +12,14 @@ namespace FoodTrakker.GUI.ConsoleInput
     internal class AddingFoodTruck
     {
         private static List<User> _users = DataRepository<User>.GetData();
-
+        private static User _user = new User()
+        {
+            Name = "Testowy",
+        };
 
         public static void AddFoodTruck()
         {
+            DataRepository<User>.AddElement(_user);
             FoodTruck newFoodTruck = new FoodTruck();
             var location = new Location();
 
