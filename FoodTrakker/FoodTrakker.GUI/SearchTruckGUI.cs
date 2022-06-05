@@ -18,11 +18,18 @@ namespace FoodTrakker.GUI
 
             if (foodTruck == null)
             {
-                Console.WriteLine("Sorry! We didn`t find a food truck with that name");
+                Console.Clear();
+                Console.WriteLine("Sorry! We didn`t find a food truck with that name, please try again!");
+                SearchTruckByName();
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"Yey! We found {foodTruck.Name} \n{foodTruck.Description}");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\nPress enter for main menu");
+                string decision = Console.ReadLine().ToLower();
+                MainMenu.Create();
             }
 
         }

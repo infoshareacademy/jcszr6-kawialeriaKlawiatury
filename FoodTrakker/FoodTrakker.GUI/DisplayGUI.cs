@@ -42,7 +42,7 @@ namespace FoodTrakker.GUI
             foreach (var eEvent in events)
             {
                 var eventMessage =
-                    $"Id: {eEvent.Id} Name: {eEvent.Name}, Located {eEvent.Location}, Description: {eEvent.Description}";
+                    $"Id: {eEvent.Id} Name: {eEvent.Name}, Located {eEvent.Location}, Description: {eEvent.Description}\nStarts: {eEvent.StartDate}\nEnds: {eEvent.EndDate}";
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"{eventMessage}\nFood Trucks:");
                 Console.ForegroundColor = ConsoleColor.White;
