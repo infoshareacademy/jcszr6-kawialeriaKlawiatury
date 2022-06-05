@@ -45,8 +45,8 @@ namespace FoodTrakker.GUI.ConsoleInput
             string owner;
             if (decision == "y")
             {
-                owner = _users[0].Name;
-                newFoodTruck.OwnerId = _users[0].Id;
+                owner = _user.Name;
+                newFoodTruck.OwnerId = 0;
             }
             else
             {
