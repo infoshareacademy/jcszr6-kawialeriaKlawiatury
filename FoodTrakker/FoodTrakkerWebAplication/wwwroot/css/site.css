@@ -18,9 +18,9 @@ body {
 }
 
 .FTButton {
-    background-color: #44c767;
+    background-color: #f5e3b0;
     border-radius: 10px;
-    border: 3px solid #18ab29;
+    /*border: 3px solid #faf1d9;*/
     display: inline-block;
     cursor: pointer;
     color: #ffffff;
@@ -28,12 +28,12 @@ body {
     font-size: 18px;
     padding: 4px 8px;
     text-decoration: none;
-    text-shadow: 0px -1px 15px #2f6627;
+    text-shadow: 0px -1px 15px #fcf3d9;
 }
 
-.FTButton:hover {
-    background-color: #5cbf2a;
-}
+    .FTButton:hover {
+        background-color: #f2d27e;
+    }
 
 .FTButton:active {
     position: relative;
@@ -74,3 +74,5 @@ body {
 .FTManuItemWrapper {
     justify-content: space-between;
 }
+
+
