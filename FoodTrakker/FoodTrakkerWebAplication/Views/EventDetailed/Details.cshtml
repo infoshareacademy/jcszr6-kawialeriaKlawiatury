@@ -1,0 +1,65 @@
+﻿@model FoodTrakker.BusinessLogic.Models.Event
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Meeting</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <label asp-for="Id"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Id
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Name"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Name
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Location"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Location
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Description"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Description
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="StartDate"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.StartDate
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="EndDate"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.EndDate
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="FoodTrucks"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var foodTruck in Model.FoodTrucks)
+            {
+                <p>@foodTruck</p>
+            }
+        </dd>
+    </dl>
+</div>
+
+
+<div>
+    @*@Html.ActionLink("Edit", "Edit", new {Model.Id }) |*@
+    <a asp-action="Index">Back to List</a>
+</div>
