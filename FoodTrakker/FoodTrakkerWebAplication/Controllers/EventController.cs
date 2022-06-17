@@ -8,8 +8,8 @@ namespace FoodTrakkerWebAplication.Controllers
 {
     public class EventController : Controller
     {
-     
-       private static List<Event> _eventList = DataRepository<Event>.GetData();
+
+        private static List<Event> _eventList = DataRepository<Event>.GetData();
         //List<Event> _eventList = new List<Event>
         //{
         //    new Event

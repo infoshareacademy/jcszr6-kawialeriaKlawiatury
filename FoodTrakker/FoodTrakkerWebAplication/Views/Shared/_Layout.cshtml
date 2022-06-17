@@ -8,25 +8,26 @@
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/FoodTrakkerWebAplication.styles.css" asp-append-version="true" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
 </head>
 <body>
 	<header>
 		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
 			<div class="container-fluid">
-				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Food Trakker!</a> @*Mateusz*@
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Food Trakker!</a> 
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 						aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between FTManuItemWrapper">
 					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item FTNavPadding">
+						@*<li class="nav-item FTNavPadding">*@
 							@*<a class="nav-link text-dark FTButton" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-truck"></i> Events</a> @*Natalia*@
-						</li>
+						@*</li>*@
 						<li class="nav-item FTNavPadding">
 							<div class="dropdown">
 								<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-									<i class="bi bi-search"></i> Show
+									<i class="bi bi-eyeglasses"></i> Show
 								</a>
 
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -37,12 +38,12 @@
 						</li>
 					</ul>
 					<div class="align-items-center">
-						<form class="row row-cols-lg-auto my-2 my-lg-0" asp-controller="" asp-action="" style="padding-right: 25px;">
-							<div class="col-12">
+						<form class="row row-cols-lg-auto my-lg-0" asp-controller="" asp-action="" style="padding-right: 25px;">
+							<div class="col-12" style="padding-right: 0;">
 								<input name="searchString" type="text" class="form-control" placeholder="Search Food Truck..."/>
 							</div>
-							<div class="col-12">
-								<button class="FTButton my-2 my-sm-0" type="submit"><i class="bi bi-search" style="float: right"></i></button>
+							<div class="col-12 d-none d-md-none d-lg-block" style="padding-left: 0;">
+								<i class="bi bi-search FTSearch" style="float: right; padding-top: 0px;"></i>
 							</div>
 						</form>
 					</div>

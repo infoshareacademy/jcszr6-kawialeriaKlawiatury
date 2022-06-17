@@ -1,13 +1,15 @@
 ﻿using FoodTrakkerWebAplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Repository;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        private static List<FoodTruck> _foodTrucks = DataRepository<FoodTruck>.GetData();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -15,7 +17,7 @@ namespace FoodTrakkerWebAplication.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_foodTrucks);
         }
 
         public IActionResult Privacy()
