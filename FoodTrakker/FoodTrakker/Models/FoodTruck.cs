@@ -22,7 +22,7 @@ namespace FoodTrakker.BusinessLogic.Models
         }
         public override string ToString()
         {
-            return $" FoodTruck : {Id},{Name},{Description},{Location},{Type},{OwnerId}";
+            return $" FoodTruck: Name: {Name},Description: {Description},Location: {Location},Type: {Type}";
         }
     }
 }
