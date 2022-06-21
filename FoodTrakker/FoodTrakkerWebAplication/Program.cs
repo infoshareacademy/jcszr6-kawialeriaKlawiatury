@@ -1,7 +1,12 @@
+using FoodTrakkerWebAplication.Contracts;
+using FoodTrakkerWebAplication.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IGetable, DataFromFile>();
 
 var app = builder.Build();
 

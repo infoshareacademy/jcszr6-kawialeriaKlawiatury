@@ -9,7 +9,7 @@ using FoodTrakker.BusinessLogic.Repository;
 
 namespace FoodTrakker.BusinessLogic.Models
 {
-    public class GetDataFromFile
+    public class GetDataFromFile 
     {
         public static bool DeserializeData()
         {

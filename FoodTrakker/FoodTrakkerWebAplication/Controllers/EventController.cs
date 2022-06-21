@@ -70,7 +70,6 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: EventController
         public ActionResult Index()
         {
-            GetDataFromFile.DeserializeData();
             var eventInNearFuture = _eventList.OrderBy(e => e.StartDate).Take(1).ToList();
             return View(eventInNearFuture);
         }
