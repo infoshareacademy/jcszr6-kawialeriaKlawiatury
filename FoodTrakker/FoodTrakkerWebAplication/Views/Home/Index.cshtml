@@ -35,16 +35,16 @@
 			</button>
 		</div>*@
 		@*<partial name="partials/_UnderConstruction"/>*@
-		<div class="row">
+		<div class="row container-fluid">
 			@foreach (var item in Model)
 			{
 				<div class="col-md-4 col-sm-6 border-primary mb-3">
-					<div class="card mb-3" style="max-width: 540px;">
+					<div class="card mb-3 FTCard" style="max-width: 540px;">
 						<img src="~/img/food_truck.png" class="card-img-top" alt="@item.Name">
 						<div class="card-body">
 							<h5 class="card-title">@item.Name</h5>
-							<p class="card-text">@item.Description</p>
-							<a href="#" class="text-dark btn FTButton">Check it out!</a>
+							<p class="card-text" style="min-height: 90px">@item.Description</p>
+							<a href="#" class="text-dark btn FTButton FTCardbutton">Check it out!</a>
 						</div>
 					</div>
 				</div>

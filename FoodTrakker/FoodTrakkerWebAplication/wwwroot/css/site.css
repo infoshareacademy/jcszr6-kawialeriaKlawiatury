@@ -88,3 +88,11 @@ body {
     text-decoration: none;
     text-shadow: 0px -1px 15px #fcf3d9;
 }
+
+.FTCard {
+    min-height: 350px;
+}
+
+.FTCardbutton {
+
+}
