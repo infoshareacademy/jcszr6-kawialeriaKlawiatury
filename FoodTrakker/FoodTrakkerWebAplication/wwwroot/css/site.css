@@ -96,3 +96,17 @@ body {
 .FTCardbutton {
 
 }
+
+.FTImageCarousel {
+    height: 500px;
+}
+
+.FTImage {
+    filter: blur(5px);
+}
+.FTCarousel {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}

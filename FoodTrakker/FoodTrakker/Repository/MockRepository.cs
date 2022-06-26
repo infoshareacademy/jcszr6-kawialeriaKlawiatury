@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using FoodTrakker.BusinessLogic.Models;
+using Newtonsoft.Json;
+
+namespace FoodTrakker.BusinessLogic.Repository
+{
+    public class MockRepository<T> : IRepository<T> where T : Iindexable
+    {
+        private static List<T> _dataList = new List<T>();
+
+        public MockRepository(string path)
+        {
+            var dataString = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "DataJSON", path));
+            _dataList = JsonConvert.DeserializeObject<List<T>>(dataString);
+        }
+        public Task<List<T>> GetAsync() => Task.FromResult(_dataList);
+     
+
+        public Task<T> GetAsync(int id)
+        {
+            return Task.FromResult(_dataList.SingleOrDefault(t => t.Id == id));
+        }
+    }
+}

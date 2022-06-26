@@ -8,7 +8,7 @@
 <div class="text-center">
 	@*<h1 class="display-4">Welcome</h1>*@
 	<div class="container">
-		@*<div id="carouselExampleIndicators" class="row carousel slide" data-bs-ride="carousel">
+		<div id="carouselExampleIndicators" class="row carousel slide FTCarousel" data-bs-ride="carousel">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
 				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -16,13 +16,13 @@
 			</div>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="~/img/carousel/pizza.jpg" class="d-block w-100" alt="Zdjecie 1">
+					<img src="~/img/carousel/pizza.jpg" class="d-block w-100 FTImageCarousel" alt="Zdjecie 1">
 				</div>
 				<div class="carousel-item">
-					<img src="~/img/carousel/hamburger.jpg" class="d-block w-100" alt="Zdjecie 2">
+					<img src="~/img/carousel/hamburger.jpg" class="d-block w-100 FTImageCarousel" alt="Zdjecie 2">
 				</div>
 				<div class="carousel-item">
-					<img src="~/img/carousel/goulash-soup.jpg" class="d-block w-100" alt="Zdjecie 3">
+					<img src="~/img/carousel/goulash-soup.jpg" class="d-block w-100 FTImageCarousel" alt="Zdjecie 3">
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -33,14 +33,14 @@
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				<span class="visually-hidden">Next</span>
 			</button>
-		</div>*@
+		</div>
 		@*<partial name="partials/_UnderConstruction"/>*@
 		<div class="row container-fluid">
 			@foreach (var item in Model)
 			{
 				<div class="col-md-4 col-sm-6 border-primary mb-3">
 					<div class="card mb-3 FTCard" style="max-width: 540px;">
-						<img src="~/img/food_truck.png" class="card-img-top" alt="@item.Name">
+						<img src="~/img/food_truck.png" class="card-img-top FTImage" alt="@item.Name">
 						<div class="card-body">
 							<h5 class="card-title">@item.Name</h5>
 							<p class="card-text" style="min-height: 90px">@item.Description</p>
@@ -52,4 +52,4 @@
 		</div>
 	</div>
 </div>
-<a class="text-dark FTButton align" asp-area="" asp-controller="Home" asp-action="Index" style="float: right">About</a> @*Pawel*@
+

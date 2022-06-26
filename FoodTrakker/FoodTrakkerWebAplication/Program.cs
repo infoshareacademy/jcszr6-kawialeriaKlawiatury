@@ -1,12 +1,15 @@
-using FoodTrakkerWebAplication.Contracts;
-using FoodTrakkerWebAplication.Services;
+using FoodTrakker.BusinessLogic.Models;
+using FoodTrakker.BusinessLogic.Repository;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton<IGetable, DataFromFile>();
+
+builder.Services.AddSingleton<IRepository<User>, UserRepository>();
+builder.Services.AddSingleton<IRepository<Event>, EventRepository>();
 
 var app = builder.Build();
 
