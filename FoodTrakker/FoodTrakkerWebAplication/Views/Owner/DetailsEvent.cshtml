@@ -1,6 +1,4 @@
-﻿@using FoodTrakker.BusinessLogic.Models
-@using FoodTrakkerWebAplication.Models.ViewModel
-@model FoodTrakker.BusinessLogic.Models.Event
+﻿@model FoodTrakker_WebBusinessLogic.Model.Event
 
 @{
 	ViewData["Title"] = "DetailsEvent";
@@ -45,7 +43,7 @@
 		</dd>
 	</dl>
 	<h4>Food Truck present at the event!</h4>
-	<table class="table">
+	@*<table class="table">
 		<thead>
 		<tr>
 			<th>
@@ -77,7 +75,7 @@
 			</tr>
 		}
 		</tbody>
-	</table>
+	</table>*@
 </div>
 <div>
 	<a asp-controller="Owner" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Edit</a> 

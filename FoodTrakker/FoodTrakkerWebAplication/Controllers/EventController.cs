@@ -1,15 +1,13 @@
-﻿using FoodTrakker.BusinessLogic.Models;
-using FoodTrakker.BusinessLogic.Repository;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using FoodTrakker_WebBusinessLogic.Model;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
     public class EventController : Controller
     {
 
-        private static List<Event> _eventList = DataRepository<Event>.GetData();
+        //private static List<Event> _eventList = DataRepository<Event>.GetData();
         //List<Event> _eventList = new List<Event>
         //{
         //    new Event
@@ -70,8 +68,8 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: EventController
         public ActionResult Index()
         {
-            var eventInNearFuture = _eventList.OrderBy(e => e.StartDate).Take(1).ToList();
-            return View(eventInNearFuture);
+            //var eventInNearFuture = _eventList.OrderBy(e => e.StartDate).Take(1).ToList();
+            return View();
         }
 
         

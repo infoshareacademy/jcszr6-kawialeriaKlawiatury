@@ -1,5 +1,7 @@
-using FoodTrakker.BusinessLogic.Models;
+
 using FoodTrakker.BusinessLogic.Repository;
+using FoodTrakker_WebBusinessLogic;
+using FoodTrakker_WebBusinessLogic.Model;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +12,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IRepository<User>, UserRepository>();
 builder.Services.AddSingleton<IRepository<Event>, EventRepository>();
-
+builder.Services.AddSingleton<IRepository<FoodTruck>, FoodTruckRepository>();
 
 var app = builder.Build();
 
