@@ -9,6 +9,8 @@ namespace FoodTrakker.BusinessLogic.Repository
     {
         public Task<List<T>> GetAsync();
         public Task<T> GetAsync(int id);
+        
+        public void Delete(int id);
         //DELETE itp itd...
     }
 }

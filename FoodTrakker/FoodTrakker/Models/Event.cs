@@ -10,7 +10,7 @@ namespace FoodTrakker.BusinessLogic.Models
 {
     public class Event : Iindexable
     {
-        public int Id { get;internal  set; }
+        public int Id { get; set; }
         public string Name { get;set; } 
         public string Description { get;set; }
         public string Location { get;set; }

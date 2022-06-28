@@ -10,6 +10,5 @@ namespace FoodTrakker.BusinessLogic.Repository
         public UserRepository():base("User.json")
         {
         }
-
     }
 }

@@ -25,5 +25,14 @@ namespace FoodTrakker.BusinessLogic.Repository
         {
             return Task.FromResult(_dataList.SingleOrDefault(t => t.Id == id));
         }
+
+        public void Delete(int id)
+        {
+            var toDelete = _dataList.SingleOrDefault(t => t.Id == id);
+            if (toDelete != null)
+            {
+                _dataList.Remove(toDelete);
+            }
+        }
     }
 }

@@ -11,11 +11,13 @@ namespace FoodTrakkerWebAplication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IRepository<Event> _eventRepository;
-        
+ 
+
         public HomeController(ILogger<HomeController> logger, IRepository<Event> eventRepository)
         {
             _logger = logger;
             _eventRepository = eventRepository;
+
         }
 
         public async Task<IActionResult> Index()

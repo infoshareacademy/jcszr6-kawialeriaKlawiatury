@@ -5,7 +5,7 @@ namespace FoodTrakker.BusinessLogic.Models
 {
     public class FoodTruck : Iindexable
     {
-        public int Id { get; internal set; }
+        public int Id { get; set; }
         [MinLength(3)]
         [MaxLength(100)]
         public string Name { get; set; }

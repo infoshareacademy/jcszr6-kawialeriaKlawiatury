@@ -11,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IRepository<User>, UserRepository>();
 builder.Services.AddSingleton<IRepository<Event>, EventRepository>();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
