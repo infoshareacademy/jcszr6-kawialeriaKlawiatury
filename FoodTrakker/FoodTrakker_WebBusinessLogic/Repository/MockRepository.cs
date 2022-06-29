@@ -1,9 +1,8 @@
-﻿using FoodTrakker_WebBusinessLogic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace FoodTrakker.BusinessLogic.Repository
+namespace FoodTrakker_WebBusinessLogic.Repository
 {
-    public class MockRepository<T> : IRepository<T> where T : Iindexable
+    public abstract class MockRepository<T> : IRepository<T> where T : Iindexable
     {
         private static List<T> _dataList = new List<T>();
 
@@ -18,6 +17,11 @@ namespace FoodTrakker.BusinessLogic.Repository
         public Task<T> GetAsync(int id)
         {
             return Task.FromResult(_dataList.SingleOrDefault(t => t.Id == id));
+        }
+
+        public void Add(T t)
+        {
+            _dataList.Add(t);
         }
 
         public void Delete(int id)

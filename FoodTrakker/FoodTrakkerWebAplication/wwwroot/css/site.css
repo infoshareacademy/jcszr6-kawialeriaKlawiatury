@@ -13,11 +13,18 @@ html {
   min-height: 100%;
 }
 
-body {
-    margin-bottom: 60px;
-    
+header {
+    height: 72px; 
 }
 
+body {
+    margin-bottom: 60px;
+    z-index: 1;
+}
+
+.FTnav {
+    z-index: 2;
+}
 
 .FTButton {
     background-color: #f5e3b0;

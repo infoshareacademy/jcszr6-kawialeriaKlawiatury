@@ -1,7 +1,7 @@
 ﻿using FoodTrakker_WebBusinessLogic.Model;
 
 
-namespace FoodTrakker.BusinessLogic.Repository
+namespace FoodTrakker_WebBusinessLogic.Repository
 {
     public class UserRepository : MockRepository<User>
     {

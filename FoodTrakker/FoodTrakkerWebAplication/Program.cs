@@ -1,7 +1,6 @@
-
-using FoodTrakker.BusinessLogic.Repository;
 using FoodTrakker_WebBusinessLogic;
 using FoodTrakker_WebBusinessLogic.Model;
+using FoodTrakker_WebBusinessLogic.Repository;
 
 
 var builder = WebApplication.CreateBuilder(args);

@@ -3,14 +3,15 @@
 
 // Write your JavaScript code.
 
-//var nav = document.getElementById('nav');
+var nav = document.getElementById('nav');
 
-//window.onscroll = function() {
-//    if (window.pageYOffset > 0) {
-//        nav.style.position = "fixed";
-//        nav.style.top = 0;
-//    } else {
-//        box.style.position = "absolute";
-//        box.style.top = 0;
-//    }
-//}
+window.onscroll = function() {
+    if (window.pageYOffset > 0) {
+        nav.style.position = "fixed";
+        nav.style.top = 0;
+        nav.style.width = "100%";
+    } else {
+        box.style.position = "absolute";
+        box.style.top = 0;
+    }
+}
