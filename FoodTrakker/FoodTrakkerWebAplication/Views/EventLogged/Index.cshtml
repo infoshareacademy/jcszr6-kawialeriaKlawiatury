@@ -1,0 +1,62 @@
+﻿@model IEnumerable<FoodTrakker_WebBusinessLogic.Model.Event>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="First().Id"></label>
+            </th>
+            <th>
+                <label asp-for="First().Name"></label>
+            </th>
+            <th>
+                <label asp-for="First().Location"></label>
+            </th>
+            <th>
+                <label asp-for="First().StartDate"></label>
+            </th>
+            <th>
+                <label asp-for="First().EndDate"></label>
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ourEvent in Model)
+        {
+            <tr>
+                <td>
+                    @ourEvent.Id
+                </td>
+                <td>
+                    @ourEvent.Name
+                </td>
+                <td>
+                    @ourEvent.Location
+                </td>
+                 <td>
+                    @ourEvent.StartDate
+                </td>
+                 <td>
+                    @ourEvent.EndDate
+                </td>
+                
+                <td>
+              @*  @Html.ActionLink("Edit", "Edit", new {id = ourEvent.Id }) |*@
+                @Html.ActionLink("Details", "Details", new { id = ourEvent.Id }) @*|
+               @* @Html.ActionLink("Delete", "Delete", new { id = ourEvent.Id })*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
