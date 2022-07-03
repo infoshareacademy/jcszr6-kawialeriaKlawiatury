@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FoodTrakker\FoodTrakker.BusinessLogic.csproj" />
     <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker_WebBusinessLogic.csproj" />
   </ItemGroup>
 
@@ -16,7 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
+    
   </ItemGroup>
 
 </Project>
