@@ -17,8 +17,16 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task <ActionResult> Index()
         {
             var events = await _eventRepository.GetAsync();
-            var eventInNearFuture = events.OrderBy(e => e.StartDate).Take(1).ToList();
-            return View(events);
+            var eventInNearFuture = events.OrderBy(e => e.StartDate)
+                .Where(e=>e.StartDate>DateTime.UtcNow)
+                .Take(8).ToList();
+            return View(eventInNearFuture);
+        }
+        // GET: EventController/Details/5
+        public async Task<ActionResult> Details(int id)
+        {
+            var events = await _eventRepository.GetAsync();
+            return View(events.SingleOrDefault(e => e.Id == id));
         }
 
 

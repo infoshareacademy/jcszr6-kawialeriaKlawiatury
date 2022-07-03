@@ -1,5 +1,6 @@
 ﻿@model FoodTrakker_WebBusinessLogic.Model.Event
 
+
 @{
     ViewData["Title"] = "Details";
 }
@@ -7,7 +8,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Meeting</h4>
+    <h4>More information about @Model.Name</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -53,6 +54,7 @@
             @foreach (var foodTruck in Model.FoodTrucksId)
             {
                 <p>@foodTruck</p>
+		
             }
         </dd>
     </dl>

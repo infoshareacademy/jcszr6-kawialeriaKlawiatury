@@ -1,1 +1,128 @@
-[{"Id":1,"Name":"PartyHard1","Description":"Test","Location":"Berlin Mitte","StartDate":"2022-06-30T00:00:00+02:00","EndDate":"2022-07-08T23:36:46.7070143+02:00","FoodTrucksId":[1,2,3]},{"Id":2,"Name":"PartyHard2","Description":"Test","Location":"Berlin Mitte","StartDate":"2022-07-01T00:00:00+02:00","EndDate":"2022-07-18T23:36:46.7070143+02:00","FoodTrucksId":[1,2,3]},{"Id":3,"Name":"PartyHard3","Description":"Test","Location":"Berlin Mitte","StartDate":"2022-07-02T00:00:00+02:00","EndDate":"2022-07-28T23:36:46.7070143+02:00","FoodTrucksId":[1,2,3]},{"Id":4,"Name":"PartyHard4","Description":"Test","Location":"Berlin Mitte","StartDate":"2022-07-03T00:00:00+02:00","EndDate":"2022-08-07T23:36:46.7070143+02:00","FoodTrucksId":[1,2,3]}]
+[
+  {
+    "Id": 1,
+    "Name": "PartyHard1",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-06-30T00:00:00+02:00",
+    "EndDate": "2022-07-08T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 2,
+    "Name": "PartyHard2",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-07-01T00:00:00+02:00",
+    "EndDate": "2022-07-18T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 3,
+    "Name": "PartyHard3",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-07-02T00:00:00+02:00",
+    "EndDate": "2022-07-28T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 4,
+    "Name": "PartyHard4",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-07-03T00:00:00+02:00",
+    "EndDate": "2022-08-07T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 5,
+    "Name": "PartyHard5",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-08-03T00:00:00+02:00",
+    "EndDate": "2022-09-07T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 6,
+    "Name": "PartyHard6",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-08-05T00:00:00+02:00",
+    "EndDate": "2022-09-10T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 7,
+    "Name": "PartyHard7",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-09-03T00:00:00+02:00",
+    "EndDate": "2022-10-07T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 8,
+    "Name": "PartyHard8",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-09-05T00:00:00+02:00",
+    "EndDate": "2022-10-07T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 9,
+    "Name": "PartyHard9",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-09-10T00:00:00+02:00",
+    "EndDate": "2022-10-07T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 10,
+    "Name": "PartyHard10",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-09-15T00:00:00+02:00",
+    "EndDate": "2022-10-07T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 11,
+    "Name": "PartyHard11",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-09-16T00:00:00+02:00",
+    "EndDate": "2022-10-07T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 12,
+    "Name": "PartyHard12",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-09-20T00:00:00+02:00",
+    "EndDate": "2022-10-07T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 13,
+    "Name": "PartyHard13",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-09-25T00:00:00+02:00",
+    "EndDate": "2022-10-07T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  },
+  {
+    "Id": 14,
+    "Name": "PartyHard14",
+    "Description": "Test",
+    "Location": "Berlin Mitte",
+    "StartDate": "2022-09-30T00:00:00+02:00",
+    "EndDate": "2022-10-07T23:36:46.7070143+02:00",
+    "FoodTrucksId": [ 1, 2, 3 ]
+  }
+]
