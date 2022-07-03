@@ -1,9 +1,14 @@
-using FoodTrakker_WebBusinessLogic;
+﻿using FoodTrakker_WebBusinessLogic;
 using FoodTrakker_WebBusinessLogic.Model;
 using FoodTrakker_WebBusinessLogic.Repository;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using FoodTrakkerWebAplication.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<FoodTrakkerWebAplicationContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerWebAplicationContext") ?? throw new InvalidOperationException("Connection string 'FoodTrakkerWebAplicationContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
