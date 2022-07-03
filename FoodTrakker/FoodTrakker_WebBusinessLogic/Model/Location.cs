@@ -7,7 +7,7 @@ namespace FoodTrakker_WebBusinessLogic.Model
 {
     public class Location 
     {
-		
+        public int Id { get; set; }
         public string Street { get; set; }  
         public string City { get; set; }
 		[DefaultValue(123456)]

@@ -1,7 +1,6 @@
 using FoodTrakker_WebBusinessLogic;
 using FoodTrakker_WebBusinessLogic.Model;
 using FoodTrakker_WebBusinessLogic.Repository;
-using System.Data.Entity;
 using FoodTrakkerWebAplication.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb")));
 
