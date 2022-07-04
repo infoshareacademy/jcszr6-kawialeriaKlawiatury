@@ -5,7 +5,8 @@ namespace FoodTrakkerWebAplication.Data
 {
     public class FoodTrakkerContext : DbContext
     {
-        public FoodTrakkerContext()
+        public FoodTrakkerContext(DbContextOptions<FoodTrakkerContext> options)
+        : base(options)
         {
 
         }
@@ -26,7 +27,19 @@ namespace FoodTrakkerWebAplication.Data
         public DbSet<Location> Locations { get; set; }
 
         public DbSet<FoodTruckType> FoodTruckTypes { get; set; }
-
-       
+        public DbSet<FoodTruckEvent> FoodTruckEvents { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FoodTruckEvent>()
+                .HasKey(fe => new { fe.FoodTruckId, fe.EventId });
+            modelBuilder.Entity<FoodTruckEvent>()
+                .HasOne(fe => fe.FoodTruck)
+                .WithMany(f => f.FoodTruckEvents)
+                .HasForeignKey(fe=> fe.FoodTruckId);
+            modelBuilder.Entity<FoodTruckEvent>()
+                .HasOne(fe => fe.Event)
+                .WithMany(e=>e.FoodTruckEvents)
+                .HasForeignKey(fe => fe.EventId);
+        }
     }
 }

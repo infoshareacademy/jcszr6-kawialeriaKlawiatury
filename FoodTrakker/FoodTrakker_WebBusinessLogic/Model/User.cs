@@ -1,7 +1,8 @@
-﻿
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace FoodTrakker_WebBusinessLogic.Model
 {
+    [Keyless]
     public class User : Iindexable
     {
         public int Id { get; set; } 

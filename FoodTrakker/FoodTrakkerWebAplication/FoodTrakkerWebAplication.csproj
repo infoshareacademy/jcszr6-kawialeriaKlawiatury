@@ -7,13 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FoodTrakker\FoodTrakker.BusinessLogic.csproj" />
-    <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker_WebBusinessLogic.csproj" />
+    <Compile Remove="Contracts\**" />
+    <Compile Remove="Services\**" />
+    <Content Remove="Contracts\**" />
+    <Content Remove="Services\**" />
+    <EmbeddedResource Remove="Contracts\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Contracts\**" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\FoodTrakker\FoodTrakker.BusinessLogic.csproj" />
+    <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker_WebBusinessLogic.csproj" />
   </ItemGroup>
 
   <ItemGroup>

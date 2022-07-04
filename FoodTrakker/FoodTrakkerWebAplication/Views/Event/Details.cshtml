@@ -47,10 +47,10 @@
             @Html.DisplayFor(model => model.EndDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FoodTrucksId)
+            @Html.DisplayNameFor(model => model.FoodTruckEvents)
         </dt>
         <dd class="col-sm-10">
-            @foreach (var foodTruck in Model.FoodTrucksId)
+            @foreach (var foodTruck in Model.FoodTruckEvents)
             {
                 <p>@foodTruck</p>
             }

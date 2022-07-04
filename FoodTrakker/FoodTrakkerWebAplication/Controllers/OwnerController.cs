@@ -130,23 +130,23 @@ namespace FoodTrakkerWebAplication.Controllers
         // POST: OwnerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteFoodTruck(int id, FoodTruck foodTruck)
-        {
-            var findEvent = await new FindEvent().FindEventsForFoodTruck(id);
-            try
-            {
-                foreach (var eEvent in findEvent)
-                {
-                    eEvent.FoodTrucksId.Remove(id);
-                }
-                _foodTruckRepository.Delete(id);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View(foodTruck);
-            }
-        }
+        //public async Task<ActionResult> DeleteFoodTruck(int id, FoodTruck foodTruck)
+        //{
+        //    var findEvent = await new FindEvent().FindEventsForFoodTruck(id);
+        //    try
+        //    {
+        //        foreach (var eEvent in findEvent)
+        //        {
+        //            eEvent.FoodTrucksId.Remove(id);
+        //        }
+        //        _foodTruckRepository.Delete(id);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View(foodTruck);
+        //    }
+        //}
         // GET: OwnerController/Delete/5
         public async Task<ActionResult> DeleteEvent(int id)
         {

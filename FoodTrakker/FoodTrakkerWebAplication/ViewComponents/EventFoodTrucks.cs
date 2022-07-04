@@ -13,19 +13,19 @@ namespace FoodTrakkerWebAplication.ViewComponents
             _foodTruckRepository = foodTruckRepository;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(Event eEvent)
-        {
-            var foodTrucks = new List<FoodTruck>();
-            foreach (var id in eEvent.FoodTrucksId)
-            {
-                var foodTruck = await _foodTruckRepository.GetAsync(id);
-                if (foodTruck != null)
-                {
-                    foodTrucks.Add(foodTruck);
-                }
-            }
+        //public async Task<IViewComponentResult> InvokeAsync(Event eEvent)
+        //{
+        //    var foodTrucks = new List<FoodTruck>();
+        //    foreach (var id in eEvent.FoodTrucksId)
+        //    {
+        //        var foodTruck = await _foodTruckRepository.GetAsync(id);
+        //        if (foodTruck != null)
+        //        {
+        //            foodTrucks.Add(foodTruck);
+        //        }
+        //    }
             
-            return View(foodTrucks);
-        }
+        //    return View(foodTrucks);
+        //}
     }
 }

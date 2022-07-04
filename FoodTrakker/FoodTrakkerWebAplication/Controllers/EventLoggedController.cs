@@ -1,6 +1,4 @@
 ﻿using FoodTrakker_WebBusinessLogic.Model;
-//using FoodTrakker.BusinessLogic.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FoodTrakker_WebBusinessLogic;
 
@@ -80,7 +78,7 @@ namespace FoodTrakkerWebAplication.Controllers
                 existingEvent.Description = eventToEdit.Description;
                 existingEvent.StartDate = eventToEdit.StartDate;
                 existingEvent.EndDate = eventToEdit.EndDate;
-                existingEvent.FoodTrucksId = eventToEdit.FoodTrucksId;
+               // existingEvent.FoodTrucks = eventToEdit.FoodTrucks;
                 existingEvent.Location = eventToEdit.Location;
 
                 return RedirectToAction(nameof(Index));
