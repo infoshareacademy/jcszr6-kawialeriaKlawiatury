@@ -3,7 +3,7 @@
 namespace FoodTrakker.Core.Model
 
 {
-    public class TypeFT : Iindexable
+    public class FoodTruckType : Iindexable
     {
         public int Id { get; set; }
 
