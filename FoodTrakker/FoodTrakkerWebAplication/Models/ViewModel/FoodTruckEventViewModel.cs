@@ -1,6 +1,6 @@
 ﻿
 
-using FoodTrakker_WebBusinessLogic.Model;
+using FoodTrakker.Core.Model;
 
 namespace FoodTrakkerWebAplication.Models.ViewModel
 {

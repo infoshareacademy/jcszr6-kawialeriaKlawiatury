@@ -1,5 +1,7 @@
 ﻿
 
+using FoodTrakker.Core.LinkingClasses;
+
 namespace FoodTrakker.Core.Model
 {
     public class Event : Iindexable

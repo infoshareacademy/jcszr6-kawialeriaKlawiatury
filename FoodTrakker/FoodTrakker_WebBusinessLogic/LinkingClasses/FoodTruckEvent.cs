@@ -1,6 +1,6 @@
-﻿
+﻿using FoodTrakker.Core.Model;
 
-namespace FoodTrakker.Core
+namespace FoodTrakker.Core.LinkingClasses
 
 {
     public class FoodTruckEvent

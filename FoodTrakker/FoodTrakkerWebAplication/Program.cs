@@ -1,5 +1,4 @@
-
-using FoodTrakker.Core;
+using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
 using FoodTrakker.Repository.Data;
 using Microsoft.EntityFrameworkCore;
