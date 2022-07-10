@@ -4,10 +4,6 @@ namespace FoodTrakker.Core.Model
 {
     public class FoodTruck : Iindexable
     {
-        public FoodTruck()
-        {
-            
-        }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
