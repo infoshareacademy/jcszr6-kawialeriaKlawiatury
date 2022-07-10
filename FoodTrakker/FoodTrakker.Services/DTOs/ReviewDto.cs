@@ -1,7 +1,9 @@
-﻿
-namespace FoodTrakker.Core
+﻿using System;
+using System.Globalization;
+
+namespace FoodTrakker.Services.DTOs
 {
-    public class Review : Iindexable
+    public class ReviewDto 
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
@@ -10,6 +12,6 @@ namespace FoodTrakker.Core
         public int Rating { get; set; }
         public int AuthorID { get; set; }
         public int FoodTruckId { get; set; }
-     
+       
     }
 }

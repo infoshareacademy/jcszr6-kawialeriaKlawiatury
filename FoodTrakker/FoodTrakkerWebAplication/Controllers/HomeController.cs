@@ -1,8 +1,10 @@
-﻿using FoodTrakkerWebAplication.Models;
+﻿using FoodTrakker.Core;
+using FoodTrakker.Repository;
+using FoodTrakker.Services;
+using FoodTrakkerWebAplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using FoodTrakker_WebBusinessLogic;
-using FoodTrakker_WebBusinessLogic.Model;
+
 
 
 namespace FoodTrakkerWebAplication.Controllers
@@ -10,19 +12,21 @@ namespace FoodTrakkerWebAplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IRepository<Event> _eventRepository;
-        private readonly IRepository<FoodTruck> _foodTruckRepository;
+        private readonly FoodTruckService _foodTruckService;
+        //private readonly IRepository<Event> _eventRepository;
+        //private readonly IRepository<FoodTruck> _foodTruckRepository;
 
-        public HomeController(ILogger<HomeController> logger, IRepository<Event> eventRepository, IRepository<FoodTruck> foodTruckRepository)
+
+        public HomeController(ILogger<HomeController> logger,FoodTruckService foodTruckService )
         {
             _logger = logger;
-            _eventRepository = eventRepository;
-            _foodTruckRepository = foodTruckRepository;
+            _foodTruckService = foodTruckService;
+           
         }
 
         public async Task<IActionResult> Index()
         {
-            var foodTrucks = await _foodTruckRepository.GetAsync();
+            var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
             return View(foodTrucks);
         }
 

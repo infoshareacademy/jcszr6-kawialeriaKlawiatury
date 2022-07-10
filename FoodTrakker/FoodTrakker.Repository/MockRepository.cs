@@ -1,6 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using FoodTrakker.Core;
+using Newtonsoft.Json;
 
-namespace FoodTrakker_WebBusinessLogic.Repository
+namespace FoodTrakker.Repository
 {
     public abstract class MockRepository<T> : IRepository<T> where T : Iindexable
     {

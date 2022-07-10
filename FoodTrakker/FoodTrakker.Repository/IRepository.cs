@@ -4,7 +4,7 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodTrakker_WebBusinessLogic
+namespace FoodTrakker.Repository
 {
     public interface IRepository<T>
     {
@@ -14,6 +14,6 @@ namespace FoodTrakker_WebBusinessLogic
         public void Add(T t);
         public void Delete(int id);
 
-        //DELETE itp itd...
+        
     }
 }

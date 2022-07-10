@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FoodTrakker.Repository\FoodTrakker.Repository.csproj" />
+    <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker.Core.csproj" />
+  </ItemGroup>
+
+</Project>
