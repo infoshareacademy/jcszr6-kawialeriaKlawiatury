@@ -1,4 +1,5 @@
-﻿using FoodTrakker.Core;
+﻿using FoodTrakker.Core.LinkingClasses;
+using FoodTrakker.Core.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace FoodTrakker.Repository.Data

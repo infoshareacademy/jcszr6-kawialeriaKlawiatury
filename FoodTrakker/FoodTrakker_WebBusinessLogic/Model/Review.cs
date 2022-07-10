@@ -1,5 +1,4 @@
-﻿
-namespace FoodTrakker.Core
+﻿namespace FoodTrakker.Core.Model
 {
     public class Review : Iindexable
     {
@@ -10,6 +9,6 @@ namespace FoodTrakker.Core
         public int Rating { get; set; }
         public int AuthorID { get; set; }
         public int FoodTruckId { get; set; }
-     
+
     }
 }

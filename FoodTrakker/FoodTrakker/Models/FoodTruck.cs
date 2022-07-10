@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using FoodTrakker.BusinessLogic.Repository;
 
 namespace FoodTrakker.BusinessLogic.Models
 {

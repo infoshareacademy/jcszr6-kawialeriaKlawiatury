@@ -2,6 +2,7 @@
 
 
 using FoodTrakker.Core;
+using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Data;
 
 namespace FoodTrakker.Repository

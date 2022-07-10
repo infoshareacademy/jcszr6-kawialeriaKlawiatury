@@ -1,4 +1,4 @@
-﻿
+﻿using FoodTrakker.Core.LinkingClasses;
 
 namespace FoodTrakker.Core.Model
 {
