@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace FoodTrakker_WebBusinessLogic
+namespace FoodTrakker.Core
 {
     public interface Iindexable
     {
         int Id { get; }
 
-        void UpdateIndex(int i);
+       // void UpdateIndex(int i);
     }
 }

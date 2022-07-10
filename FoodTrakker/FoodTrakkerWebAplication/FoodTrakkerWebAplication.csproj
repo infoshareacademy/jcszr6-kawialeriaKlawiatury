@@ -18,11 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FoodTrakker\FoodTrakker.BusinessLogic.csproj" />
-    <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker_WebBusinessLogic.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.6">
       <PrivateAssets>all</PrivateAssets>
@@ -31,6 +26,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
     
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FoodTrakker.Repository\FoodTrakker.Repository.csproj" />
+    <ProjectReference Include="..\FoodTrakker.Services\FoodTrakker.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,7 @@
 ﻿
-
-namespace FoodTrakker.Core.Model
+namespace FoodTrakker.Services.DTOs
 {
-    public class Event : Iindexable
+    public class EventDto 
     {
        
         public int Id { get; set; }
@@ -11,7 +10,6 @@ namespace FoodTrakker.Core.Model
         public string Location { get;set; }
         public DateTime StartDate { get;set; }    
         public DateTime EndDate { get; set; }
-        public ICollection<FoodTruckEvent> FoodTruckEvents { get; set; }
-
+     
     }
 }

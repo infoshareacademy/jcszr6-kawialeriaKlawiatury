@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace FoodTrakker_WebBusinessLogic.Model
+namespace FoodTrakker.Core
+
 {
     public class FoodTruckEvent
     {

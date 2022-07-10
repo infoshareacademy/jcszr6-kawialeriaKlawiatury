@@ -1,7 +1,7 @@
-using FoodTrakker_WebBusinessLogic;
-using FoodTrakker_WebBusinessLogic.Model;
-using FoodTrakker_WebBusinessLogic.Repository;
-using FoodTrakkerWebAplication.Data;
+
+using FoodTrakker.Core;
+using FoodTrakker.Repository;
+using FoodTrakker.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 
 

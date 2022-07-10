@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FoodTrakker_WebBusinessLogic.Model
+namespace FoodTrakker.Core
+
 {
-    public class FoodTruckType
+    public class TypeFT : Iindexable
     {
         public int Id { get; set; }
 

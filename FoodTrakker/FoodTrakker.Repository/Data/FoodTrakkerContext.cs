@@ -1,7 +1,7 @@
-﻿using FoodTrakker_WebBusinessLogic.Model;
+﻿using FoodTrakker.Core;
 using Microsoft.EntityFrameworkCore;
 
-namespace FoodTrakkerWebAplication.Data
+namespace FoodTrakker.Repository.Data
 {
     public class FoodTrakkerContext : DbContext
     {
@@ -26,7 +26,7 @@ namespace FoodTrakkerWebAplication.Data
 
         public DbSet<Location> Locations { get; set; }
 
-        public DbSet<FoodTruckType> FoodTruckTypes { get; set; }
+        public DbSet<TypeFT> Types { get; set; }
         public DbSet<FoodTruckEvent> FoodTruckEvents { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
