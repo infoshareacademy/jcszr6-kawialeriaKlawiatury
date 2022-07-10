@@ -16,7 +16,7 @@ namespace FoodTrakker.Repository.Data
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder
-                .UseSqlServer("Server=DESKTOP-NDVQDSJ\\SQLEXPRESS;Database=FoodTrakkerDb;Trusted_Connection=True;MultipleActiveResultSets=True;");
+                .UseSqlServer("Server=localhost;Database=FoodTrakkerDb;Trusted_Connection=True;MultipleActiveResultSets=True;");
         }
         public DbSet<Event> Events { get; set; }
         public DbSet<FoodTruck> FoodTrucks { get; set; }
@@ -27,7 +27,7 @@ namespace FoodTrakker.Repository.Data
 
         public DbSet<Location> Locations { get; set; }
 
-        public DbSet<TypeFT> Types { get; set; }
+        public DbSet<FoodTruckType> Types { get; set; }
         public DbSet<FoodTruckEvent> FoodTruckEvents { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
