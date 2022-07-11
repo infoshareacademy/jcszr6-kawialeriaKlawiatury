@@ -1,6 +1,7 @@
 ﻿
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
+using FoodTrakker.Services;
 using FoodTrakkerWebAplication.Models.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,23 +11,28 @@ namespace FoodTrakkerWebAplication.Controllers
 {
     public class OwnerController : Controller
     {
-        private readonly IRepository<Event> _eventRepository;
-        private readonly IRepository<FoodTruck> _foodTruckRepository;
-        public OwnerController(IRepository<Event> eventRepository, IRepository<FoodTruck> foodRepository)
+        private readonly FoodTruckService _foodTruckService;
+        private readonly EventService _eventService;
+        public OwnerController(EventService eventService, FoodTruckService foodTruckService)
         {
-            _eventRepository = eventRepository;
-            _foodTruckRepository = foodRepository;
+            _eventService = eventService;
+            _foodTruckService = foodTruckService;
         }
         // GET: OwnerController
         public async Task<ActionResult> Index()
         {
-            throw new NotImplementedException();
+            var events = await _eventService.GetEventsAsync();
+            var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+            var uEViewModel = new FoodTruckEventViewModel();
+            uEViewModel.Events = events;
+            uEViewModel.Foodtrucks = foodTrucks;
+            return View(uEViewModel);
         }
 
         // GET: OwnerController/Details/5
         public async Task<ActionResult> DetailsFoodTruck(int id)
         {
-            var foodTruck = await _foodTruckRepository.GetAsync(id);
+            var foodTruck = await _foodTruckService.GetFoodTruckAsync(id);
 
             if (foodTruck != null)
             {
@@ -40,7 +46,7 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: OwnerController/Details/5
         public async Task<ActionResult> DetailsEvent(int id)
         {
-            var events = await _eventRepository.GetAsync(id);
+            var events = await _eventService.GetEventAsync(id);
 
             if (events != null)
             {
@@ -62,7 +68,7 @@ namespace FoodTrakkerWebAplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateFoodTruck(FoodTruck foodTruck)
         {
-            var foodTrucks = await _foodTruckRepository.GetAsync();
+            var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
             var index = foodTrucks.OrderBy(f => f.Id).Last().Id;
             foodTruck.Id = index + 1;
             foodTruck.OwnerId = 1; //Temporary value to be updated!!!
@@ -87,7 +93,7 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: OwnerController/Edit/5
         public async Task<ActionResult> EditFoodTruck(int id)
         {
-            var foodTruckToEdit = await _foodTruckRepository.GetAsync(id);
+            var foodTruckToEdit = await _foodTruckService.GetFoodTruckAsync(id);
             return View(foodTruckToEdit);
         }
 
@@ -100,7 +106,7 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 return View(foodTruck);
             }
-            var foodTruckToEdit = await _foodTruckRepository.GetAsync(id);
+            var foodTruckToEdit = await _foodTruckService.GetFoodTruckAsync(id);
             try
             {
                 foodTruckToEdit.Name = foodTruck.Name;
@@ -119,7 +125,7 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: OwnerController/Delete/5
         public async Task<ActionResult> DeleteFoodTruck(int id)
         {
-            var foodTruckToDelete = await _foodTruckRepository.GetAsync(id);
+            var foodTruckToDelete = await _foodTruckService.GetFoodTruckAsync(id);
             return View(foodTruckToDelete);
         }
 
@@ -133,7 +139,7 @@ namespace FoodTrakkerWebAplication.Controllers
         //GET: OwnerController/Delete/5
         public async Task<ActionResult> DeleteEvent(int id)
         {
-            var events = await _eventRepository.GetAsync(id);
+            var events = await _eventService.GetEventAsync(id);
 
             return View(events);
         }
@@ -145,7 +151,7 @@ namespace FoodTrakkerWebAplication.Controllers
         {
             try
             {
-                _eventRepository.Delete(id);
+                _eventService.GetEventAsync(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

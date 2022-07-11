@@ -1,4 +1,6 @@
-﻿namespace FoodTrakker.Repository
+﻿using FoodTrakker.Core.Model;
+
+namespace FoodTrakker.Repository
 {
     public interface IRepository<T>
     {
@@ -7,7 +9,5 @@
 
         public void Add(T t);
         public void Delete(int id);
-
-        
     }
 }

@@ -1,6 +1,7 @@
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
 using FoodTrakker.Repository.Data;
+using FoodTrakker.Services;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -8,14 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<FoodTruckService>();
+builder.Services.AddScoped<EventService>();
+
 var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb")));
 
 
-builder.Services.AddSingleton<IRepository<User>, UserRepository>();
-builder.Services.AddSingleton<IRepository<Event>, EventRepository>();
-builder.Services.AddSingleton<IRepository<FoodTruck>, FoodTruckRepository>();
+builder.Services.AddTransient<IRepository<User>, UserRepository>();
+builder.Services.AddTransient<IRepository<Event>, EventRepository>();
+builder.Services.AddTransient<IRepository<FoodTruck>, FoodTruckRepository>();
+
 
 var app = builder.Build();
 

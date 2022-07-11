@@ -1,4 +1,5 @@
 ﻿using FoodTrakker.Core;
+using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Data;
 using System;
 using System.Collections.Generic;

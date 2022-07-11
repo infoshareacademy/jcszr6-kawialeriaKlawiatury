@@ -21,12 +21,15 @@ namespace FoodTrakkerWebAplication.Controllers
         {
             _logger = logger;
             _foodTruckService = foodTruckService;
-           
         }
 
         public async Task<IActionResult> Index()
         {
             var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+            if(foodTrucks == null)
+            {
+                return NotFound();
+            }
             return View(foodTrucks);
         }
 
