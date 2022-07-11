@@ -8,11 +8,11 @@ namespace FoodTrakker.BusinessLogic.Models
 {
     public class FoodTruckType
     {
-        public int Id { get; internal set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public override string ToString()
         {
-            return $" Review : {Id},{Name}";
+            return $"{Name}";
         }
     }
 }
