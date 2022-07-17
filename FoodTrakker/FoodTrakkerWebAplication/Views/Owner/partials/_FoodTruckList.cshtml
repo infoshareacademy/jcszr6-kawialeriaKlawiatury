@@ -1,0 +1,50 @@
+﻿@model FoodTrakkerWebAplication.Models.ViewModel.FoodTruckEventViewModel
+
+
+<table class="table">
+	<thead>
+	<tr>
+		<th>
+			<label asp-for="Foodtrucks.First().Name"></label>
+		</th>
+		<th>
+			<label asp-for="Foodtrucks.First().Type"></label>
+		</th>
+		<th>
+			<label asp-for="Foodtrucks.First().Description"></label>
+		</th>
+		<th>
+			<label asp-for="Foodtrucks.First().Location.City"></label>
+		</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+
+	@foreach (var foodTruck in Model.Foodtrucks)
+	{
+		<tr>
+			<td>
+				<a asp-controller="Owner" asp-action="DetailsFoodTruck" asp-route-id="@foodTruck.Id">@foodTruck.Name</a>
+			</td>
+			<td>
+				@foodTruck.Type
+			</td>
+			<td>
+				@foodTruck.Description
+			</td>
+			<td>
+				@*@foodTruck.Location.City*@
+			</td>
+			<td class="text-end">
+				<div class="btn-group">
+					<a asp-controller="Owner" asp-action="EditFoodTruck" asp-route-id="@foodTruck.Id"
+					   class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
+					<a asp-controller="Owner" asp-action="DeleteFoodTruck" asp-route-id="@foodTruck.Id"
+					   class="btn btn-danger mx-2"><i class="bi bi-trash"></i>Delete</a>
+				</div>
+			</td>
+		</tr>
+	}
+	</tbody>
+</table>
