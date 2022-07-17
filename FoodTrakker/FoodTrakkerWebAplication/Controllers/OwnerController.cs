@@ -22,7 +22,7 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> Index()
         {
             var events = await _eventService.GetEventsAsync();
-            var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
             var uEViewModel = new FoodTruckEventViewModel();
             uEViewModel.Events = events;
             uEViewModel.Foodtrucks = foodTrucks;
@@ -32,11 +32,10 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: OwnerController/Details/5
         public async Task<ActionResult> DetailsFoodTruck(int id)
         {
-            var foodTruck = await _foodTruckService.GetFoodTruckAsync(id);
+            var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
 
             if (foodTruck != null)
             {
-
                 return View(foodTruck);
             }
 

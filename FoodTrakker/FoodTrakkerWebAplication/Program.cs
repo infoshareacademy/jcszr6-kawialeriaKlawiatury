@@ -1,5 +1,6 @@
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
+using FoodTrakker.Repository.Contracts;
 using FoodTrakker.Repository.Data;
 using FoodTrakker.Services;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,7 @@ builder.Services.AddDbContext<FoodTrakkerContext>(options =>
 
 builder.Services.AddTransient<IRepository<User>, UserRepository>();
 builder.Services.AddTransient<IRepository<Event>, EventRepository>();
-builder.Services.AddTransient<IRepository<FoodTruck>, FoodTruckRepository>();
+builder.Services.AddTransient<IFoodTruckRepository, FoodTruckRepository>();
 
 
 var app = builder.Build();

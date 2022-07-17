@@ -1,6 +1,6 @@
 ﻿
 using FoodTrakker.Core.Model;
-using FoodTrakker.Repository;
+using FoodTrakker.Repository.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 

@@ -1,5 +1,5 @@
 ﻿using FoodTrakker.Core.Model;
-using FoodTrakker.Repository;
+using FoodTrakker.Repository.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

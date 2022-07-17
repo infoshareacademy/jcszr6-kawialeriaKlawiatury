@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using FoodTrakker.Core.Model;
-using FoodTrakker.Repository;
-
+using FoodTrakker.Repository.Contracts;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
