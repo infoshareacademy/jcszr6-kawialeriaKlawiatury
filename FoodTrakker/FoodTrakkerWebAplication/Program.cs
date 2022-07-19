@@ -19,9 +19,10 @@ builder.Services.AddDbContext<FoodTrakkerContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb")));
 
 
-builder.Services.AddTransient<IRepository<User>, UserRepository>();
-builder.Services.AddTransient<IRepository<Event>, EventRepository>();
-builder.Services.AddTransient<IFoodTruckRepository, FoodTruckRepository>();
+builder.Services.AddScoped<IRepository<User>, UserRepository>();
+builder.Services.AddScoped<IRepository<Event>, EventRepository>();
+builder.Services.AddScoped<IFoodTruckRepository, FoodTruckRepository>();
+builder.Services.AddScoped<IEventRepository, EventRepository>();
 
 
 var app = builder.Build();

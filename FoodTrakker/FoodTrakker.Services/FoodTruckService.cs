@@ -14,6 +14,10 @@ namespace FoodTrakker.Services
         {
             return await _foodTruckRepository.GetAsync();
         }
+        public async Task<FoodTruck> GetFoodTruckAsync(int Id)
+        {
+            return await _foodTruckRepository.GetAsync(Id);
+        }
 
         public async Task<ICollection<FoodTruck>> GetFullFoodTruckInfoAsync()
         {
@@ -25,9 +29,6 @@ namespace FoodTrakker.Services
             return await _foodTruckRepository.GetFullFoodTruckInfoAsync(Id);
         }
 
-        public async Task<FoodTruck> GetFoodTruckAsync(int Id)
-        {
-            return await _foodTruckRepository.GetAsync(Id);
-        }
+
     }
 }

@@ -45,7 +45,7 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: OwnerController/Details/5
         public async Task<ActionResult> DetailsEvent(int id)
         {
-            var events = await _eventService.GetEventAsync(id);
+            var events = await _eventService.GetFullEventInfoAsync(id);
 
             if (events != null)
             {
