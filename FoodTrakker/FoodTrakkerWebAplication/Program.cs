@@ -4,6 +4,7 @@ using FoodTrakker.Repository.Contracts;
 using FoodTrakker.Repository.Data;
 using FoodTrakker.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,13 @@ var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb")));
 
+builder.Services.AddDefaultIdentity<User>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 7;
+    options.Password.RequireUppercase = true;
+    options.SignIn.RequireConfirmedAccount = true;
+}).AddEntityFrameworkStores<FoodTrakkerContext>();
 
 builder.Services.AddScoped<IRepository<User>, UserRepository>();
 builder.Services.AddScoped<IRepository<Event>, EventRepository>();
@@ -43,6 +51,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
