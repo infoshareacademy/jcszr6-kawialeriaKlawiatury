@@ -52,6 +52,7 @@ namespace FoodTrakker.Repository.Data
 
             modelBuilder.Entity<User>()
                 .Ignore(u => u.ReviewsID);
+
         }
     }
 }
