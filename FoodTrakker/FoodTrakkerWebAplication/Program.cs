@@ -13,6 +13,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<FoodTruckService>();
 builder.Services.AddScoped<EventService>();
+builder.Services.AddScoped<ReviewService>();
 
 var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
@@ -23,6 +24,7 @@ builder.Services.AddScoped<IRepository<User>, UserRepository>();
 builder.Services.AddScoped<IRepository<Event>, EventRepository>();
 builder.Services.AddScoped<IFoodTruckRepository, FoodTruckRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 
 var app = builder.Build();
