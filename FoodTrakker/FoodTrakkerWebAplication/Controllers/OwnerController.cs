@@ -3,12 +3,14 @@ using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
 using FoodTrakker.Services;
 using FoodTrakkerWebAplication.Models.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
+    [Authorize]
     public class OwnerController : Controller
     {
         private readonly FoodTruckService _foodTruckService;

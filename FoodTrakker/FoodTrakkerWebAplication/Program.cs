@@ -5,7 +5,7 @@ using FoodTrakker.Repository.Data;
 using FoodTrakker.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-
+using FoodTrakker.Services.IdentityServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +27,13 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Password.RequiredLength = 7;
     options.Password.RequireUppercase = true;
     options.SignIn.RequireConfirmedAccount = true;
-}).AddEntityFrameworkStores<FoodTrakkerContext>();
+
+    options.Lockout.AllowedForNewUsers = true;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.MaxFailedAccessAttempts = 3;
+})
+    .AddEntityFrameworkStores<FoodTrakkerContext>()
+    .AddPasswordValidator<PasswordValidatorService>();
 
 builder.Services.AddScoped<IRepository<User>, UserRepository>();
 builder.Services.AddScoped<IRepository<Event>, EventRepository>();

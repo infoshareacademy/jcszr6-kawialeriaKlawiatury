@@ -35,6 +35,7 @@ namespace FoodTrakker.Repository.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(FoodTrakkerContext).Assembly);
 
             modelBuilder.Entity<FoodTruckEvent>()
                 .HasKey(fe => new { fe.FoodTruckId, fe.EventId });
