@@ -31,7 +31,10 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Lockout.AllowedForNewUsers = true;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.MaxFailedAccessAttempts = 3;
+
+    options.User.RequireUniqueEmail = true;
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<FoodTrakkerContext>()
     .AddPasswordValidator<PasswordValidatorService>();
 
