@@ -17,7 +17,7 @@ namespace FoodTrakker.Services.IdentityServices
                 return Task.FromResult(IdentityResult.Failed(new IdentityError
                 {
                     Code = "Error with password",
-                    Description = "Password can't be the same as user!"                    
+                    Description = "Password can't be the same as user or contain user name!"                    
                 }));
             }
 

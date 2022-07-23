@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using FoodTrakker.Repository.Constants;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FoodTrakkerWebAplication.Areas.Identity.Pages.Account
 {
@@ -31,13 +32,15 @@ namespace FoodTrakkerWebAplication.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleInManager;
 
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleInManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -45,6 +48,7 @@ namespace FoodTrakkerWebAplication.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleInManager = roleInManager;
         }
 
         /// <summary>
@@ -85,6 +89,11 @@ namespace FoodTrakkerWebAplication.Areas.Identity.Pages.Account
             [Display(Name = "User Name")]
             public string UserName { get; set; }
 
+            
+            public SelectList Roles { get; set; }
+
+            [Required]
+            public string Role { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -108,6 +117,7 @@ namespace FoodTrakkerWebAplication.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            Input = new InputModel() { Roles = new(_roleInManager.Roles.Where(r => r.Name != Roles.Administrator).ToList(), "Name", "Name")};
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -128,7 +138,7 @@ namespace FoodTrakkerWebAplication.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _userManager.AddToRoleAsync(user, Roles.Owner);
+                    await _userManager.AddToRoleAsync(user, Input.Role);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -159,6 +169,7 @@ namespace FoodTrakkerWebAplication.Areas.Identity.Pages.Account
             }
 
             // If we got this far, something failed, redisplay form
+            Input.Roles = new SelectList(_roleInManager.Roles.Where(r => r.Name != Roles.Administrator).ToList(), "Name", "Name");
             return Page();
         }
 

@@ -51,14 +51,14 @@
 						</form>
 					</div>
 					<div>
-						<ul class="navbar-nav flex-grow-1">
-							<li>
-								<a class="nav-link m-2" asp-area="" asp-controller="Owner" asp-action="Index" style="">My Panel</a>
-							</li>
-							<li>
-								<a class="nav-link m-2" asp-area="" asp-controller="Home" asp-action="Index" style="min-width: 90px">Sign up</a>
-							</li>
-						</ul>
+						@if (User.IsInRole(Roles.Administrator) || User.IsInRole(Roles.Owner))
+						{
+							<ul class="navbar-nav flex-grow-1">
+								<li>
+									<a class="nav-link m-2" asp-area="" asp-controller="Owner" asp-action="Index" style="">My Panel</a>
+								</li>
+							</ul>
+						}
 					</div>
 					<div>
 						<partial name="_LoginPartial" />

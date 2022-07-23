@@ -1,28 +1,34 @@
 ﻿
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
+using FoodTrakker.Repository.Constants;
 using FoodTrakker.Services;
 using FoodTrakkerWebAplication.Models.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
+using System.Security.Claims;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = Roles.Administrator + "," + Roles.Owner)]
     public class OwnerController : Controller
     {
         private readonly FoodTruckService _foodTruckService;
         private readonly EventService _eventService;
-        public OwnerController(EventService eventService, FoodTruckService foodTruckService)
+        private readonly UserManager<User> _userManager;
+        public OwnerController(EventService eventService, FoodTruckService foodTruckService, UserManager<User> userManager)
         {
             _eventService = eventService;
             _foodTruckService = foodTruckService;
+            _userManager = userManager;
         }
         // GET: OwnerController
         public async Task<ActionResult> Index()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var events = await _eventService.GetEventsAsync();
             var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
             var uEViewModel = new FoodTruckEventViewModel();
