@@ -1,4 +1,5 @@
 ﻿using FoodTrakker.Core;
+using FoodTrakker.Repository.Contracts;
 using Newtonsoft.Json;
 
 namespace FoodTrakker.Repository
@@ -32,6 +33,21 @@ namespace FoodTrakker.Repository
             {
                 _dataList.Remove(toDelete);
             }
+        }
+
+        Task IRepository<T>.AddAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<T>.DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(T entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
