@@ -23,9 +23,9 @@ namespace FoodTrakker.Repository
 
         public Task<FoodTruck> GetFullFoodTruckInfoAsync(int Id)
         {
-            return Task.FromResult(_context.FoodTrucks
+            return _context.FoodTrucks
                 .Include(f => f.Location)
-                .Include(f => f.Type).FirstOrDefault(f => f.Id == Id));
+                .Include(f => f.Type).SingleOrDefaultAsync(f => f.Id == Id);
         }
 
     }

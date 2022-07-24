@@ -33,13 +33,13 @@ namespace FoodTrakker.Repository
 
         public Task<T> GetAsync(int id)
         {
-            return Task.FromResult(_context.Set<T>().FirstOrDefault(t => t.Id == id));
+            return _context.Set<T>().FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task UpdateAsync(T entity)
+        public Task UpdateAsync(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            return _context.SaveChangesAsync();
         }
     }
 }

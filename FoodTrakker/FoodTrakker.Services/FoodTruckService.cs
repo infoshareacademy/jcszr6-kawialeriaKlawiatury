@@ -10,23 +10,23 @@ namespace FoodTrakker.Services
         {
             _foodTruckRepository = foodTruckRepository;
         }
-        public async Task<ICollection<FoodTruck>> GetFoodTrucksAsync()
+        public Task<List<FoodTruck>> GetFoodTrucksAsync()
         {
-            return await _foodTruckRepository.GetAsync();
+            return _foodTruckRepository.GetAsync();
         }
-        public async Task<FoodTruck> GetFoodTruckAsync(int Id)
+        public Task<FoodTruck> GetFoodTruckAsync(int Id)
         {
-            return await _foodTruckRepository.GetAsync(Id);
-        }
-
-        public async Task<ICollection<FoodTruck>> GetFullFoodTruckInfoAsync()
-        {
-            return await _foodTruckRepository.GetFullFoodTruckInfoAsync();
+            return _foodTruckRepository.GetAsync(Id);
         }
 
-        public async Task<FoodTruck> GetFullFoodTruckInfoAsync(int Id)
+        public Task<List<FoodTruck>> GetFullFoodTruckInfoAsync()
         {
-            return await _foodTruckRepository.GetFullFoodTruckInfoAsync(Id);
+            return _foodTruckRepository.GetFullFoodTruckInfoAsync();
+        }
+
+        public Task<FoodTruck> GetFullFoodTruckInfoAsync(int Id)
+        {
+            return _foodTruckRepository.GetFullFoodTruckInfoAsync(Id);
         }
 
 

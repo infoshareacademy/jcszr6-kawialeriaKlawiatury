@@ -25,9 +25,9 @@ namespace FoodTrakker.Repository
 
         public Task<Event> GetFullEventInfoAsync(int Id)
         {
-            return Task.FromResult(_context.Events
+            return _context.Events
                 .Include(ev => ev.FoodTruckEvents)
-                .FirstOrDefault(ev => ev.Id == Id));          
+                .SingleOrDefaultAsync(ev => ev.Id == Id);          
         }
     }
 }
