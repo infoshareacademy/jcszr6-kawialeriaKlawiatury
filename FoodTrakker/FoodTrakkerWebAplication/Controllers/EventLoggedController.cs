@@ -1,6 +1,7 @@
 ﻿
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
+using FoodTrakker.Services;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -8,24 +9,30 @@ namespace FoodTrakkerWebAplication.Controllers
 {
     public class EventLoggedController : Controller
     {
-        private readonly IRepository<Event> _eventRepository;
-        public EventLoggedController(IRepository<Event> eventRepository)
+        private readonly EventService _eventService;
+        public EventLoggedController(EventService eventService)
         {
-            _eventRepository = eventRepository;
+            _eventService = eventService;
         }
 
         // GET: EventController
         public async Task<ActionResult> Index()
         {
-            var events = await _eventRepository.GetAsync();
+            var events = await _eventService.GetEventsAsync();
             return View(events);
         }
 
         // GET: EventController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var events = await _eventRepository.GetAsync();
-            return View(events.SingleOrDefault(e => e.Id == id));
+            var eventById = await _eventService.GetEventAsync(id);
+            if (eventById != null)
+            {
+
+                return View(eventById);
+            }
+
+            return NotFound();
         }
 
         // GET: EventController/Create
@@ -39,7 +46,7 @@ namespace FoodTrakkerWebAplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Event eventToCreate)
         {
-            var events = await _eventRepository.GetAsync();
+            var events = await _eventService.GetEventsAsync();
             if (!ModelState.IsValid)
             {
                 return View(eventToCreate);
@@ -58,8 +65,14 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: EventController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            var events = await _eventRepository.GetAsync();
-            return View(events.FirstOrDefault(e => e.Id == id));
+            var eventById = await _eventService.GetEventAsync(id);
+            if (eventById != null)
+            {
+
+                return View(eventById);
+            }
+
+            return NotFound();
         }
 
         // POST: EventController/Edit/5
@@ -67,7 +80,7 @@ namespace FoodTrakkerWebAplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, Event eventToEdit)
         {
-            var events = await _eventRepository.GetAsync();
+            var events = await _eventService.GetEventsAsync();
             if (!ModelState.IsValid)
             {
                 return View(events);
@@ -96,8 +109,14 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: EventController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            var events = await _eventRepository.GetAsync();
-            return View(events.FirstOrDefault(e => e.Id == id));
+            var eventToDelte = await _eventService.GetEventAsync(id);
+            if (eventToDelte != null)
+            {
+
+                return View(eventToDelte);
+            }
+
+            return NotFound();
         }
 
         // POST: EventController/Delete/5
@@ -105,7 +124,7 @@ namespace FoodTrakkerWebAplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id, Event @event)
         {
-            var events = await _eventRepository.GetAsync();
+            var events = await _eventService.GetEventsAsync();
             try
             {
                 var eventToDelete = events.FirstOrDefault(e => e.Id == id);
