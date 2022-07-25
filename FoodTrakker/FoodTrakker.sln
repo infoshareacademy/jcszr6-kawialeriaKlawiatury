@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodTrakkerWebAplication", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodTrakker.Core", "FoodTrakker_WebBusinessLogic\FoodTrakker.Core.csproj", "{5A527C19-7A1B-4EC4-AEA3-298C9AFBBCFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTrakker.Repository", "FoodTrakker.Repository\FoodTrakker.Repository.csproj", "{CE78B97D-3BB5-4AF6-8C39-2983B22FD6A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodTrakker.Repository", "FoodTrakker.Repository\FoodTrakker.Repository.csproj", "{CE78B97D-3BB5-4AF6-8C39-2983B22FD6A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTrakker.Services", "FoodTrakker.Services\FoodTrakker.Services.csproj", "{BD78AEA8-9B84-452C-9075-2C2483B7470D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodTrakker.Services", "FoodTrakker.Services\FoodTrakker.Services.csproj", "{BD78AEA8-9B84-452C-9075-2C2483B7470D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
