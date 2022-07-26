@@ -29,6 +29,12 @@ namespace FoodTrakker.Services
             return _foodTruckRepository.GetFullFoodTruckInfoAsync(Id);
         }
 
+        public Task AddFoodTruck(FoodTruck foodTruck)
+        {
+            _foodTruckRepository.AddAsync(foodTruck);
+            return Task.CompletedTask;
+        }
+
 
     }
 }

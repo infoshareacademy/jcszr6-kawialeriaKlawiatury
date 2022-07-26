@@ -1,13 +1,16 @@
 ﻿
+using AutoMapper;
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
 using FoodTrakker.Repository.Constants;
 using FoodTrakker.Services;
+using FoodTrakker.Services.DTOs;
 using FoodTrakkerWebAplication.Models.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 using System.Security.Claims;
 
@@ -18,12 +21,25 @@ namespace FoodTrakkerWebAplication.Controllers
     {
         private readonly FoodTruckService _foodTruckService;
         private readonly EventService _eventService;
+        private readonly LocationService _locationService;
+        private readonly TypeService _typeService;
         private readonly UserManager<User> _userManager;
-        public OwnerController(EventService eventService, FoodTruckService foodTruckService, UserManager<User> userManager)
+        private readonly IMapper _mapper;
+        
+        public OwnerController(
+            EventService eventService, 
+            FoodTruckService foodTruckService, 
+            LocationService locationService,
+            TypeService typeService,
+            UserManager<User> userManager, 
+            IMapper mapper)
         {
             _eventService = eventService;
             _foodTruckService = foodTruckService;
             _userManager = userManager;
+            _mapper = mapper;
+            _locationService = locationService;
+            _typeService = typeService;
         }
         // GET: OwnerController
         public async Task<ActionResult> Index()
@@ -32,8 +48,10 @@ namespace FoodTrakkerWebAplication.Controllers
             var events = await _eventService.GetEventsAsync();
             var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
             var uEViewModel = new FoodTruckEventViewModel();
-            uEViewModel.Events = events;
-            uEViewModel.Foodtrucks = foodTrucks;
+
+            uEViewModel.Events = _mapper.Map<List<Event>, List<EventDto>>(events.ToList());
+            uEViewModel.Foodtrucks = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks.ToList());
+
             return View(uEViewModel);
         }
 
@@ -41,12 +59,11 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> DetailsFoodTruck(int id)
         {
             var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
-
-            if (foodTruck != null)
+            var foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
+            if (foodTruckDto != null)
             {
-                return View(foodTruck);
+                return View(foodTruckDto);
             }
-
             return NotFound();
         }
 
@@ -54,40 +71,72 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> DetailsEvent(int id)
         {
             var events = await _eventService.GetFullEventInfoAsync(id);
-
-            if (events != null)
+            var eventDto = _mapper.Map<Event, EventDto>(events);
+            if (eventDto != null)
             {
 
-                return View(events);
+                return View(eventDto);
             }
 
             return NotFound();
         }
 
         // GET: OwnerController/Create
-        public ActionResult CreateFoodTruck()
+        public async Task<ActionResult> CreateFoodTruck()
         {
+            var locations = await _locationService.GetLocationsAsync();
+            var locationSelect = new List<SelectListItem>();
+
+            if(locations != null)
+            {
+                foreach (var location in locations)
+                {                   
+                    locationSelect.Add(new SelectListItem { Text = $"{location.City} {location.Street}", Value = $"{location.Id}" });                  
+                }
+            }
+
+            ViewBag.LocationSelect = locationSelect;
+
+            var types = await _typeService.GetTypesAsync();
+            var typesSelect = new List<SelectListItem>();
+
+            if (types != null)
+            {
+                foreach (var type in types)
+                {
+                    typesSelect.Add(new SelectListItem { Text = $"{type.Name}", Value = $"{type.Id}" });
+                }
+            }
+
+            ViewBag.TypesSelect = typesSelect;
+
+
             return View();
         }
 
         // POST: OwnerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateFoodTruck(FoodTruck foodTruck)
+        public async Task<ActionResult> CreateFoodTruck(FoodTruckDto foodTruckDto, int locationId, int typeId)
         {
-            var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();          
+            
             var index = foodTrucks.OrderBy(f => f.Id).Last().Id;
-            foodTruck.Id = index + 1;
-            foodTruck.OwnerId = 1; //Temporary value to be updated!!!
+            foodTruckDto.Id = foodTrucks.Max(f => f.Id) + 1;
+            foodTruckDto.OwnerId = userId; //Temporary value to be updated!!!
+            foodTruckDto.Location = await _locationService.GetLocationAsync(locationId);
+            foodTruckDto.Type = await _typeService.GetTypeAsync(typeId);
+            
             if (!ModelState.IsValid)
             {
-                return View(foodTruck);
+                return View(foodTruckDto);
             }
 
             try
             {
-
-                foodTrucks.Add(foodTruck);
+                var foodTruck = _mapper.Map<FoodTruckDto, FoodTruck>(foodTruckDto);
+                await _foodTruckService.AddFoodTruck(foodTruck);
 
                 return RedirectToAction(nameof(Index));
             }

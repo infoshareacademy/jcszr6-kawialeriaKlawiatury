@@ -17,6 +17,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<FoodTruckService>();
 builder.Services.AddScoped<EventService>();
 builder.Services.AddScoped<ReviewService>();
+builder.Services.AddScoped<LocationService>();
+builder.Services.AddScoped<TypeService>();
 
 var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
@@ -44,6 +46,8 @@ builder.Services.AddScoped<IRepository<Event>, EventRepository>();
 builder.Services.AddScoped<IFoodTruckRepository, FoodTruckRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ITypeRepository, TypeRepository>();
 
 
 var app = builder.Build();
