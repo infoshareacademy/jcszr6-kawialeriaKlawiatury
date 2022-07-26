@@ -14,6 +14,6 @@ namespace FoodTrakker.Core.Model
         public DateTime StartDate { get;set; }    
         public DateTime EndDate { get; set; }
         public ICollection<FoodTruckEvent> FoodTruckEvents { get; set; }
-
+        
     }
 }

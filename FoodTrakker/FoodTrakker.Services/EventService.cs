@@ -1,5 +1,5 @@
 ﻿using FoodTrakker.Core.Model;
-using FoodTrakker.Repository;
+using FoodTrakker.Repository.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +10,8 @@ namespace FoodTrakker.Services
 {
     public class EventService
     {
-        private readonly IRepository<Event> _eventRepository;
-        public EventService(IRepository<Event> eventRepository)
+        private readonly IEventRepository _eventRepository;
+        public EventService(IEventRepository eventRepository)
         {
             _eventRepository = eventRepository;
         }
@@ -28,6 +28,15 @@ namespace FoodTrakker.Services
 
         }
 
+        public async Task<ICollection<Event>> GetFullEventInfoAsync()
+        {
+            return await _eventRepository.GetFullEventInfoAsync();
+        }
+
+        public async Task<Event> GetFullEventInfoAsync(int Id)
+        {
+            return await _eventRepository.GetFullEventInfoAsync(Id);
+        }
 
     }
 }

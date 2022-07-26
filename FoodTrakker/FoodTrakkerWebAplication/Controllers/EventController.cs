@@ -2,22 +2,22 @@
 using System.Linq;
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
-
+using FoodTrakker.Services;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
     public class EventController : Controller
     {
-
-        private readonly IRepository<Event> _eventRepository;
-        public EventController(IRepository<Event> eventRepository)
+        private readonly EventService _eventService;
+        public EventController(EventService eventService)
         {
-            _eventRepository = eventRepository;
+            _eventService = eventService;
         }
+       
         // GET: EventController
         public async Task<ActionResult> Index()
         {
-            var events = await _eventRepository.GetAsync();
+            var events = await _eventService.GetEventsAsync();
             var eventInNearFuture = events.OrderBy(e => e.StartDate)
                 .Where(e => e.StartDate > DateTime.UtcNow)
                 .Take(8).ToList();
@@ -26,8 +26,14 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: EventController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var events = await _eventRepository.GetAsync();
-            return View(events.SingleOrDefault(e => e.Id == id));
+            var events = await _eventService.GetEventAsync(id);
+            if (events != null)
+            {
+
+                return View(events);
+            }
+
+            return NotFound();
         }
 
 
