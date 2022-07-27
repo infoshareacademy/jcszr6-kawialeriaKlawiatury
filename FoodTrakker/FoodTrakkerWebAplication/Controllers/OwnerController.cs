@@ -124,8 +124,8 @@ namespace FoodTrakkerWebAplication.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();          
             
-            var index = foodTrucks.OrderBy(f => f.Id).Last().Id;
-            foodTruckDto.Id = foodTrucks.Max(f => f.Id) + 1;
+            //var index = foodTrucks.OrderBy(f => f.Id).Last().Id;
+            //foodTruckDto.Id = foodTrucks.Max(f => f.Id) + 1;
             foodTruckDto.OwnerId = userId; //Temporary value to be updated!!!
             foodTruckDto.Location = await _locationService.GetLocationAsync(locationId);
             foodTruckDto.Type = await _typeService.GetTypeAsync(typeId);
