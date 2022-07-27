@@ -126,10 +126,14 @@ namespace FoodTrakkerWebAplication.Controllers
             
             //var index = foodTrucks.OrderBy(f => f.Id).Last().Id;
             //foodTruckDto.Id = foodTrucks.Max(f => f.Id) + 1;
-            foodTruckDto.OwnerId = userId; //Temporary value to be updated!!!
-            foodTruckDto.Location = await _locationService.GetLocationAsync(locationId);
-            foodTruckDto.Type = await _typeService.GetTypeAsync(typeId);
-
+            foodTruckDto.OwnerId = userId.ToString();
+            var foodTruck = _mapper.Map<FoodTruckDto, FoodTruck>(foodTruckDto);
+            foodTruck.LocationId = locationId;
+            foodTruck.TypeId = typeId;
+            //foodTruckDto.Location = await _locationService.GetLocationAsync(locationId);
+            //foodTruckDto.Type = await _typeService.GetTypeAsync(typeId);
+            
+            ModelState.Remove("OwnerId");
             var errors = ModelState.SelectMany(m => m.Value.Errors);
             if (!ModelState.IsValid)
             {
@@ -138,7 +142,7 @@ namespace FoodTrakkerWebAplication.Controllers
 
             try
             {
-                var foodTruck = _mapper.Map<FoodTruckDto, FoodTruck>(foodTruckDto);
+                
                 await _foodTruckService.AddFoodTruck(foodTruck);
 
                 return RedirectToAction(nameof(Index));

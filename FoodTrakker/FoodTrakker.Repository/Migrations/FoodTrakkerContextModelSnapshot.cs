@@ -88,7 +88,6 @@ namespace FoodTrakker.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OwnerId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TypeId")
@@ -179,6 +178,8 @@ namespace FoodTrakker.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FoodTruckId");
 
                     b.ToTable("Reviews");
                 });
@@ -290,21 +291,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "c1fe74a2-5722-4f99-9f64-8ea84d969d27",
+                            ConcurrencyStamp = "09661f28-1f2d-4e5f-86aa-0e4a0ca8c314",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "5cc63321-cdfb-40ce-9c1c-0676a6731219",
+                            ConcurrencyStamp = "4bca6902-8caa-4f0d-89f0-c7f343887bf1",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "5c2f7e32-d6f9-4619-82b9-a088560f6064",
+                            ConcurrencyStamp = "de919c09-2334-420c-ba8c-f554dd096e68",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -456,6 +457,17 @@ namespace FoodTrakker.Repository.Migrations
                     b.Navigation("Location");
 
                     b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("FoodTrakker.Core.Model.Review", b =>
+                {
+                    b.HasOne("FoodTrakker.Core.Model.FoodTruck", "FoodTruck")
+                        .WithMany()
+                        .HasForeignKey("FoodTruckId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FoodTruck");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

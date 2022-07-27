@@ -11,5 +11,6 @@ namespace FoodTrakker.Repository.Contracts
     {
         public Task<List<FoodTruck>> GetFullFoodTruckInfoAsync();
         public Task<FoodTruck> GetFullFoodTruckInfoAsync(int Id);
+        public Task AddFoodTruckAsync(FoodTruck foodTruck);
     }
 }

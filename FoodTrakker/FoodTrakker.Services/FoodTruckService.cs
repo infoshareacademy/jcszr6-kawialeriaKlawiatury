@@ -31,7 +31,7 @@ namespace FoodTrakker.Services
 
         public Task AddFoodTruck(FoodTruck foodTruck)
         {
-            _foodTruckRepository.AddAsync(foodTruck);
+            _foodTruckRepository.AddFoodTruckAsync(foodTruck);
             return Task.CompletedTask;
         }
 

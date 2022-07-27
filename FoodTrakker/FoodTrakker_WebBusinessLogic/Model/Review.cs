@@ -9,6 +9,7 @@
         public int Rating { get; set; }
         public int AuthorID { get; set; }
         public int FoodTruckId { get; set; }
+        public FoodTruck FoodTruck { get; set; }
 
     }
 }

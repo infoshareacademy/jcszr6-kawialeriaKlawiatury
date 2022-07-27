@@ -18,9 +18,9 @@
     <div class="col-md-4">
         <form asp-action="CreateFoodTruck">
 			<partial name="partials/_CreateEdit" model="@Model"/>
-            <select asp-for="@Model.Type" asp-items="@types" name="typeId"></select>
+            <select asp-for="@Model.Type" asp-items="@types" name="typeId" class="form-select"></select>
             <br>
-            <select asp-for="@Model.Location" asp-items="@location" name="locationId"></select>
+            <select asp-for="@Model.Location" asp-items="@location" name="locationId" class="form-select"></select>
             <br>
 	        <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
