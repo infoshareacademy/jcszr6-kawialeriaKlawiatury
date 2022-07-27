@@ -41,9 +41,11 @@ namespace FoodTrakkerWebAplication.Controllers
             _locationService = locationService;
             _typeService = typeService;
         }
+
+
         // GET: OwnerController
         public async Task<ActionResult> Index()
-        {
+        {          
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var events = await _eventService.GetEventsAsync();
             var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
@@ -127,10 +129,11 @@ namespace FoodTrakkerWebAplication.Controllers
             foodTruckDto.OwnerId = userId; //Temporary value to be updated!!!
             foodTruckDto.Location = await _locationService.GetLocationAsync(locationId);
             foodTruckDto.Type = await _typeService.GetTypeAsync(typeId);
-            
+
+            var errors = ModelState.SelectMany(m => m.Value.Errors);
             if (!ModelState.IsValid)
             {
-                return View(foodTruckDto);
+                return RedirectToAction("CreateFoodTruck");
             }
 
             try
