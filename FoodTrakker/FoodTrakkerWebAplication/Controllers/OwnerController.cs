@@ -48,7 +48,7 @@ namespace FoodTrakkerWebAplication.Controllers
         {          
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var events = await _eventService.GetEventsAsync();
-            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
+            var foodTrucks = await _foodTruckService.GetOwnerFoodTrucks(userId.ToString());
             var uEViewModel = new FoodTruckEventViewModel();
 
             uEViewModel.Events = _mapper.Map<List<Event>, List<EventDto>>(events.ToList());
@@ -126,10 +126,11 @@ namespace FoodTrakkerWebAplication.Controllers
             
             //var index = foodTrucks.OrderBy(f => f.Id).Last().Id;
             //foodTruckDto.Id = foodTrucks.Max(f => f.Id) + 1;
-            foodTruckDto.OwnerId = userId.ToString();
+ 
             var foodTruck = _mapper.Map<FoodTruckDto, FoodTruck>(foodTruckDto);
             foodTruck.LocationId = locationId;
             foodTruck.TypeId = typeId;
+            foodTruck.OwnerId = userId.ToString();
             //foodTruckDto.Location = await _locationService.GetLocationAsync(locationId);
             //foodTruckDto.Type = await _typeService.GetTypeAsync(typeId);
             

@@ -28,12 +28,14 @@ namespace FoodTrakker.Repository
                 .Include(f => f.Type).SingleOrDefaultAsync(f => f.Id == Id);
         }
 
-        public Task AddFoodTruckAsync(FoodTruck foodTruck)
-        {
-            _context.FoodTrucks.AddAsync(foodTruck);
-            _context.SaveChangesAsync();
-            return Task.CompletedTask;
-        }
 
+        public Task<List<FoodTruck>> GetOwnerFoodTrucks(string ownerId)
+        {
+            return Task.FromResult(_context.FoodTrucks
+                 .Include(f => f.Location)
+                 .Include(f => f.Type)
+                 .Where(f => f.OwnerId == ownerId)
+                 .ToList());
+        }
     }
 }
