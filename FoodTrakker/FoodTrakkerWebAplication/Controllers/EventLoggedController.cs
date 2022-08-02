@@ -1,7 +1,9 @@
 ﻿
+using AutoMapper;
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
 using FoodTrakker.Services;
+using FoodTrakker.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -10,26 +12,30 @@ namespace FoodTrakkerWebAplication.Controllers
     public class EventLoggedController : Controller
     {
         private readonly EventService _eventService;
-        public EventLoggedController(EventService eventService)
+        private readonly IMapper _mapper;
+        public EventLoggedController(EventService eventService,IMapper mapper)
         {
             _eventService = eventService;
+            _mapper = mapper;
         }
 
         // GET: EventController
         public async Task<ActionResult> Index()
         {
             var events = await _eventService.GetEventsAsync();
-            return View(events);
+            var eventsDto = _mapper.Map<ICollection<Event>, ICollection<EventDto>>(events);
+            return View(eventsDto);
         }
 
         // GET: EventController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var eventById = await _eventService.GetEventAsync(id);
-            if (eventById != null)
+            var events = await _eventService.GetFullEventInfoAsync(id);
+            var eventsDto = _mapper.Map<Event, EventDto>(events);
+            if (eventsDto != null)
             {
 
-                return View(eventById);
+                return View(eventsDto);
             }
 
             return NotFound();
@@ -44,16 +50,17 @@ namespace FoodTrakkerWebAplication.Controllers
         // POST: EventController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Event eventToCreate)
+        public async Task<ActionResult> Create(EventDto eventToCreate)
         {
             var events = await _eventService.GetEventsAsync();
+            var eventsDto = _mapper.Map<ICollection<Event>, ICollection<EventDto>>(events);
             if (!ModelState.IsValid)
             {
                 return View(eventToCreate);
             }
             try
             {
-                events.Add(eventToCreate);
+                eventsDto.Add(eventToCreate);
             }
             catch
             {
@@ -66,10 +73,11 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> Edit(int id)
         {
             var eventById = await _eventService.GetEventAsync(id);
-            if (eventById != null)
+            var eventDtoById = _mapper.Map<Event, EventDto>(eventById);
+            if (eventDtoById != null)
             {
 
-                return View(eventById);
+                return View(eventDtoById);
             }
 
             return NotFound();
@@ -81,13 +89,14 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> Edit(int id, Event eventToEdit)
         {
             var events = await _eventService.GetEventsAsync();
+            var eventsDto = _mapper.Map<ICollection<Event>, ICollection<EventDto>>(events);
             if (!ModelState.IsValid)
             {
-                return View(events);
+                return View(eventsDto);
             }
             try
             {
-                var existingEvent = events.FirstOrDefault(e => e.Id == id);
+                var existingEvent = eventsDto.SingleOrDefault(e => e.Id == id);
 
                 existingEvent.Name = eventToEdit.Name;
                 existingEvent.Description = eventToEdit.Description;
@@ -110,10 +119,11 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var eventToDelte = await _eventService.GetEventAsync(id);
-            if (eventToDelte != null)
+            var eventDtoToDelete = _mapper.Map<Event, EventDto>(eventToDelte);
+            if (eventDtoToDelete != null)
             {
 
-                return View(eventToDelte);
+                return View(eventDtoToDelete);
             }
 
             return NotFound();
@@ -125,10 +135,11 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> Delete(int id, Event @event)
         {
             var events = await _eventService.GetEventsAsync();
+            var eventsDto = _mapper.Map<ICollection<Event>, ICollection<EventDto>>(events);
             try
             {
-                var eventToDelete = events.FirstOrDefault(e => e.Id == id);
-                events.Remove(eventToDelete);
+                var eventToDelete = eventsDto.SingleOrDefault(e => e.Id == id);
+                eventsDto.Remove(eventToDelete);
 
                 return RedirectToAction(nameof(Index));
             }

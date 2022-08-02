@@ -11,6 +11,6 @@ namespace FoodTrakker.Core.Model
         public FoodTruckType Type { get; set; }
         public int OwnerId { get; set; }
         public ICollection<FoodTruckEvent> FoodTruckEvents { get; set; }
-      
+        
     }
 }

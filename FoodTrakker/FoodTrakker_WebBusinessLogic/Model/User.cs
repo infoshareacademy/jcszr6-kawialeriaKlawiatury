@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 namespace FoodTrakker.Core.Model
 
 {
-    [Keyless]
+    
     public class User : IdentityUser, Iindexable
     {
         public int Id { get; set; }
@@ -13,8 +13,8 @@ namespace FoodTrakker.Core.Model
         public string? Name { get; set; }
 
         public string? LastName { get; set; }
-        public List<int> FavouriteFoodTrucksID { get; set; }
-        public List<int> ReviewsID { get; set; }
+        public List<FoodTruck> FavouriteFoodTrucks { get; set; }
+        public List<Review> Reviews { get; set; }
 
 
     }

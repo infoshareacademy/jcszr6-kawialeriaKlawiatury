@@ -1,0 +1,38 @@
+﻿@model IEnumerable<FoodTrakker.Services.DTOs.FoodTruckDto>  
+
+
+<table class="table">
+		<thead>
+		<tr>
+			<th>
+				<label asp-for="@Model.First().Name"></label>
+			</th>
+			<th>
+				<label asp-for="@Model.First().Type"></label>
+			</th>
+			<th>
+				<label asp-for="@Model.First().Description"></label>
+			</th>
+			
+			<th></th>
+		</tr>
+		</thead>
+		<tbody>
+
+		@foreach (var foodTruck in Model)
+		{
+			<tr>
+				<td>
+					@foodTruck.Name @*dodaj odwołanie do foodtrucka*@
+				</td>
+				<td>
+					@foodTruck.Type
+				</td>
+				<td>
+					@foodTruck.Description
+				</td>
+				
+			</tr>
+		}
+		</tbody>
+	</table>
