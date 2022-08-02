@@ -32,6 +32,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
@@ -42,6 +43,10 @@
     <ProjectReference Include="..\FoodTrakker.Repository\FoodTrakker.Repository.csproj" />
     <ProjectReference Include="..\FoodTrakker.Services\FoodTrakker.Services.csproj" />
     <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\" />
   </ItemGroup>
 
 </Project>

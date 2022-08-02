@@ -19,7 +19,7 @@ namespace FoodTrakker.Repository.Data
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder
-                .UseSqlServer("Server=DESKTOP-NDVQDSJ\\SQLEXPRESS;Database=FoodTrakkerDb;Trusted_Connection=True;MultipleActiveResultSets=True;");
+                .UseSqlServer("Server=LAPTOP-CC11O5F3;Database=FoodTrakkerDb;Trusted_Connection=True;MultipleActiveResultSets=True;");
         }
         public DbSet<Event> Events { get; set; }
         public DbSet<FoodTruck> FoodTrucks { get; set; }
