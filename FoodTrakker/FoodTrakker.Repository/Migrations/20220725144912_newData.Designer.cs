@@ -4,6 +4,7 @@ using FoodTrakker.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTrakker.Repository.Migrations
 {
     [DbContext(typeof(FoodTrakkerContext))]
-    partial class FoodTrakkerContextModelSnapshot : ModelSnapshot
+    [Migration("20220725144912_newData")]
+    partial class newData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -289,21 +291,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "18f74454-4c7b-48ce-914a-11df9a0e639a",
+                            ConcurrencyStamp = "1301845a-d108-4322-bb91-e407a53e7804",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "d0313098-767a-4aa0-bedd-59e4960044fc",
+                            ConcurrencyStamp = "5650cf3e-5c24-471e-b49e-0ea7b37b8d68",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "6a6736e7-8276-4d43-a28b-6f505f2baf61",
+                            ConcurrencyStamp = "f7eb409e-f25c-429e-9fd0-7f7aa3aa8bb2",
                             Name = "User",
                             NormalizedName = "USER"
                         });

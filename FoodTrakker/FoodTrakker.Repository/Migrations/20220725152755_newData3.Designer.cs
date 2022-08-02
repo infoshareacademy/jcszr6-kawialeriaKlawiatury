@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTrakker.Repository.Migrations
 {
     [DbContext(typeof(FoodTrakkerContext))]
-    [Migration("20220721213337_RolesAdded")]
-    partial class RolesAdded
+    [Migration("20220725152755_newData3")]
+    partial class newData3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -291,21 +291,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "b7a9f965-105d-4729-8f4e-4882eb9277bc",
+                            ConcurrencyStamp = "1094357d-4bdd-4194-8465-13fe1a59bc2c",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "315b368a-61c1-47af-8b45-6c8ff0ca19b6",
+                            ConcurrencyStamp = "e493c885-1727-49e0-ae99-2832af86d1eb",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "ed3083f5-486b-4f39-a2ed-d70a1d154b96",
+                            ConcurrencyStamp = "e1856ce2-6e08-4198-b7e0-2a589954910e",
                             Name = "User",
                             NormalizedName = "USER"
                         });

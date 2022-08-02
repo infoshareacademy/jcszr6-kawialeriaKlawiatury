@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTrakker.Repository.Migrations
 {
     [DbContext(typeof(FoodTrakkerContext))]
-    [Migration("20220720220627_AddedLastName")]
-    partial class AddedLastName
+    [Migration("20220802084140_changes")]
+    partial class changes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -286,6 +286,29 @@ namespace FoodTrakker.Repository.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "df510c89-042b-4342-a852-b32678f1c1ce",
+                            ConcurrencyStamp = "18f74454-4c7b-48ce-914a-11df9a0e639a",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "df456c89-021b-4342-a852-b32678f1alec",
+                            ConcurrencyStamp = "d0313098-767a-4aa0-bedd-59e4960044fc",
+                            Name = "Owner",
+                            NormalizedName = "OWNER"
+                        },
+                        new
+                        {
+                            Id = "df456c69-021b-1234-a852-b32678f1alec",
+                            ConcurrencyStamp = "6a6736e7-8276-4d43-a28b-6f505f2baf61",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

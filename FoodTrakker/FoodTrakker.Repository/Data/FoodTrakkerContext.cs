@@ -25,7 +25,6 @@ namespace FoodTrakker.Repository.Data
         public DbSet<FoodTruck> FoodTrucks { get; set; }
 
         public DbSet<User> Users { get; set; }
-
         public DbSet<Review> Reviews { get; set; }
 
         public DbSet<Location> Locations { get; set; }
@@ -49,10 +48,10 @@ namespace FoodTrakker.Repository.Data
                 .HasForeignKey(fe => fe.EventId);
 
             modelBuilder.Entity<User>()              
-                .Ignore(u => u.FavouriteFoodTrucksID);
+                .Ignore(u => u.FavouriteFoodTrucks);
 
             modelBuilder.Entity<User>()
-                .Ignore(u => u.ReviewsID);
+                .Ignore(u => u.Reviews);
 
         }
     }
