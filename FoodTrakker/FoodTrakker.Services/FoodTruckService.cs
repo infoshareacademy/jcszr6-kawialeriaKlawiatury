@@ -36,10 +36,13 @@ namespace FoodTrakker.Services
 
         public Task AddFoodTruck(FoodTruck foodTruck)
         {
-            _foodTruckRepository.AddAsync(foodTruck);
-            return Task.CompletedTask;
+            return _foodTruckRepository.AddAsync(foodTruck);
         }
 
+        public Task DeleteFoodTruck(int foodTruckId)
+        {
+            return _foodTruckRepository.DeleteAsync(foodTruckId);
+        }
 
     }
 }

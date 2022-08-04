@@ -25,7 +25,9 @@
 	{
 		<tr>
 			<td>
-				<a asp-controller="Owner" asp-action="DetailsFoodTruck" asp-route-id="@foodTruck.Id">@foodTruck.Name</a>
+				<div>
+					<a asp-controller="Owner" asp-action="DetailsFoodTruck" asp-route-id="@foodTruck.Id" class="FTNameButton">@foodTruck.Name</a>
+				</div>
 			</td>
 			<td>
 				@foodTruck.Type

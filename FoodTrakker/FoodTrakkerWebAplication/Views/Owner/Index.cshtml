@@ -8,14 +8,18 @@
 
 
 <div class="container">
+	<br />
 	<div class="row">
-		<a asp-controller="Owner" asp-action="CreateFoodTruck">Add new food truck!</a>
+		<a asp-controller="Owner" asp-action="CreateFoodTruck" class="btn btn-primary">Add new food truck!</a>
 	</div>
 	<h1>Food Trucks</h1>
 	<div class="row">
 		<partial name="partials/_FoodTruckList" model="Model"/>
 	</div>
-
+	<br />
+	<div class="row">
+		<a asp-controller="Owner" asp-action="CreateEvent" class="btn btn-primary">Add new event!</a>
+	</div>
 	<h1>Events</h1>
 	<div class="row">
 		<partial name="partials/_EventsList" model="Model"/>

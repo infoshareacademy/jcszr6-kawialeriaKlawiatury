@@ -57,6 +57,8 @@ namespace FoodTrakkerWebAplication.Controllers
             return View(uEViewModel);
         }
 
+        #region FoodTruck
+
         // GET: OwnerController/Details/5
         public async Task<ActionResult> DetailsFoodTruck(int id)
         {
@@ -66,20 +68,6 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 return View(foodTruckDto);
             }
-            return NotFound();
-        }
-
-        // GET: OwnerController/Details/5
-        public async Task<ActionResult> DetailsEvent(int id)
-        {
-            var events = await _eventService.GetFullEventInfoAsync(id);
-            var eventDto = _mapper.Map<Event, EventDto>(events);
-            if (eventDto != null)
-            {
-
-                return View(eventDto);
-            }
-
             return NotFound();
         }
 
@@ -123,16 +111,11 @@ namespace FoodTrakkerWebAplication.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();          
-            
-            //var index = foodTrucks.OrderBy(f => f.Id).Last().Id;
-            //foodTruckDto.Id = foodTrucks.Max(f => f.Id) + 1;
  
             var foodTruck = _mapper.Map<FoodTruckDto, FoodTruck>(foodTruckDto);
             foodTruck.LocationId = locationId;
             foodTruck.TypeId = typeId;
             foodTruck.OwnerId = userId.ToString();
-            //foodTruckDto.Location = await _locationService.GetLocationAsync(locationId);
-            //foodTruckDto.Type = await _typeService.GetTypeAsync(typeId);
             
             ModelState.Remove("OwnerId");
             var errors = ModelState.SelectMany(m => m.Value.Errors);
@@ -198,8 +181,93 @@ namespace FoodTrakkerWebAplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteFoodTruck(int id, FoodTruck foodTruck)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                await _foodTruckService.DeleteFoodTruck(id);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
+        #endregion
+
+
+        #region Event
+        // GET: OwnerController/Details/5
+        public async Task<ActionResult> DetailsEvent(int id)
+        {
+            var events = await _eventService.GetFullEventInfoAsync(id);
+            var eventDto = _mapper.Map<Event, EventDto>(events);
+            if (eventDto != null)
+            {
+
+                return View(eventDto);
+            }
+
+            return NotFound();
+        }
+
+        // GET: OwnerController/Create
+        public async Task<ActionResult> CreateEvent()
+        {
+            var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+            var foodTrucksSelect = new List<SelectListItem>();
+
+            if (foodTrucks != null)
+            {
+                foreach (var foodTruck in foodTrucks)
+                {
+                    foodTrucksSelect.Add(new SelectListItem { Text = $"{foodTruck.Name}", Value = $"{foodTruck.Id}" });
+                }
+            }
+
+            ViewBag.FoodTruckSelect = foodTrucksSelect;
+
+            return View();
+        }
+
+        // POST: OwnerController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateEvent(FoodTruckDto foodTruckDto, int locationId, int typeId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
+
+            //var index = foodTrucks.OrderBy(f => f.Id).Last().Id;
+            //foodTruckDto.Id = foodTrucks.Max(f => f.Id) + 1;
+
+            var foodTruck = _mapper.Map<FoodTruckDto, FoodTruck>(foodTruckDto);
+            foodTruck.LocationId = locationId;
+            foodTruck.TypeId = typeId;
+            foodTruck.OwnerId = userId.ToString();
+            //foodTruckDto.Location = await _locationService.GetLocationAsync(locationId);
+            //foodTruckDto.Type = await _typeService.GetTypeAsync(typeId);
+
+            ModelState.Remove("OwnerId");
+            var errors = ModelState.SelectMany(m => m.Value.Errors);
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("CreateFoodTruck");
+            }
+
+            try
+            {
+
+                await _foodTruckService.AddFoodTruck(foodTruck);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        } //Not Implemented
+
         //GET: OwnerController/Delete/5
         public async Task<ActionResult> DeleteEvent(int id)
         {
@@ -223,6 +291,8 @@ namespace FoodTrakkerWebAplication.Controllers
                 return View(eventToDelete);
             }
         }
+
+        #endregion
     }
 
 }

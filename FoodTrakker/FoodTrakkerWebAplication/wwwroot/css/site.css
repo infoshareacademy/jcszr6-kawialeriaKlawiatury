@@ -9,12 +9,12 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 header {
-    height: 72px; 
+    height: 72px;
 }
 
 body {
@@ -40,14 +40,14 @@ body {
     text-shadow: 0px -1px 15px #fcf3d9;
 }
 
-.FTButton:hover {
+    .FTButton:hover {
         background-color: #f2d27e;
-}
+    }
 
-.FTButton:active {
-    position: relative;
-    top: 1px;
-}
+    .FTButton:active {
+        position: relative;
+        top: 1px;
+    }
 
 .FTNavPadding {
     padding-left: 10px;
@@ -70,15 +70,15 @@ body {
     text-shadow: 0px 1px 0px #ffffff;
 }
 
-.FTLoginButton:hover {
-    background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-    background-color: #f6f6f6;
-}
+    .FTLoginButton:hover {
+        background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+        background-color: #f6f6f6;
+    }
 
-.FTLoginButton:active {
-    position: relative;
-    top: 1px;
-}
+    .FTLoginButton:active {
+        position: relative;
+        top: 1px;
+    }
 
 .FTManuItemWrapper {
     justify-content: space-between;
@@ -102,7 +102,6 @@ body {
 }
 
 .FTCardbutton {
-
 }
 
 .FTImageCarousel {
@@ -112,9 +111,27 @@ body {
 .FTImage {
     filter: blur(5px);
 }
+
 .FTCarousel {
     display: block;
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.FTNameButton {
+    background-color: #fff9e9;
+    border: 3px solid #faf1d9;
+    display: inline-block;
+    cursor: pointer;
+    color: #000000;
+    font-family: Verdana;
+    font-size: 18px;
+    padding: 4px 8px;
+    text-decoration: none;
+    text-shadow: 0px -1px 15px #fcf3d9;
+}
+
+.FTNameButton:hover {
+    background-color: #f5e3b0;
 }
