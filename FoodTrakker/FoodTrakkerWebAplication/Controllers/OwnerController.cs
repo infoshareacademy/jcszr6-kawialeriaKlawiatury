@@ -215,13 +215,14 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> CreateEvent()
         {
             var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+            var foodTrucksDTO = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks.ToList());
             var foodTrucksSelect = new List<SelectListItem>();
 
             if (foodTrucks != null)
             {
-                foreach (var foodTruck in foodTrucks)
+                foreach (var foodTruckDTO in foodTrucksDTO)
                 {
-                    foodTrucksSelect.Add(new SelectListItem { Text = $"{foodTruck.Name}", Value = $"{foodTruck.Id}" });
+                    foodTrucksSelect.Add(new SelectListItem { Text = $"{foodTruckDTO.Name}", Value = $"{foodTruckDTO.Id}" });
                 }
             }
 
