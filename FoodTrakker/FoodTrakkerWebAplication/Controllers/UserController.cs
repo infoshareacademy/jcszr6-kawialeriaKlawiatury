@@ -3,6 +3,7 @@ using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Constants;
 using FoodTrakker.Services;
 using FoodTrakker.Services.DTOs;
+using FoodTrakkerWebAplication.ShowingAlerts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -69,11 +70,14 @@ namespace FoodTrakkerWebAplication.Controllers
         }
         public async Task<ActionResult> AddFoodTruckToFavourites(int foodTruckId)
         {
-            var x = User.Identity;
-            
-            
-
-
+           //var x = User.Identity.Name;
+        
+           var y = _favouritesFoodTruckService.AddFoodTruckToFavourites(foodTruckId, 1);
+            if (y.IsCompleted)
+            {
+                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "You've got new favourite FoodTruck!");
+            }
+            else ViewBag.Alert = AlertsService.ShowAlert(Alerts.Danger, "Something went wrong!");
             return View();
         } 
     }

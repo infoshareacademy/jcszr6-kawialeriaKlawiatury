@@ -28,5 +28,9 @@ namespace FoodTrakker.Repository
                 .Include(f => f.Type).SingleOrDefaultAsync(f => f.Id == Id);
         }
 
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }
