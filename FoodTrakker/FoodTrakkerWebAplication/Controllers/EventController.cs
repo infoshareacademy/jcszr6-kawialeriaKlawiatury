@@ -21,6 +21,12 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: EventController
         public async Task<ActionResult> Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var eventsLogged = await _eventService.GetEventsAsync();
+                var eventsDto = _mapper.Map<ICollection<Event>, ICollection<EventDto>>(eventsLogged);
+                return View(eventsDto);
+            }
             var events = await _eventService.GetEventsAsync();
             var eventInNearFuture = events.OrderBy(e => e.StartDate)
                 .Where(e => e.StartDate > DateTime.UtcNow)

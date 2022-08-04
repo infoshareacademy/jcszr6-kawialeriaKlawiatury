@@ -19,7 +19,7 @@ namespace FoodTrakker.Repository.Data
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder
-                .UseSqlServer("Server=LAPTOP-CC11O5F3;Database=FoodTrakkerDb;Trusted_Connection=True;MultipleActiveResultSets=True;");
+                .UseSqlServer();
         }
         public DbSet<Event> Events { get; set; }
         public DbSet<FoodTruck> FoodTrucks { get; set; }
@@ -52,7 +52,10 @@ namespace FoodTrakker.Repository.Data
 
             modelBuilder.Entity<User>()
                 .Ignore(u => u.Reviews);
-
+            modelBuilder.Entity<User>()
+                .HasMany<FoodTruck>(u => u.FavouriteFoodTrucks)
+                .WithMany(f => f.Users);
+               
         }
     }
 }

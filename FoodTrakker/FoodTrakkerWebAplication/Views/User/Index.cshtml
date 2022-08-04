@@ -1,0 +1,14 @@
+﻿@using FoodTrakker.Services.DTOs
+@model (List<FoodTruckDto> foodTrucks,  List<ReviewDto> reviews)
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>View</h1>
+
+<div class="container">
+	<h1>Food Trucks</h1>
+	<div class="column">
+		@Html.Partial("partials/_FoodTruckList", Model.foodTrucks)
+	</div>

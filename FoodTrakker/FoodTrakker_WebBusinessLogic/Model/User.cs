@@ -13,7 +13,7 @@ namespace FoodTrakker.Core.Model
         public string? Name { get; set; }
 
         public string? LastName { get; set; }
-        public List<FoodTruck> FavouriteFoodTrucks { get; set; }
+        public ICollection<FoodTruck> FavouriteFoodTrucks { get; set; }
         public List<Review> Reviews { get; set; }
 
 

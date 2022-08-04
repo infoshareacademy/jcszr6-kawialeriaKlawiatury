@@ -8,12 +8,16 @@
 
   <ItemGroup>
     <Compile Remove="Contracts\**" />
+    <Compile Remove="Pages\**" />
     <Compile Remove="Services\**" />
     <Content Remove="Contracts\**" />
+    <Content Remove="Pages\**" />
     <Content Remove="Services\**" />
     <EmbeddedResource Remove="Contracts\**" />
+    <EmbeddedResource Remove="Pages\**" />
     <EmbeddedResource Remove="Services\**" />
     <None Remove="Contracts\**" />
+    <None Remove="Pages\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 
@@ -43,10 +47,6 @@
     <ProjectReference Include="..\FoodTrakker.Repository\FoodTrakker.Repository.csproj" />
     <ProjectReference Include="..\FoodTrakker.Services\FoodTrakker.Services.csproj" />
     <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\" />
   </ItemGroup>
 
 </Project>
