@@ -62,7 +62,8 @@ namespace FoodTrakker.Repository.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OwnerId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -285,17 +286,26 @@ namespace FoodTrakker.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "df456c69-021b-1234-a852-b32678f1alec", "de919c09-2334-420c-ba8c-f554dd096e68", "User", "USER" });
+                values: new object[,]
+                {
+                    { "df456c69-021b-1234-a852-b32678f1alec", "1cc61d66-c250-44ee-a73e-9462a5ffb125", "User", "USER" },
+                    { "df456c89-021b-4342-a852-b32678f1alec", "f0cd1190-bb39-4855-b87a-63d780e8abee", "Owner", "OWNER" },
+                    { "df510c89-042b-4342-a852-b32678f1c1ce", "a330ba19-b695-4f3b-9f55-1cde8db3a5ef", "Administrator", "ADMINISTRATOR" }
+                });
 
             migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "df456c89-021b-4342-a852-b32678f1alec", "4bca6902-8caa-4f0d-89f0-c7f343887bf1", "Owner", "OWNER" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "df510c89-042b-4342-a852-b32678f1c1ce", "09661f28-1f2d-4e5f-86aa-0e4a0ca8c314", "Administrator", "ADMINISTRATOR" });
+                table: "Types",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Polish" },
+                    { 2, "German" },
+                    { 3, "American" },
+                    { 4, "Italian" },
+                    { 5, "Mexican" },
+                    { 6, "Beverages" },
+                    { 7, "Drinks" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

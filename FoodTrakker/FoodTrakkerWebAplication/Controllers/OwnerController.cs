@@ -270,17 +270,10 @@ namespace FoodTrakkerWebAplication.Controllers
             var @event = _mapper.Map<EventDto, Event>(eventDto);          
 
             var errors = ModelState.SelectMany(m => m.Value.Errors);
-            var foodTruckEvents = new List<FoodTruckEvent>();
-            
-            foreach (var foodTruck in foodTruckId)
-            {
-                foodTruckEvents.Add(new FoodTruckEvent()
-                {
-                    FoodTruckId = foodTruck,
-                    Event = @event
-                }); 
-            }
-            @event.FoodTruckEvents = foodTruckEvents;
+
+            @event.FoodTruckEvents = _eventService.AddFoodTrucks(foodTruckId, @event);
+            @event.OwnerId = userId.ToString();
+
             ModelState.Remove("FoodTruckEvents");
             if (!ModelState.IsValid)
             {

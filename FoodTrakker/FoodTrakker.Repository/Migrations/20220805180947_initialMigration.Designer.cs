@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTrakker.Repository.Migrations
 {
     [DbContext(typeof(FoodTrakkerContext))]
-    [Migration("20220727164250_initialMigration")]
+    [Migration("20220805180947_initialMigration")]
     partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,9 @@ namespace FoodTrakker.Repository.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
@@ -119,6 +122,43 @@ namespace FoodTrakker.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Types");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Polish"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "German"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "American"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Italian"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Mexican"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Beverages"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Drinks"
+                        });
                 });
 
             modelBuilder.Entity("FoodTrakker.Core.Model.Location", b =>
@@ -293,21 +333,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "09661f28-1f2d-4e5f-86aa-0e4a0ca8c314",
+                            ConcurrencyStamp = "a330ba19-b695-4f3b-9f55-1cde8db3a5ef",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "4bca6902-8caa-4f0d-89f0-c7f343887bf1",
+                            ConcurrencyStamp = "f0cd1190-bb39-4855-b87a-63d780e8abee",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "de919c09-2334-420c-ba8c-f554dd096e68",
+                            ConcurrencyStamp = "1cc61d66-c250-44ee-a73e-9462a5ffb125",
                             Name = "User",
                             NormalizedName = "USER"
                         });

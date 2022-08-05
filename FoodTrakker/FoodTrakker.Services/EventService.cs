@@ -1,4 +1,5 @@
-﻿using FoodTrakker.Core.Model;
+﻿using FoodTrakker.Core.LinkingClasses;
+using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Contracts;
 using System;
 using System.Collections.Generic;
@@ -43,5 +44,20 @@ namespace FoodTrakker.Services
             return _eventRepository.AddAsync(@event);
         }
 
+        public List<FoodTruckEvent> AddFoodTrucks(List<int> foodTruckId, Event @event)
+        {
+            var foodTruckEvents = new List<FoodTruckEvent>();
+
+            foreach (var foodTruck in foodTruckId)
+            {
+                foodTruckEvents.Add(new FoodTruckEvent()
+                {
+                    FoodTruckId = foodTruck,
+                    Event = @event
+                });
+            }
+
+            return foodTruckEvents;             
+        }
     }
 }
