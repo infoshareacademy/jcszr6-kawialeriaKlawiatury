@@ -34,7 +34,7 @@ namespace FoodTrakker.Repository.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("FoodTruckEvents");
+                    b.ToTable("FoodTruckEvents", (string)null);
                 });
 
             modelBuilder.Entity("FoodTrakker.Core.Model.Event", b =>
@@ -65,7 +65,7 @@ namespace FoodTrakker.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("FoodTrakker.Core.Model.FoodTruck", b =>
@@ -99,7 +99,7 @@ namespace FoodTrakker.Repository.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("FoodTrucks");
+                    b.ToTable("FoodTrucks", (string)null);
                 });
 
             modelBuilder.Entity("FoodTrakker.Core.Model.FoodTruckType", b =>
@@ -116,7 +116,7 @@ namespace FoodTrakker.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Types");
+                    b.ToTable("Types", (string)null);
                 });
 
             modelBuilder.Entity("FoodTrakker.Core.Model.Location", b =>
@@ -146,7 +146,7 @@ namespace FoodTrakker.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Locations", (string)null);
                 });
 
             modelBuilder.Entity("FoodTrakker.Core.Model.Review", b =>
@@ -181,7 +181,7 @@ namespace FoodTrakker.Repository.Migrations
 
                     b.HasIndex("FoodTruckId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("FoodTrakker.Core.Model.User", b =>

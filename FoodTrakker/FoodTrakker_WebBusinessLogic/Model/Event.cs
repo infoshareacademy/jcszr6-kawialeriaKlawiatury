@@ -13,6 +13,7 @@ namespace FoodTrakker.Core.Model
         public string Location { get;set; }
         public DateTime StartDate { get;set; }    
         public DateTime EndDate { get; set; }
+        public string? OwnerId { get; set; }
         public ICollection<FoodTruckEvent>? FoodTruckEvents { get; set; }
         
     }

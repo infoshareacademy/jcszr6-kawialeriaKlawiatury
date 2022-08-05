@@ -38,5 +38,10 @@ namespace FoodTrakker.Services
             return await _eventRepository.GetFullEventInfoAsync(Id);
         }
 
+        public Task AddEventAsync(Event @event)
+        {
+            return _eventRepository.AddAsync(@event);
+        }
+
     }
 }

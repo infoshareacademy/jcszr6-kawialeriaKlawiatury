@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using FoodTrakker.Core.LinkingClasses;
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
 using FoodTrakker.Repository.Constants;
@@ -110,8 +111,7 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> CreateFoodTruck(FoodTruckDto foodTruckDto, int locationId, int typeId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();          
- 
+                   
             var foodTruck = _mapper.Map<FoodTruckDto, FoodTruck>(foodTruckDto);
             foodTruck.LocationId = locationId;
             foodTruck.TypeId = typeId;
@@ -141,26 +141,55 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> EditFoodTruck(int id)
         {
             var foodTruckToEdit = await _foodTruckService.GetFoodTruckAsync(id);
-            return View(foodTruckToEdit);
+            var foodTruckToEditDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruckToEdit);
+
+            var locations = await _locationService.GetLocationsAsync();
+            var locationSelect = new List<SelectListItem>();
+
+            if (locations != null)
+            {
+                foreach (var location in locations)
+                {
+                    locationSelect.Add(new SelectListItem { Text = $"{location.City} {location.Street}", Value = $"{location.Id}" });
+                }
+            }
+
+            ViewBag.LocationSelect = locationSelect;
+
+            var types = await _typeService.GetTypesAsync();
+            var typesSelect = new List<SelectListItem>();
+
+            if (types != null)
+            {
+                foreach (var type in types)
+                {
+                    typesSelect.Add(new SelectListItem { Text = $"{type.Name}", Value = $"{type.Id}" });
+                }
+            }
+
+            ViewBag.TypesSelect = typesSelect;
+
+            return View(foodTruckToEditDto);
         }
 
         // POST: OwnerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditFoodTruck(int id, FoodTruck foodTruck)
+        public async Task<ActionResult> EditFoodTruck(int id, FoodTruck foodTruck, int locationId, int typeId)
         {
             if (!ModelState.IsValid)
             {
                 return View(foodTruck);
             }
-            var foodTruckToEdit = await _foodTruckService.GetFoodTruckAsync(id);
+            var foodTruckToEdit = await _foodTruckService.GetFoodTruckAsync(id);            
             try
             {
                 foodTruckToEdit.Name = foodTruck.Name;
                 foodTruckToEdit.Description = foodTruck.Description;
-                foodTruckToEdit.Type.Name = foodTruck.Type.Name;
-                foodTruckToEdit.Location.City = foodTruck.Location.City;
-                foodTruckToEdit.Location.Street = foodTruck.Location.Street;
+                foodTruckToEdit.LocationId = locationId;
+                foodTruckToEdit.TypeId = typeId;
+                await _foodTruckService.UpdateFoodTruck(foodTruckToEdit);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -234,32 +263,34 @@ namespace FoodTrakkerWebAplication.Controllers
         // POST: OwnerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateEvent(FoodTruckDto foodTruckDto, int locationId, int typeId)
+        public async Task<ActionResult> CreateEvent(EventDto eventDto, List<int> foodTruckId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
 
-            //var index = foodTrucks.OrderBy(f => f.Id).Last().Id;
-            //foodTruckDto.Id = foodTrucks.Max(f => f.Id) + 1;
+            var @event = _mapper.Map<EventDto, Event>(eventDto);          
 
-            var foodTruck = _mapper.Map<FoodTruckDto, FoodTruck>(foodTruckDto);
-            foodTruck.LocationId = locationId;
-            foodTruck.TypeId = typeId;
-            foodTruck.OwnerId = userId.ToString();
-            //foodTruckDto.Location = await _locationService.GetLocationAsync(locationId);
-            //foodTruckDto.Type = await _typeService.GetTypeAsync(typeId);
-
-            ModelState.Remove("OwnerId");
             var errors = ModelState.SelectMany(m => m.Value.Errors);
+            var foodTruckEvents = new List<FoodTruckEvent>();
+            
+            foreach (var foodTruck in foodTruckId)
+            {
+                foodTruckEvents.Add(new FoodTruckEvent()
+                {
+                    FoodTruckId = foodTruck,
+                    Event = @event
+                }); 
+            }
+            @event.FoodTruckEvents = foodTruckEvents;
+            ModelState.Remove("FoodTruckEvents");
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("CreateFoodTruck");
+                return RedirectToAction("CreateEvent");
             }
 
             try
             {
 
-                await _foodTruckService.AddFoodTruck(foodTruck);
+                await _eventService.AddEventAsync(@event);
 
                 return RedirectToAction(nameof(Index));
             }
