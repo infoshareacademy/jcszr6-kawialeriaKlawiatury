@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.Repository.Contracts
 {
-    public interface IFoodTruckRepository : IRepository<FoodTruck>
+    public interface IFoodTruckRepository : IRepository<FoodTruck, int>
     {
         public Task<List<FoodTruck>> GetFullFoodTruckInfoAsync();
         public Task<FoodTruck> GetFullFoodTruckInfoAsync(int Id);

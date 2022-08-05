@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.Repository.Contracts
 {
-    public interface IReviewRepository : IRepository<Review>
+    public interface IReviewRepository : IRepository<Review, int>
     {
     }
 }

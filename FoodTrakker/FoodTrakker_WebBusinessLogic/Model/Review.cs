@@ -2,7 +2,7 @@
 
 namespace FoodTrakker.Core.Model
 {
-    public class Review : Iindexable
+    public class Review : Iindexable<int>
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }

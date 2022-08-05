@@ -2,9 +2,9 @@
 
 namespace FoodTrakker.Core
 {
-    public interface Iindexable
+    public interface Iindexable<T>
     {
-        int Id { get; }
+        T Id { get; }
 
        // void UpdateIndex(int i);
     }

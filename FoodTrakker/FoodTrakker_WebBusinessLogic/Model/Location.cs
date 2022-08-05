@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FoodTrakker.Core.Model
 {
-    public class Location : Iindexable
+    public class Location : Iindexable<int>
     {
         public int Id { get; set; }
         public string Street { get; set; }

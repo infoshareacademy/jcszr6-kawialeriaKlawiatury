@@ -6,9 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FoodTrakker.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class, Iindexable
+    public class Repository<T, IndexType> : IRepository<T, IndexType> 
+        where T : class, Iindexable<IndexType> 
     {
-        private readonly FoodTrakkerContext _context;
+        protected readonly FoodTrakkerContext _context;
         public Repository(FoodTrakkerContext context)
         {
             _context = context;
@@ -19,9 +20,9 @@ namespace FoodTrakker.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(IndexType id)
         {
-            var objectToDelete = GetAsync(id).Result;
+            var objectToDelete = await GetAsync(id);
             _context.Remove(objectToDelete);
             await _context.SaveChangesAsync(true);
         }
@@ -31,9 +32,9 @@ namespace FoodTrakker.Repository
             return Task.FromResult(_context.Set<T>().ToList());
         }
 
-        public Task<T> GetAsync(int id)
+        public async Task<T> GetAsync(IndexType id)
         {
-            return _context.Set<T>().FirstOrDefaultAsync(t => t.Id == id);
+            return await _context.Set<T>().FirstOrDefaultAsync(t => t.Id.Equals(id));
         }
 
         public Task UpdateAsync(T entity)

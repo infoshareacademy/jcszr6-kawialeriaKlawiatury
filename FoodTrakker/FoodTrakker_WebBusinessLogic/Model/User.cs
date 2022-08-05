@@ -1,13 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace FoodTrakker.Core.Model
 
 {
     
-    public class User : IdentityUser, Iindexable
+    public class User : IdentityUser, Iindexable<string>
     {
-        public int Id { get; set; }
+        [Key]
+        public override string Id { get => base.Id; set => base.Id = value; }
         public string? Login { get; set; }
         public string? Password { get; set; }
         public string? Name { get; set; }

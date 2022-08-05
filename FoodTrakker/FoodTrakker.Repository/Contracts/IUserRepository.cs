@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.Repository.Contracts
 {
-      public interface IUserRepository : IRepository<User>
-        {
-     
-        }
-    
+    public interface IUserRepository : IRepository<User, string>
+    {
+        Task<User> GetUserWithFavFoodTrucsAsync(string userId);
+    }
+
 }

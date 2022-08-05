@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace FoodTrakker.Repository
 {
-    public abstract class MockRepository<T> : IRepository<T> where T : Iindexable
+    public abstract class MockRepository<T, IT> : IRepository<T, IT> where T : Iindexable<IT>
     {
         private static List<T> _dataList = new List<T>();
 
@@ -16,9 +16,9 @@ namespace FoodTrakker.Repository
         public Task<List<T>> GetAsync() => Task.FromResult(_dataList);
      
 
-        public Task<T> GetAsync(int id)
+        public Task<T> GetAsync(IT id)
         {
-            return Task.FromResult(_dataList.SingleOrDefault(t => t.Id == id));
+            return Task.FromResult(_dataList.SingleOrDefault(t => id.Equals(t.Id)));
         }
 
         public void Add(T t)
@@ -26,26 +26,26 @@ namespace FoodTrakker.Repository
             _dataList.Add(t);
         }
 
-        public void Delete(int id)
+        public void Delete(IT id)
         {
-            var toDelete = _dataList.SingleOrDefault(t => t.Id == id);
+            var toDelete = _dataList.SingleOrDefault(t => id.Equals(t.Id));
             if (toDelete != null)
             {
                 _dataList.Remove(toDelete);
             }
         }
 
-        Task IRepository<T>.AddAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<T>.DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task UpdateAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(IT id)
         {
             throw new NotImplementedException();
         }

@@ -1,9 +1,11 @@
 ﻿using FoodTrakker.Core.LinkingClasses;
+using System.ComponentModel.DataAnnotations;
 
 namespace FoodTrakker.Core.Model
 {
-    public class FoodTruck : Iindexable
+    public class FoodTruck : Iindexable<int>
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

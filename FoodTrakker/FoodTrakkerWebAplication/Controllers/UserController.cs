@@ -6,6 +6,7 @@ using FoodTrakker.Services.DTOs;
 using FoodTrakkerWebAplication.ShowingAlerts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
@@ -68,17 +69,25 @@ namespace FoodTrakkerWebAplication.Controllers
                 return View();
             }
         }
-        public async Task<ActionResult> AddFoodTruckToFavourites(int foodTruckId)
+        public async Task<ActionResult> AddFoodTruckToFavourites(int id)
         {
-           //var x = User.Identity.Name;
-        
-           var y = _favouritesFoodTruckService.AddFoodTruckToFavourites(foodTruckId, 1);
-            if (y.IsCompleted)
+            FoodTruck foodTruck = null;
+
+            try
             {
-                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "You've got new favourite FoodTruck!");
+                var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+
+               foodTruck= await _favouritesFoodTruckService.AddFoodTruckToFavourites(id, x.Value);
+             //  foodTruckDto = _mapper.Map<FoodTruckDto>(foodTruck);
+               ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "You've got new favourite FoodTruck!");
+                
+            }catch(Exception ex)
+            {
+                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Danger, "Something went wrong!");
+                //add logs here
             }
-            else ViewBag.Alert = AlertsService.ShowAlert(Alerts.Danger, "Something went wrong!");
-            return View();
+
+            return View("../FoodTrucks/Details",foodTruck);
         } 
     }
 }

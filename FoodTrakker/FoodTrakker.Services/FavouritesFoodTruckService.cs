@@ -19,15 +19,14 @@ namespace FoodTrakker.Services
             _foodTruckRepository = foodTruckRepository;
             
         }
-        public async Task AddFoodTruckToFavourites(int foodTruckId, int userId)
+        public async Task<FoodTruck> AddFoodTruckToFavourites(int foodTruckId, string userId)
         {
-            var foodTruckTask = _foodTruckRepository.GetAsync(foodTruckId);
-            var userTask = _userRepository.GetAsync(userId);
-            await Task.WhenAll(foodTruckTask, userTask);
-            var user = userTask.Result;
-            var foodTruck = foodTruckTask.Result;
+            var foodTruck = await _foodTruckRepository.GetAsync(foodTruckId);
+            var user = await _userRepository.GetUserWithFavFoodTrucsAsync(userId);
             user.FavouriteFoodTrucks.Add(foodTruck);
             await _foodTruckRepository.SaveChanges();
+
+            return foodTruck;
         }
     }
 }

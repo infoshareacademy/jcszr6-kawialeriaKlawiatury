@@ -69,8 +69,13 @@
     {
      <a asp-controller="User" asp-action="CreateReview" asp-route-id="@Model.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add Review</a>
      <a asp-controller="User" asp-action="AddFoodTruckToFavourites" asp-route-id="@Model.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add To Favourites!</a>
-      //  <a class="btn btn-primary mx-2"> href @Html.ActionLink("Add Review","CreateReview",User)></a> 
-       // <a asp-action="Index" class="btn btn-secondary">Tajny baton heh heheheheeh</a>
+    
     }
-
+    <div class="row">  
+    <div class="col-md-12">  
+        <div class="form-group">  
+            @Html.Raw(@ViewBag.Alert)  
+        </div>  
+    </div>  
+</div>  
 </div>

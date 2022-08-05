@@ -41,8 +41,8 @@ builder.Services.AddDefaultIdentity<User>(options =>
     .AddEntityFrameworkStores<FoodTrakkerContext>()
     .AddPasswordValidator<PasswordValidatorService>();
 
-builder.Services.AddScoped<IRepository<User>, UserRepository>();
-builder.Services.AddScoped<IRepository<Event>, EventRepository>();
+builder.Services.AddScoped<IRepository<User, string>, UserRepository>();
+builder.Services.AddScoped<IRepository<Event, int>, EventRepository>();
 builder.Services.AddScoped<IFoodTruckRepository, FoodTruckRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();

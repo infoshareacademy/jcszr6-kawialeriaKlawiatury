@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FoodTrakker.Repository
 {
-    public class FoodTruckRepository : Repository<FoodTruck>, IFoodTruckRepository
+    public class FoodTruckRepository : Repository<FoodTruck, int>, IFoodTruckRepository
     {
         private readonly FoodTrakkerContext _context;
         public FoodTruckRepository(FoodTrakkerContext context) : base(context)
