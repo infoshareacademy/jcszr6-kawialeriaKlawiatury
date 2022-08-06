@@ -14,7 +14,7 @@
 
 <div class="container">
 	<h1>Create new Food Truck!</h1>
-	
+
 	<hr />
 	<div class="row">
 		<div class="col-md-4">
@@ -25,19 +25,18 @@
 				<select asp-for="@Model.Type" asp-items="@types" name="typeId" class="form-select"></select>
 				<br>
 				<h5>Location:</h5>
-				<select asp-for="@Model.Location" asp-items="@location" name="locationId" class="form-select"></select>
-				<a asp-controller="Location" asp-action="CreateLocation" class="btn btn-light">Add new location!</a>
-				<br />				
+				<div>
+					<select asp-for="@Model.Location" asp-items="@location" name="locationId" class="form-select"></select>
+					<a asp-controller="Location" asp-action="CreateLocation" class="btn btn-light">Add new location!</a>
+				</div>
+				<br />
 				<div class="form-group">
 					<input type="submit" value="Create" class="btn btn-primary" />
+					<a asp-action="Index" class="btn btn-light">Back!</a>
 				</div>
 			</form>
-			
+
 		</div>
-	</div>
-	<br />
-	<div>
-		<a asp-action="Index" class="btn btn-light">Back!</a>
 	</div>
 </div>
 
