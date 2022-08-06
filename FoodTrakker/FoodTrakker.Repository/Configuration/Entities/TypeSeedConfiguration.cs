@@ -48,6 +48,41 @@ namespace FoodTrakker.Repository.Configuration.Entities
                 {
                     Id = 7,
                     Name = "Drinks"
+                },
+                new FoodTruckType
+                {
+                    Id = 8,
+                    Name = "Fast Food"
+                },
+                new FoodTruckType
+                {
+                    Id = 9,
+                    Name = "Würst"
+                },
+                new FoodTruckType
+                {
+                    Id = 10,
+                    Name = "Fusion"
+                },
+                new FoodTruckType
+                {
+                    Id = 11,
+                    Name = "Regional"
+                },
+                new FoodTruckType
+                {
+                    Id = 12,
+                    Name = "Midterranean"
+                },
+                new FoodTruckType
+                {
+                    Id = 13,
+                    Name = "Indian"
+                },
+                new FoodTruckType
+                {
+                    Id = 14,
+                    Name = "Spanish"
                 }
                 );
         }
