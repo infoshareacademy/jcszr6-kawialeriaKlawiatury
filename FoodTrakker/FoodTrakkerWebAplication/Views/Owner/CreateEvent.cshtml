@@ -19,7 +19,9 @@
 	<div class="row">
 		<div class="col-md-4">
 			<form asp-action="CreateEvent">	
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 				<partial name="partials/_CreateEditEvent" model="@Model" />
+				<h5>Add food trucks!</h5>
 				<select asp-for="@Model.FoodTruckEvents " asp-items="@foodTruck" name="foodTruckId" class="form-select"></select>
 				<br>
 				<div class="form-group">

@@ -26,5 +26,10 @@ namespace FoodTrakker.Services
             return _locationRepository.GetAsync(Id);
         }
 
+        public Task AddLocation(Location location)
+        {
+            return _locationRepository.AddAsync(location);
+        }
+
     }
 }
