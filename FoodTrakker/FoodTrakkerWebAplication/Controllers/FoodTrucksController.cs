@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FoodTrakker.Core.Model;
+using Microsoft.AspNetCore.Mvc;
 using FoodTrakker.Services;
+using FoodTrakker.Repository;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
@@ -12,10 +14,9 @@ namespace FoodTrakkerWebAplication.Controllers
             _foodTruckService = foodTruckService;
         }
 
-        // GET: FoodTrucksController
         public async Task<ActionResult> Index()
         {
-            var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+           var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
             var foodTruck = foodTrucks.OrderBy(ft => ft.Name).ToList();
             return View(foodTrucks);
         }
@@ -23,7 +24,7 @@ namespace FoodTrakkerWebAplication.Controllers
         //GET: FoodTrucksController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var foodTrucks = await _foodTruckService.GetFoodTruckAsync(id);
+            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
             if (foodTrucks != null)
             {
 
@@ -31,14 +32,6 @@ namespace FoodTrakkerWebAplication.Controllers
             }
 
             return NotFound();
-
-
-
-
-            //public IActionResult Index()
-            //{
-            //    return View();
-            //}
         }
 
     }
