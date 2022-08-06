@@ -213,7 +213,7 @@ namespace FoodTrakkerWebAplication.Controllers
             try
             {
 
-                await _foodTruckService.DeleteFoodTruck(id);
+                 await _foodTruckService.DeleteFoodTruck(id);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -387,7 +387,7 @@ namespace FoodTrakkerWebAplication.Controllers
         {
             try
             {
-                _eventService.GetEventAsync(id);
+                await _eventService.DeleteEvent(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

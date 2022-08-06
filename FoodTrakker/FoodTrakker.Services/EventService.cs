@@ -87,5 +87,9 @@ namespace FoodTrakker.Services
             return _eventRepository.UpdateAsync(@event);
         }
 
+        public Task DeleteEvent(int eventId)
+        {
+            return _eventRepository.DeleteAsync(eventId);
+        }
     }
 }
