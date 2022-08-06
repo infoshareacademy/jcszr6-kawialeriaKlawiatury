@@ -6,6 +6,7 @@ using FoodTrakker.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using FoodTrakker.Services.IdentityServices;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddRazorPages();
+
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(builder.Configuration));
 
 builder.Services.AddScoped<FoodTruckService>();
 builder.Services.AddScoped<EventService>();

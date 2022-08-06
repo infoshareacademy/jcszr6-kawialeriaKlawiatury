@@ -26,6 +26,7 @@ namespace FoodTrakkerWebAplication.Controllers
         private readonly TypeService _typeService;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
+        private readonly ILogger<OwnerController> _logger;
 
         public OwnerController(
             EventService eventService,
@@ -33,7 +34,8 @@ namespace FoodTrakkerWebAplication.Controllers
             LocationService locationService,
             TypeService typeService,
             UserManager<User> userManager,
-            IMapper mapper)
+            IMapper mapper,
+            ILogger<OwnerController> logger)
         {
             _eventService = eventService;
             _foodTruckService = foodTruckService;
@@ -41,6 +43,7 @@ namespace FoodTrakkerWebAplication.Controllers
             _mapper = mapper;
             _locationService = locationService;
             _typeService = typeService;
+            _logger = logger;
         }
 
 
@@ -128,7 +131,7 @@ namespace FoodTrakkerWebAplication.Controllers
             {
 
                 await _foodTruckService.AddFoodTruck(foodTruck);
-
+                _logger.LogInformation("Food Truck created");
                 return RedirectToAction(nameof(Index));
             }
             catch
