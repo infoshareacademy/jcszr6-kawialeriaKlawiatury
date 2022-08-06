@@ -10,27 +10,23 @@ namespace FoodTrakkerWebAplication.ViewComponents
     public class EventFoodTrucks : ViewComponent
     {
         private readonly FoodTruckService _foodTruckService;
+        private readonly EventService _eventService;
         private readonly IMapper _mapper;
-        public EventFoodTrucks(FoodTruckService foodTruckService, IMapper mapper)
+        public EventFoodTrucks(FoodTruckService foodTruckService,EventService eventService , IMapper mapper)
         {
             _foodTruckService = foodTruckService;
+            _eventService = eventService;
             _mapper = mapper;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(EventDto eEvent)
         {
-            var foodTrucks = new List<FoodTruckDto>();           
-            foreach (var foodTruckEvent in eEvent.FoodTruckEvents)
-            {
-                var foodTruckId = foodTruckEvent.FoodTruckId;
-                var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(foodTruckId);
-                var foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
-                if (foodTruckDto != null)
-                {
-                    foodTrucks.Add(foodTruckDto);
-                }
-            }
-            return View(foodTrucks);
+            var @event = _mapper.Map<EventDto, Event>(eEvent);
+            var foodTrucks = await _eventService.GetEventFoodTrucks(@event);
+
+            var foodTrucksDto = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks);
+
+            return View(foodTrucksDto);
         }
     }
 }

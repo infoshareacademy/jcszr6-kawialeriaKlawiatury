@@ -26,13 +26,13 @@ namespace FoodTrakkerWebAplication.Controllers
         private readonly TypeService _typeService;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
-        
+
         public OwnerController(
-            EventService eventService, 
-            FoodTruckService foodTruckService, 
+            EventService eventService,
+            FoodTruckService foodTruckService,
             LocationService locationService,
             TypeService typeService,
-            UserManager<User> userManager, 
+            UserManager<User> userManager,
             IMapper mapper)
         {
             _eventService = eventService;
@@ -46,9 +46,9 @@ namespace FoodTrakkerWebAplication.Controllers
 
         // GET: OwnerController
         public async Task<ActionResult> Index()
-        {          
+        {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var events = await _eventService.GetEventsAsync();
+            var events = await _eventService.GetOwnerEvents(userId.ToString());
             var foodTrucks = await _foodTruckService.GetOwnerFoodTrucks(userId.ToString());
             var uEViewModel = new FoodTruckEventViewModel();
 
@@ -78,11 +78,11 @@ namespace FoodTrakkerWebAplication.Controllers
             var locations = await _locationService.GetLocationsAsync();
             var locationSelect = new List<SelectListItem>();
 
-            if(locations != null)
+            if (locations != null)
             {
                 foreach (var location in locations)
-                {                   
-                    locationSelect.Add(new SelectListItem { Text = $"{location.City} {location.Street}", Value = $"{location.Id}" });                  
+                {
+                    locationSelect.Add(new SelectListItem { Text = $"{location.City} {location.Street}", Value = $"{location.Id}" });
                 }
             }
 
@@ -111,12 +111,12 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> CreateFoodTruck(FoodTruckDto foodTruckDto, int locationId, int typeId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                   
+
             var foodTruck = _mapper.Map<FoodTruckDto, FoodTruck>(foodTruckDto);
             foodTruck.LocationId = locationId;
             foodTruck.TypeId = typeId;
             foodTruck.OwnerId = userId.ToString();
-            
+
             ModelState.Remove("OwnerId");
             var errors = ModelState.SelectMany(m => m.Value.Errors);
             if (!ModelState.IsValid)
@@ -126,7 +126,7 @@ namespace FoodTrakkerWebAplication.Controllers
 
             try
             {
-                
+
                 await _foodTruckService.AddFoodTruck(foodTruck);
 
                 return RedirectToAction(nameof(Index));
@@ -181,7 +181,7 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 return View(foodTruck);
             }
-            var foodTruckToEdit = await _foodTruckService.GetFoodTruckAsync(id);            
+            var foodTruckToEdit = await _foodTruckService.GetFoodTruckAsync(id);
             try
             {
                 foodTruckToEdit.Name = foodTruck.Name;
@@ -267,7 +267,7 @@ namespace FoodTrakkerWebAplication.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var @event = _mapper.Map<EventDto, Event>(eventDto);          
+            var @event = _mapper.Map<EventDto, Event>(eventDto);
 
             var errors = ModelState.SelectMany(m => m.Value.Errors);
 
@@ -292,6 +292,85 @@ namespace FoodTrakkerWebAplication.Controllers
                 return View();
             }
         } //Not Implemented
+
+        // GET: OwnerController/Edit/5
+        public async Task<ActionResult> EditEvent(int id)
+        {
+            var eventToEdit = await _eventService.GetFullEventInfoAsync(id);
+            var eventToEditDto = _mapper.Map<Event, EventDto>(eventToEdit);
+
+            var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+            var foodTrucksDTO = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks.ToList());
+            var foodTrucksSelect = new List<SelectListItem>();
+
+            if (foodTrucks != null)
+            {
+                foreach (var foodTruckDTO in foodTrucksDTO)
+                {
+                    foodTrucksSelect.Add(new SelectListItem { Text = $"{foodTruckDTO.Name}", Value = $"{foodTruckDTO.Id}" });
+                }
+            }
+
+            ViewBag.FoodTruckSelect = foodTrucksSelect;
+
+            var foodTrucksToDelete = await _eventService.GetEventFoodTrucks(eventToEdit);
+
+            var foodTrucksToDeleteDTO = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucksToDelete.ToList());
+            var foodTrucksToDeleteSelect = new List<SelectListItem>();
+
+            if (foodTrucksToDelete != null)
+            {
+                foreach (var foodTruckDTO in foodTrucksToDeleteDTO)
+                {
+                    foodTrucksToDeleteSelect.Add(new SelectListItem { Text = $"{foodTruckDTO.Name}", Value = $"{foodTruckDTO.Id}" });
+                }
+            }
+
+            ViewBag.FoodTruckToDeleteSelect = foodTrucksToDeleteSelect;
+
+
+            return View(eventToEditDto);
+        }
+
+        // POST: OwnerController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditEvent(int id, Event @event, List<int> foodTruckId, List<int> foodTruckToDeleteId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(@event);
+            }
+            var eventToEdit = await _eventService.GetFullEventInfoAsync(id);
+            try
+            {
+                eventToEdit.Name = @event.Name;
+                eventToEdit.Description = @event.Description;
+                eventToEdit.Location = @event.Location;
+                eventToEdit.StartDate = @event.StartDate;
+                eventToEdit.EndDate = @event.EndDate;    
+               
+                var foodTruckstoAdd = _eventService.AddFoodTrucks(foodTruckId, @event);
+                foreach (var foodTruckEvent in foodTruckstoAdd)
+                {
+                    eventToEdit.FoodTruckEvents.Add(foodTruckEvent);
+                }
+
+                var foodTruckstoDeleteAdd = _eventService.DeleteFoodTrucks(foodTruckToDeleteId, eventToEdit);
+                foreach (var foodTruckEvent in foodTruckstoDeleteAdd)
+                {
+                    eventToEdit.FoodTruckEvents.Remove(foodTruckEvent);
+                }
+
+                await _eventService.UpdateEvent(eventToEdit);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         //GET: OwnerController/Delete/5
         public async Task<ActionResult> DeleteEvent(int id)

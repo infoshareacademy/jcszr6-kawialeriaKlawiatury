@@ -1,0 +1,40 @@
+﻿@model EventDto
+
+@{
+	ViewData["Title"] = "EditFoodTruck";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+	var foodTrucks = ViewBag.FoodTruckSelect;
+	var foodTrucksToDelete = ViewBag.FoodTruckToDeleteSelect;
+}
+
+<div class="container">
+	<h1>Edit Food Truck</h1>
+
+	<hr />
+	<div class="row">
+		<div class="col-md-4">
+			<form asp-action="EditEvent">
+				<partial name="partials/_CreateEditEvent" model="@Model" />
+				<h5>Add new food trucks!</h5>
+				<select asp-for="@Model.FoodTruckEvents " asp-items="@foodTrucks" name="foodTruckId" class="form-select"></select>
+				<br>
+				<h5>Delete food trucks from the list!</h5>
+				<select asp-for="@Model.FoodTruckEvents " asp-items="@foodTrucksToDelete" name="foodTruckToDeleteId" class="form-select"></select>
+				<br>
+				<div class="form-group">
+					<input type="submit" value="Save" class="btn btn-primary" />
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div>
+		<a asp-action="Index">Back to List</a>
+	</div>
+</div>
+
+
