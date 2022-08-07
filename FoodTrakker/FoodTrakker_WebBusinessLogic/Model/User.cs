@@ -16,7 +16,7 @@ namespace FoodTrakker.Core.Model
 
         public string? LastName { get; set; }
         public ICollection<FoodTruck> FavouriteFoodTrucks { get; set; }
-        public List<Review> Reviews { get; set; }
+        public ICollection<Review> Reviews { get; set; }
 
 
     }

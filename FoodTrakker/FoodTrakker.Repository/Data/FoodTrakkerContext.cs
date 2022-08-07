@@ -54,12 +54,15 @@ namespace FoodTrakker.Repository.Data
                 .Ignore(u => u.Reviews);
             modelBuilder.Entity<User>()
                 .HasMany<FoodTruck>(u => u.FavouriteFoodTrucks)
-                .WithMany(f => f.Users);
-            //modelBuilder.Entity<FoodTruck>()
-            //    .HasMany<Review>(f => f.Reviews)
-            //    .WithOne(r => r.FoodTruckId);
-            //modelBuilder.Entity<Review>()
-            //    .Ignore(r=>r.FoodTruckId);
+                .WithMany(f => f.Users)
+                .UsingEntity("FoodTruckUser");
+
+            modelBuilder.Entity<FoodTruck>()
+                .HasMany<Review>(f => f.Reviews)
+                .WithOne(f => f.FoodTruck)
+                .HasForeignKey(r => r.FoodTruckId);
+            modelBuilder.Entity<Review>()
+                .Ignore(r => r.FoodTruck);
 
         }
     }

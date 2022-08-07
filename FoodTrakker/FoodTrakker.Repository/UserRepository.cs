@@ -18,5 +18,10 @@ namespace FoodTrakker.Repository
             return await _context.Users.Include(u => u.FavouriteFoodTrucks)
                 .FirstOrDefaultAsync(u => u.Id.Equals(userId));
         }
+
+        public async Task<int> SaveChanges()
+        {
+            return await _context.SaveChangesAsync();
+        }
     }
 }

@@ -1,11 +1,8 @@
 ﻿using FoodTrakker.Core.Model;
-using FoodTrakker.Repository;
 using FoodTrakker.Repository.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FoodTrakker.Repository.Data;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace FoodTrakker.Services
 {
@@ -13,18 +10,24 @@ namespace FoodTrakker.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IFoodTruckRepository _foodTruckRepository;
-        public FavouritesFoodTruckService(IUserRepository userRepository, IFoodTruckRepository foodTruckRepository)
+        private readonly FoodTrakkerContext _context;
+        public FavouritesFoodTruckService(IUserRepository userRepository, IFoodTruckRepository foodTruckRepository, FoodTrakkerContext context)
         {
             _userRepository = userRepository;
             _foodTruckRepository = foodTruckRepository;
+            _context = context;
             
         }
         public async Task<FoodTruck> AddFoodTruckToFavourites(int foodTruckId, string userId)
         {
-            var foodTruck = await _foodTruckRepository.GetAsync(foodTruckId);
-            var user = await _userRepository.GetUserWithFavFoodTrucsAsync(userId);
+            var foodTruck = await _context.FoodTrucks.FirstOrDefaultAsync(f => f.Id == foodTruckId);
+            var user = await _context.Users.Include(u => u.FavouriteFoodTrucks)
+                .FirstOrDefaultAsync(u => u.Id.Equals(userId));
+            _context.Attach(user);
+            _context.Attach(foodTruck);
             user.FavouriteFoodTrucks.Add(foodTruck);
-            await _foodTruckRepository.SaveChanges();
+
+                       var result = await _context.SaveChangesAsync();
 
             return foodTruck;
         }

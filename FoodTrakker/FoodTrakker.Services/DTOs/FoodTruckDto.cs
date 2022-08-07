@@ -9,9 +9,7 @@ namespace FoodTrakker.Services.DTOs
 {
     public class FoodTruckDto
     {
-        [Key]
         public int Id { get; set; }
-       // [InverseProperty(nameof(ReviewDto.FoodTruck))]
         public ICollection<ReviewDto> Reviews { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

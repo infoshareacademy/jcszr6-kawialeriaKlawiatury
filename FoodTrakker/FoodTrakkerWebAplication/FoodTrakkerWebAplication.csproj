@@ -49,4 +49,8 @@
     <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\User\partials\" />
+  </ItemGroup>
+
 </Project>

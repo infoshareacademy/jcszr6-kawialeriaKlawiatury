@@ -10,6 +10,7 @@ namespace FoodTrakker.Repository.Contracts
     public interface IUserRepository : IRepository<User, string>
     {
         Task<User> GetUserWithFavFoodTrucsAsync(string userId);
+        Task<int> SaveChanges();
     }
 
 }

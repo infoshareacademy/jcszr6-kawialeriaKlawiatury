@@ -8,7 +8,6 @@ namespace FoodTrakker.Core.Model
     {
         [Key]
         public int Id { get; set; }
-       // [InverseProperty(nameof(Review.FoodTruck))]
         public ICollection<Review> Reviews { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

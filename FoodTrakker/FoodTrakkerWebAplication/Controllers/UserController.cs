@@ -79,7 +79,7 @@ namespace FoodTrakkerWebAplication.Controllers
                 var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
 
                foodTruck= await _favouritesFoodTruckService.AddFoodTruckToFavourites(id, x.Value);
-             //  foodTruckDto = _mapper.Map<FoodTruckDto>(foodTruck);
+               //foodTruckDto = _mapper.Map<FoodTruckDto>(foodTruck);
                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "You've got new favourite FoodTruck!");
                 
             }catch(Exception ex)
