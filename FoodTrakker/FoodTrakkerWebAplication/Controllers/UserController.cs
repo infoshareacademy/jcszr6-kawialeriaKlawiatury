@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Constants;
+using FoodTrakker.Repository.Data;
 using FoodTrakker.Services;
 using FoodTrakker.Services.DTOs;
 using FoodTrakkerWebAplication.ShowingAlerts;
@@ -18,16 +19,18 @@ namespace FoodTrakkerWebAplication.Controllers
         private readonly ReviewService _reviewService;
         private readonly FavouritesFoodTruckService _favouritesFoodTruckService;
         private readonly IMapper _mapper;
+        private readonly FoodTrakkerContext _context;
 
         public UserController(EventService eventService, FoodTruckService foodTruckService,
             ReviewService reviewService,FavouritesFoodTruckService favouritesFoodTruckService,
-            IMapper mapper)
+            IMapper mapper, FoodTrakkerContext context)
         {
             _eventService = eventService;
             _foodTruckService = foodTruckService;
             _reviewService = reviewService;
             _favouritesFoodTruckService = favouritesFoodTruckService;
             _mapper = mapper;
+            _context = context; 
         }
         public async Task<ActionResult> Index()
         {
@@ -37,21 +40,19 @@ namespace FoodTrakkerWebAplication.Controllers
             return View((foodTrucks: foodTrucksDto, reviews: userReviews));
         }
         // GET: UserController/Create
-        public ActionResult CreateReview()
+        public ActionResult CreateReview(int id)
         {
-            return View();
+            return View(new ReviewDto() { FoodTruckId = id});
         }
 
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateReview(ReviewDto review)
+        public async Task<ActionResult> CreateReview(ReviewDto reviewDto)
         {
-            var reviews = await _reviewService.GetReviewsAsync();
-            var reviewsDto = _mapper.Map<ICollection<Review>,ICollection< ReviewDto>>(reviews);
-           // var index = reviewsDto.OrderBy(r => r.Id).Last().Id;
-           // review.Id = index + 1;
-            
+ 
+            var review = _mapper.Map<Review>(reviewDto);
+            review.Id = 0;
             if (!ModelState.IsValid)
             {
                 return View(review);
@@ -59,10 +60,10 @@ namespace FoodTrakkerWebAplication.Controllers
 
             try
             {
-
-                reviewsDto.Add(review);
-
-                return RedirectToAction(nameof(Index));
+                _context.Add(review);
+               await _context.SaveChangesAsync();
+                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "Thank You for Your opinion!");
+                return RedirectToAction("Details","FoodTrucks",new { id = review.FoodTruckId });
             }
             catch
             {

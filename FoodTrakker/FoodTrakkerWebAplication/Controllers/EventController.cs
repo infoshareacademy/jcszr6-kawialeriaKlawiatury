@@ -30,7 +30,7 @@ namespace FoodTrakkerWebAplication.Controllers
             var events = await _eventService.GetEventsAsync();
             var eventInNearFuture = events.OrderBy(e => e.StartDate)
                 .Where(e => e.StartDate > DateTime.UtcNow)
-                .Take(8).ToList();
+                .Take(3).ToList();
             var eventDtoInNearFuture = _mapper.Map<List<Event>,List<EventDto>>(eventInNearFuture);
             return View(eventDtoInNearFuture);
         }

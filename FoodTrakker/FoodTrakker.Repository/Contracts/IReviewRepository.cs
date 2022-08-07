@@ -9,5 +9,6 @@ namespace FoodTrakker.Repository.Contracts
 {
     public interface IReviewRepository : IRepository<Review, int>
     {
+        Task SaveChanges();
     }
 }

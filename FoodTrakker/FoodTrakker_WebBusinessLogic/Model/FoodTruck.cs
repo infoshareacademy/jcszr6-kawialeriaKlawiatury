@@ -1,5 +1,6 @@
 ﻿using FoodTrakker.Core.LinkingClasses;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodTrakker.Core.Model
 {
@@ -7,6 +8,8 @@ namespace FoodTrakker.Core.Model
     {
         [Key]
         public int Id { get; set; }
+       // [InverseProperty(nameof(Review.FoodTruck))]
+        public ICollection<Review> Reviews { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public Location Location { get; set; }
@@ -14,6 +17,7 @@ namespace FoodTrakker.Core.Model
         public int OwnerId { get; set; }
         public ICollection<FoodTruckEvent> FoodTruckEvents { get; set; }
         public ICollection<User> Users { get; set; }
+        
         
     }
 }

@@ -22,7 +22,9 @@ builder.Services.AddScoped<FavouritesFoodTruckService>();
 
 var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb")));
+  { options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb"));
+      options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    });
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {
@@ -34,7 +36,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Lockout.AllowedForNewUsers = true;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.MaxFailedAccessAttempts = 3;
-
+   
     options.User.RequireUniqueEmail = true;
 })
     .AddRoles<IdentityRole>()
