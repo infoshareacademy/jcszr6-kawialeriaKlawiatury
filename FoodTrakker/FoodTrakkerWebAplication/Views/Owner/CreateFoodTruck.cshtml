@@ -1,26 +1,43 @@
-﻿@model FoodTruck
+﻿@model FoodTruckDto
 
 @{
-    ViewData["Title"] = "CreateFoodTruck";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "CreateFoodTruck";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>CreateFoodTruck</h1>
 
-<h4>FoodTruck</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateFoodTruck">
-			<partial name="partials/_CreateEdit" model="@Model"/>
-	        <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+
+@{
+	var location = ViewBag.LocationSelect;
+	var types = ViewBag.TypesSelect;
+}
+
+<div class="container">
+	<h1>Create new Food Truck!</h1>
+
+	<hr />
+	<div class="row">
+		<div class="col-md-4">
+			<form asp-action="CreateFoodTruck">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<partial name="partials/_CreateEdit" model="@Model" />
+				<h5>Type:</h5>
+				<select asp-for="@Model.Type" asp-items="@types" name="typeId" class="form-select"></select>
+				<br>
+				<h5>Location:</h5>
+				<div>
+					<select asp-for="@Model.Location" asp-items="@location" name="locationId" class="form-select"></select>
+					<a asp-controller="Location" asp-action="CreateLocation" class="btn btn-light">Add new location!</a>
+				</div>
+				<br />
+				<div class="form-group">
+					<input type="submit" value="Create" class="btn btn-primary" />
+					<a asp-action="Index" class="btn btn-light">Back!</a>
+				</div>
+			</form>
+
+		</div>
+	</div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn">Back to List</a>
-</div>
 

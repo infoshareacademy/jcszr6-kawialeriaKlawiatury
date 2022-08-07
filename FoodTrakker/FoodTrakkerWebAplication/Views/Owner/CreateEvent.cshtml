@@ -1,0 +1,39 @@
+﻿@model EventDto
+
+@{
+	ViewData["Title"] = "CreateFoodTruck";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@{
+	var foodTruck = ViewBag.FoodTruckSelect;
+	var types = ViewBag.TypesSelect;
+}
+
+<div class="container">
+	<h1>Create new event!</h1>
+	
+	<hr />
+	<div class="row">
+		<div class="col-md-4">
+			<form asp-action="CreateEvent">	
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<partial name="partials/_CreateEditEvent" model="@Model" />
+				<h5>Add food trucks!</h5>
+				<select asp-for="@Model.FoodTruckEvents " asp-items="@foodTruck" name="foodTruckId" class="form-select"></select>
+				<br>
+				<div class="form-group">
+					<input type="submit" value="Create" class="btn btn-primary" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<br />
+	<div>
+		<a asp-action="Index" class="btn btn-light">Back!</a>
+	</div>
+</div>
+
+

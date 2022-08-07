@@ -49,5 +49,10 @@ namespace FoodTrakker.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
