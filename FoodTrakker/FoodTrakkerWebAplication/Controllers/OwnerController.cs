@@ -287,7 +287,7 @@ namespace FoodTrakkerWebAplication.Controllers
             {
 
                 await _eventService.AddEventAsync(@event);
-
+                _logger.LogInformation("Event created");
                 return RedirectToAction(nameof(Index));
             }
             catch
