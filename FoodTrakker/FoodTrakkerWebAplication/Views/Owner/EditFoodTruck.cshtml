@@ -22,6 +22,7 @@
 				<select asp-for="@Model.Type" asp-items="@types" name="typeId" class="form-select"></select>
 				<br>
 				<select asp-for="@Model.Location" asp-items="@location" name="locationId" class="form-select"></select>
+				<a asp-controller="Location" asp-action="CreateLocation" class="btn btn-light">Add new location!</a>
 				<br>
 				<div class="form-group">
 					<input type="submit" value="Save" class="btn btn-primary" />
