@@ -54,6 +54,10 @@ namespace FoodTrakker.Repository.Data
             modelBuilder.Entity<User>()
                 .Ignore(u => u.ReviewsID);
 
+            modelBuilder.Entity<FoodTruck>()
+                .HasIndex(f => f.Name)
+                .IsUnique();
+
         }
     }
 }

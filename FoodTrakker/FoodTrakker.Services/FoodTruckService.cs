@@ -49,5 +49,9 @@ namespace FoodTrakker.Services
             return _foodTruckRepository.DeleteAsync(foodTruckId);
         }
 
+        public void IsNameUnique(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -122,6 +122,8 @@ namespace FoodTrakkerWebAplication.Controllers
 
             ModelState.Remove("OwnerId");
             var errors = ModelState.SelectMany(m => m.Value.Errors);
+            //_foodTruckService.IsNameUnique(foodTruck.Name);
+            ModelState.AddModelError("Name", "Must be unique!");
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("CreateFoodTruck");
@@ -136,6 +138,31 @@ namespace FoodTrakkerWebAplication.Controllers
             }
             catch
             {
+                var locations = await _locationService.GetLocationsAsync();
+                var locationSelect = new List<SelectListItem>();
+
+                if (locations != null)
+                {
+                    foreach (var location in locations)
+                    {
+                        locationSelect.Add(new SelectListItem { Text = $"{location.City} {location.Street}", Value = $"{location.Id}" });
+                    }
+                }
+
+                ViewBag.LocationSelect = locationSelect;
+
+                var types = await _typeService.GetTypesAsync();
+                var typesSelect = new List<SelectListItem>();
+
+                if (types != null)
+                {
+                    foreach (var type in types)
+                    {
+                        typesSelect.Add(new SelectListItem { Text = $"{type.Name}", Value = $"{type.Id}" });
+                    }
+                }
+
+                ViewBag.TypesSelect = typesSelect;
                 return View();
             }
         }
