@@ -22,8 +22,10 @@ namespace FoodTrakker.Repository
             foreach (var foodTruckEvent in @event.FoodTruckEvents)
             {
                 var foodTruckId = foodTruckEvent.FoodTruckId;
-                var foodTruck = _context.FoodTrucks.SingleOrDefault(f => f.Id == foodTruckId);
-               
+                var foodTruck = _context.FoodTrucks
+                    .SingleOrDefault(f => f.Id == foodTruckId);
+                var type = _context.Types.SingleOrDefault(t => t.Id == foodTruck.TypeId);
+
                 if (foodTruck != null)
                 {
                     foodTrucks.Add(foodTruck);
