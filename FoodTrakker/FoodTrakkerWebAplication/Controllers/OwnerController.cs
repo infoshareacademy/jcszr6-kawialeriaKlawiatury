@@ -294,7 +294,7 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 return View();
             }
-        } //Not Implemented
+        } 
 
         // GET: OwnerController/Edit/5
         public async Task<ActionResult> EditEvent(int id)
