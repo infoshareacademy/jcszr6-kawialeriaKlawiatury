@@ -13,10 +13,11 @@ namespace FoodTrakkerWebAplication.Controllers
         {
             _foodTruckService = foodTruckService;
         }
-
+        //pobrać mapera i zrobic mapowanie
         public async Task<ActionResult> Index()
         {
            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
+            //mapowanie gdzieś tutaj
             var foodTruck = foodTrucks.OrderBy(ft => ft.Name).ToList();
             return View(foodTrucks);
         }
