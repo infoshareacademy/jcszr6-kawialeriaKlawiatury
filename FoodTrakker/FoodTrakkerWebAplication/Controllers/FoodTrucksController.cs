@@ -28,11 +28,12 @@ namespace FoodTrakkerWebAplication.Controllers
         //GET: FoodTrucksController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
-            if (foodTrucks != null)
+            var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
+            var foodTruckDto = _mapper.Map<ICollection<FoodTruck>, ICollection<FoodTruckDto>>(foodTruck);
+            if (foodTruck != null)
             {
 
-                return View(foodTrucks);
+                return View(foodTruckDto);
             }
 
             return NotFound();

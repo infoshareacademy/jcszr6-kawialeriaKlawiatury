@@ -1,6 +1,4 @@
-﻿
-
-using FoodTrakker.Core.LinkingClasses;
+﻿using FoodTrakker.Core.LinkingClasses;
 using FoodTrakker.Core.Model;
 
 namespace FoodTrakker.Services.DTOs
