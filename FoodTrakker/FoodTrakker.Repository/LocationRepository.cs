@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.Repository
 {
-    public class LocationRepository : Repository<Location>, ILocationRepository
+    public class LocationRepository : Repository<Location,int>, ILocationRepository
     {
         public LocationRepository(FoodTrakkerContext context) : base(context)
         {

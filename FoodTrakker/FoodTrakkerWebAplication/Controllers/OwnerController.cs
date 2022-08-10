@@ -118,7 +118,7 @@ namespace FoodTrakkerWebAplication.Controllers
             var foodTruck = _mapper.Map<FoodTruckDto, FoodTruck>(foodTruckDto);
             foodTruck.LocationId = locationId;
             foodTruck.TypeId = typeId;
-            foodTruck.OwnerId = userId.ToString();
+            foodTruck.OwnerId = userId;
 
             ModelState.Remove("OwnerId");
             var errors = ModelState.SelectMany(m => m.Value.Errors);

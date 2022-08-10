@@ -12,12 +12,13 @@ namespace FoodTrakker.Core.Model
         public ICollection<Review> Reviews { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Location Location { get; set; }
-        public FoodTruckType Type { get; set; }
-        public int OwnerId { get; set; }
-        public ICollection<FoodTruckEvent> FoodTruckEvents { get; set; }
         public ICollection<User> Users { get; set; }
-        
-        
+        public int LocationId { get; set; }
+        public Location? Location { get; set; }
+        public int TypeId { get; set; }
+        public FoodTruckType? Type { get; set; }
+        public string? OwnerId { get; set; }
+        public ICollection<FoodTruckEvent>? FoodTruckEvents { get; set; }
+
     }
 }

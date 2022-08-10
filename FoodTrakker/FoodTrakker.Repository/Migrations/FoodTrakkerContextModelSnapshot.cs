@@ -60,6 +60,9 @@ namespace FoodTrakker.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -87,8 +90,8 @@ namespace FoodTrakker.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
@@ -117,6 +120,78 @@ namespace FoodTrakker.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Types");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Polish"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "German"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "American"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Italian"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Mexican"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Beverages"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Drinks"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Fast Food"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Würst"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Fusion"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Regional"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Midterranean"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Indian"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Spanish"
+                        });
                 });
 
             modelBuilder.Entity("FoodTrakker.Core.Model.Location", b =>
@@ -306,21 +381,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "d28039d1-a1e0-4e28-ab51-087d82f6f1f7",
+                            ConcurrencyStamp = "52983d64-6d9a-4dc2-949b-fbdc4d3981dc",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "6a56d4f5-256f-4780-975c-45626223fca1",
+                            ConcurrencyStamp = "b17db5b3-aea4-4ab7-9d86-0fe4618e982d",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "ee0361b9-f068-4e69-9336-5a65b68e1c42",
+                            ConcurrencyStamp = "428a7c88-1878-417d-9707-340469b48655",
                             Name = "User",
                             NormalizedName = "USER"
                         });

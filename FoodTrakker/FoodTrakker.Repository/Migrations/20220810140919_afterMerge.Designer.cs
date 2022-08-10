@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTrakker.Repository.Migrations
 {
     [DbContext(typeof(FoodTrakkerContext))]
-    [Migration("20220802084140_changes")]
-    partial class changes
+    [Migration("20220810140919_afterMerge")]
+    partial class afterMerge
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,9 @@ namespace FoodTrakker.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -89,8 +92,8 @@ namespace FoodTrakker.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
@@ -119,6 +122,78 @@ namespace FoodTrakker.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Types");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Polish"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "German"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "American"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Italian"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Mexican"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Beverages"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Drinks"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Fast Food"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Würst"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Fusion"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Regional"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Midterranean"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Indian"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Spanish"
+                        });
                 });
 
             modelBuilder.Entity("FoodTrakker.Core.Model.Location", b =>
@@ -169,7 +244,7 @@ namespace FoodTrakker.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FoodTruckId")
+                    b.Property<int?>("FoodTruckId")
                         .HasColumnType("int");
 
                     b.Property<int>("Rating")
@@ -180,6 +255,8 @@ namespace FoodTrakker.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FoodTruckId");
 
                     b.ToTable("Reviews");
                 });
@@ -261,6 +338,21 @@ namespace FoodTrakker.Repository.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("FoodTruckUser", b =>
+                {
+                    b.Property<int>("FavouriteFoodTrucksId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("FavouriteFoodTrucksId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("FoodTruckUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -291,21 +383,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "18f74454-4c7b-48ce-914a-11df9a0e639a",
+                            ConcurrencyStamp = "52983d64-6d9a-4dc2-949b-fbdc4d3981dc",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "d0313098-767a-4aa0-bedd-59e4960044fc",
+                            ConcurrencyStamp = "b17db5b3-aea4-4ab7-9d86-0fe4618e982d",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "6a6736e7-8276-4d43-a28b-6f505f2baf61",
+                            ConcurrencyStamp = "428a7c88-1878-417d-9707-340469b48655",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -459,6 +551,28 @@ namespace FoodTrakker.Repository.Migrations
                     b.Navigation("Type");
                 });
 
+            modelBuilder.Entity("FoodTrakker.Core.Model.Review", b =>
+                {
+                    b.HasOne("FoodTrakker.Core.Model.FoodTruck", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("FoodTruckId");
+                });
+
+            modelBuilder.Entity("FoodTruckUser", b =>
+                {
+                    b.HasOne("FoodTrakker.Core.Model.FoodTruck", null)
+                        .WithMany()
+                        .HasForeignKey("FavouriteFoodTrucksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FoodTrakker.Core.Model.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -518,6 +632,8 @@ namespace FoodTrakker.Repository.Migrations
             modelBuilder.Entity("FoodTrakker.Core.Model.FoodTruck", b =>
                 {
                     b.Navigation("FoodTruckEvents");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }
