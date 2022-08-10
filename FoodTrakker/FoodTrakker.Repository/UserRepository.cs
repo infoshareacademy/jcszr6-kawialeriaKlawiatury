@@ -13,10 +13,20 @@ namespace FoodTrakker.Repository
           
         }
 
-        public async Task<User> GetUserWithFavFoodTrucsAsync(string userId)
+        public async Task<FoodTruck> AddFavFoodTrucToUserAsync(string userId,int foodTruckId)
         {
-            return await _context.Users.Include(u => u.FavouriteFoodTrucks)
+            
+            var foodTruck = await _context.FoodTrucks.FirstOrDefaultAsync(f => f.Id == foodTruckId);
+            var user = await _context.Users.Include(u => u.FavouriteFoodTrucks)
                 .FirstOrDefaultAsync(u => u.Id.Equals(userId));
+            _context.Attach(user);
+            _context.Attach(foodTruck);
+            user.FavouriteFoodTrucks.Add(foodTruck);
+            var result = await _context.SaveChangesAsync();
+
+            return foodTruck;
+
         }
+       
     }
 }

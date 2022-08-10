@@ -9,7 +9,7 @@ namespace FoodTrakker.Repository.Contracts
 {
     public interface IUserRepository : IRepository<User, string>
     {
-        Task<User> GetUserWithFavFoodTrucsAsync(string userId);
+        Task<FoodTruck> AddFavFoodTrucToUserAsync(string userId, int foodTruckId);
     }
 
 }
