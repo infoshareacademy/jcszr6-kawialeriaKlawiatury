@@ -1,6 +1,8 @@
 ﻿
+using AutoMapper;
 using FoodTrakker.Core.Model;
 using FoodTrakker.Services;
+using FoodTrakker.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodTrakkerWebAplication.ViewComponents
@@ -8,26 +10,23 @@ namespace FoodTrakkerWebAplication.ViewComponents
     public class EventFoodTrucks : ViewComponent
     {
         private readonly FoodTruckService _foodTruckService;
-
-        public EventFoodTrucks(FoodTruckService foodTruckService)
+        private readonly EventService _eventService;
+        private readonly IMapper _mapper;
+        public EventFoodTrucks(FoodTruckService foodTruckService,EventService eventService , IMapper mapper)
         {
             _foodTruckService = foodTruckService;
+            _eventService = eventService;
+            _mapper = mapper;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(Event eEvent)
+        public async Task<IViewComponentResult> InvokeAsync(EventDto eEvent)
         {
-            var foodTrucks = new List<FoodTruck>();
-            foreach (var foodTruckEvent in eEvent.FoodTruckEvents)
-            {
-                var foodTruckId = foodTruckEvent.FoodTruckId;
-                var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(foodTruckId);
-                if (foodTruck != null)
-                {
-                    foodTrucks.Add(foodTruck);
-                }
-            }
+            var @event = _mapper.Map<EventDto, Event>(eEvent);
+            var foodTrucks = await _eventService.GetEventFoodTrucks(@event);
 
-            return View(foodTrucks);
+            var foodTrucksDto = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks);
+
+            return View(foodTrucksDto);
         }
     }
 }

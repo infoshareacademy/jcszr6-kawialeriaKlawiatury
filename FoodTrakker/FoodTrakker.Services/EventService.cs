@@ -1,4 +1,5 @@
-﻿using FoodTrakker.Core.Model;
+﻿using FoodTrakker.Core.LinkingClasses;
+using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Contracts;
 using System;
 using System.Collections.Generic;
@@ -38,5 +39,57 @@ namespace FoodTrakker.Services
             return await _eventRepository.GetFullEventInfoAsync(Id);
         }
 
+        public Task AddEventAsync(Event @event)
+        {
+            return _eventRepository.AddAsync(@event);
+        }
+
+        public List<FoodTruckEvent> AddFoodTrucks(List<int> foodTruckId, Event @event)
+        {
+            var foodTruckEvents = new List<FoodTruckEvent>();
+
+            foreach (var foodTruck in foodTruckId)
+            {
+                foodTruckEvents.Add(new FoodTruckEvent()
+                {
+                    FoodTruckId = foodTruck,
+                    Event = @event
+                });
+            }
+            return foodTruckEvents;             
+        }
+
+        public List<FoodTruckEvent> DeleteFoodTrucks(List<int> foodTruckId, Event @event)
+        {
+            var foodTruckEvents = new List<FoodTruckEvent>();
+
+            foreach (var foodTruck in foodTruckId)
+            {
+                var foodTruckEvent = @event.FoodTruckEvents.SingleOrDefault(e => e.FoodTruckId == foodTruck);
+                if (foodTruckEvent != null)
+                    foodTruckEvents.Add(foodTruckEvent);
+            }
+            return foodTruckEvents;
+        }
+
+        public Task<List<Event>> GetOwnerEvents(string ownerId)
+        {
+            return _eventRepository.GetOwnerEvents(ownerId);
+        }
+
+        public Task<List<FoodTruck>> GetEventFoodTrucks(Event @event)
+        {
+            return _eventRepository.GetEventFoodTrucks(@event);
+        }
+
+        public Task UpdateEvent(Event @event)
+        {
+            return _eventRepository.UpdateAsync(@event);
+        }
+
+        public Task DeleteEvent(int eventId)
+        {
+            return _eventRepository.DeleteAsync(eventId);
+        }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using FoodTrakker.Core.Model;
+using FoodTrakker.Services.DTOs;
 
 namespace FoodTrakkerWebAplication.Models.ViewModel
 {
     public class FoodTruckEventViewModel
     {
-        public IEnumerable<FoodTruck> Foodtrucks { get; set; }
-        public IEnumerable<Event> Events { get; set; }
+        public List<FoodTruckDto> Foodtrucks { get; set; }
+        public List<EventDto> Events { get; set; }
     }
 }
