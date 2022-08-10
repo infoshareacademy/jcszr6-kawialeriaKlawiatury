@@ -1,47 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using FoodTrakker.Core.Model;
+using Microsoft.AspNetCore.Mvc;
 using FoodTrakker.Services;
+using FoodTrakker.Repository;
+using FoodTrakker.Services.DTOs;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
     public class FoodTrucksController : Controller
     {
         private readonly FoodTruckService _foodTruckService;
-        private readonly ReviewService _reviewService;
+        private readonly IMapper _mapper;
 
-        public FoodTrucksController(FoodTruckService foodTruckService, ReviewService reviewService)
+        public FoodTrucksController(FoodTruckService foodTruckService, IMapper mapper)
         {
             _foodTruckService = foodTruckService;
-            _reviewService = reviewService;
+            _mapper = mapper;
         }
-
-        // GET: FoodTrucksController
+        
         public async Task<ActionResult> Index()
         {
-            var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
-            var foodTruck = foodTrucks.OrderBy(ft => ft.Name).ToList();
-            return View(foodTrucks);
+            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
+            var foodTruckDto = _mapper.Map<ICollection<FoodTruck>, ICollection<FoodTruckDto>>(foodTrucks);
+            return View(foodTruckDto);
         }
 
         //GET: FoodTrucksController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var foodTruck = await _foodTruckService.GetFoodTruckAsync(id);
-            foodTruck.Reviews = await _reviewService.GetFoodTruckReviewsAsync(id);
-            if (foodTruck != null)
+            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
+            if (foodTrucks != null)
             {
 
-                return View(foodTruck);
+                return View(foodTrucks);
             }
 
             return NotFound();
-
-
-
-
-            //public IActionResult Index()
-            //{
-            //    return View();
-            //}
         }
 
     }
