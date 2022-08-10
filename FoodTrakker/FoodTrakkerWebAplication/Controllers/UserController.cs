@@ -37,7 +37,8 @@ namespace FoodTrakkerWebAplication.Controllers
             var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
             var foodTrucksDto = _mapper.Map<List<FoodTruck>,List<FoodTruckDto>>(foodTrucks);
             var userReviews = new List<Review>() { };
-            return View((foodTrucks: foodTrucksDto, reviews: userReviews));
+            var userReviewsDto = _mapper.Map<List<Review>,List<ReviewDto>>(userReviews);
+            return View((foodTrucks: foodTrucksDto, reviews: userReviewsDto));
         }
         // GET: UserController/Create
         public ActionResult CreateReview(int id)
@@ -51,7 +52,7 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> CreateReview(ReviewDto reviewDto)
         {
  
-            var review = _mapper.Map<Review>(reviewDto);
+           var review = _mapper.Map<Review>(reviewDto);
             review.Id = 0;
             if (!ModelState.IsValid)
             {
@@ -62,8 +63,9 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 _context.Add(review);
                await _context.SaveChangesAsync();
-                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "Thank You for Your opinion!");
-                return RedirectToAction("Details","FoodTrucks",new { id = review.FoodTruckId });
+               
+               ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "Thank You for Your opinion!");
+               return RedirectToAction("Details","FoodTrucks",new { id = reviewDto.FoodTruckId });
             }
             catch
             {
@@ -73,13 +75,14 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> AddFoodTruckToFavourites(int id)
         {
             FoodTruck foodTruck = null;
+            FoodTruckDto foodTruckDto = null;
 
             try
             {
                 var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
 
                foodTruck= await _favouritesFoodTruckService.AddFoodTruckToFavourites(id, x.Value);
-             //  foodTruckDto = _mapper.Map<FoodTruckDto>(foodTruck);
+               foodTruckDto = _mapper.Map<FoodTruck,FoodTruckDto>(foodTruck);
                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "You've got new favourite FoodTruck!");
                 
             }catch(Exception ex)
@@ -88,7 +91,7 @@ namespace FoodTrakkerWebAplication.Controllers
                 //add logs here
             }
 
-            return View("../FoodTrucks/Details",foodTruck);
+            return View("../FoodTrucks/Details", foodTruckDto);
         } 
     }
 }

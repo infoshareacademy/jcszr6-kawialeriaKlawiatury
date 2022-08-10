@@ -16,7 +16,7 @@ namespace FoodTrakker.Services
         {
             return await _reviewRepository.GetAsync();
         }
-
+       
         public async Task<ICollection<Review>> GetFoodTruckReviewsAsync(int id)
         {
             return (await _reviewRepository.GetAsync()).Where(r => r.FoodTruckId == id).ToList();
