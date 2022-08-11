@@ -21,6 +21,9 @@ namespace FoodTrakker.Services
         {
             return (await _reviewRepository.GetAsync()).Where(r => r.FoodTruckId == id).ToList();
         }
-
+        public async Task AddReview(Review review)
+        {
+            await _reviewRepository.AddAsync(review);
+        }
     }
 }
