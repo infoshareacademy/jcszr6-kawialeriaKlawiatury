@@ -18,12 +18,20 @@ namespace FoodTrakkerWebAplication.Controllers
             _mapper = mapper;
         }
         
-        public async Task<ActionResult> Index(string searchString)
+        public async Task<ActionResult> Index(string searchString, string citySearchString, string streetSearchString)
         {
             var foodTrucks = new List<FoodTruck>();
             if (!String.IsNullOrEmpty(searchString))
             {
                 foodTrucks = await _foodTruckService.FindFoodTruckAsync(searchString);
+            }
+            else if (!String.IsNullOrEmpty(citySearchString))
+            {
+                foodTrucks = await _foodTruckService.FindByCityAsync(citySearchString);
+            }
+            else if (!String.IsNullOrEmpty(streetSearchString))
+            {
+                foodTrucks = await _foodTruckService.FindByStreetAsync(streetSearchString);
             }
             else
             {

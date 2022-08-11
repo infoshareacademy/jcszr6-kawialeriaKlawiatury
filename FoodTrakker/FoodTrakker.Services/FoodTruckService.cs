@@ -38,5 +38,10 @@ namespace FoodTrakker.Services
         {
             return _foodTruckRepository.FindByCityAsync(City);
         }
+
+        public Task<List<FoodTruck>> FindByStreetAsync(string City)
+        {
+            return _foodTruckRepository.FindByStreetAsync(City);
+        }
     }
 }
