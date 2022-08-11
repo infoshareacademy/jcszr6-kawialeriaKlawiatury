@@ -18,10 +18,20 @@ namespace FoodTrakkerWebAplication.Controllers
             _mapper = mapper;
         }
         
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchString)
         {
-            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
-            var foodTruckDto = _mapper.Map<ICollection<FoodTruck>, ICollection<FoodTruckDto>>(foodTrucks);
+            var foodTrucks = new List<FoodTruck>();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                foodTrucks = await _foodTruckService.FindFoodTruckAsync(searchString);
+            }
+            else
+            {
+                foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
+            }
+            
+            var foodTruckDto = _mapper.Map<ICollection<FoodTruck>, 
+                ICollection<FoodTruckDto>>(foodTrucks);
             return View(foodTruckDto);
         }
 

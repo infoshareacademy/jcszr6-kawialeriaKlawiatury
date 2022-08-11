@@ -29,6 +29,14 @@ namespace FoodTrakker.Services
             return _foodTruckRepository.GetFullFoodTruckInfoAsync(Id);
         }
 
+        public Task<List<FoodTruck>> FindFoodTruckAsync(string Name)
+        {
+            return _foodTruckRepository.FindFoodTruckAsync(Name);
+        }
 
+        public Task<List<FoodTruck>> FindByCityAsync(string City)
+        {
+            return _foodTruckRepository.FindByCityAsync(City);
+        }
     }
 }
