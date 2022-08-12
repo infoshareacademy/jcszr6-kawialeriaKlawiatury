@@ -5,8 +5,32 @@
 }
 
 <h1>Welcome to the world of mobile cuisine!</h1>
-<div class="row container">
-    <form class="col-2">
+<div class="row">
+    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 mb-2">
+        <div style="margin-right: 5px">
+            Truck <input type="text" name="SearchString" />
+            <input type="submit" value="Filter" />
+        </div>
+    </form>
+    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 mb-2">
+        <div style="margin-right: 5px">
+            Cuisine <input type="input-group" name="SearchString" />
+            <input type="submit" value="Filter" />
+        </div>
+    </form>
+    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 mb-2">
+        <div style="margin-right: 5px">
+            City <input type="input-group" name="CitySearchString" />
+            <input type="submit" value="Filter" />
+        </div>
+    </form>
+    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 mb-2">
+        <div style="margin-right: 5px">
+            Street <input type="input-group" name="StreetSearchString" />
+            <input type="submit" value="Filter" />
+        </div>
+    </form>
+    <!--<form class="col-2">
         <div>
             <label for="FoodTruckName" class="form-label">Name of Food Truck:</label>
             <input type="text" class="form-control" id="FoodTruckName"/>
@@ -17,13 +41,13 @@
             <label for="FoodTruckLocationCity" class="form-label">City U want to search:</label>
             <input type="text" class="form-control" id="FoodTruckLocationCity"/>
         </div>
-    </form>    
+    </form>
     <form class="col-2">
         <div>
             <label for="FoodTruckLocationStreet" class="form-label">Search the street:</label>
             <input type="text" class="form-control" id="FoodTruckLocationStreet"/>
         </div>
-    </form>    
+    </form>
     <form class="col-2">
         <div>
             <div class="input-group mb-2">
@@ -42,7 +66,7 @@
                 <option value="7">Polish</option>
                 <option value="8">Midterranean</option>
                 <option value="9">Indian</option>
-            </select>   
+            </select>
         </div>
     </form>
     <form class="col-2">
@@ -50,7 +74,7 @@
             <label for="FoodTruckEvents" class="form-label">Check the events:</label>
             <input type="text" class="form-control" id="FoodTruckEventst"/>
         </div>
-    </form> 
+    </form>
     <form class="col-2">
         <div>
             <div class="input-group mb-2">
@@ -69,10 +93,10 @@
                 <option value="7">7</option>
                 <option value="8">8</option>
                 <option value="9">9</option>
-            </select>   
+            </select>
         </div>
-    </form>
-    
+    </form>-->
+
 </div> 
 
 

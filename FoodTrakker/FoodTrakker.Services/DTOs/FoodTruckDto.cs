@@ -1,6 +1,4 @@
-﻿
-
-using FoodTrakker.Core.LinkingClasses;
+﻿using FoodTrakker.Core.LinkingClasses;
 using FoodTrakker.Core.Model;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

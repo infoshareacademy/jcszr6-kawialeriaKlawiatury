@@ -18,19 +18,38 @@ namespace FoodTrakkerWebAplication.Controllers
             _mapper = mapper;
         }
         
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchString, string citySearchString, string streetSearchString)
         {
-            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
-            var foodTruckDto = _mapper.Map<ICollection<FoodTruck>, ICollection<FoodTruckDto>>(foodTrucks);
+            var foodTrucks = new List<FoodTruck>();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                foodTrucks = await _foodTruckService.FindFoodTruckAsync(searchString);
+            }
+            else if (!String.IsNullOrEmpty(citySearchString))
+            {
+                foodTrucks = await _foodTruckService.FindByCityAsync(citySearchString);
+            }
+            else if (!String.IsNullOrEmpty(streetSearchString))
+            {
+                foodTrucks = await _foodTruckService.FindByStreetAsync(streetSearchString);
+            }
+            else
+            {
+                foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
+            }
+            
+            var foodTruckDto = _mapper.Map<ICollection<FoodTruck>, 
+                ICollection<FoodTruckDto>>(foodTrucks);
             return View(foodTruckDto);
         }
 
         //GET: FoodTrucksController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
-            var foodTruckDto = _mapper.Map<FoodTruck,FoodTruckDto>(foodTrucks);
-            if (foodTruckDto != null)
+            var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
+            var foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
+            
+            if (foodTruck != null)
             {
 
                 return View(foodTruckDto);
