@@ -53,7 +53,8 @@ namespace FoodTrakker.Services
                 foodTruckEvents.Add(new FoodTruckEvent()
                 {
                     FoodTruckId = foodTruck,
-                    Event = @event
+                    Event = @event,
+                    EventId = @event.Id
                 });
             }
             return foodTruckEvents;             
