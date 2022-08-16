@@ -1,0 +1,21 @@
+﻿@using FoodTrakker.Services.DTOs
+@model (FoodTruckDto foodTruck,UserDto user)
+
+
+  @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-controller="User" asp-action="CreateReview" asp-route-id="foodTruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add Review</a>
+
+    @if (@Model.user.FavouriteFoodTrucks.Contains(@Model.foodTruck))
+    {
+        <a asp-controller="User" asp-action="RemoveFoodTruckFromFavourites" asp-route-id="foodTruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Remove From Favourites!</a>
+    }
+        <a asp-controller="User" asp-action="AddFoodTruckToFavourites" asp-route-id="foodTruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add To Favourites!</a>
+    
+    }
+    <div class="row">  
+    <div class="col-md-12">  
+        <div class="form-group">  
+            @Html.Raw(@ViewBag.Alert)  
+        </div>  
+    </div>  

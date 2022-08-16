@@ -97,6 +97,28 @@ namespace FoodTrakkerWebAplication.Controllers
             }
 
             return View("../FoodTrucks/Details", foodTruckDto);
-        } 
+        }
+        public async Task<ActionResult> RemoveFoodTruckFromFavourites(int id)
+        {
+            FoodTruck foodTruck = null;
+            FoodTruckDto foodTruckDto = null;
+
+            try
+            {
+                var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+
+                foodTruck = await _favouritesFoodTruckService.RemoveFoodTruckFromFavourites(id, x.Value);
+                foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
+                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "This is no longer your favourite FoodTruck!");
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Danger, "Something went wrong!");
+                //add logs here
+            }
+
+            return View("../FoodTrucks/Details", foodTruckDto);
+        }
     }
 }

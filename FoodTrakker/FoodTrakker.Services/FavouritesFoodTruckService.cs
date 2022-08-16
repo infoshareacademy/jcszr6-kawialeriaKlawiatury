@@ -19,5 +19,10 @@ namespace FoodTrakker.Services
             var foodTruck = await _userRepository.AddFavFoodTrucToUserAsync(userId,foodTruckId);
             return foodTruck;
         }
+        public async Task<FoodTruck> RemoveFoodTruckFromFavourites(int foodTruckId, string userId)
+        {
+            var foodTruck = await _userRepository.RemoveFavFoodTruckFromUserAsync(userId, foodTruckId);
+            return foodTruck;
+        }
     }
 }

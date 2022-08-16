@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using FoodTrakker.Services;
 using FoodTrakker.Repository;
 using FoodTrakker.Services.DTOs;
+using FoodTrakkerWebAplication.Models.ViewModel;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
@@ -11,11 +12,12 @@ namespace FoodTrakkerWebAplication.Controllers
     {
         private readonly FoodTruckService _foodTruckService;
         private readonly IMapper _mapper;
-
+        
         public FoodTrucksController(FoodTruckService foodTruckService, IMapper mapper)
         {
             _foodTruckService = foodTruckService;
             _mapper = mapper;
+           
         }
         
         public async Task<ActionResult> Index(string searchString, string citySearchString, string streetSearchString)
@@ -46,9 +48,12 @@ namespace FoodTrakkerWebAplication.Controllers
         //GET: FoodTrucksController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
-            var foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
-            
+
+           
+                var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
+                var foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
+                
+                     
             if (foodTruck != null)
             {
 

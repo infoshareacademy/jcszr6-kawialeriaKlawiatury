@@ -48,10 +48,22 @@ namespace FoodTrakker.Services
         {
             return _foodTruckRepository.DeleteAsync(foodTruckId);
         }
+        public Task<List<FoodTruck>> FindFoodTruckAsync(string Name)
+        {
+            return _foodTruckRepository.FindFoodTruckAsync(Name);
+        }
 
         public void IsNameUnique(string name)
         {
             throw new NotImplementedException();
+        public Task<List<FoodTruck>> FindByCityAsync(string City)
+        {
+            return _foodTruckRepository.FindByCityAsync(City);
+        }
+
+        public Task<List<FoodTruck>> FindByStreetAsync(string City)
+        {
+            return _foodTruckRepository.FindByStreetAsync(City);
         }
     }
 }
