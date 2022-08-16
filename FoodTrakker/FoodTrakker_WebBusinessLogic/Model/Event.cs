@@ -4,7 +4,7 @@ using FoodTrakker.Core.LinkingClasses;
 
 namespace FoodTrakker.Core.Model
 {
-    public class Event : Iindexable
+    public class Event : Iindexable<int>
     {
        
         public int Id { get; set; }

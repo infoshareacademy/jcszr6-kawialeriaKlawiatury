@@ -5,12 +5,35 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FoodTrakker.Repository
 {
-    public class FoodTruckRepository : Repository<FoodTruck>, IFoodTruckRepository
+    public class FoodTruckRepository : Repository<FoodTruck, int>, IFoodTruckRepository
     {
         private readonly FoodTrakkerContext _context;
         public FoodTruckRepository(FoodTrakkerContext context) : base(context)
         {
             _context = context;
+        }
+        public Task<List<FoodTruck>> FindByCityAsync(string City)
+        {
+            return _context.FoodTrucks.Where(f => f.Location.City.Contains(City))
+                .Include(f => f.Location)
+                .Include(f => f.Type)
+                .ToListAsync();
+        }
+
+        public Task<List<FoodTruck>> FindByStreetAsync(string Street)
+        {
+            return _context.FoodTrucks.Where(f => f.Location.Street.Contains(Street))
+                .Include(f => f.Location)
+                .Include(f => f.Type)
+                .ToListAsync();
+        }
+
+        public Task<List<FoodTruck>> FindFoodTruckAsync(string Name)
+        {
+            return _context.FoodTrucks.Where(f => f.Name.Contains(Name))
+                .Include(f => f.Location)
+                .Include(f => f.Type)
+                .ToListAsync();
         }
 
         public Task<List<FoodTruck>> GetFullFoodTruckInfoAsync()
@@ -27,8 +50,6 @@ namespace FoodTrakker.Repository
                 .Include(f => f.Location)
                 .Include(f => f.Type).SingleOrDefaultAsync(f => f.Id == Id);
         }
-
-
         public Task<List<FoodTruck>> GetOwnerFoodTrucks(string ownerId)
         {
             return Task.FromResult(_context.FoodTrucks
@@ -36,6 +57,10 @@ namespace FoodTrakker.Repository
                  .Include(f => f.Type)
                  .Where(f => f.OwnerId == ownerId)
                  .ToList());
+        }
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

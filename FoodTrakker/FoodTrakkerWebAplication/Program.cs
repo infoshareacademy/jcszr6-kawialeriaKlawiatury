@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using FoodTrakker.Services.IdentityServices;
 using Serilog;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,12 +21,15 @@ builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Confi
 builder.Services.AddScoped<FoodTruckService>();
 builder.Services.AddScoped<EventService>();
 builder.Services.AddScoped<ReviewService>();
+builder.Services.AddScoped<FavouritesFoodTruckService>();
 builder.Services.AddScoped<LocationService>();
 builder.Services.AddScoped<TypeService>();
 
 var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb")));
+  { options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb"));
+      options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    });
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {
@@ -37,18 +41,19 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Lockout.AllowedForNewUsers = true;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.MaxFailedAccessAttempts = 3;
-
+   
     options.User.RequireUniqueEmail = true;
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<FoodTrakkerContext>()
     .AddPasswordValidator<PasswordValidatorService>();
 
-builder.Services.AddScoped<IRepository<User>, UserRepository>();
-builder.Services.AddScoped<IRepository<Event>, EventRepository>();
+builder.Services.AddScoped<IRepository<User, string>, UserRepository>();
+builder.Services.AddScoped<IRepository<Event, int>, EventRepository>();
 builder.Services.AddScoped<IFoodTruckRepository, FoodTruckRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ITypeRepository, TypeRepository>();
 

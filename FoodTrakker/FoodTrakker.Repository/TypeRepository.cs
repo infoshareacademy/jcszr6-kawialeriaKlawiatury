@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.Repository
 {
-    public class TypeRepository : Repository<FoodTruckType>, ITypeRepository
+    public class TypeRepository : Repository<FoodTruckType,int>, ITypeRepository
     {
         public TypeRepository(FoodTrakkerContext context) : base(context)
         {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FoodTrakker.Core.Model;
+﻿using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Contracts;
+
 
 namespace FoodTrakker.Services
 {
@@ -20,6 +16,14 @@ namespace FoodTrakker.Services
         {
             return await _reviewRepository.GetAsync();
         }
-
+       
+        public async Task<ICollection<Review>> GetFoodTruckReviewsAsync(int id)
+        {
+            return (await _reviewRepository.GetAsync()).Where(r => r.FoodTruckId == id).ToList();
+        }
+        public async Task AddReview(Review review)
+        {
+            await _reviewRepository.AddAsync(review);
+        }
     }
 }

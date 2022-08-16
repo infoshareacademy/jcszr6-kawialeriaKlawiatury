@@ -1,0 +1,128 @@
+﻿@model IEnumerable<FoodTrakker.Services.DTOs.FoodTruckDto>
+
+@{
+    ViewData["Title"] = "Food Trucks";
+}
+
+<h1>Welcome to the world of mobile cuisine!</h1>
+<div class="row">
+    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 mb-2">
+        <div style="margin-right: 5px">
+            Truck <input type="text" name="SearchString" />
+            <input type="submit" value="Filter" />
+        </div>
+    </form>
+    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 mb-2">
+        <div style="margin-right: 5px">
+            Cuisine <input type="input-group" name="SearchString" />
+            <input type="submit" value="Filter" />
+        </div>
+    </form>
+    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 mb-2">
+        <div style="margin-right: 5px">
+            City <input type="input-group" name="CitySearchString" />
+            <input type="submit" value="Filter" />
+        </div>
+    </form>
+    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 mb-2">
+        <div style="margin-right: 5px">
+            Street <input type="input-group" name="StreetSearchString" />
+            <input type="submit" value="Filter" />
+        </div>
+    </form>
+    <!--<form class="col-2">
+        <div>
+            <label for="FoodTruckName" class="form-label">Name of Food Truck:</label>
+            <input type="text" class="form-control" id="FoodTruckName"/>
+        </div>
+    </form>
+    <form class="col-2">
+        <div>
+            <label for="FoodTruckLocationCity" class="form-label">City U want to search:</label>
+            <input type="text" class="form-control" id="FoodTruckLocationCity"/>
+        </div>
+    </form>
+    <form class="col-2">
+        <div>
+            <label for="FoodTruckLocationStreet" class="form-label">Search the street:</label>
+            <input type="text" class="form-control" id="FoodTruckLocationStreet"/>
+        </div>
+    </form>
+    <form class="col-2">
+        <div>
+            <div class="input-group mb-2">
+                <div class="input-group">
+                    <label class="input-group-text">Search</label>
+                </div>
+            </div>
+            <select class="shadow" id="FoodTruckType">
+                <option selected> Cuisine...</option>
+                <option value="1">Fusion</option>
+                <option value="2">Fast Food</option>
+                <option value="3">Mexican</option>
+                <option value="4">Wurst</option>
+                <option value="5">Italian</option>
+                <option value="6">Regional</option>
+                <option value="7">Polish</option>
+                <option value="8">Midterranean</option>
+                <option value="9">Indian</option>
+            </select>
+        </div>
+    </form>
+    <form class="col-2">
+        <div>
+            <label for="FoodTruckEvents" class="form-label">Check the events:</label>
+            <input type="text" class="form-control" id="FoodTruckEventst"/>
+        </div>
+    </form>
+    <form class="col-2">
+        <div>
+            <div class="input-group mb-2">
+                <div class="input-group">
+                    <label class="input-group-text">Search</label>
+                </div>
+            </div>
+            <select class="shadow" id="FoodTruckRatings">
+                <option selected> Ratings...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+        </div>
+    </form>-->
+
+</div> 
+
+
+<div class="row container-fluid">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-3 border-primary mb-3">
+            <div class="card mb-3 FTCard" style="max-width: 340px;">
+                <img src="kawialeria klawiatury.png" class="card-img-top FTImage" alt="@item.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text" style="min-height: 90px">@item.Description</p>
+                    <p class="card-text" style="min-height: 50px">From: @item.Location.City</p>
+                    <td>  @Html.ActionLink("More info", "Details", new {id = item.Id}, new {@class="text-dark btn FTButton FTCardbutton"})
+                    </td>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">  
+    <div class="col-md-12">  
+        <div class="form-group">  
+            @Html.Raw(@ViewBag.Alert)  
+        </div>  
+    </div>  
+</div>  
+</div>
+
+

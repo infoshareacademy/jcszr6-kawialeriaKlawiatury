@@ -19,13 +19,12 @@ namespace FoodTrakker.Repository.Data
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder
-                .UseSqlServer("Server=localhost;Database=FoodTrakkerDb;Trusted_Connection=True;MultipleActiveResultSets=True;");
+                .UseSqlServer();
         }
         public DbSet<Event> Events { get; set; }
         public DbSet<FoodTruck> FoodTrucks { get; set; }
 
-        public DbSet<User> Users { get; set; }
-
+        //public DbSet<User> Users { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
         public DbSet<Location> Locations { get; set; }
@@ -49,10 +48,18 @@ namespace FoodTrakker.Repository.Data
                 .HasForeignKey(fe => fe.EventId);
 
             modelBuilder.Entity<User>()              
-                .Ignore(u => u.FavouriteFoodTrucksID);
+                .Ignore(u => u.FavouriteFoodTrucks);
 
             modelBuilder.Entity<User>()
-                .Ignore(u => u.ReviewsID);
+                .Ignore(u => u.Reviews);
+            modelBuilder.Entity<User>()
+                .HasMany<FoodTruck>(u => u.FavouriteFoodTrucks)
+                .WithMany(f => f.Users);
+            //modelBuilder.Entity<FoodTruck>()
+            //    .HasMany<Review>(f => f.Reviews)
+            //    .WithOne(r => r.FoodTruckId);
+            //modelBuilder.Entity<Review>()
+            //   .Ignore(r=>r.FoodTruckId);
 
             modelBuilder.Entity<FoodTruck>()
                 .HasIndex(f => f.Name)

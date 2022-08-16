@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodTrakker.Repository.Contracts
 {
-    public interface ITypeRepository : IRepository<FoodTruckType>
+    public interface ITypeRepository : IRepository<FoodTruckType, int>
     {
     }
 }

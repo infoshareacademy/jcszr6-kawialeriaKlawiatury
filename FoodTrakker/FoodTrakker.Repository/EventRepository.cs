@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FoodTrakker.Repository
 {
-    public class EventRepository : Repository<Event>, IEventRepository
+    public class EventRepository : Repository<Event, int>, IEventRepository
     {
         private readonly FoodTrakkerContext _context;
 

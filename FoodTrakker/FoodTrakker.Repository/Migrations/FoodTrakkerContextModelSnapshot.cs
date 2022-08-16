@@ -245,7 +245,7 @@ namespace FoodTrakker.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FoodTruckId")
+                    b.Property<int?>("FoodTruckId")
                         .HasColumnType("int");
 
                     b.Property<int>("Rating")
@@ -337,6 +337,21 @@ namespace FoodTrakker.Repository.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("FoodTruckUser", b =>
+                {
+                    b.Property<int>("FavouriteFoodTrucksId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("FavouriteFoodTrucksId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("FoodTruckUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -539,13 +554,24 @@ namespace FoodTrakker.Repository.Migrations
 
             modelBuilder.Entity("FoodTrakker.Core.Model.Review", b =>
                 {
-                    b.HasOne("FoodTrakker.Core.Model.FoodTruck", "FoodTruck")
+                    b.HasOne("FoodTrakker.Core.Model.FoodTruck", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("FoodTruckId");
+                });
+
+            modelBuilder.Entity("FoodTruckUser", b =>
+                {
+                    b.HasOne("FoodTrakker.Core.Model.FoodTruck", null)
                         .WithMany()
-                        .HasForeignKey("FoodTruckId")
+                        .HasForeignKey("FavouriteFoodTrucksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("FoodTruck");
+                    b.HasOne("FoodTrakker.Core.Model.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -607,6 +633,8 @@ namespace FoodTrakker.Repository.Migrations
             modelBuilder.Entity("FoodTrakker.Core.Model.FoodTruck", b =>
                 {
                     b.Navigation("FoodTruckEvents");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,7 +4,7 @@ using FoodTrakker.Services;
 using FoodTrakkerWebAplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-
+using FoodTrakker.Core.Model;
 
 
 namespace FoodTrakkerWebAplication.Controllers
@@ -23,13 +23,23 @@ namespace FoodTrakkerWebAplication.Controllers
             _foodTruckService = foodTruckService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
-            if(foodTrucks == null)
+            var foodTrucks = new List<FoodTruck>();
+            if (!String.IsNullOrEmpty(searchString))
             {
-                return NotFound();
+                foodTrucks = await _foodTruckService.FindFoodTruckAsync(searchString);
             }
+            else
+            {
+                foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+            }
+
+            //var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+            //if (foodTrucks == null)
+            //{
+            //    return NotFound();
+            //}
             return View(foodTrucks);
         }
 

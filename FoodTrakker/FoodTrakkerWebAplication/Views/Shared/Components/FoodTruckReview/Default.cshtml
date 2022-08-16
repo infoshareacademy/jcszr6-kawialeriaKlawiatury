@@ -1,0 +1,37 @@
+﻿@using FoodTrakker.Services.DTOs
+@model IEnumerable<ReviewDto>
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				<label asp-for="@Model.First().Title "></label>
+			</th>
+			<th>
+				<label asp-for="@Model.First().Description"></label>
+			</th>
+			<th>
+				<label asp-for="@Model.First().Rating"></label>
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (var review in Model)
+		{
+			<tr>
+				<td>
+					@review.Title
+				</td>
+				<td>
+					@review.Description
+				</td>
+				<td>
+					@review.Rating
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
