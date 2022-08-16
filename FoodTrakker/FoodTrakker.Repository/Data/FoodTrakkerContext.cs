@@ -59,7 +59,7 @@ namespace FoodTrakker.Repository.Data
             //    .HasMany<Review>(f => f.Reviews)
             //    .WithOne(r => r.FoodTruckId);
             //modelBuilder.Entity<Review>()
-            //    .Ignore(r=>r.FoodTruckId);
+            //   .Ignore(r=>r.FoodTruckId);
 
         }
     }

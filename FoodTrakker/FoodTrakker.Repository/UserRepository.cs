@@ -27,6 +27,15 @@ namespace FoodTrakker.Repository
             return foodTruck;
 
         }
-       
+        public async Task<FoodTruck> RemoveFavFoodTruckFromUserAsync(string userId, int foodTruckId)
+        {
+            var foodTruck = await _context.FoodTrucks.AsTracking().FirstOrDefaultAsync(f => f.Id == foodTruckId);
+            var user = await _context.Users.Include(u => u.FavouriteFoodTrucks).AsTracking()
+                .FirstOrDefaultAsync(u => u.Id.Equals(userId));
+           user.FavouriteFoodTrucks.Remove(foodTruck);
+            var result = await _context.SaveChangesAsync();
+
+            return foodTruck;
+        }
     }
 }

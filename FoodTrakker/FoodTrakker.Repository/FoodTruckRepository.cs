@@ -12,6 +12,29 @@ namespace FoodTrakker.Repository
         {
             _context = context;
         }
+        public Task<List<FoodTruck>> FindByCityAsync(string City)
+        {
+            return _context.FoodTrucks.Where(f => f.Location.City.Contains(City))
+                .Include(f => f.Location)
+                .Include(f => f.Type)
+                .ToListAsync();
+        }
+
+        public Task<List<FoodTruck>> FindByStreetAsync(string Street)
+        {
+            return _context.FoodTrucks.Where(f => f.Location.Street.Contains(Street))
+                .Include(f => f.Location)
+                .Include(f => f.Type)
+                .ToListAsync();
+        }
+
+        public Task<List<FoodTruck>> FindFoodTruckAsync(string Name)
+        {
+            return _context.FoodTrucks.Where(f => f.Name.Contains(Name))
+                .Include(f => f.Location)
+                .Include(f => f.Type)
+                .ToListAsync();
+        }
 
         public Task<List<FoodTruck>> GetFullFoodTruckInfoAsync()
         {
