@@ -54,5 +54,27 @@ namespace FoodTrakker.Repository
                  .Where(f => f.OwnerId == ownerId)
                  .ToList());
         }
+
+        public Task<List<FoodTruck>> GetFoodTrucksExceptAsync(Event @event)
+        {
+            var foodTrucks = _context.FoodTrucks
+                .ToList();
+            foreach (var foodTruckEvent in @event.FoodTruckEvents)
+            {
+                var foodTruckId = foodTruckEvent.FoodTruckId;
+                var foodTruck = _context.FoodTrucks
+                    .SingleOrDefault(f => f.Id == foodTruckId);
+                var type = _context.Types.SingleOrDefault(t => t.Id == foodTruck.TypeId);
+
+                if (foodTruck != null)
+                {
+                    foodTrucks.Remove(foodTrucks.SingleOrDefault(f => f.Id == foodTruck.Id));
+                }
+            }
+            return Task.FromResult(foodTrucks);
+        }
+
+
+
     }
 }

@@ -92,5 +92,11 @@ namespace FoodTrakker.Services
         {
             return _eventRepository.DeleteAsync(eventId);
         }
+
+        public Task<List<FoodTruck>> GetFoodTrucksExceptAsync(Event @event)
+        {
+            return _eventRepository.GetFoodTrucksExceptAsync(@event);
+        }
+
     }
 }
