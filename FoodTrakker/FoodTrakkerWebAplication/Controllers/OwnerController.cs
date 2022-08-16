@@ -123,7 +123,7 @@ namespace FoodTrakkerWebAplication.Controllers
             ModelState.Remove("OwnerId");
             var errors = ModelState.SelectMany(m => m.Value.Errors);
             //_foodTruckService.IsNameUnique(foodTruck.Name);
-            ModelState.AddModelError("Name", "Must be unique!");
+            //ModelState.AddModelError("Name", "Must be unique!");
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("CreateFoodTruck");
