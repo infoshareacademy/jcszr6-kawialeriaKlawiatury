@@ -28,7 +28,7 @@ builder.Services.AddScoped<TypeService>();
 var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
   { options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb"));
-      options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+      //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     });
 
 builder.Services.AddDefaultIdentity<User>(options =>
