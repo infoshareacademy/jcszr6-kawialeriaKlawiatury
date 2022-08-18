@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using FoodTrakker.Services;
 using FoodTrakker.Repository;
 using FoodTrakker.Services.DTOs;
+using FoodTrakkerWebAplication.Models.ViewModel;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
@@ -18,8 +21,11 @@ namespace FoodTrakkerWebAplication.Controllers
             _mapper = mapper;
         }
         
-        public async Task<ActionResult> Index(string searchString, string citySearchString, string streetSearchString)
+        public async Task<ActionResult> Index(string type, string searchString, string citySearchString, string streetSearchString)
         {
+            //IQueryable<string> typeQuery = from f in (_foodTruckService.FindByType(type)) orderby f.Type
+                                                select f.Type;
+                //await _foodTruckService.FindByTypeAsync(fooodTruckType);
             var foodTrucks = new List<FoodTruck>();
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -37,6 +43,12 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
             }
+
+            var foodTruckTypeVM = new FoodTruckTypesViewModel()
+            {
+                Types = new SelectList(await typeQuery.Distinct().ToListAsync()),
+                FoodTrucks = await.foodTrucks.ToListAsync()
+            };
             
             var foodTruckDto = _mapper.Map<ICollection<FoodTruck>, 
                 ICollection<FoodTruckDto>>(foodTrucks);
