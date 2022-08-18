@@ -11,12 +11,14 @@ namespace FoodTrakkerWebAplication.Controllers
     public class FoodTrucksController : Controller
     {
         private readonly FoodTruckService _foodTruckService;
+        private readonly UserService _userService;
         private readonly IMapper _mapper;
-        private readonly UserRepository _userRepository;
         
-        public FoodTrucksController(FoodTruckService foodTruckService, IMapper mapper)
+        
+        public FoodTrucksController(FoodTruckService foodTruckService, IMapper mapper, UserService userService)
         {
             _foodTruckService = foodTruckService;
+            _userService = userService;
             _mapper = mapper;
            
         }
@@ -49,16 +51,19 @@ namespace FoodTrakkerWebAplication.Controllers
         //GET: FoodTrucksController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            
+            UserDto userDto = null;
             var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
-           
             var foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
-            
-                     
+            if (User.Identity.IsAuthenticated)
+            {
+                var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+                var user = await _userService.GetAllUserDataAsync(x.Value);
+                userDto = _mapper.Map<User, UserDto>(user);
+            }
             if (foodTruckDto!= null)
             {
 
-                return View(foodTruckDto);
+                return View((foodTruckDto,userDto));
             }
 
             return NotFound();

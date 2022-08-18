@@ -19,17 +19,20 @@ namespace FoodTrakkerWebAplication.Controllers
         private readonly FoodTruckService _foodTruckService;
         private readonly ReviewService _reviewService;
         private readonly FavouritesFoodTruckService _favouritesFoodTruckService;
+        private readonly UserService _userService;
         private readonly IMapper _mapper;
         
 
         public UserController(EventService eventService, FoodTruckService foodTruckService,
             ReviewService reviewService,FavouritesFoodTruckService favouritesFoodTruckService,
+            UserService userService,
             IMapper mapper)
         {
             _eventService = eventService;
             _foodTruckService = foodTruckService;
             _reviewService = reviewService;
             _favouritesFoodTruckService = favouritesFoodTruckService;
+            _userService = userService;
             _mapper = mapper;
             
         }
@@ -77,14 +80,17 @@ namespace FoodTrakkerWebAplication.Controllers
         {
             FoodTruck foodTruck = null;
             FoodTruckDto foodTruckDto = null;
-
+            User user = null;
+            UserDto userDto = null;
             try
             {
                 var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
 
                foodTruck= await _favouritesFoodTruckService.AddFoodTruckToFavourites(id, x.Value);
                foodTruckDto = _mapper.Map<FoodTruck,FoodTruckDto>(foodTruck);
-               ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "You've got new favourite FoodTruck!");
+               user = await _userService.GetUserAsync(x.Value);
+               userDto = _mapper.Map<User, UserDto>(user);
+                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "You've got new favourite FoodTruck!");
                 
             }catch(Exception ex)
             {
@@ -92,12 +98,14 @@ namespace FoodTrakkerWebAplication.Controllers
                 //add logs here
             }
 
-            return View("../FoodTrucks/Details", foodTruckDto);
+            return View("../FoodTrucks/Details", (foodTruckDto,userDto));
         }
         public async Task<ActionResult> RemoveFoodTruckFromFavourites(int id)
         {
             FoodTruck foodTruck = null;
             FoodTruckDto foodTruckDto = null;
+            User user = null;
+            UserDto userDto = null;
 
             try
             {
@@ -105,6 +113,8 @@ namespace FoodTrakkerWebAplication.Controllers
 
                 foodTruck = await _favouritesFoodTruckService.RemoveFoodTruckFromFavourites(id, x.Value);
                 foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
+                user = await _userService.GetUserAsync(x.Value);
+                userDto = _mapper.Map<User, UserDto>(user);
                 ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "This is no longer your favourite FoodTruck!");
 
             }
@@ -114,13 +124,13 @@ namespace FoodTrakkerWebAplication.Controllers
                 //add logs here
             }
 
-            return View("../FoodTrucks/Details", foodTruckDto);
+            return View("../FoodTrucks/Details", (foodTruckDto,userDto));
         }
         public async Task<ActionResult> ListFavFoodTruck()
         {
             ICollection<FoodTruck> foodTrucks = null;
             ICollection<FoodTruckDto> foodTrucksDto = null;
-             var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+            var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
             foodTrucks = await _favouritesFoodTruckService.FavFoodTrucks(x.Value);
             foodTrucksDto = _mapper.Map<ICollection<FoodTruck>,ICollection<FoodTruckDto>>(foodTrucks);    
             if (foodTrucksDto!= null)

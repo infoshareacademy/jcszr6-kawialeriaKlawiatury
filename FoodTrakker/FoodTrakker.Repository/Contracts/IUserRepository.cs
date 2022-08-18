@@ -13,6 +13,7 @@ namespace FoodTrakker.Repository.Contracts
         Task<FoodTruck> RemoveFavFoodTruckFromUserAsync(string userId, int foodTruckId);
         Task<ICollection<FoodTruck>> FavFoodTrucks(string userId);
         Task<List<Review>> UserReviews(string userId);
+        Task<User> GetAllUserData(string userId);
     }
 
 }

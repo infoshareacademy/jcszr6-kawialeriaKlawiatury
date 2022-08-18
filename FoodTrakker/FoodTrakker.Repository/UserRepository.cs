@@ -53,6 +53,13 @@ namespace FoodTrakker.Repository
             var reviews = user.Reviews;
 
             return reviews;
-        }  
+        }
+
+        public async Task<User> GetAllUserData(string userId)
+        {
+            return await _context.Users.Include(u => u.FavouriteFoodTrucks)
+                                        //.Include(u => u.Reviews)
+                                        .FirstOrDefaultAsync(u => u.Id == userId);
+        }
     }
 }
