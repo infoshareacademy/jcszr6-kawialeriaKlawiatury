@@ -13,5 +13,6 @@ namespace FoodTrakker.Repository.Contracts
         public Task<Event> GetFullEventInfoAsync(int Id);
         public Task<List<Event>> GetOwnerEvents(string ownerId);
         public Task<List<FoodTruck>> GetEventFoodTrucks(Event @event);
+        public Task<List<FoodTruck>> GetFoodTrucksExceptAsync(Event @event);
     }
 }

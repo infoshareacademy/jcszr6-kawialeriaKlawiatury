@@ -53,10 +53,11 @@ namespace FoodTrakker.Services
             return _foodTruckRepository.FindFoodTruckAsync(Name);
         }
 
+<<<<<<< HEAD
         public void IsNameUnique(string name)
         {
             throw new NotImplementedException();
-        }
+=======
         public Task<List<FoodTruck>> FindByCityAsync(string City)
         {
             return _foodTruckRepository.FindByCityAsync(City);
@@ -65,6 +66,7 @@ namespace FoodTrakker.Services
         public Task<List<FoodTruck>> FindByStreetAsync(string City)
         {
             return _foodTruckRepository.FindByStreetAsync(City);
+>>>>>>> faa199d567ef0d7f3ec12c241b3da9b9f6410283
         }
     }
 }

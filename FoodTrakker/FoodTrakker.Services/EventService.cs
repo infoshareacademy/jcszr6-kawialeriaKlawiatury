@@ -53,7 +53,8 @@ namespace FoodTrakker.Services
                 foodTruckEvents.Add(new FoodTruckEvent()
                 {
                     FoodTruckId = foodTruck,
-                    Event = @event
+                    Event = @event,
+                    EventId = @event.Id
                 });
             }
             return foodTruckEvents;             
@@ -91,5 +92,11 @@ namespace FoodTrakker.Services
         {
             return _eventRepository.DeleteAsync(eventId);
         }
+
+        public Task<List<FoodTruck>> GetFoodTrucksExceptAsync(Event @event)
+        {
+            return _eventRepository.GetFoodTrucksExceptAsync(@event);
+        }
+
     }
 }

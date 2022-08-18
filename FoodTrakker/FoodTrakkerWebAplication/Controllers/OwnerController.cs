@@ -121,7 +121,10 @@ namespace FoodTrakkerWebAplication.Controllers
             foodTruck.OwnerId = userId;
 
             ModelState.Remove("OwnerId");
+            ModelState.Remove("Reviews");
             var errors = ModelState.SelectMany(m => m.Value.Errors);
+            //_foodTruckService.IsNameUnique(foodTruck.Name);
+            //ModelState.AddModelError("Name", "Must be unique!");
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("CreateFoodTruck");
@@ -136,6 +139,31 @@ namespace FoodTrakkerWebAplication.Controllers
             }
             catch
             {
+                var locations = await _locationService.GetLocationsAsync();
+                var locationSelect = new List<SelectListItem>();
+
+                if (locations != null)
+                {
+                    foreach (var location in locations)
+                    {
+                        locationSelect.Add(new SelectListItem { Text = $"{location.City} {location.Street}", Value = $"{location.Id}" });
+                    }
+                }
+
+                ViewBag.LocationSelect = locationSelect;
+
+                var types = await _typeService.GetTypesAsync();
+                var typesSelect = new List<SelectListItem>();
+
+                if (types != null)
+                {
+                    foreach (var type in types)
+                    {
+                        typesSelect.Add(new SelectListItem { Text = $"{type.Name}", Value = $"{type.Id}" });
+                    }
+                }
+
+                ViewBag.TypesSelect = typesSelect;
                 return View();
             }
         }
@@ -178,15 +206,18 @@ namespace FoodTrakkerWebAplication.Controllers
         // POST: OwnerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditFoodTruck(int id, FoodTruck foodTruck, int locationId, int typeId)
+        public async Task<ActionResult> EditFoodTruck(int id, FoodTruckDto foodTruckDto, int locationId, int typeId)
         {
+            ModelState.Remove("OwnerId");
+            ModelState.Remove("Reviews");
             if (!ModelState.IsValid)
             {
-                return View(foodTruck);
+                return View(foodTruckDto);
             }
             var foodTruckToEdit = await _foodTruckService.GetFoodTruckAsync(id);
             try
             {
+                var foodTruck = _mapper.Map<FoodTruckDto, FoodTruck>(foodTruckDto);
                 foodTruckToEdit.Name = foodTruck.Name;
                 foodTruckToEdit.Description = foodTruck.Description;
                 foodTruckToEdit.LocationId = locationId;
@@ -299,10 +330,11 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: OwnerController/Edit/5
         public async Task<ActionResult> EditEvent(int id)
         {
-            var eventToEdit = await _eventService.GetFullEventInfoAsync(id);
-            var eventToEditDto = _mapper.Map<Event, EventDto>(eventToEdit);
+            var eventToEdit = await _eventService.GetFullEventInfoAsync(id);        
+            var foodTrucks = await _eventService.GetFoodTrucksExceptAsync(eventToEdit);
+            
 
-            var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+            var eventToEditDto = _mapper.Map<Event, EventDto>(eventToEdit);
             var foodTrucksDTO = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks.ToList());
             var foodTrucksSelect = new List<SelectListItem>();
 
