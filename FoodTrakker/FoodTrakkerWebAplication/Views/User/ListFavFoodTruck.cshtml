@@ -1,14 +1,15 @@
-﻿@model IEnumerable<FoodTrakker.Services.DTOs.FoodTruckDto>  
+﻿@model IEnumerable<FoodTruckDto>
+@{
+    ViewData["Title"] = "ListFavFoodTruck";
+}
 
+<h1>Your Favourites FoodTrucks!</h1>
 
 <table class="table">
-		<thead>
+	<thead>
 		<tr>
 			<th>
 				<label asp-for="@Model.First().Name"></label>
-			</th>
-			<th>
-				<label asp-for="@Model.First().Type"></label>
 			</th>
 			<th>
 				<label asp-for="@Model.First().Description"></label>
@@ -16,8 +17,8 @@
 			
 			<th></th>
 		</tr>
-		</thead>
-		<tbody>
+	</thead>
+	<tbody>
 
 		@foreach (var foodTruck in Model)
 		{
@@ -26,13 +27,10 @@
 					<a asp-controller="FoodTrucks" asp-action="Details" asp-route-id="@foodTruck.Id" class="FTNameButton">@foodTruck.Name</a>
 				</td>
 				<td>
-					@foodTruck.Type
-				</td>
-				<td>
 					@foodTruck.Description
 				</td>
 				
 			</tr>
 		}
-		</tbody>
-	</table>
+	</tbody>
+</table>

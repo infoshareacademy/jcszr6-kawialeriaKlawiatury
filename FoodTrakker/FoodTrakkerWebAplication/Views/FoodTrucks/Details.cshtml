@@ -1,5 +1,4 @@
-﻿
-@model FoodTrakker.Services.DTOs.FoodTruckDto;
+﻿@model FoodTrakker.Services.DTOs.FoodTruckDto;
 
 @{
     ViewData["Title"] = "Details";
@@ -77,8 +76,6 @@
    @if (User.Identity.IsAuthenticated)
     {
         <a asp-controller="User" asp-action="CreateReview" asp-route-id="@Model.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add Review</a>
-        
-        
         <a asp-controller="User" asp-action="AddFoodTruckToFavourites" asp-route-id="@Model.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add To Favourites!</a>
         <a asp-controller="User" asp-action="RemoveFoodTruckFromFavourites" asp-route-id="@Model.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Remove From Favourites!</a>
         

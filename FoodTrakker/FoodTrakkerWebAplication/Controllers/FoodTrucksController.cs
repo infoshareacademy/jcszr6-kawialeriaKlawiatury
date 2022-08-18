@@ -12,6 +12,7 @@ namespace FoodTrakkerWebAplication.Controllers
     {
         private readonly FoodTruckService _foodTruckService;
         private readonly IMapper _mapper;
+        private readonly UserRepository _userRepository;
         
         public FoodTrucksController(FoodTruckService foodTruckService, IMapper mapper)
         {
@@ -48,13 +49,13 @@ namespace FoodTrakkerWebAplication.Controllers
         //GET: FoodTrucksController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-
+            
+            var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
            
-                var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
-                var foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
-                
+            var foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
+            
                      
-            if (foodTruck != null)
+            if (foodTruckDto!= null)
             {
 
                 return View(foodTruckDto);

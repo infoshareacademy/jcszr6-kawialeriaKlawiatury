@@ -7,6 +7,7 @@ namespace FoodTrakker.Core.Model
     public class Review : Iindexable<int>
     {
        
+        
         public int Id { get; set; }
         public int? FoodTruckId { get; set; }
        // [ForeignKey("FoodTruckId")]
@@ -19,7 +20,8 @@ namespace FoodTrakker.Core.Model
         [IntegerValidator(MinValue = 1, MaxValue = 10)]
         public int Rating { get; set; }
         public int AuthorID { get; set; }
-       
-       
+        
+    
+
     }
 }

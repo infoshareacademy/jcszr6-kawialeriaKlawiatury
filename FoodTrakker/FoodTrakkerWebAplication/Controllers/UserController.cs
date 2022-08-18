@@ -120,5 +120,35 @@ namespace FoodTrakkerWebAplication.Controllers
 
             return View("../FoodTrucks/Details", foodTruckDto);
         }
+        public async Task<ActionResult> ListFavFoodTruck()
+        {
+            ICollection<FoodTruck> foodTrucks = null;
+            ICollection<FoodTruckDto> foodTrucksDto = null;
+             var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+            foodTrucks = await _favouritesFoodTruckService.FavFoodTrucks(x.Value);
+            foodTrucksDto = _mapper.Map<ICollection<FoodTruck>,ICollection<FoodTruckDto>>(foodTrucks);    
+            if (foodTrucksDto!= null)
+            {
+
+                return View(foodTrucksDto);
+            }
+
+            return NotFound();
+        }
+        public async Task<ActionResult> ListReview()
+        {
+            List<Review> reviews = null;
+            List<ReviewDto> reviewsDto = null;
+            var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+            reviews = await _favouritesFoodTruckService.UserReviews(x.Value);
+            reviewsDto = _mapper.Map<List<Review>, List<ReviewDto>>(reviews);
+            if (reviewsDto!= null)
+            {
+
+                return View(reviewsDto);
+            }
+
+            return NotFound();
+        }
     }
 }
