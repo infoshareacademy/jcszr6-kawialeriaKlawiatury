@@ -37,5 +37,22 @@ namespace FoodTrakker.Repository
 
             return foodTruck;
         }
+        public async Task<ICollection<FoodTruck>> FavFoodTrucks(string userId)
+        {
+            var user = await _context.Users.Include(u => u.FavouriteFoodTrucks).AsTracking()
+                .FirstOrDefaultAsync(u => u.Id.Equals(userId));
+            var foodTrucks = user.FavouriteFoodTrucks;
+
+            return foodTrucks;
+        }
+
+        public async Task<List<Review>> UserReviews(string userId)
+        {
+            var user = await _context.Users.Include(u => (u as User).Reviews)
+               .FirstOrDefaultAsync(u => u.Id.Equals(userId));
+            var reviews = user.Reviews;
+
+            return reviews;
+        }  
     }
 }

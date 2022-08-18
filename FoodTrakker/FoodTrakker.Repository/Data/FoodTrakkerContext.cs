@@ -49,12 +49,12 @@ namespace FoodTrakker.Repository.Data
 
             modelBuilder.Entity<User>()              
                 .Ignore(u => u.FavouriteFoodTrucks);
-
             modelBuilder.Entity<User>()
                 .Ignore(u => u.Reviews);
             modelBuilder.Entity<User>()
                 .HasMany<FoodTruck>(u => u.FavouriteFoodTrucks)
                 .WithMany(f => f.Users);
+           
             //modelBuilder.Entity<FoodTruck>()
             //    .HasMany<Review>(f => f.Reviews)
             //    .WithOne(r => r.FoodTruckId);
