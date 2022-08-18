@@ -12,6 +12,7 @@ namespace FoodTrakker.Services.DTOs
         public Location Location { get; set; }
         public FoodTruckType Type { get; set; }
         public ICollection<FoodTruckEvent> FoodTruckEvents { get; set; }
+       
     }
 
 }

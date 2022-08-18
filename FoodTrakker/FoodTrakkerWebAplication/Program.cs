@@ -45,6 +45,9 @@ builder.Services.AddScoped<IRepository<Event>, EventRepository>();
 builder.Services.AddScoped<IFoodTruckRepository, FoodTruckRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IRepository<FoodTruckType>, Repository<FoodTruckType>>();
+builder.Services.AddScoped<IRepository<Review>, Repository<Review>>();
+
 
 
 var app = builder.Build();

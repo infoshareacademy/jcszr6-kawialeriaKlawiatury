@@ -13,6 +13,10 @@ namespace FoodTrakker.Repository
             _context = context;
         }
 
+        //Task<List<FoodTruck>> FindByEventAsync(string EventName)
+        //{
+            
+        //}
         public Task<List<FoodTruck>> FindByCityAsync(string City)
         {
             return _context.FoodTrucks.Where(f => f.Location.City.Contains(City))
@@ -28,10 +32,9 @@ namespace FoodTrakker.Repository
                 .Include(f => f.Type)
                 .ToListAsync();
         }
-
         public Task<List<FoodTruck>> FindByTypeAsync(string Type)
         {
-            return _context.FoodTrucks.Where(f => f.Location.Street.Contains(Type))
+            return _context.FoodTrucks.Where(f => f.Type.Name.Contains(Type))
                 .Include(f => f.Location)
                 .Include(f => f.Type)
                 .ToListAsync();
@@ -39,7 +42,7 @@ namespace FoodTrakker.Repository
 
         public Task<List<FoodTruck>> FindFoodTruckAsync(string Name)
         {
-            return _context.FoodTrucks.Where(f => f.Name.Contains(Name) )
+            return _context.FoodTrucks.Where(f => f.Name.Contains(Name))
                 .Include(f => f.Location)
                 .Include(f => f.Type)
                 .ToListAsync();
@@ -60,6 +63,12 @@ namespace FoodTrakker.Repository
                 .Include(f => f.Type).SingleOrDefaultAsync(f => f.Id == Id);
         }
 
-
+        //Task<List<FoodTruck>> IFoodTruckRepository.FindByEventAsync(string Event)
+        //{
+        //    return _context.FoodTruckEvents.Where(f => f.FoodTruck.FoodTruckEvents.Contains(Event))
+        //        .Include(f => f.Location)
+        //        .Include(f => f.Type)
+        //        .ToListAsync();
+        //}
     }
 }
