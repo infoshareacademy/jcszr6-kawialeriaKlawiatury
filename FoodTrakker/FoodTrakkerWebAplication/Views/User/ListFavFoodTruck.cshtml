@@ -29,7 +29,10 @@
 				<td>
 					@foodTruck.Description
 				</td>
-				
+				<td>
+                 
+                @Html.ActionLink("Remove from favourites!", "RemoveFoodTruckFromFavourites", new { id= foodTruck.Id })
+                </td>
 			</tr>
 		}
 	</tbody>
