@@ -35,15 +35,11 @@ namespace FoodTrakkerWebAplication.Controllers
         }
         public async Task<ActionResult> Index()
         {
-            //var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
-            //var foodTrucksDto = _mapper.Map<List<FoodTruck>,List<FoodTruckDto>>(foodTrucks);
-            //var userReviews = new List<Review>() { };
-            //var userReviewsDto = _mapper.Map<List<Review>,List<ReviewDto>>(userReviews);
-            //var uEViewModel = new FoodTruckEventViewModel();
-            //return View((foodTrucks: uEViewModel, reviews: userReviewsDto));
+           
             var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
-            var foodTruckDto = _mapper.Map<ICollection<FoodTruck>, ICollection<FoodTruckDto>>(foodTrucks);
-            return View(foodTruckDto);
+            var foodTruckDto = _mapper.Map<ICollection<FoodTruck>,
+                ICollection<FoodTruckDto>>(foodTrucks);
+          return View("../FoodTrucks/Index",foodTruckDto);
         }
         // GET: UserController/Create
         public ActionResult CreateReview(int id)

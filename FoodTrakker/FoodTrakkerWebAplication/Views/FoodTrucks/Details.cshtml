@@ -71,7 +71,8 @@
     </dl>
 </div>
 <div>
-   <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+ 
+  <a href="@Url.Action("Index","FoodTrucks")" class="btn btn-secondary"> Back to List</a>
    
    @if (User.Identity.IsAuthenticated)
     {
