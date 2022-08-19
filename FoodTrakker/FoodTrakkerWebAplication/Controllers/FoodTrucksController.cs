@@ -56,8 +56,8 @@ namespace FoodTrakkerWebAplication.Controllers
             var foodTruckDto = _mapper.Map<ICollection<FoodTruck>, 
                 ICollection<FoodTruckDto>>(foodTrucks);
 
-            var foodTruckReviewRate = new FoodTruckTypeDto { FoodTrucks = foodTruckDto };
-            foodTruckReviewRate.FoodTruckReviewRate = await _foodTruckService.GetFoodTruckReviewRates();
+            //var foodTruckReviewRate = new FoodTruckTypeDto { FoodTrucks = foodTruckDto };
+            //foodTruckReviewRate.FoodTruckReviewRate = await _foodTruckService.GetFoodTruckReviewRates();
 
             var foodTruckTypeDto = new FoodTruckTypeDto { FoodTrucks = foodTruckDto };
             foodTruckTypeDto.FoodTruckTypeName = await _foodTruckService.GetFoodTruckTypeNames();

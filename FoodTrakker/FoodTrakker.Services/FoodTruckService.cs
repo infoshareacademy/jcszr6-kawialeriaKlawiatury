@@ -58,11 +58,11 @@ namespace FoodTrakker.Services
             return _foodTruckRepository.FindByTypeAsync(Type);
         }
 
-        public async Task<IEnumerable<string>> GetFoodTruckReviewRates()
-        {
-            var rates = await _reviewRepository.GetAsync();
-            return rates.Select(x => x.Rating.ToString());
-        }
+        //public async Task<IEnumerable<string>> GetFoodTruckReviewRates()
+        //{
+        //    var rates = await _reviewRepository.GetAsync();
+        //    return rates.Select(x => x.Rating.ToString());
+        //}
 
         public async Task<IEnumerable<string>> GetFoodTruckTypeNames()
         {

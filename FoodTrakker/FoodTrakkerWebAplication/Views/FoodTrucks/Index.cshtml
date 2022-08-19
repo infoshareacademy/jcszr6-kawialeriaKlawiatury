@@ -42,7 +42,7 @@
             <input type="submit" value="Filter" />
         </div>
     </form>
-    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
+    @*<form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
         <div style="margin-right: 5px">
             <p>Review rating</p>
             @Html.DropDownListFor(m => m.FoodTrackReviews.First().Rating,
@@ -51,7 +51,7 @@
             
             <input type="submit" value="Filter"/>
         </div>
-    </form>
+    </form*@>
    @* <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 mb-2">
         <div style="margin-right: 5px">
         <select asp-for="FoodTruckType" asp-items="Model.Types">
