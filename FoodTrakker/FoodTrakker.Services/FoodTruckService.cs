@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FoodTrakker.Repository;
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Contracts;
 
@@ -7,10 +8,10 @@ namespace FoodTrakker.Services
     public class FoodTruckService
     {
         private readonly IFoodTruckRepository _foodTruckRepository;
-        private readonly IRepository<FoodTruckType> _foodTruckTypeRepository;
-        private readonly IRepository<Review> _reviewRepository;
+        private readonly IRepository<FoodTruckType, string> _foodTruckTypeRepository;
+        private readonly IRepository<Review, string> _reviewRepository;
         private readonly IMapper _mapper;
-        public FoodTruckService(IFoodTruckRepository foodTruckRepository, IRepository<FoodTruckType> foodTruckTypeRepository, IMapper mapper, IRepository<Review> reviewRepository )
+        public FoodTruckService(IFoodTruckRepository foodTruckRepository, IRepository<FoodTruckType, string> foodTruckTypeRepository, IMapper mapper, IRepository<Review, string> reviewRepository )
         {
             _foodTruckRepository = foodTruckRepository;
             _foodTruckTypeRepository = foodTruckTypeRepository;

@@ -62,7 +62,6 @@ namespace FoodTrakker.Repository
                 .Include(f => f.Location)
                 .Include(f => f.Type).SingleOrDefaultAsync(f => f.Id == Id);
         }
-<<<<<<< HEAD
         public Task<List<FoodTruck>> GetOwnerFoodTrucks(string ownerId)
         {
             return Task.FromResult(_context.FoodTrucks
@@ -75,7 +74,7 @@ namespace FoodTrakker.Repository
         {
             await _context.SaveChangesAsync();
         }
-=======
+
 
         //Task<List<FoodTruck>> IFoodTruckRepository.FindByEventAsync(string Event)
         //{
@@ -84,6 +83,6 @@ namespace FoodTrakker.Repository
         //        .Include(f => f.Type)
         //        .ToListAsync();
         //}
->>>>>>> feat/FTsearch
+
     }
 }

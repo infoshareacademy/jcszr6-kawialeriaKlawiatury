@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FoodTrakker.Repository\FoodTrakker.Repository.csproj" />
+    <ProjectReference Include="..\FoodTrakker\FoodTrakker.BusinessLogic.csproj" />
     <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker.Core.csproj" />
   </ItemGroup>
 
