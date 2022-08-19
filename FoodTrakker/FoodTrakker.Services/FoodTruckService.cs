@@ -1,4 +1,5 @@
-﻿using FoodTrakker.Core.Model;
+﻿using AutoMapper;
+using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Contracts;
 
 namespace FoodTrakker.Services
@@ -6,10 +7,18 @@ namespace FoodTrakker.Services
     public class FoodTruckService
     {
         private readonly IFoodTruckRepository _foodTruckRepository;
-        public FoodTruckService(IFoodTruckRepository foodTruckRepository)
+        private readonly IRepository<FoodTruckType> _foodTruckTypeRepository;
+        private readonly IRepository<Review> _reviewRepository;
+        private readonly IMapper _mapper;
+        public FoodTruckService(IFoodTruckRepository foodTruckRepository, IRepository<FoodTruckType> foodTruckTypeRepository, IMapper mapper, IRepository<Review> reviewRepository )
         {
             _foodTruckRepository = foodTruckRepository;
+            _foodTruckTypeRepository = foodTruckTypeRepository;
+            _reviewRepository = reviewRepository;
+            _mapper = mapper;
+
         }
+
         public Task<List<FoodTruck>> GetFoodTrucksAsync()
         {
             return _foodTruckRepository.GetAsync();
@@ -66,5 +75,26 @@ namespace FoodTrakker.Services
         {
             return _foodTruckRepository.FindByStreetAsync(City);
         }
+
+        public Task<List<FoodTruck>> FindByTypeAsync(string Type)
+        {
+            return _foodTruckRepository.FindByTypeAsync(Type);
+        }
+
+        //public async Task<IEnumerable<string>> GetFoodTruckReviewRates()
+        //{
+        //    var rates = await _reviewRepository.GetAsync();
+        //    return rates.Select(x => x.Rating.ToString());
+        //}
+
+        public async Task<IEnumerable<string>> GetFoodTruckTypeNames()
+        {
+            var types = await _foodTruckTypeRepository.GetAsync();
+            return types.Select(x => x.Name);
+        }
+        //public Task<List<FoodTruck>> FindByEventAsync(string EventName)
+        //{
+        //    return _foodTruckRepository.FindByEventAsync(EventName);
+        //}
     }
 }

@@ -23,8 +23,9 @@ namespace FoodTrakkerWebAplication.Controllers
            
         }
         
-        public async Task<ActionResult> Index(string searchString, string citySearchString, string streetSearchString)
+        public async Task<ActionResult> Index(string EventName, string Type, string searchString, string citySearchString, string streetSearchString)
         {
+            
             var foodTrucks = new List<FoodTruck>();
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -38,14 +39,31 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 foodTrucks = await _foodTruckService.FindByStreetAsync(streetSearchString);
             }
+            else if (!String.IsNullOrEmpty(Type))
+            {
+                foodTrucks = await _foodTruckService.FindByTypeAsync(Type);
+            }
+            //else if (!String.IsNullOrEmpty(EventName))
+            //{
+            //    foodTrucks = await _foodTruckService.FindByEventAsync(EventName);
+            //}
             else
             {
                 foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
             }
+
+            
             
             var foodTruckDto = _mapper.Map<ICollection<FoodTruck>, 
                 ICollection<FoodTruckDto>>(foodTrucks);
-            return View(foodTruckDto);
+
+            //var foodTruckReviewRate = new FoodTruckTypeDto { FoodTrucks = foodTruckDto };
+            //foodTruckReviewRate.FoodTruckReviewRate = await _foodTruckService.GetFoodTruckReviewRates();
+
+            var foodTruckTypeDto = new FoodTruckTypeDto { FoodTrucks = foodTruckDto };
+            foodTruckTypeDto.FoodTruckTypeName = await _foodTruckService.GetFoodTruckTypeNames();
+
+            return View(foodTruckTypeDto);
         }
 
         //GET: FoodTrucksController/Details/5
