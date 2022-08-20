@@ -57,8 +57,8 @@ builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ITypeRepository, TypeRepository>();
-builder.Services.AddScoped<IRepository<FoodTruckType, string>, Repository<FoodTruckType, string>>();
-builder.Services.AddScoped<IRepository<Review, string>, Repository<Review, string>>();
+builder.Services.AddScoped<IRepository<FoodTruckType, int>, Repository<FoodTruckType, int>>();
+builder.Services.AddScoped<IRepository<Review, int>, Repository<Review, int>>();
 
 
 

@@ -8,10 +8,10 @@ namespace FoodTrakker.Services
     public class FoodTruckService
     {
         private readonly IFoodTruckRepository _foodTruckRepository;
-        private readonly IRepository<FoodTruckType, string> _foodTruckTypeRepository;
-        private readonly IRepository<Review, string> _reviewRepository;
+        private readonly IRepository<FoodTruckType, int> _foodTruckTypeRepository;
+        private readonly IRepository<Review, int> _reviewRepository;
         private readonly IMapper _mapper;
-        public FoodTruckService(IFoodTruckRepository foodTruckRepository, IRepository<FoodTruckType, string> foodTruckTypeRepository, IMapper mapper, IRepository<Review, string> reviewRepository )
+        public FoodTruckService(IFoodTruckRepository foodTruckRepository, IRepository<FoodTruckType, int> foodTruckTypeRepository, IMapper mapper, IRepository<Review, int> reviewRepository )
         {
             _foodTruckRepository = foodTruckRepository;
             _foodTruckTypeRepository = foodTruckTypeRepository;
