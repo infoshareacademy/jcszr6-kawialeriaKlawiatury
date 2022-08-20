@@ -311,9 +311,9 @@ namespace FoodTrakker.Repository.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "df456c69-021b-1234-a852-b32678f1alec", "e7b2c20a-f095-4d77-b467-8bf67d8baaf9", "User", "USER" },
-                    { "df456c89-021b-4342-a852-b32678f1alec", "02807d51-52e7-4afe-9bb8-6c883925be16", "Owner", "OWNER" },
-                    { "df510c89-042b-4342-a852-b32678f1c1ce", "60458806-cb6c-4edc-b041-166d635b18e3", "Administrator", "ADMINISTRATOR" }
+                    { "df456c69-021b-1234-a852-b32678f1alec", "419005c3-0fa2-4ef3-bd45-14440414bc1b", "User", "USER" },
+                    { "df456c89-021b-4342-a852-b32678f1alec", "3b633ffb-8b04-4b4e-8bfb-302096601a77", "Owner", "OWNER" },
+                    { "df510c89-042b-4342-a852-b32678f1c1ce", "f8ad8a91-d2a3-4a34-8146-2cb80e4f64ea", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
