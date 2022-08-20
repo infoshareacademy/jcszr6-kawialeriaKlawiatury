@@ -29,103 +29,15 @@
     <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
         <div style="margin-right: 5px">
             <p>Cuisine</p>
-            @Html.DropDownListFor(m => m.FoodTrucks.First().Type,
+            @Html.DropDownListFor(m => m.FoodTrucks.FirstOrDefault().Type,
                 new SelectList(Model.FoodTruckTypeName),
                 ".....")
             
             <input type="submit" value="Filter"/>
         </div>
     </form>
-    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-        <div style="margin-right: 5px">
-            Event <input type="input-group" name="EventName" />
-            <input type="submit" value="Filter" />
-        </div>
-    </form>
-    @*<form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-        <div style="margin-right: 5px">
-            <p>Review rating</p>
-            @Html.DropDownListFor(m => m.FoodTrackReviews.First().Rating,
-                new SelectList(Model.FoodTruckReviewRate),
-                ".....")
-            
-            <input type="submit" value="Filter"/>
-        </div>
-    </form*@>
-   @* <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 mb-2">
-        <div style="margin-right: 5px">
-        <select asp-for="FoodTruckType" asp-items="Model.Types">
-            <option value="">All</option>
-        </select>
-    </form>*@
-        <!--<form class="col-2">
-            <div>
-                <label for="FoodTruckName" class="form-label">Name of Food Truck:</label>
-                <input type="text" class="form-control" id="FoodTruckName"/>
-            </div>
-        </form>
-        <form class="col-2">
-            <div>
-                <label for="FoodTruckLocationCity" class="form-label">City U want to search:</label>
-                <input type="text" class="form-control" id="FoodTruckLocationCity"/>
-            </div>
-        </form>
-        <form class="col-2">
-            <div>
-                <label for="FoodTruckLocationStreet" class="form-label">Search the street:</label>
-                <input type="text" class="form-control" id="FoodTruckLocationStreet"/>
-            </div>
-        </form>
-        <form class="col-2">
-            <div>
-                <div class="input-group mb-2">
-                    <div class="input-group">
-                        <label class="input-group-text">Search</label>
-                    </div>
-                </div>
-                <select class="shadow" id="FoodTruckType">
-                    <option selected> Cuisine...</option>
-                    <option value="1">Fusion</option>
-                    <option value="2">Fast Food</option>
-                    <option value="3">Mexican</option>
-                    <option value="4">Wurst</option>
-                    <option value="5">Italian</option>
-                    <option value="6">Regional</option>
-                    <option value="7">Polish</option>
-                    <option value="8">Midterranean</option>
-                    <option value="9">Indian</option>
-                </select>
-            </div>
-        </form>
-        <form class="col-2">
-            <div>
-                <label for="FoodTruckEvents" class="form-label">Check the events:</label>
-                <input type="text" class="form-control" id="FoodTruckEventst"/>
-            </div>
-        </form>
-        <form class="col-2">
-            <div>
-                <div class="input-group mb-2">
-                    <div class="input-group">
-                        <label class="input-group-text">Search</label>
-                    </div>
-                </div>
-                <select class="shadow" id="FoodTruckRatings">
-                    <option selected> Ratings...</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                </select>
-            </div>
-        </form>-->
 
-    </div> 
+</div> 
 
 
 <div class="row container-fluid">

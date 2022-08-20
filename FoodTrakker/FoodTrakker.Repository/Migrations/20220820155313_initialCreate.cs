@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodTrakker.Repository.Migrations
 {
-    public partial class init : Migration
+    public partial class initialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -311,9 +311,9 @@ namespace FoodTrakker.Repository.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "df456c69-021b-1234-a852-b32678f1alec", "419005c3-0fa2-4ef3-bd45-14440414bc1b", "User", "USER" },
-                    { "df456c89-021b-4342-a852-b32678f1alec", "3b633ffb-8b04-4b4e-8bfb-302096601a77", "Owner", "OWNER" },
-                    { "df510c89-042b-4342-a852-b32678f1c1ce", "f8ad8a91-d2a3-4a34-8146-2cb80e4f64ea", "Administrator", "ADMINISTRATOR" }
+                    { "df456c69-021b-1234-a852-b32678f1alec", "02ebb630-e6c7-427c-94cf-31642d13a07a", "User", "USER" },
+                    { "df456c89-021b-4342-a852-b32678f1alec", "7d4b24f8-be74-48a3-ab54-0036389f1b1d", "Owner", "OWNER" },
+                    { "df510c89-042b-4342-a852-b32678f1c1ce", "76532144-b9df-475e-9c78-01ee26b0ca59", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
