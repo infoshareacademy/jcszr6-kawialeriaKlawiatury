@@ -212,7 +212,7 @@ namespace FoodTrakker.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LocationId = table.Column<int>(type: "int", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: false),
@@ -311,9 +311,9 @@ namespace FoodTrakker.Repository.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "df456c69-021b-1234-a852-b32678f1alec", "b18acecd-0217-4665-901d-4f12f4488177", "User", "USER" },
-                    { "df456c89-021b-4342-a852-b32678f1alec", "0bd95676-2a48-4897-8abc-bcaee1d93dea", "Owner", "OWNER" },
-                    { "df510c89-042b-4342-a852-b32678f1c1ce", "98fe51a1-caa4-4d37-9f3e-4252adc2993a", "Administrator", "ADMINISTRATOR" }
+                    { "df456c69-021b-1234-a852-b32678f1alec", "e7b2c20a-f095-4d77-b467-8bf67d8baaf9", "User", "USER" },
+                    { "df456c89-021b-4342-a852-b32678f1alec", "02807d51-52e7-4afe-9bb8-6c883925be16", "Owner", "OWNER" },
+                    { "df510c89-042b-4342-a852-b32678f1c1ce", "60458806-cb6c-4edc-b041-166d635b18e3", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -385,6 +385,12 @@ namespace FoodTrakker.Repository.Migrations
                 name: "IX_FoodTrucks_LocationId",
                 table: "FoodTrucks",
                 column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FoodTrucks_Name",
+                table: "FoodTrucks",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_FoodTrucks_TypeId",

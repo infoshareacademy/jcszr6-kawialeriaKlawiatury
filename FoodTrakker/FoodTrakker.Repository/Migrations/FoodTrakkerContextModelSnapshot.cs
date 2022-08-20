@@ -88,7 +88,7 @@ namespace FoodTrakker.Repository.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(max)");
@@ -99,6 +99,9 @@ namespace FoodTrakker.Repository.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("LocationId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.HasIndex("TypeId");
 
@@ -381,21 +384,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "98fe51a1-caa4-4d37-9f3e-4252adc2993a",
+                            ConcurrencyStamp = "60458806-cb6c-4edc-b041-166d635b18e3",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "0bd95676-2a48-4897-8abc-bcaee1d93dea",
+                            ConcurrencyStamp = "02807d51-52e7-4afe-9bb8-6c883925be16",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "b18acecd-0217-4665-901d-4f12f4488177",
+                            ConcurrencyStamp = "e7b2c20a-f095-4d77-b467-8bf67d8baaf9",
                             Name = "User",
                             NormalizedName = "USER"
                         });
