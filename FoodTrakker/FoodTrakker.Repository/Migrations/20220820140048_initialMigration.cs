@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodTrakker.Repository.Migrations
 {
-    public partial class init : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -212,7 +212,7 @@ namespace FoodTrakker.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LocationId = table.Column<int>(type: "int", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: false),
@@ -311,9 +311,9 @@ namespace FoodTrakker.Repository.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "df456c69-021b-1234-a852-b32678f1alec", "b18acecd-0217-4665-901d-4f12f4488177", "User", "USER" },
-                    { "df456c89-021b-4342-a852-b32678f1alec", "0bd95676-2a48-4897-8abc-bcaee1d93dea", "Owner", "OWNER" },
-                    { "df510c89-042b-4342-a852-b32678f1c1ce", "98fe51a1-caa4-4d37-9f3e-4252adc2993a", "Administrator", "ADMINISTRATOR" }
+                    { "df456c69-021b-1234-a852-b32678f1alec", "c78d6392-ad7a-4069-881e-6bcecee63c41", "User", "USER" },
+                    { "df456c89-021b-4342-a852-b32678f1alec", "17b7601b-ff62-453d-ac6d-c060f79f2eb2", "Owner", "OWNER" },
+                    { "df510c89-042b-4342-a852-b32678f1c1ce", "e4cc3128-a937-4667-94c9-6bc2af5cc595", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -385,6 +385,12 @@ namespace FoodTrakker.Repository.Migrations
                 name: "IX_FoodTrucks_LocationId",
                 table: "FoodTrucks",
                 column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FoodTrucks_Name",
+                table: "FoodTrucks",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_FoodTrucks_TypeId",

@@ -4,6 +4,7 @@ using FoodTrakker.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTrakker.Repository.Migrations
 {
     [DbContext(typeof(FoodTrakkerContext))]
-    partial class FoodTrakkerContextModelSnapshot : ModelSnapshot
+    [Migration("20220820140048_initialMigration")]
+    partial class initialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -384,33 +386,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-<<<<<<< HEAD
-                            ConcurrencyStamp = "07169b5d-ca81-46d1-8155-3002f74027a2",
-=======
-                            ConcurrencyStamp = "52983d64-6d9a-4dc2-949b-fbdc4d3981dc",
->>>>>>> fd5f03174b989ee23de06e276ba6c19d2a6fc357
+                            ConcurrencyStamp = "e4cc3128-a937-4667-94c9-6bc2af5cc595",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-<<<<<<< HEAD
-                            ConcurrencyStamp = "8505952f-76bd-40dc-8707-ae4fc532c867",
-=======
-                            ConcurrencyStamp = "b17db5b3-aea4-4ab7-9d86-0fe4618e982d",
->>>>>>> fd5f03174b989ee23de06e276ba6c19d2a6fc357
+                            ConcurrencyStamp = "17b7601b-ff62-453d-ac6d-c060f79f2eb2",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-<<<<<<< HEAD
-                            ConcurrencyStamp = "7584c8f8-88c9-4dee-8361-169c9b5652a6",
-=======
-                            ConcurrencyStamp = "428a7c88-1878-417d-9707-340469b48655",
->>>>>>> fd5f03174b989ee23de06e276ba6c19d2a6fc357
+                            ConcurrencyStamp = "c78d6392-ad7a-4069-881e-6bcecee63c41",
                             Name = "User",
                             NormalizedName = "USER"
                         });
