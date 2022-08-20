@@ -70,7 +70,8 @@
     </dl>
 </div>
 <div>
- 
+  <h4>Reviews:</h4>
+        @await Component.InvokeAsync("FoodTruckReview", @Model.foodtruck.Id)
   <a href="@Url.Action("Index","FoodTrucks")" class="btn btn-secondary"> Back to List</a>
    
    @if (User.Identity.IsAuthenticated)
