@@ -2,67 +2,70 @@
 @model FoodTrakker.Services.DTOs.FoodTruckTypeDto
 
 @{
-    ViewData["Title"] = "Food Trucks";
+	ViewData["Title"] = "Food Trucks";
 }
+<div class="container">
+	<h1>Welcome to the world of mobile cuisine!</h1>
+	<div class="row">
+		<form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
+			<div style="margin-right: 5px">
+				Truck <input type="text" name="SearchString" />
+				<input type="submit" value="Filter" />
+			</div>
+		</form>
 
-<h1>Welcome to the world of mobile cuisine!</h1>
-<div class="row">
-    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-        <div style="margin-right: 5px">
-            Truck <input type="text" name="SearchString" />
-            <input type="submit" value="Filter" />
-        </div>
-    </form>
+		<form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
+			<div style="margin-right: 5px">
+				City <input type="input-group" name="CitySearchString" />
+				<input type="submit" value="Filter" />
+			</div>
+		</form>
+		<form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
+			<div style="margin-right: 5px">
+				Street <input type="input-group" name="StreetSearchString" />
+				<input type="submit" value="Filter" />
+			</div>
+		</form>
+		<form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
+			<div style="margin-right: 5px">
+				<p>Cuisine</p>
+				@Html.DropDownListFor(m => m.FoodTrucks.FirstOrDefault().Type,
+				new SelectList(Model.FoodTruckTypeName),
+				".....")
 
-    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-        <div style="margin-right: 5px">
-            City <input type="input-group" name="CitySearchString" />
-            <input type="submit" value="Filter" />
-        </div>
-    </form>
-    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-        <div style="margin-right: 5px">
-            Street <input type="input-group" name="StreetSearchString" />
-            <input type="submit" value="Filter" />
-        </div>
-    </form>
-    <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-        <div style="margin-right: 5px">
-            <p>Cuisine</p>
-            @Html.DropDownListFor(m => m.FoodTrucks.FirstOrDefault().Type,
-                new SelectList(Model.FoodTruckTypeName),
-                ".....")
-            
-            <input type="submit" value="Filter"/>
-        </div>
-    </form>
+				<input type="submit" value="Filter" />
+			</div>
+		</form>
 
-</div> 
+	</div>
 
 
-<div class="row container-fluid">
-    @foreach (var item in Model.FoodTrucks)
-    {
-        <div class="col-md-3 col-sm-3 border-primary mb-3">
-            <div class="card mb-3 FTCard" style="max-width: 340px;">
-                <img src="kawialeria klawiatury.png" class="card-img-top FTImage" alt="@item.Name">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text" style="min-height: 90px">@item.Description</p>
-                    <p class="card-text" style="min-height: 50px">From: @item.Location.City</p>
-                    <td>  @Html.ActionLink("More info", "Details", new {id = item.Id}, new {@class="text-dark btn FTButton FTCardbutton"})
-                    </td>
-                </div>
-            </div>
-        </div>
-    }
-    <div class="row">  
-    <div class="col-md-12">  
-        <div class="form-group">  
-            @Html.Raw(@ViewBag.Alert)  
-        </div>  
-    </div>  
-</div>  
+	<div class="row container-fluid">
+		@foreach (var item in Model.FoodTrucks)
+		{
+			<div class="col-md-3 col-sm-3 border-primary mb-3">
+				<div class="card mb-3 FTCard" style="max-width: 340px;">
+					<img src="kawialeria klawiatury.png" class="card-img-top FTImage" alt="@item.Name">
+					<div class="card-body">
+						<h5 class="card-title">@item.Name</h5>
+						<p class="card-text" style="min-height: 90px">@item.Description</p>
+						<p class="card-text" style="min-height: 50px">From: @item.Location.City</p>
+						<td>
+							@Html.ActionLink("More info", "Details", new {id = item.Id}, new {@class="text-dark btn FTButton FTCardbutton"})
+						</td>
+					</div>
+				</div>
+			</div>
+		}
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					@Html.Raw(@ViewBag.Alert)
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
 
 

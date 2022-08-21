@@ -1,98 +1,101 @@
 ﻿@model (FoodTrakker.Services.DTOs.FoodTruckDto foodtruck, FoodTrakker.Services.DTOs.UserDto user);
 
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 
-<h1>Food Trucks</h1>
 
 @{
-    ViewData["Title"] = "DetailsFoodTruck";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "DetailsFoodTruck";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@Model.foodtruck.Name Details</h1>
+<div class="container">
+	<h1>@Model.foodtruck.Name Details</h1>
 
-<div>
-    <h4>FoodTruck</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            <label asp-for="@Model.foodtruck.Name">Name:</label>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.foodtruck.Name
-        </dd>
-        <dt class="col-sm-2">
-            <label asp-for="@Model.foodtruck.Type">Cuisine type:</label>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.foodtruck.Type
-        </dd>
-        <dt class="col-sm-2">
-            <label asp-for="@Model.foodtruck.Description">About us:</label>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.foodtruck.Description
-        </dd>
-      @* <dt class="col-sm-2">
-            <label asp-for="@Model.foodtruck.Location.ZIPCode"> ZIP code:</label>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.foodtruck.Location.ZIPCode
-        </dd>*@
-    @*    <dt class="col-sm-2">
-            <label asp-for="@Model.foodtruck.Location.City">City:</label>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.foodtruck.Location.City
-        </dd>
-        <dt class="col-sm-2">
-            <label asp-for="@Model.foodtruck.Location.Street">Street:</label>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.foodtruck.Location.Street
-        </dd>
-        <dt class="col-sm-2">
-            <label asp-for="@Model.foodtruck.Location.StartDate">Available from:</label>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.foodtruck.Location.StartDate.Date
-        </dd>
-        <dt class="col-sm-2">
-            <label asp-for="@Model.foodtruck.Location.EndDate">to:</label>
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Location.EndDate.Date
-        </dd>
-       @*<h4>Events participation</h4>
-        @await Component.InvokeAsync("FoodTruckEvents",@Model)*@
-    </dl>
-</div>
-<div>
-  <h4>Reviews:</h4>
-        @await Component.InvokeAsync("FoodTruckReview", @Model.foodtruck.Id)
-  <a href="@Url.Action("Index","FoodTrucks")" class="btn btn-secondary"> Back to List</a>
-   
-   @if (User.IsInRole(Roles.User))
-    {
-        <a asp-controller="User" asp-action="CreateReview" asp-route-id="@Model.foodtruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add Review</a>
-        if (Model.user.FavouriteFoodTrucks.Any(f => f.Id == Model.foodtruck.Id))
-        {
-             <a asp-controller="User" asp-action="RemoveFoodTruckFromFavourites" asp-route-id="@Model.foodtruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Remove From Favourites!</a>    
-        }
-        else
-        {        
-            <a asp-controller="User" asp-action="AddFoodTruckToFavourites" asp-route-id="@Model.foodtruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add To Favourites!</a>
-        }
-        
+	<div>
+		<h4>FoodTruck details</h4>
+		<hr />
+		<dl class="row">
+			<dt class="col-sm-2">
+				<label asp-for="@Model.foodtruck.Name">Name:</label>
+			</dt>
+			<dd class="col-sm-10">
+				@Model.foodtruck.Name
+			</dd>
+			<dt class="col-sm-2">
+				<label asp-for="@Model.foodtruck.Type">Cuisine type:</label>
+			</dt>
+			<dd class="col-sm-10">
+				@Model.foodtruck.Type
+			</dd>
+			<dt class="col-sm-2">
+				<label asp-for="@Model.foodtruck.Description">About us:</label>
+			</dt>
+			<dd class="col-sm-10">
+				@Model.foodtruck.Description
+			</dd>
+			@* <dt class="col-sm-2">
+			<label asp-for="@Model.foodtruck.Location.ZIPCode"> ZIP code:</label>
+			</dt>
+			<dd class="col-sm-10">
+			@Model.foodtruck.Location.ZIPCode
+			</dd>*@
+			@*    <dt class="col-sm-2">
+			<label asp-for="@Model.foodtruck.Location.City">City:</label>
+			</dt>
+			<dd class="col-sm-10">
+			@Model.foodtruck.Location.City
+			</dd>
+			<dt class="col-sm-2">
+			<label asp-for="@Model.foodtruck.Location.Street">Street:</label>
+			</dt>
+			<dd class="col-sm-10">
+			@Model.foodtruck.Location.Street
+			</dd>
+			<dt class="col-sm-2">
+			<label asp-for="@Model.foodtruck.Location.StartDate">Available from:</label>
+			</dt>
+			<dd class="col-sm-10">
+			@Model.foodtruck.Location.StartDate.Date
+			</dd>
+			<dt class="col-sm-2">
+			<label asp-for="@Model.foodtruck.Location.EndDate">to:</label>
+			</dt>
+			<dd class="col-sm-10">
+			@Model.Location.EndDate.Date
+			</dd>
+			@*<h4>Events participation</h4>
+			@await Component.InvokeAsync("FoodTruckEvents",@Model)*@
+		</dl>
+	</div>
+	<div>
+		<h4>Reviews:</h4>
+		@await Component.InvokeAsync("FoodTruckReview", @Model.foodtruck.Id)
+		<a href="@Url.Action("Index","FoodTrucks")" class="btn btn-secondary"> Back to List</a>
 
-    }
-    <div class="row">  
-    <div class="col-md-12">  
-        <div class="form-group">  
-            @Html.Raw(@ViewBag.Alert)  
-        </div>  
-    </div>
-</div>  
+		@if (User.IsInRole(Roles.User))
+		{
+			<a asp-controller="User" asp-action="CreateReview" asp-route-id="@Model.foodtruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add Review</a>
+			if (Model.user.FavouriteFoodTrucks.Any(f => f.Id == Model.foodtruck.Id))
+			{
+				<a asp-controller="User" asp-action="RemoveFoodTruckFromFavourites" asp-route-id="@Model.foodtruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Remove From Favourites!</a>
+			}
+			else
+			{
+				<a asp-controller="User" asp-action="AddFoodTruckToFavourites" asp-route-id="@Model.foodtruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add To Favourites!</a>
+			}
+
+
+		}
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					@Html.Raw(@ViewBag.Alert)
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
+
