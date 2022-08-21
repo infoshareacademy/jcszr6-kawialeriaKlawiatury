@@ -5,7 +5,8 @@ using FoodTrakkerWebAplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using FoodTrakker.Core.Model;
-
+using AutoMapper;
+using FoodTrakker.Services.DTOs;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
@@ -13,14 +14,16 @@ namespace FoodTrakkerWebAplication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly FoodTruckService _foodTruckService;
+        private readonly IMapper _mapper;
         //private readonly IRepository<Event> _eventRepository;
         //private readonly IRepository<FoodTruck> _foodTruckRepository;
 
 
-        public HomeController(ILogger<HomeController> logger,FoodTruckService foodTruckService )
+        public HomeController(ILogger<HomeController> logger,FoodTruckService foodTruckService, IMapper mapper)
         {
             _logger = logger;
             _foodTruckService = foodTruckService;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index(string searchString)
@@ -35,12 +38,20 @@ namespace FoodTrakkerWebAplication.Controllers
                 foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
             }
 
-            //var foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
-            //if (foodTrucks == null)
-            //{
-            //    return NotFound();
-            //}
-            return View(foodTrucks);
+            Random random = new Random();
+            var foodTruckDtos = new List<FoodTruckDto>();
+            var counter = 0;
+            if (foodTrucks != null)
+            {
+                while (counter < 6 && counter < foodTrucks.Count)
+                {
+                    int randomNumber = random.Next(0, foodTrucks.Count);
+                    foodTruckDtos.Add(_mapper.Map<FoodTruck, FoodTruckDto>(foodTrucks[randomNumber]));
+                    counter++;
+                }
+            }
+
+            return View(foodTruckDtos);
         }
 
         public IActionResult Privacy()

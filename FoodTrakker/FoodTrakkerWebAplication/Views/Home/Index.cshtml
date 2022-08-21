@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model IEnumerable<FoodTruck>
+@model IEnumerable<FoodTruckDto>
 
 @{
 	ViewData["Title"] = "Home Page";
@@ -10,9 +10,9 @@
 	<div class="container">
 		<div id="carouselExampleIndicators" class="row carousel slide FTCarousel" data-bs-ride="carousel">
 			@*<div class="carousel-indicators">
-				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>*@
 			<div class="carousel-inner">
 				<div class="carousel-item active">
@@ -35,8 +35,8 @@
 			</button>
 		</div>
 		@*<partial name="partials/_UnderConstruction"/>*@
-		<hr/>
-		<div class="row container-fluid">
+		<hr />
+		<div class="row container-fluid">		
 			@foreach (var item in Model)
 			{
 				<div class="col-md-4 col-sm-6 border-primary mb-3">
