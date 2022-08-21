@@ -171,7 +171,15 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: OwnerController/Edit/5
         public async Task<ActionResult> EditFoodTruck(int id)
         {
+            
+
             var foodTruckToEdit = await _foodTruckService.GetFoodTruckAsync(id);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(foodTruckToEdit.OwnerId != userId)
+            {
+                return Content("Access denied!");
+            }
+
             var foodTruckToEditDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruckToEdit);
 
             var locations = await _locationService.GetLocationsAsync();
