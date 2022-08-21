@@ -21,8 +21,7 @@ namespace FoodTrakker.Core.Model
         [IntegerValidator(MinValue = 1, MaxValue = 10)]
         public int Rating { get; set; }
         public int AuthorID { get; set; }
-        
-    
+          
 
     }
 }
