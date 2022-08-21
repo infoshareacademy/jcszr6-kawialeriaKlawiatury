@@ -9,7 +9,7 @@ namespace FoodTrakker.BusinessLogic
 {
     public class Logger
     {
-        internal static void Log()
+        public static void Log()
         {      
             int hour = DateTime.Now.Hour;
             int minute = DateTime.Now.Minute;

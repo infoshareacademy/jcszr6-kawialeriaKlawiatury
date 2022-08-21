@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FoodTrakker.BusinessLogic.Repository;
+using FoodTrakker.BusinessLogic.Models;
 
-namespace FoodTrakker.BusinessLogic.Models
+namespace FoodTrakker.BusinessLogic
 {
     public class GetDataFromFile
     {
@@ -16,7 +17,7 @@ namespace FoodTrakker.BusinessLogic.Models
             try
             {
                 //Adding User & Review
-                var userString = File.ReadAllText(Path.Combine(Environment.CurrentDirectory,"DataJSON","User.json"));
+                var userString = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "DataJSON", "User.json"));
                 var userJson = JsonConvert.DeserializeObject<List<User>>(userString);
 
                 foreach (var user1 in userJson)
@@ -47,7 +48,7 @@ namespace FoodTrakker.BusinessLogic.Models
                 Logger.Log();
                 return false;
             }
-            
+
         }
     }
 }
