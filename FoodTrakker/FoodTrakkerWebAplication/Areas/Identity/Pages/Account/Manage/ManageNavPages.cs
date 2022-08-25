@@ -19,6 +19,7 @@ namespace  FoodTrakkerWebAplication.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public static string Index => "Index";
         public static string ListFavFoodTruck => "ListFavFoodTruck";
+        public static string ListReview => "ListReview";
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -71,6 +72,7 @@ namespace  FoodTrakkerWebAplication.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        public static string ListReviewNavClass(ViewContext viewContext) => PageNavClass(viewContext, ListReview);
         public static string EmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, Email);
 
         /// <summary>
