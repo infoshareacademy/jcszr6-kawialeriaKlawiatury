@@ -25,6 +25,11 @@
 					<label asp-for="Input.Email"></label>
 					<span asp-validation-for="Input.Email" class="text-danger"></span>
 				</div>
+				<div class="form-floating">
+					<input asp-for="Input.UserLocation" class="form-control" autocomplete="location" aria-required="true" />
+					<label asp-for="Input.UserLocation"></label>
+					<span asp-validation-for="Input.UserLocation" class="text-danger"></span>
+				</div>
 				<br>
 				<div class="form-floating">
 					<input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
