@@ -66,9 +66,15 @@ namespace FoodTrakker.Services
             return _foodTruckRepository.FindFoodTruckAsync(Name);
         }
 
-        public void IsNameUnique(string name)
+        public async Task<bool> IsNameUnique(string name)
         {
-            throw new NotImplementedException();
+            var foodTrucks = await GetFoodTrucksAsync();
+            foreach (var foodTruck in foodTrucks)
+            {
+                if (foodTruck.Name == name)
+                    return false;
+            }
+            return true;
         }
         public Task<List<FoodTruck>> FindByCityAsync(string City)
         {
@@ -117,6 +123,21 @@ namespace FoodTrakker.Services
             };
             
             return fileName;
+        }
+
+
+        public async Task<bool> DeleteImageFile(int id)
+        {
+            var foodTruckToDelete = await GetFullFoodTruckInfoAsync(id);
+            if (foodTruckToDelete.ImageName == "food_truck.png")
+            {
+                 return false;
+            }
+            var fileName = foodTruckToDelete.ImageName;
+            var imagePath = CheckDirectory();
+            var filePath = Path.Combine(imagePath, fileName);
+            File.Delete(filePath);
+            return true;
         }
 
         public string CheckDirectory()

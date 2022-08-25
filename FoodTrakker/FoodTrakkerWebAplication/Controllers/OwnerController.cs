@@ -45,7 +45,7 @@ namespace FoodTrakkerWebAplication.Controllers
             _locationService = locationService;
             _typeService = typeService;
             _logger = logger;
-            
+
         }
 
 
@@ -59,7 +59,7 @@ namespace FoodTrakkerWebAplication.Controllers
 
             uEViewModel.Events = _mapper.Map<List<Event>, List<EventDto>>(events.ToList());
             uEViewModel.Foodtrucks = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks.ToList());
-  
+
             return View(uEViewModel);
         }
 
@@ -113,7 +113,7 @@ namespace FoodTrakkerWebAplication.Controllers
         // POST: OwnerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateFoodTruck(FoodTruckDto foodTruckDto, int locationId, int typeId )
+        public async Task<ActionResult> CreateFoodTruck(FoodTruckDto foodTruckDto, int locationId, int typeId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -121,20 +121,22 @@ namespace FoodTrakkerWebAplication.Controllers
             foodTruck.LocationId = locationId;
             foodTruck.TypeId = typeId;
             foodTruck.OwnerId = userId;
-            foodTruck.ImageName = _foodTruckService.AddImageToFoodTruck(foodTruck.Name, foodTruckDto.ImageFile);
+
+            
 
             ModelState.Remove("OwnerId");
             ModelState.Remove("Reviews");
             ModelState.Remove("ImageFile");
             ModelState.Remove("ImageName");
             var errors = ModelState.SelectMany(m => m.Value.Errors);
-            //_foodTruckService.IsNameUnique(foodTruck.Name);
-            //ModelState.AddModelError("Name", "Must be unique!");
+            var isUnique = await _foodTruckService.IsNameUnique(foodTruck.Name);
+            if(!isUnique)
+                ModelState.AddModelError("Name", "Must be unique!");
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("CreateFoodTruck");
             }
-
+            foodTruck.ImageName = _foodTruckService.AddImageToFoodTruck(foodTruck.Name, foodTruckDto.ImageFile);
             try
             {
 
@@ -176,11 +178,11 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: OwnerController/Edit/5
         public async Task<ActionResult> EditFoodTruck(int id)
         {
-            
+
 
             var foodTruckToEdit = await _foodTruckService.GetFoodTruckAsync(id);
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if(foodTruckToEdit.OwnerId != userId)
+            if (foodTruckToEdit.OwnerId != userId)
             {
                 return Content("Access denied!");
             }
@@ -223,6 +225,8 @@ namespace FoodTrakkerWebAplication.Controllers
         {
             ModelState.Remove("OwnerId");
             ModelState.Remove("Reviews");
+            ModelState.Remove("ImageFile");
+            ModelState.Remove("ImageName");
             if (!ModelState.IsValid)
             {
                 return View(foodTruckDto);
@@ -235,6 +239,11 @@ namespace FoodTrakkerWebAplication.Controllers
                 foodTruckToEdit.Description = foodTruck.Description;
                 foodTruckToEdit.LocationId = locationId;
                 foodTruckToEdit.TypeId = typeId;
+                if (foodTruckDto.ImageFile != null)
+                {
+                    await _foodTruckService.DeleteImageFile(id);
+                    foodTruckToEdit.ImageName =  _foodTruckService.AddImageToFoodTruck(foodTruckToEdit.Name, foodTruckDto.ImageFile);
+                }
                 await _foodTruckService.UpdateFoodTruck(foodTruckToEdit);
 
                 return RedirectToAction(nameof(Index));
@@ -259,8 +268,8 @@ namespace FoodTrakkerWebAplication.Controllers
         {
             try
             {
-
-                 await _foodTruckService.DeleteFoodTruck(id);
+                await _foodTruckService.DeleteImageFile(id);
+                await _foodTruckService.DeleteFoodTruck(id);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -338,14 +347,14 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 return View();
             }
-        } 
+        }
 
         // GET: OwnerController/Edit/5
         public async Task<ActionResult> EditEvent(int id)
         {
-            var eventToEdit = await _eventService.GetFullEventInfoAsync(id);        
+            var eventToEdit = await _eventService.GetFullEventInfoAsync(id);
             var foodTrucks = await _eventService.GetFoodTrucksExceptAsync(eventToEdit);
-            
+
 
             var eventToEditDto = _mapper.Map<Event, EventDto>(eventToEdit);
             var foodTrucksDTO = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks.ToList());
@@ -396,8 +405,8 @@ namespace FoodTrakkerWebAplication.Controllers
                 eventToEdit.Description = @event.Description;
                 eventToEdit.Location = @event.Location;
                 eventToEdit.StartDate = @event.StartDate;
-                eventToEdit.EndDate = @event.EndDate;    
-               
+                eventToEdit.EndDate = @event.EndDate;
+
                 var foodTruckstoAdd = _eventService.AddFoodTrucks(foodTruckId, @event);
                 foreach (var foodTruckEvent in foodTruckstoAdd)
                 {
