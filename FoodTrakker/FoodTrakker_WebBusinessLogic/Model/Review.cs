@@ -20,7 +20,7 @@ namespace FoodTrakker.Core.Model
         public string Description { get; set; }
         [IntegerValidator(MinValue = 1, MaxValue = 10)]
         public int Rating { get; set; }
-        public int AuthorID { get; set; }
+        public User User { get; set; }
           
 
     }

@@ -19,7 +19,7 @@ namespace FoodTrakker.Services.DTOs
         public int TypeId { get; set; }
         public FoodTruckType? Type { get; set; }
         public ICollection<FoodTruckEvent>? FoodTruckEvents { get; set; }
-        public int? AvgRating { get; set; }
+        public double? AvgRating { get; set; }
     }
 
 }

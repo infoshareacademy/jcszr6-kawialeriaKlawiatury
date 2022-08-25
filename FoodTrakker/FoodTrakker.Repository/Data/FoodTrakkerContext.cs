@@ -61,7 +61,10 @@ namespace FoodTrakker.Repository.Data
                 .HasForeignKey(r => r.FoodTruckId);
             //modelBuilder.Entity<Review>()
             //   .Ignore(r=>r.FoodTruckId);
-
+            modelBuilder.Entity<Review>()
+                .HasOne<User>(r => r.User)
+                .WithMany(u => u.Reviews);
+                
             modelBuilder.Entity<FoodTruck>()
                 .HasIndex(f => f.Name)
                 .IsUnique();

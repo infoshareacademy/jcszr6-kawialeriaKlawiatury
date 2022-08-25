@@ -15,7 +15,7 @@ namespace FoodTrakker.Repository
 
         //Task<List<FoodTruck>> FindByEventAsync(string EventName)
         //{
-            
+
         //}
         public Task<List<FoodTruck>> FindByCityAsync(string City)
         {
@@ -69,6 +69,23 @@ namespace FoodTrakker.Repository
                  .Include(f => f.Type)
                  .Where(f => f.OwnerId == ownerId)
                  .ToList());
+        }
+        public async Task<double?> AvgRatingCount(int Id)
+        {
+            var foodTruck = _context.FoodTrucks
+                .Include(f => f.Reviews)
+                .Include(f => f.Location)
+                .Include(f => f.Type).SingleOrDefaultAsync(f => f.Id == Id);
+            int ratingSum = 0;
+            foreach (var review in foodTruck.Result.Reviews)
+            {
+                ratingSum += review.Rating;
+            }
+           var ratingCount = foodTruck.Result.Reviews.Count();
+           var avgRating = foodTruck.Result.AvgRating;
+           avgRating = ratingSum/ ratingCount;
+
+              return avgRating;
         }
         public async Task SaveChanges()
         {
