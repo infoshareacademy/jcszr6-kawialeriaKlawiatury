@@ -1,5 +1,6 @@
 ﻿using FoodTrakker.Core.LinkingClasses;
 using FoodTrakker.Core.Model;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,6 +20,9 @@ namespace FoodTrakker.Services.DTOs
         public int TypeId { get; set; }
         public FoodTruckType? Type { get; set; }
         public ICollection<FoodTruckEvent>? FoodTruckEvents { get; set; }
+        public IFormFile ImageFile { get; set; }
+
+        public string ImageName { get; set; }
 
     }
 

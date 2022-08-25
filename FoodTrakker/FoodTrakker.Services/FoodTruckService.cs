@@ -2,6 +2,8 @@
 using FoodTrakker.Repository;
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Contracts;
+using Microsoft.AspNetCore.Http;
+
 
 namespace FoodTrakker.Services
 {
@@ -11,7 +13,8 @@ namespace FoodTrakker.Services
         private readonly IRepository<FoodTruckType, int> _foodTruckTypeRepository;
         private readonly IRepository<Review, int> _reviewRepository;
         private readonly IMapper _mapper;
-        public FoodTruckService(IFoodTruckRepository foodTruckRepository, IRepository<FoodTruckType, int> foodTruckTypeRepository, IMapper mapper, IRepository<Review, int> reviewRepository )
+
+        public FoodTruckService(IFoodTruckRepository foodTruckRepository, IRepository<FoodTruckType, int> foodTruckTypeRepository, IMapper mapper, IRepository<Review, int> reviewRepository)
         {
             _foodTruckRepository = foodTruckRepository;
             _foodTruckTypeRepository = foodTruckTypeRepository;
@@ -97,5 +100,35 @@ namespace FoodTrakker.Services
         //{
         //    return _foodTruckRepository.FindByEventAsync(EventName);
         //}
+
+        public string AddImageToFoodTruck(string name, IFormFile image)
+        {
+            if (image == null)
+                return "food_truck.png";
+            var imageType = image.ContentType;
+            var type = imageType.Split("/");
+            var fileName = Guid.NewGuid().ToString() + name + "." + type[1].ToString();
+            var imagePath = CheckDirectory();
+            var filePath = Path.Combine(imagePath, fileName);
+            
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                image.CopyTo(fileStream);
+            };
+            
+            return fileName;
+        }
+
+        public string CheckDirectory()
+        {
+            var imagePath = Path.Combine(Environment.CurrentDirectory, "wwwroot/img/FoodTruckImg");
+            var directoryExists = Directory.Exists(imagePath);
+            if (directoryExists == false)
+            {
+                Directory.CreateDirectory(imagePath);
+            }
+            return imagePath;
+        }
+
     }
 }

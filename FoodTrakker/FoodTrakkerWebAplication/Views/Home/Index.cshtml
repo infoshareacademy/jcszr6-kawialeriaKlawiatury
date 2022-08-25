@@ -41,7 +41,7 @@
 			{
 				<div class="col-md-4 col-sm-6 border-primary mb-3">
 					<div class="card mb-3 FTCard" style="max-width: 540px;">
-						<img src="~/img/food_truck.png" class="card-img-top FTImage" alt="@item.Name">
+						<img src="~/img/FoodTruckImg/@item.ImageName" class="card-img-top FTImage" alt="@item.Name" asp-append-version="true">
 						<div class="card-body">
 							<h5 class="card-title">@item.Name</h5>
 							<p class="card-text" style="min-height: 90px">@item.Description</p>

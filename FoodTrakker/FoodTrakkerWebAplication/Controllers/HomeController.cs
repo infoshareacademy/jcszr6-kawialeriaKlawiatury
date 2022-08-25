@@ -28,6 +28,7 @@ namespace FoodTrakkerWebAplication.Controllers
 
         public async Task<IActionResult> Index(string searchString)
         {
+            
             var foodTrucks = new List<FoodTruck>();
             if (!String.IsNullOrEmpty(searchString))
             {

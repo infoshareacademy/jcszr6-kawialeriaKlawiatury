@@ -28,6 +28,7 @@ namespace FoodTrakkerWebAplication.Controllers
         private readonly IMapper _mapper;
         private readonly ILogger<OwnerController> _logger;
 
+
         public OwnerController(
             EventService eventService,
             FoodTruckService foodTruckService,
@@ -44,6 +45,7 @@ namespace FoodTrakkerWebAplication.Controllers
             _locationService = locationService;
             _typeService = typeService;
             _logger = logger;
+            
         }
 
 
@@ -57,7 +59,7 @@ namespace FoodTrakkerWebAplication.Controllers
 
             uEViewModel.Events = _mapper.Map<List<Event>, List<EventDto>>(events.ToList());
             uEViewModel.Foodtrucks = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks.ToList());
-
+  
             return View(uEViewModel);
         }
 
@@ -111,7 +113,7 @@ namespace FoodTrakkerWebAplication.Controllers
         // POST: OwnerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateFoodTruck(FoodTruckDto foodTruckDto, int locationId, int typeId)
+        public async Task<ActionResult> CreateFoodTruck(FoodTruckDto foodTruckDto, int locationId, int typeId )
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -119,9 +121,12 @@ namespace FoodTrakkerWebAplication.Controllers
             foodTruck.LocationId = locationId;
             foodTruck.TypeId = typeId;
             foodTruck.OwnerId = userId;
+            foodTruck.ImageName = _foodTruckService.AddImageToFoodTruck(foodTruck.Name, foodTruckDto.ImageFile);
 
             ModelState.Remove("OwnerId");
             ModelState.Remove("Reviews");
+            ModelState.Remove("ImageFile");
+            ModelState.Remove("ImageName");
             var errors = ModelState.SelectMany(m => m.Value.Errors);
             //_foodTruckService.IsNameUnique(foodTruck.Name);
             //ModelState.AddModelError("Name", "Must be unique!");
