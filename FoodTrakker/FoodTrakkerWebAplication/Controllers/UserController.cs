@@ -55,9 +55,13 @@ namespace FoodTrakkerWebAplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateReview(ReviewDto reviewDto)
         {
- 
+            User user = null;
+            UserDto userDto = null;
+            var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+            user = await _userService.GetUserAsync(x.Value);
             var review = _mapper.Map<Review>(reviewDto);
             review.Id = 0;
+            review.User = user; 
             if (!ModelState.IsValid)
             {
                 return View(review);
@@ -90,7 +94,7 @@ namespace FoodTrakkerWebAplication.Controllers
                foodTruckDto = _mapper.Map<FoodTruck,FoodTruckDto>(foodTruck);
                user = await _userService.GetUserAsync(x.Value);
                userDto = _mapper.Map<User, UserDto>(user);
-                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "You've got new favourite FoodTruck!");
+               ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "You've got new favourite FoodTruck!");
                 
             }catch(Exception ex)
             {
