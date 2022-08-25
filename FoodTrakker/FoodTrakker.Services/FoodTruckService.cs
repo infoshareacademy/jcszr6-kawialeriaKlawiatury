@@ -3,7 +3,7 @@ using FoodTrakker.Repository;
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Contracts;
 using Microsoft.AspNetCore.Http;
-
+using System;
 
 namespace FoodTrakker.Services
 {
@@ -40,6 +40,31 @@ namespace FoodTrakker.Services
         public Task<FoodTruck> GetFullFoodTruckInfoAsync(int Id)
         {
             return _foodTruckRepository.GetFullFoodTruckInfoAsync(Id);
+        }
+
+        public async Task<List<FoodTruck>> GetRandomFoodTrucks(int number)
+        {
+            var foodTrucksToShow = new List<FoodTruck>();
+            var foodTrucks = await GetFoodTrucksAsync();
+            var counter = 0;
+            var randomNumberControll = new List<int>();
+            Random random = new Random();
+            if (foodTrucks != null)
+            {
+                while (counter < number && counter < foodTrucks.Count)
+                {
+                    int randomNumber = random.Next(0, foodTrucks.Count);
+                    if (randomNumberControll.Contains(randomNumber))
+                    {
+                        continue;
+                    }
+                    randomNumberControll.Add(randomNumber);
+                    foodTrucksToShow.Add(foodTrucks[randomNumber]);
+                    counter++;
+                }
+            }
+            return foodTrucksToShow;
+
         }
 
         public Task<List<FoodTruck>> GetOwnerFoodTrucks(string ownerId)
