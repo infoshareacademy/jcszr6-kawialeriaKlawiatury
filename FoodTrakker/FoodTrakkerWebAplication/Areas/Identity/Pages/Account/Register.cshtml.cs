@@ -88,8 +88,11 @@ namespace FoodTrakkerWebAplication.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "User Name")]
             public string UserName { get; set; }
+            [Required]
+            [Display(Name = "Location")]
+            public string UserLocation { get; set; }
 
-            
+
             public SelectList Roles { get; set; }
 
             [Required]
@@ -129,10 +132,11 @@ namespace FoodTrakkerWebAplication.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
+                user.Location = Input.UserLocation;
                 await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                
 
                 if (result.Succeeded)
                 {
