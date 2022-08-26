@@ -1,5 +1,5 @@
 html {
-    font-size: 14px;
+    font-size: 20px;
 }
 
 @media (min-width: 768px) {
@@ -14,22 +14,26 @@ html {
 }
 
 * {
-    font-family: 'Rubik Maze', cursive;
+    font-family: "Roboto";
     font-style: normal;
-    font-weight: 400;
+    font-weight: 100;
 }
 
 header {
     height: 72px;
+    
 }
 
 body {
     margin-bottom: 60px;
     z-index: 1;
+
 }
 
 .FTnav {
     z-index: 2;
+
+    
 }
 
 .FTButton {
@@ -57,6 +61,7 @@ body {
 
 .FTNavPadding {
     padding-left: 10px;
+
 }
 
 .FTLoginButton {
@@ -101,6 +106,7 @@ body {
     padding: 4px 8px;
     text-decoration: none;
     text-shadow: 0px -1px 15px #fcf3d9;
+    
 }
 
 .FTCard {
@@ -112,6 +118,7 @@ body {
 
 .FTImageCarousel {
     height: 500px;
+    
 }
 
 .FTImage {
@@ -119,10 +126,12 @@ body {
 }
 
 .FTCarousel {
-    display: block;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    top: 0;
+    left: 0;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    width: auto;
+    
 }
 
 .FTNameButton {
@@ -140,6 +149,7 @@ body {
 
 .FTNameButton:hover {
     background-color: #f5e3b0;
+
 }
 .commentBox {
     background-color: #efefef;

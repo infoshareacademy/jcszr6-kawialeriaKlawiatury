@@ -6,37 +6,7 @@
 }
 
 <div class="text-center">
-	@*<h1 class="display-4">Welcome</h1>*@
-	<div class="container">
-		<div id="carouselExampleIndicators" class="row carousel slide FTCarousel" data-bs-ride="carousel">
-			@*<div class="carousel-indicators">
-			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-			</div>*@
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="~/img/carousel/pizza.jpg" class="d-block w-100 FTImageCarousel" alt="Zdjecie 1">
-				</div>
-				<div class="carousel-item">
-					<img src="~/img/carousel/hamburger.jpg" class="d-block w-100 FTImageCarousel" alt="Zdjecie 2">
-				</div>
-				<div class="carousel-item">
-					<img src="~/img/carousel/goulash-soup.jpg" class="d-block w-100 FTImageCarousel" alt="Zdjecie 3">
-				</div>
-			</div>
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
-		</div>
-		@*<partial name="partials/_UnderConstruction"/>*@
-		<hr />
-		<div class="row container-fluid">		
+	@*TUTAJ ZROB SLIDER NA FULL WIDTH*@
 			@foreach (var item in Model)
 			{
 				<div class="col-md-4 col-sm-6 border-primary mb-3">
@@ -45,7 +15,7 @@
 						<div class="card-body">
 							<h5 class="card-title">@item.Name</h5>
 							<p class="card-text" style="min-height: 90px">@item.Description</p>
-							<a asp-controller="FoodTrucks" asp-action="Details" asp-route-id="@item.Id" class="FTNameButton">Find out more!</a>
+							<a asp-controller="FoodTrucks" asp-action="Details" asp-route-id="@item.Id" class="FTNameButton">Check it out!</a>
 						</div>
 					</div>
 				</div>

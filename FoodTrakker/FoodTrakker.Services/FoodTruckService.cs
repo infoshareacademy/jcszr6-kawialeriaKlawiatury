@@ -11,7 +11,7 @@ namespace FoodTrakker.Services
         private readonly IRepository<FoodTruckType, int> _foodTruckTypeRepository;
         private readonly IRepository<Review, int> _reviewRepository;
         private readonly IMapper _mapper;
-        public FoodTruckService(IFoodTruckRepository foodTruckRepository, IRepository<FoodTruckType, int> foodTruckTypeRepository, IMapper mapper, IRepository<Review, int> reviewRepository )
+        public FoodTruckService(IFoodTruckRepository foodTruckRepository, IRepository<FoodTruckType, int> foodTruckTypeRepository, IMapper mapper, IRepository<Review, int> reviewRepository)
         {
             _foodTruckRepository = foodTruckRepository;
             _foodTruckTypeRepository = foodTruckTypeRepository;
@@ -96,6 +96,10 @@ namespace FoodTrakker.Services
         //public Task<List<FoodTruck>> FindByEventAsync(string EventName)
         //{
         //    return _foodTruckRepository.FindByEventAsync(EventName);
+        //}
+        //public async Task<double?> AvgRatingCount(int Id)
+        //{
+        //    return await _foodTruckRepository.AvgRatingCount(Id);
         //}
     }
 }
