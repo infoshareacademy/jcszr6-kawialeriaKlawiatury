@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FoodTrakker.Services;
-using Microsoft.AspNetCore.Http;
+using FoodTrakker.Core.Model;
+using FoodTrakker.Core.LinkingClasses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodTrakkerWebAplication.Controllers
@@ -10,18 +11,20 @@ namespace FoodTrakkerWebAplication.Controllers
         private readonly FoodTruckService _foodTruckService;
         private readonly UserService _userService;
         private readonly LocationService _locationService;
+        
         private readonly IMapper _mapper;
         public MergedListController(FoodTruckService foodTruckService, UserService userService, LocationService locationService, IMapper mapper)
         {
             _foodTruckService=foodTruckService;
             _userService=userService;
             _locationService=locationService;
+            
             _mapper=mapper;
         }
-
+       
         public ActionResult Index()
         {
-            var foodTruckList = _foodTruckService.GetFoodTruckAsync();
+            
 
             return View();
         }

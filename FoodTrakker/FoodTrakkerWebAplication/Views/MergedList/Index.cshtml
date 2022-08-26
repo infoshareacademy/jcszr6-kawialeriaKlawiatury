@@ -1,4 +1,4 @@
-﻿@using System.Collections;
+﻿@*@using System.Collections;*@
 @using FoodTrakker.Core.LinkingClasses
 @model IEnumerable<MergedList>
 
@@ -15,36 +15,33 @@
                 @Html.DisplayNameFor(model => model.foodTruck.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.foodTruck.Location.City)
+                @Html.DisplayNameFor(model => model.location.City)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.foodTruck.AvgRating)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.foodTruck.Type)
+                @Html.DisplayNameFor(model => model.foodTruck.Description)
             </th>
         </tr>
     </thead>
-    @*<tbody>
-
         
-         @foreach (var item in Model)
+       @*  @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.foodTruck.Id)
+                    @Html.DisplayFor(modelItem => item.foodTruck.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.location.City)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.foodTruck.AvgRating)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.foodTruck.Location.City)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.foodTruck.Description)
                 </td>
                 
             </tr>
-        }
-    </tbody>*@
+        }*@
 </table>
