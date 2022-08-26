@@ -55,16 +55,24 @@ namespace FoodTrakker.Repository.Data
                 .HasMany<FoodTruck>(u => u.FavouriteFoodTrucks)
                 .WithMany(f => f.Users);
 
-            modelBuilder.Entity<FoodTruck>()
-                .HasMany<Review>(f => f.Reviews)
-                .WithOne(r => r.FoodTruck)
-                .HasForeignKey(r => r.FoodTruckId);
+            modelBuilder.Entity<Review>().
+                HasAlternateKey(r => new { uid = r.UserId, fId = r.FoodTruckId });
+
+            //modelBuilder.Entity<FoodTruck>()
+            //    .HasMany<Review>(f => f.Reviews)
+            //    .WithOne(r => r.FoodTruck)
+            //    .HasForeignKey(r => r.FoodTruckId)
+            //    ;
+
             //modelBuilder.Entity<Review>()
-            //   .Ignore(r=>r.FoodTruckId);
-            modelBuilder.Entity<Review>()
-                .HasOne<User>(r => r.User)
-                .WithMany(u => u.Reviews);
-                
+            //    .HasOne<User>(r => r.User)
+            //    .WithMany(u => u.Reviews);
+
+            //modelBuilder.Entity<Review>()
+            //    .HasOne<FoodTruck>(r => r.FoodTruck)
+            //    .WithMany(f => f.Reviews);
+
+
             modelBuilder.Entity<FoodTruck>()
                 .HasIndex(f => f.Name)
                 .IsUnique();
