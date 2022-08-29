@@ -18,7 +18,7 @@ namespace FoodTrakker.Repository.Contracts
         
         public Task<List<FoodTruck>> FindByTypeAsync(string Type);
         //public Task<List<FoodTruck>> FindByEventAsync(string Event);
-        public Task<double?> AvgRatingCount(int Id);
+        public Task<decimal?> AvgRatingCount(int Id);
         Task SaveChanges();
 
     }

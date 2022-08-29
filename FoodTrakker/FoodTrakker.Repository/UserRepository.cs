@@ -61,5 +61,10 @@ namespace FoodTrakker.Repository
                                         //.Include(u => u.Reviews)
                                         .FirstOrDefaultAsync(u => u.Id == userId);
         }
+
+        public async Task DoesUserAddReviewForFoodTruck(string userId)
+        {
+           
+        }
     }
 }

@@ -70,7 +70,7 @@ namespace FoodTrakker.Repository
                  .Where(f => f.OwnerId == ownerId)
                  .ToList());
         }
-        public async Task<double?> AvgRatingCount(int Id)
+        public async Task<decimal?> AvgRatingCount(int Id)
         {
             var foodTruck = _context.FoodTrucks
                 .Include(f => f.Reviews)
@@ -85,7 +85,7 @@ namespace FoodTrakker.Repository
                 }
                 var ratingCount = foodTruck.Result.Reviews.Count();
                 var avgRating = foodTruck.Result.AvgRating;
-                avgRating = ratingSum / ratingCount;
+                avgRating = (decimal)ratingSum / ratingCount;
 
                 return avgRating;
             }

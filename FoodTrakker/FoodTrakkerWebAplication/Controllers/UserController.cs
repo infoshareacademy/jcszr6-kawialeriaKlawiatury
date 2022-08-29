@@ -54,7 +54,7 @@ namespace FoodTrakkerWebAplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateReview(ReviewDto reviewDto)
-        {
+        { 
             User user = null;
             UserDto userDto = null;
             var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");

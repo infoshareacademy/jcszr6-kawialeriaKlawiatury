@@ -97,7 +97,7 @@ namespace FoodTrakker.Services
         //{
         //    return _foodTruckRepository.FindByEventAsync(EventName);
         //}
-        public async Task<double?> AvgRatingCount(int Id)
+        public async Task<decimal?> AvgRatingCount(int Id)
         {
             return await _foodTruckRepository.AvgRatingCount(Id);
         }
