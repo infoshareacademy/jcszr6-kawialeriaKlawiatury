@@ -17,6 +17,7 @@ namespace FoodTrakker.Services.DTOs
         public ICollection<FoodTruckEvent>? FoodTruckEvents { get; set; }
         public decimal? AvgRating { get; set; }
         public bool HasCurrentUserReview   { get; set; }
+        public bool IsAddedToFav { get; set; }
     }
 
 }

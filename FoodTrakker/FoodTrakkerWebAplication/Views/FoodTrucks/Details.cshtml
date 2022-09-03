@@ -1,4 +1,4 @@
-﻿@model (FoodTrakker.Services.DTOs.FoodTruckDto foodtruck, FoodTrakker.Services.DTOs.UserDto user);
+﻿@model FoodTrakker.Services.DTOs.FoodTruckDto;
 
 @{
 	ViewData["Title"] = "Details";
@@ -11,72 +11,72 @@
 }
 
 <div class="container">
-	<h1>@Model.foodtruck.Name Details</h1>
+	<h1>@Model.Name Details</h1>
 
 	<div>
 		<h4>FoodTruck details</h4>
 		<hr />
 		<dl class="row">
 			<dt class="col-sm-2">
-				<label asp-for="@Model.foodtruck.Name">Name:</label>
+				<label asp-for="@Model.Name">Name:</label>
 			</dt>
 			<dd class="col-sm-10">
-				@Model.foodtruck.Name
+				@Model.Name
 			</dd>
 			<dt class="col-sm-2">
-				<label asp-for="@Model.foodtruck.Type">Cuisine type:</label>
+				<label asp-for="@Model.Type">Cuisine type:</label>
 			</dt>
 			<dd class="col-sm-10">
-				@Model.foodtruck.Type
+				@Model.Type
 			</dd>
 			<dt class="col-sm-2">
-				<label asp-for="@Model.foodtruck.Description">About us:</label>
+				<label asp-for="@Model.Description">About us:</label>
 			</dt>
 			<dd class="col-sm-10">
-				@Model.foodtruck.Description
+				@Model.Description
 			</dd>
 			<dt class="col-sm-2">
-				<label asp-for="@Model.foodtruck.AvgRating">Avg Rating:</label>
+				<label asp-for="@Model.AvgRating">Avg Rating:</label>
 			</dt>
 			<dd class="col-sm-10">
-				@Model.foodtruck.AvgRating.Value.ToString("0.00") 
+				@Model.AvgRating.Value.ToString("0.00") 
 			</dd>
 			<dd class="col-sm-10">
-				 @for (var i = 1; i <= Model.foodtruck.AvgRating; i++)
+				 @for (var i = 1; i <= Model.AvgRating; i++)
             {
                 <span class="starGlowN"></span>
             }
-                  @for (var i = (Model.foodtruck.AvgRating + 1); i <= 5; i++)
+                  @for (var i = (Model.AvgRating + 1); i <= 5; i++)
             {
                 <span class="starFadeN"></span>
             }
 			</dd>
 			@* <dt class="col-sm-2">
-			<label asp-for="@Model.foodtruck.Location.ZIPCode"> ZIP code:</label>
+			<label asp-for="@Model.Location.ZIPCode"> ZIP code:</label>
 			</dt>
 			<dd class="col-sm-10">
-			@Model.foodtruck.Location.ZIPCode
+			@Model.Location.ZIPCode
 			</dd>*@
 			@*    <dt class="col-sm-2">
-			<label asp-for="@Model.foodtruck.Location.City">City:</label>
+			<label asp-for="@Model.Location.City">City:</label>
 			</dt>
 			<dd class="col-sm-10">
-			@Model.foodtruck.Location.City
+			@Model.Location.City
 			</dd>
 			<dt class="col-sm-2">
-			<label asp-for="@Model.foodtruck.Location.Street">Street:</label>
+			<label asp-for="@Model.Location.Street">Street:</label>
 			</dt>
 			<dd class="col-sm-10">
-			@Model.foodtruck.Location.Street
+			@Model.Location.Street
 			</dd>
 			<dt class="col-sm-2">
-			<label asp-for="@Model.foodtruck.Location.StartDate">Available from:</label>
+			<label asp-for="@Model.Location.StartDate">Available from:</label>
 			</dt>
 			<dd class="col-sm-10">
-			@Model.foodtruck.Location.StartDate.Date
+			@Model.Location.StartDate.Date
 			</dd>
 			<dt class="col-sm-2">
-			<label asp-for="@Model.foodtruck.Location.EndDate">to:</label>
+			<label asp-for="@Model.Location.EndDate">to:</label>
 			</dt>
 			<dd class="col-sm-10">
 			@Model.Location.EndDate.Date
@@ -87,22 +87,22 @@
 	</div>
 	<div>
 		<h4>Reviews:</h4>
-		@await Component.InvokeAsync("FoodTruckReview", @Model.foodtruck.Id)
+		@await Component.InvokeAsync("FoodTruckReview", @Model.Id)
 		<a href="@Url.Action("Index","FoodTrucks")" class="btn btn-secondary"> Back to List</a>
 
 		@if (User.IsInRole(Roles.User))
 		{
-			if(!Model.foodtruck.HasCurrentUserReview)
+			if(!Model.HasCurrentUserReview)
 			{
-			<a asp-controller="User" asp-action="CreateReview" asp-route-id="@Model.foodtruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add Review</a>
+			<a asp-controller="User" asp-action="CreateReview" asp-route-id="@Model.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add Review</a>
 			}
-			if (Model.user.FavouriteFoodTrucks.Any(f => f.Id == Model.foodtruck.Id))
+			if (Model.IsAddedToFav)
 			{
-				<a asp-controller="User" asp-action="RemoveFoodTruckFromFavourites" asp-route-id="@Model.foodtruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Remove From Favourites!</a>
+				<a asp-controller="User" asp-action="RemoveFoodTruckFromFavourites" asp-route-id="@Model.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Remove From Favourites!</a>
 			}
 			else
 			{
-				<a asp-controller="User" asp-action="AddFoodTruckToFavourites" asp-route-id="@Model.foodtruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add To Favourites!</a>
+				<a asp-controller="User" asp-action="AddFoodTruckToFavourites" asp-route-id="@Model.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add To Favourites!</a>
 			}
 
 

@@ -20,6 +20,7 @@ namespace FoodTrakker.Repository.Contracts
         //public Task<List<FoodTruck>> FindByEventAsync(string Event);
         public Task<decimal?> AvgRatingCount(int Id);
         Task<bool> HasFoodTruckReviewFromUser(int foodTruckId, string userId);
+        Task<bool> IsAddedToFav(int id, string userId);
         Task SaveChanges();
 
     }

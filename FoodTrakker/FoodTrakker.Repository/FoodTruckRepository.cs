@@ -100,6 +100,12 @@ namespace FoodTrakker.Repository
             f.Reviews.Any(r => r.UserId.Equals(userId)));
             return result != null;
         }
+       public async Task<bool> IsAddedToFav(int id, string userId)
+        {
+            var resultl = await _context.FoodTrucks.SingleOrDefaultAsync(f => f.Id == id &&
+            f.Users.Any(u=>u.Id.Equals(userId)));
+            return resultl != null;
+        }
         public async Task SaveChanges()
         {
             await _context.SaveChangesAsync();

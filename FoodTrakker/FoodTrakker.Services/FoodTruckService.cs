@@ -105,5 +105,9 @@ namespace FoodTrakker.Services
         {
            return await _foodTruckRepository.HasFoodTruckReviewFromUser(foodTruckId, userId);
         }
+        public async Task<bool>IsAddedToFav(int id, string userId)
+        {
+            return await _foodTruckRepository.IsAddedToFav(id, userId);
+        }
     }
 }

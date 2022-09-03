@@ -13,19 +13,19 @@ namespace FoodTrakkerWebAplication.Controllers
         private readonly FoodTruckService _foodTruckService;
         private readonly UserService _userService;
         private readonly IMapper _mapper;
-        
-        
+
+
         public FoodTrucksController(FoodTruckService foodTruckService, IMapper mapper, UserService userService)
         {
             _foodTruckService = foodTruckService;
             _userService = userService;
             _mapper = mapper;
-           
+
         }
-        
+
         public async Task<ActionResult> Index(string EventName, string Type, string searchString, string citySearchString, string streetSearchString)
         {
-            
+
             var foodTrucks = new List<FoodTruck>();
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -52,9 +52,9 @@ namespace FoodTrakkerWebAplication.Controllers
                 foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
             }
 
-            
-            
-            var foodTruckDto = _mapper.Map<ICollection<FoodTruck>, 
+
+
+            var foodTruckDto = _mapper.Map<ICollection<FoodTruck>,
                 ICollection<FoodTruckDto>>(foodTrucks);
 
             //var foodTruckReviewRate = new FoodTruckTypeDto { FoodTrucks = foodTruckDto };
@@ -69,24 +69,22 @@ namespace FoodTrakkerWebAplication.Controllers
         //GET: FoodTrucksController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            UserDto userDto = null;
+
             var foodTruck = await _foodTruckService.GetFullFoodTruckInfoAsync(id);
             var foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
+            if (foodTruckDto == null)
+            {
+                return NotFound();
+            }
             foodTruckDto.AvgRating = await _foodTruckService.AvgRatingCount(id);
             if (User.Identity.IsAuthenticated)
             {
                 var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
-                var user = await _userService.GetAllUserDataAsync(x.Value);
-                userDto = _mapper.Map<User, UserDto>(user);
+                foodTruckDto.IsAddedToFav = await _foodTruckService.IsAddedToFav(id, x.Value);
                 foodTruckDto.HasCurrentUserReview = await _foodTruckService.HasFoodTruckReviewFromUser(id, x.Value);
             }
-            if (foodTruckDto!= null)
-            {
 
-                return View((foodTruckDto,userDto));
-            }
-
-            return NotFound();
+            return View(foodTruckDto);
         }
 
     }

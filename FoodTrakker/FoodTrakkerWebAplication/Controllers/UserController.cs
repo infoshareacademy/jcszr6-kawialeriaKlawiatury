@@ -56,7 +56,6 @@ namespace FoodTrakkerWebAplication.Controllers
         public async Task<ActionResult> CreateReview(ReviewDto reviewDto)
         { 
             User user = null;
-            UserDto userDto = null;
             var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
             user = await _userService.GetUserAsync(x.Value);
             var review = _mapper.Map<Review>(reviewDto);
@@ -69,9 +68,7 @@ namespace FoodTrakkerWebAplication.Controllers
 
             try
             {
-              
-               await _reviewService.AddReview(review);
-                        
+               await _reviewService.AddReview(review);       
                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "Thank You for Your opinion!");
                return RedirectToAction("Details","FoodTrucks",new { id = reviewDto.FoodTruckId });
             }
@@ -84,16 +81,14 @@ namespace FoodTrakkerWebAplication.Controllers
         {
             FoodTruck foodTruck = null;
             FoodTruckDto foodTruckDto = null;
-            User user = null;
-            UserDto userDto = null;
             try
             {
                 var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
 
                foodTruck= await _favouritesFoodTruckService.AddFoodTruckToFavourites(id, x.Value);
                foodTruckDto = _mapper.Map<FoodTruck,FoodTruckDto>(foodTruck);
-               user = await _userService.GetUserAsync(x.Value);
-               userDto = _mapper.Map<User, UserDto>(user);
+               foodTruckDto.IsAddedToFav = await _foodTruckService.IsAddedToFav(id, x.Value);
+               foodTruckDto.HasCurrentUserReview = await _foodTruckService.HasFoodTruckReviewFromUser(id, x.Value);
                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "You've got new favourite FoodTruck!");
                 
             }catch(Exception ex)
@@ -102,23 +97,20 @@ namespace FoodTrakkerWebAplication.Controllers
                 //add logs here
             }
 
-            return View("../FoodTrucks/Details", (foodTruckDto,userDto));
+            return View("../FoodTrucks/Details", foodTruckDto);
         }
         public async Task<ActionResult> RemoveFoodTruckFromFavourites(int id)
         {
             FoodTruck foodTruck = null;
             FoodTruckDto foodTruckDto = null;
-            User user = null;
-            UserDto userDto = null;
-
+         
             try
             {
                 var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
-
                 foodTruck = await _favouritesFoodTruckService.RemoveFoodTruckFromFavourites(id, x.Value);
                 foodTruckDto = _mapper.Map<FoodTruck, FoodTruckDto>(foodTruck);
-                user = await _userService.GetUserAsync(x.Value);
-                userDto = _mapper.Map<User, UserDto>(user);
+                foodTruckDto.IsAddedToFav = await _foodTruckService.IsAddedToFav(id, x.Value);
+                foodTruckDto.HasCurrentUserReview = await _foodTruckService.HasFoodTruckReviewFromUser(id, x.Value);
                 ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "This is no longer your favourite FoodTruck!");
 
             }
@@ -128,7 +120,7 @@ namespace FoodTrakkerWebAplication.Controllers
                 //add logs here
             }
 
-            return View("../FoodTrucks/Details", (foodTruckDto,userDto));
+            return View("../FoodTrucks/Details", foodTruckDto);
         }
         public async Task<ActionResult> ListFavFoodTruck()
         {
@@ -160,5 +152,6 @@ namespace FoodTrakkerWebAplication.Controllers
 
             return NotFound();
         }
+      
     }
 }
