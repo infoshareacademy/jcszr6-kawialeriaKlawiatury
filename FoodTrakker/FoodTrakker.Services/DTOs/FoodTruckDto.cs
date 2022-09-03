@@ -15,9 +15,10 @@ namespace FoodTrakker.Services.DTOs
         public int TypeId { get; set; }
         public FoodTruckType? Type { get; set; }
         public ICollection<FoodTruckEvent>? FoodTruckEvents { get; set; }
-        public decimal? AvgRating { get; set; }
+        public double AvgRating { get; set; }
         public bool HasCurrentUserReview   { get; set; }
         public bool IsAddedToFav { get; set; }
+        public int ReviewsTotalCount    { get; set; }
     }
 
 }

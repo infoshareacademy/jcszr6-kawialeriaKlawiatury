@@ -10,7 +10,6 @@ namespace FoodTrakker.Core.Model
         public int Id { get; set; }
        // [InverseProperty(nameof(Review.FoodTruck))]
         public ICollection<Review> Reviews { get; set; }
-        public decimal? AvgRating { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public ICollection<User> Users { get; set; }

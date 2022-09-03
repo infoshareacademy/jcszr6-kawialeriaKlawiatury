@@ -76,7 +76,7 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 return NotFound();
             }
-            foodTruckDto.AvgRating = await _foodTruckService.AvgRatingCount(id);
+            (foodTruckDto.AvgRating, foodTruckDto.ReviewsTotalCount) = await _foodTruckService.AvgRatingCount(id);
             if (User.Identity.IsAuthenticated)
             {
                 var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");

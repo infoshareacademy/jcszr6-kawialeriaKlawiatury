@@ -70,30 +70,17 @@ namespace FoodTrakker.Repository
                  .Where(f => f.OwnerId == ownerId)
                  .ToList());
         }
-        public async Task<decimal?> AvgRatingCount(int Id)
+        public async Task<(double,int)> AvgRatingAndReviewCount(int Id)
         {
-            var foodTruck = _context.FoodTrucks
-                .Include(f => f.Reviews)
-                .Include(f => f.Location)
-                .Include(f => f.Type).SingleOrDefaultAsync(f => f.Id == Id);
-            if (foodTruck.Result.Reviews.Count() > 0)
-            {
-                int ratingSum = 0;
-                foreach (var review in foodTruck.Result.Reviews)
-                {
-                    ratingSum += review.Rating;
-                }
-                var ratingCount = foodTruck.Result.Reviews.Count();
-                var avgRating = foodTruck.Result.AvgRating;
-                avgRating = (decimal)ratingSum / ratingCount;
-
-                return avgRating;
-            }
-            else
-            {
-                return 0;
-            }
+            double avg = 0;
+            var count = await _context.Reviews.CountAsync(r => r.FoodTruckId == Id);
+           
+            if(count != 0) 
+              avg = await _context.Reviews.Where(r => r.FoodTruckId == Id).AverageAsync(r => r.Rating);
+           
+            return (avg, count);
         }
+        
         public async Task<bool> HasFoodTruckReviewFromUser(int foodTruckId, string userId)
         {
             var result = await _context.FoodTrucks.SingleOrDefaultAsync(f => f.Id == foodTruckId &&
