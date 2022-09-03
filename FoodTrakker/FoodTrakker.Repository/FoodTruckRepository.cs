@@ -94,6 +94,12 @@ namespace FoodTrakker.Repository
                 return 0;
             }
         }
+        public async Task<bool> HasFoodTruckReviewFromUser(int foodTruckId, string userId)
+        {
+            var result = await _context.FoodTrucks.SingleOrDefaultAsync(f => f.Id == foodTruckId &&
+            f.Reviews.Any(r => r.UserId.Equals(userId)));
+            return result != null;
+        }
         public async Task SaveChanges()
         {
             await _context.SaveChangesAsync();

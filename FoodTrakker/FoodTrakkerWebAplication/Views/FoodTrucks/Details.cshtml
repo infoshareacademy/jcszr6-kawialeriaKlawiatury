@@ -92,7 +92,10 @@
 
 		@if (User.IsInRole(Roles.User))
 		{
+			if(!Model.foodtruck.HasCurrentUserReview)
+			{
 			<a asp-controller="User" asp-action="CreateReview" asp-route-id="@Model.foodtruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Add Review</a>
+			}
 			if (Model.user.FavouriteFoodTrucks.Any(f => f.Id == Model.foodtruck.Id))
 			{
 				<a asp-controller="User" asp-action="RemoveFoodTruckFromFavourites" asp-route-id="@Model.foodtruck.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Remove From Favourites!</a>

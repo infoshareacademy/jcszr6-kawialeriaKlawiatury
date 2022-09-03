@@ -78,6 +78,7 @@ namespace FoodTrakkerWebAplication.Controllers
                 var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
                 var user = await _userService.GetAllUserDataAsync(x.Value);
                 userDto = _mapper.Map<User, UserDto>(user);
+                foodTruckDto.HasCurrentUserReview = await _foodTruckService.HasFoodTruckReviewFromUser(id, x.Value);
             }
             if (foodTruckDto!= null)
             {

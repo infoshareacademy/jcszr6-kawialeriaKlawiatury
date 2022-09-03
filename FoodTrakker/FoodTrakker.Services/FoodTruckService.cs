@@ -101,5 +101,9 @@ namespace FoodTrakker.Services
         {
             return await _foodTruckRepository.AvgRatingCount(Id);
         }
+        public async Task<bool> HasFoodTruckReviewFromUser(int foodTruckId, string userId)
+        {
+           return await _foodTruckRepository.HasFoodTruckReviewFromUser(foodTruckId, userId);
+        }
     }
 }
