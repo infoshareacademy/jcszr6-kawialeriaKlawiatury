@@ -23,44 +23,42 @@ namespace FoodTrakker.Api.Controllers
 
         // GET api/<EventController>/5
         [HttpGet("{id}")]
-        public ActionResult<Event> GetEventById(int id)
+        public Task<Event?> GetEventById(int id)
         {
             var eventById = _eventService.GetEventAsync(id);
 
             if (eventById is null)
             {
-                return NotFound();
+                throw new NullReferenceException();
             }
 
-            return Ok(eventById);
+            return Task.FromResult<Event?>(eventById.Result);
         }
 
         // POST api/<EventController>
         [HttpPost]
-        public IActionResult CreateEvent(Event eventToCreate)
+        public Task<Event> CreateEvent(int id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest("Invalid data.");
-
+            
+            var eventToAdd = _eventService.GetEventAsync(id);
             var events = _eventService.GetEventsAsync();
-
             events.Result.Add(new Event
             {
-                Location = eventToCreate.Location,
-                Name = eventToCreate.Name,
-                StartDate = eventToCreate.StartDate,
-                EndDate = eventToCreate.EndDate,
-                Description = eventToCreate.Description
-            });
+              Name = eventToAdd.Result.Name,
+              Description = eventToAdd.Result.Description,
+              StartDate = eventToAdd.Result.StartDate,
+              EndDate = eventToAdd.Result.EndDate
+              
+            }); 
 
-            return Ok();
+            return Task.FromResult(eventToAdd.Result);
         }
     
 
         // PUT api/<EventController>/5
     [HttpPut("{id}")]
    
-    public ActionResult<Event> UpdateEvent(Event eventUpdate)
+    public Task<Event> UpdateEvent(Event eventUpdate)
     {
             var events = _eventService.GetEventsAsync();
             var eventToUpdate = events.Result.SingleOrDefault(e => e.Id == eventUpdate.Id);
@@ -73,29 +71,29 @@ namespace FoodTrakker.Api.Controllers
 
             if (eventToUpdate is null)
         {
-            return NotFound();
+            throw new ArgumentNullException(nameof(eventToUpdate));
         }
-        
-        
 
-        return Ok(eventToUpdate);
+
+
+            return Task.FromResult(eventToUpdate);
     }
 
     // DELETE api/<EventController>/5
     [HttpDelete("{id:int}")]
-        public ActionResult Delete(int id)
+        public Task Delete(int id)
         {
             var events = _eventService.GetEventsAsync();
             var eventToDelete = events.Result.SingleOrDefault(e => e.Id == id);
 
             if (eventToDelete == null)
             {
-                return NotFound();
+                throw new NullReferenceException();
             }
 
             events.Result.Remove(eventToDelete);
-
-            return Ok(eventToDelete);
+            
+            return Task.CompletedTask;
         }
 
     }
