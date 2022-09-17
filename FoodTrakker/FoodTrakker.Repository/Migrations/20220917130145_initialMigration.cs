@@ -216,7 +216,8 @@ namespace FoodTrakker.Repository.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LocationId = table.Column<int>(type: "int", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: false),
-                    OwnerId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    OwnerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -289,21 +290,29 @@ namespace FoodTrakker.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FoodTruckId = table.Column<int>(type: "int", nullable: true),
+                    FoodTruckId = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: false),
-                    AuthorID = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.UniqueConstraint("AK_Reviews_UserId_FoodTruckId", x => new { x.UserId, x.FoodTruckId });
+                    table.ForeignKey(
+                        name: "FK_Reviews_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reviews_FoodTrucks_FoodTruckId",
                         column: x => x.FoodTruckId,
                         principalTable: "FoodTrucks",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -311,9 +320,9 @@ namespace FoodTrakker.Repository.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "df456c69-021b-1234-a852-b32678f1alec", "e843c86d-5958-4aea-a7fc-52d6d22804a6", "User", "USER" },
-                    { "df456c89-021b-4342-a852-b32678f1alec", "ec74f740-1a83-4af5-9e79-69bc72ad9551", "Owner", "OWNER" },
-                    { "df510c89-042b-4342-a852-b32678f1c1ce", "be87d2f6-8ca3-4182-b4ac-73976475e531", "Administrator", "ADMINISTRATOR" }
+                    { "df456c69-021b-1234-a852-b32678f1alec", "12916309-4b49-4e30-a67d-e85372b222cc", "User", "USER" },
+                    { "df456c89-021b-4342-a852-b32678f1alec", "d805306b-1981-432f-8f20-cd950a3dd396", "Owner", "OWNER" },
+                    { "df510c89-042b-4342-a852-b32678f1c1ce", "01e44725-366a-4664-9315-6d52422ad076", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
