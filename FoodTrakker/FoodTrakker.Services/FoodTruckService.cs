@@ -176,5 +176,17 @@ namespace FoodTrakker.Services
             return imagePath;
         }
 
+        public async Task<(double,int)> AvgRatingCount(int Id)
+        {
+            return await _foodTruckRepository.AvgRatingAndReviewCount(Id);
+        }
+        public async Task<bool> HasFoodTruckReviewFromUser(int foodTruckId, string userId)
+        {
+           return await _foodTruckRepository.HasFoodTruckReviewFromUser(foodTruckId, userId);
+        }
+        public async Task<bool>IsAddedToFav(int id, string userId)
+        {
+            return await _foodTruckRepository.IsAddedToFav(id, userId);
+        }
     }
 }

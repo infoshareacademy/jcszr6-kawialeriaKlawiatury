@@ -15,7 +15,7 @@ namespace FoodTrakker.Repository
 
         //Task<List<FoodTruck>> FindByEventAsync(string EventName)
         //{
-            
+
         //}
         public Task<List<FoodTruck>> FindByCityAsync(string City)
         {
@@ -69,6 +69,29 @@ namespace FoodTrakker.Repository
                  .Include(f => f.Type)
                  .Where(f => f.OwnerId == ownerId)
                  .ToList());
+        }
+        public async Task<(double,int)> AvgRatingAndReviewCount(int Id)
+        {
+            double avg = 0;
+            var count = await _context.Reviews.CountAsync(r => r.FoodTruckId == Id);
+           
+            if(count != 0) 
+              avg = await _context.Reviews.Where(r => r.FoodTruckId == Id).AverageAsync(r => r.Rating);
+           
+            return (avg, count);
+        }
+        
+        public async Task<bool> HasFoodTruckReviewFromUser(int foodTruckId, string userId)
+        {
+            var result = await _context.FoodTrucks.SingleOrDefaultAsync(f => f.Id == foodTruckId &&
+            f.Reviews.Any(r => r.UserId.Equals(userId)));
+            return result != null;
+        }
+       public async Task<bool> IsAddedToFav(int id, string userId)
+        {
+            var resultl = await _context.FoodTrucks.SingleOrDefaultAsync(f => f.Id == id &&
+            f.Users.Any(u=>u.Id.Equals(userId)));
+            return resultl != null;
         }
         public async Task SaveChanges()
         {

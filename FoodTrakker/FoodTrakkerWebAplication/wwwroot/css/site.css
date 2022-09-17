@@ -141,4 +141,40 @@ body {
 .FTNameButton:hover {
     background-color: #f5e3b0;
 }
+.commentBox {
+    background-color: #efefef;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.starFade {
+    background-image: url('/img/StarFade.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starFadeN {
+    background-image: url('/img/StarFade.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+}
+
+.starGlow {
+    background-image: url('/img/StarGlow.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starGlowN {
+    background-image: url('/img/StarGlow.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+}
+
 

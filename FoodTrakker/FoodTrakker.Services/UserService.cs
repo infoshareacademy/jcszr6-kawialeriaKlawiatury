@@ -28,7 +28,6 @@ namespace FoodTrakker.Services
         {
             return _userRepository.FavFoodTrucks(Id);
         }
-         
-
+       
     }
 }

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FoodTrakker.Repository\FoodTrakker.Repository.csproj" />
+    <ProjectReference Include="..\FoodTrakker.Services\FoodTrakker.Services.csproj" />
+    <ProjectReference Include="..\FoodTrakkerWebAplication\FoodTrakkerWebAplication.csproj" />
+    <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker.Core.csproj" />
+  </ItemGroup>
+
+</Project>
