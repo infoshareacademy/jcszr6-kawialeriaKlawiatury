@@ -1,8 +1,6 @@
 ﻿using FoodTrakker.Core.Model;
 using FoodTrakker.Services;
-using FoodTrakker.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,10 +11,12 @@ namespace FoodTrakker.Api.Controllers
     public class EventController : ControllerBase
     {
         private readonly EventService _eventService;
+
         public EventController(EventService eventService)
         {
             _eventService = eventService;
         }
+
         // GET: api/<EventController>
         [HttpGet]
         public IActionResult Get() => Ok(_eventService.GetEventsAsync());
@@ -55,13 +55,11 @@ namespace FoodTrakker.Api.Controllers
 
             return Ok();
         }
-    
 
         // PUT api/<EventController>/5
-    [HttpPut("{id}")]
-   
-    public ActionResult<Event> UpdateEvent(Event eventUpdate)
-    {
+        [HttpPut("{id}")]
+        public ActionResult<Event> UpdateEvent(Event eventUpdate)
+        {
             var events = _eventService.GetEventsAsync();
             var eventToUpdate = events.Result.SingleOrDefault(e => e.Id == eventUpdate.Id);
 
@@ -72,17 +70,15 @@ namespace FoodTrakker.Api.Controllers
             eventToUpdate.Location = eventUpdate.Location;
 
             if (eventToUpdate is null)
-        {
-            return NotFound();
+            {
+                return NotFound();
+            }
+
+            return Ok(eventToUpdate);
         }
-        
-        
 
-        return Ok(eventToUpdate);
-    }
-
-    // DELETE api/<EventController>/5
-    [HttpDelete("{id:int}")]
+        // DELETE api/<EventController>/5
+        [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
             var events = _eventService.GetEventsAsync();
@@ -97,6 +93,5 @@ namespace FoodTrakker.Api.Controllers
 
             return Ok(eventToDelete);
         }
-
     }
 }
