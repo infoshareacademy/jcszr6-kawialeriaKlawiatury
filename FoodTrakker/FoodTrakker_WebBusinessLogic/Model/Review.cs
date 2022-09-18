@@ -1,27 +1,27 @@
-﻿using System;
-using System.Globalization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
 
-
-namespace FoodTrakker_WebBusinessLogic.Model
+namespace FoodTrakker.Core.Model
 {
-    public class Review : Iindexable
+    public class Review : Iindexable<int>
     {
+       
+        
         public int Id { get; set; }
+        public int FoodTruckId { get; set; }
+
+        [ForeignKey("FoodTruckId")]      
+        public FoodTruck FoodTruck { get; set; }
         public DateTime Date { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        [IntegerValidator(MinValue = 1, MaxValue = 10)]
         public int Rating { get; set; }
-        public int AuthorID { get; set; }
-        public int FoodTruckId { get; set; }
-        public void UpdateIndex(int i)
-        {
-            Id = i;
-        }
-
-        public override string ToString()
-        {
-            return $"Review: Id:{Id} Title:{Title} ({Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)}),\nDescription: {Description},\nRate: {Rating},\nAuthor: {AuthorID},Food Truck Id: {FoodTruckId}";
-        }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
+        public string UserId { get; set; }
+          
 
     }
 }

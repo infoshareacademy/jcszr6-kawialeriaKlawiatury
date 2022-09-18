@@ -1,32 +1,57 @@
-﻿using FoodTrakkerWebAplication.Models;
+﻿using FoodTrakker.Core;
+using FoodTrakker.Repository;
+using FoodTrakker.Services;
+using FoodTrakkerWebAplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using FoodTrakker_WebBusinessLogic;
-using FoodTrakker_WebBusinessLogic.Model;
-
+using FoodTrakker.Core.Model;
+using AutoMapper;
+using FoodTrakker.Services.DTOs;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IRepository<Event> _eventRepository;
-        private readonly IRepository<FoodTruck> _foodTruckRepository;
+        private readonly FoodTruckService _foodTruckService;
+        private readonly IMapper _mapper;
+        //private readonly IRepository<Event> _eventRepository;
+        //private readonly IRepository<FoodTruck> _foodTruckRepository;
 
-        public HomeController(ILogger<HomeController> logger, IRepository<Event> eventRepository, IRepository<FoodTruck> foodTruckRepository)
+
+        public HomeController(ILogger<HomeController> logger, FoodTruckService foodTruckService, IMapper mapper)
         {
             _logger = logger;
-            _eventRepository = eventRepository;
-            _foodTruckRepository = foodTruckRepository;
+            _foodTruckService = foodTruckService;
+            _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var foodTrucks = await _foodTruckRepository.GetAsync();
-            return View(foodTrucks);
+
+            var foodTrucks = new List<FoodTruck>();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                foodTrucks = await _foodTruckService.FindFoodTruckAsync(searchString);
+            }
+            else
+            {
+                foodTrucks = await _foodTruckService.GetRandomFoodTrucks(6);
+            }
+
+
+
+            var foodTruckDtos = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks);
+
+            return View(foodTruckDtos);
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult About()
         {
             return View();
         }

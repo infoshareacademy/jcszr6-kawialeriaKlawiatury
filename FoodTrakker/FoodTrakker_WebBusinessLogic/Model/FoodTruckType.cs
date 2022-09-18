@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FoodTrakker_WebBusinessLogic.Model
+namespace FoodTrakker.Core.Model
+
 {
-    public class FoodTruckType
+    public class FoodTruckType : Iindexable<int>
     {
         public int Id { get; set; }
 
-		[Display(Name = "Food truck type")]
+        [Display(Name = "Food truck type")]
         public string Name { get; set; }
         public override string ToString()
         {

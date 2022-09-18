@@ -1,31 +1,32 @@
-﻿using FoodTrakker_WebBusinessLogic;
-using FoodTrakker_WebBusinessLogic.Model;
+﻿
+using AutoMapper;
+using FoodTrakker.Core.Model;
+using FoodTrakker.Services;
+using FoodTrakker.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodTrakkerWebAplication.ViewComponents
 {
     public class EventFoodTrucks : ViewComponent
     {
-        private readonly IRepository<FoodTruck> _foodTruckRepository;
-
-        public EventFoodTrucks(IRepository<FoodTruck> foodTruckRepository)
+        private readonly FoodTruckService _foodTruckService;
+        private readonly EventService _eventService;
+        private readonly IMapper _mapper;
+        public EventFoodTrucks(FoodTruckService foodTruckService,EventService eventService , IMapper mapper)
         {
-            _foodTruckRepository = foodTruckRepository;
+            _foodTruckService = foodTruckService;
+            _eventService = eventService;
+            _mapper = mapper;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(Event eEvent)
+        public async Task<IViewComponentResult> InvokeAsync(EventDto eEvent)
         {
-            var foodTrucks = new List<FoodTruck>();
-            foreach (var id in eEvent.FoodTrucksId)
-            {
-                var foodTruck = await _foodTruckRepository.GetAsync(id);
-                if (foodTruck != null)
-                {
-                    foodTrucks.Add(foodTruck);
-                }
-            }
-            
-            return View(foodTrucks);
+            var @event = _mapper.Map<EventDto, Event>(eEvent);
+            var foodTrucks = await _eventService.GetEventFoodTrucks(@event);
+
+            var foodTrucksDto = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks);
+
+            return View(foodTrucksDto);
         }
     }
 }

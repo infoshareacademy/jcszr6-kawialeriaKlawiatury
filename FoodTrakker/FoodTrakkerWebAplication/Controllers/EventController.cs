@@ -1,34 +1,53 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using FoodTrakker_WebBusinessLogic.Model;
-using FoodTrakker_WebBusinessLogic;
+using FoodTrakker.Core.Model;
+using FoodTrakker.Repository;
+using FoodTrakker.Services;
+using AutoMapper;
+using FoodTrakker.Services.DTOs;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
     public class EventController : Controller
     {
-
-        private readonly IRepository<Event> _eventRepository;
-        public EventController(IRepository<Event> eventRepository)
+        private readonly EventService _eventService;
+        private readonly IMapper _mapper;
+        public EventController(EventService eventService, IMapper mapper)
         {
-            _eventRepository = eventRepository;
+            _eventService = eventService;
+            _mapper = mapper;
         }
+       
         // GET: EventController
-        public async Task <ActionResult> Index()
+        public async Task<ActionResult> Index()
         {
-            var events = await _eventRepository.GetAsync();
+            if (User.Identity.IsAuthenticated)
+            {
+                var eventsLogged = await _eventService.GetEventsAsync();
+                var eventsDto = _mapper.Map<ICollection<Event>, ICollection<EventDto>>(eventsLogged);
+                return View(eventsDto);
+            }
+            var events = await _eventService.GetEventsAsync();
             var eventInNearFuture = events.OrderBy(e => e.StartDate)
-                .Where(e=>e.StartDate>DateTime.UtcNow)
-                .Take(8).ToList();
-            return View(eventInNearFuture);
+                .Where(e => e.StartDate > DateTime.UtcNow)
+                .Take(3).ToList();
+            var eventDtoInNearFuture = _mapper.Map<List<Event>,List<EventDto>>(eventInNearFuture);
+            return View(eventDtoInNearFuture);
         }
-        // GET: EventController/Details/5
+       
+        // GET: OwnerController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var events = await _eventRepository.GetAsync();
-            return View(events.SingleOrDefault(e => e.Id == id));
-        }
+            var events = await _eventService.GetFullEventInfoAsync(id);
+            var eventsDto = _mapper.Map<Event, EventDto>(events);
+            if (eventsDto != null)
+            {
 
+                return View(eventsDto);
+            }
+
+            return NotFound();
+        }
 
     }
 }

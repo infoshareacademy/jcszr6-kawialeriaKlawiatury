@@ -4,47 +4,48 @@
 
 <table class="table">
 	<thead>
-	<tr>
-		<th>
-			<label asp-for="Events.First().Name"></label>
-		</th>
-		<th>
-			<label asp-for="Events.First().Description"></label>
-		</th>
-		<th>
-			<label asp-for="Events.First().StartDate"></label>
-		</th>
-		<th>
-			<label asp-for="Events.First().StartDate"></label>
-		</th>
-		<th></th>
-	</tr>
+		<tr>
+			<th>
+				<label asp-for="Events.First().Name"></label>
+			</th>
+			<th>
+				<label asp-for="Events.First().Description"></label>
+			</th>
+			<th>
+				<label asp-for="Events.First().StartDate"></label>
+			</th>
+			<th>
+				<label asp-for="Events.First().EndDate"></label>
+			</th>
+			<th></th>
+		</tr>
 	</thead>
 	<tbody>
-	@foreach (var item in Model.Events)
-	{
-		<tr>
-			<td>
-				<a asp-controller="Owner" asp-action="DetailsEvent" asp-route-id="@item.Id">@item.Name</a>
-			</td>
-			<td>
-				@item.Description
-			</td>
-			<td>
-				@item.StartDate
-			</td>
-			<td>
-				@item.EndDate
-			</td>
-			<td class="text-end">
-				<div class="btn-group">
-					<a asp-controller="Owner" asp-action="Edit" asp-route-id="@item.Id"
-					   class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
-					<a asp-controller="Owner" asp-action="DeleteEvent" asp-route-id="@item.Id"
-					   class="btn btn-danger mx-2"><i class="bi bi-trash"></i>Delete</a>
-				</div>
-			</td>
-		</tr>
-	}
+		@foreach (var item in Model.Events)
+		{
+			<tr>
+				<td>
+					<a asp-controller="Owner" asp-action="DetailsEvent" asp-route-id="@item.Id" class="FTNameButton">@item.Name</a>
+				</td>
+				<td>
+					@item.Description
+				</td>
+				<td>
+					@item.StartDate
+				</td>
+				<td>
+					@item.EndDate
+				</td>
+				<td class="text-end">
+					<div class="btn-group">
+						<a asp-controller="Owner" asp-action="EditEvent" asp-route-id="@item.Id"
+					   class="btn btn-light mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
+@*						<a asp-controller="Owner" asp-action="DeleteEvent" asp-route-id="@item.Id"
+					   class="btn btn-light mx-2 delete"><i class="bi bi-trash"></i>Delete</a>*@
+						<button data-id="@item.Id" class="btn btn-light mx-2 deleteEvent"><i class="bi bi-trash"></i>Delete</button>
+					</div>
+				</td>
+			</tr>
+		}
 	</tbody>
 </table>

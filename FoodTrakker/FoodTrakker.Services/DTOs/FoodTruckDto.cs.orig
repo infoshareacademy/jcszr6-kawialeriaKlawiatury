@@ -1,0 +1,37 @@
+﻿using FoodTrakker.Core.LinkingClasses;
+using FoodTrakker.Core.Model;
+<<<<<<< HEAD
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+=======
+>>>>>>> 705856e2d51548694781efb2bf370c76f001c982
+
+namespace FoodTrakker.Services.DTOs
+{
+    public class FoodTruckDto
+    {
+        public int Id { get; set; }
+        public ICollection<ReviewDto> Reviews { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string OwnerId { get; set; }
+        public int LocationId { get; set; }
+        public Location? Location { get; set; }
+        public int TypeId { get; set; }
+        public FoodTruckType? Type { get; set; }
+        public ICollection<FoodTruckEvent>? FoodTruckEvents { get; set; }
+<<<<<<< HEAD
+        public IFormFile ImageFile { get; set; }
+
+        public string ImageName { get; set; }
+
+=======
+        public double AvgRating { get; set; }
+        public bool HasCurrentUserReview   { get; set; }
+        public bool IsAddedToFav { get; set; }
+        public int ReviewsTotalCount    { get; set; }
+>>>>>>> 705856e2d51548694781efb2bf370c76f001c982
+    }
+
+}

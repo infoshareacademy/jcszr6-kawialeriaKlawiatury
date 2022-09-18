@@ -7,16 +7,48 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker_WebBusinessLogic.csproj" />
+    <Compile Remove="Contracts\**" />
+    <Compile Remove="Pages\**" />
+    <Compile Remove="Services\**" />
+    <Content Remove="Contracts\**" />
+    <Content Remove="Pages\**" />
+    <Content Remove="Services\**" />
+    <EmbeddedResource Remove="Contracts\**" />
+    <EmbeddedResource Remove="Pages\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Contracts\**" />
+    <None Remove="Pages\**" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="Services\" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Logger" Version="1.0.9.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
+    
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
+    <ProjectReference Include="..\FoodTrakker.Repository\FoodTrakker.Repository.csproj" />
+    <ProjectReference Include="..\FoodTrakker.Services\FoodTrakker.Services.csproj" />
+    <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker.Core.csproj" />
   </ItemGroup>
 
 </Project>

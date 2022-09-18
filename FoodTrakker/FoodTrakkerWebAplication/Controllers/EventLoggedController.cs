@@ -1,31 +1,44 @@
-﻿using FoodTrakker_WebBusinessLogic.Model;
-//using FoodTrakker.BusinessLogic.Repository;
-using Microsoft.AspNetCore.Http;
+﻿
+using AutoMapper;
+using FoodTrakker.Core.Model;
+using FoodTrakker.Repository;
+using FoodTrakker.Services;
+using FoodTrakker.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using FoodTrakker_WebBusinessLogic;
+
 
 namespace FoodTrakkerWebAplication.Controllers
 {
     public class EventLoggedController : Controller
     {
-        private readonly IRepository<Event> _eventRepository;
-        public EventLoggedController(IRepository<Event> eventRepository)
+        private readonly EventService _eventService;
+        private readonly IMapper _mapper;
+        public EventLoggedController(EventService eventService,IMapper mapper)
         {
-            _eventRepository = eventRepository;
+            _eventService = eventService;
+            _mapper = mapper;
         }
 
         // GET: EventController
-        public async Task <ActionResult> Index()
+        public async Task<ActionResult> Index()
         {
-            var events = await _eventRepository.GetAsync();
-            return View(events);
+            var events = await _eventService.GetEventsAsync();
+            var eventsDto = _mapper.Map<ICollection<Event>, ICollection<EventDto>>(events);
+            return View(eventsDto);
         }
 
         // GET: EventController/Details/5
-        public async Task <ActionResult> Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            var events = await _eventRepository.GetAsync();
-            return View(events.SingleOrDefault(e => e.Id == id));
+            var events = await _eventService.GetFullEventInfoAsync(id);
+            var eventsDto = _mapper.Map<Event, EventDto>(events);
+            if (eventsDto != null)
+            {
+
+                return View(eventsDto);
+            }
+
+            return NotFound();
         }
 
         // GET: EventController/Create
@@ -37,16 +50,17 @@ namespace FoodTrakkerWebAplication.Controllers
         // POST: EventController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <ActionResult> Create(Event eventToCreate)
+        public async Task<ActionResult> Create(EventDto eventToCreate)
         {
-            var events = await _eventRepository.GetAsync();
+            var events = await _eventService.GetEventsAsync();
+            var eventsDto = _mapper.Map<ICollection<Event>, ICollection<EventDto>>(events);
             if (!ModelState.IsValid)
             {
                 return View(eventToCreate);
             }
             try
             {
-                events.Add(eventToCreate);
+                eventsDto.Add(eventToCreate);
             }
             catch
             {
@@ -56,31 +70,39 @@ namespace FoodTrakkerWebAplication.Controllers
         }
 
         // GET: EventController/Edit/5
-        public async Task <ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            var events = await _eventRepository.GetAsync();
-            return View(events.FirstOrDefault(e => e.Id == id));
+            var eventById = await _eventService.GetEventAsync(id);
+            var eventDtoById = _mapper.Map<Event, EventDto>(eventById);
+            if (eventDtoById != null)
+            {
+
+                return View(eventDtoById);
+            }
+
+            return NotFound();
         }
 
         // POST: EventController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <ActionResult> Edit(int id, Event eventToEdit)
+        public async Task<ActionResult> Edit(int id, Event eventToEdit)
         {
-            var events = await _eventRepository.GetAsync();
+            var events = await _eventService.GetEventsAsync();
+            var eventsDto = _mapper.Map<ICollection<Event>, ICollection<EventDto>>(events);
             if (!ModelState.IsValid)
             {
-                return View(events);
+                return View(eventsDto);
             }
             try
             {
-                var existingEvent = events.FirstOrDefault(e => e.Id == id);
+                var existingEvent = eventsDto.SingleOrDefault(e => e.Id == id);
 
                 existingEvent.Name = eventToEdit.Name;
                 existingEvent.Description = eventToEdit.Description;
                 existingEvent.StartDate = eventToEdit.StartDate;
                 existingEvent.EndDate = eventToEdit.EndDate;
-                existingEvent.FoodTrucksId = eventToEdit.FoodTrucksId;
+                // existingEvent.FoodTrucks = eventToEdit.FoodTrucks;
                 existingEvent.Location = eventToEdit.Location;
 
                 return RedirectToAction(nameof(Index));
@@ -96,20 +118,28 @@ namespace FoodTrakkerWebAplication.Controllers
         // GET: EventController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            var events = await _eventRepository.GetAsync();
-            return View(events.FirstOrDefault(e => e.Id == id));
+            var eventToDelte = await _eventService.GetEventAsync(id);
+            var eventDtoToDelete = _mapper.Map<Event, EventDto>(eventToDelte);
+            if (eventDtoToDelete != null)
+            {
+
+                return View(eventDtoToDelete);
+            }
+
+            return NotFound();
         }
 
         // POST: EventController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <ActionResult> Delete(int id, Event @event)
+        public async Task<ActionResult> Delete(int id, Event @event)
         {
-            var events = await _eventRepository.GetAsync();
+            var events = await _eventService.GetEventsAsync();
+            var eventsDto = _mapper.Map<ICollection<Event>, ICollection<EventDto>>(events);
             try
             {
-                var eventToDelete = events.FirstOrDefault(e => e.Id == id);
-                events.Remove(eventToDelete);
+                var eventToDelete = eventsDto.SingleOrDefault(e => e.Id == id);
+                eventsDto.Remove(eventToDelete);
 
                 return RedirectToAction(nameof(Index));
             }

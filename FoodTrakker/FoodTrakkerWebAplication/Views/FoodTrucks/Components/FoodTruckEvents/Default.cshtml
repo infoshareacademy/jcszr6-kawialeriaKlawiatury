@@ -1,0 +1,29 @@
+﻿@model IEnumerable<FoodTrakkerWebAplication.Models.ViewModel.FoodTruckEventViewModel>  
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            <label asp-for="@Model.First().Events"></label>
+        </th>
+        <th>
+            <label asp-for="@Model.First()."></label>
+        </th>
+        
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var events in Model)
+    {
+        <tr>
+            <td>
+                @events.Events.ToList()
+            </td>
+            
+				
+        </tr>
+    }
+    </tbody>
+</table>

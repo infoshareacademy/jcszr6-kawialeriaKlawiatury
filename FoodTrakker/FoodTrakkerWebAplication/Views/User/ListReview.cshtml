@@ -1,0 +1,61 @@
+﻿@model IEnumerable<FoodTrakker.Services.DTOs.ReviewDto>
+
+@{
+    ViewData["Title"] = "ListReview";
+}
+
+<h1> Reviews!</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.FoodTruckId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodTruckId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+           <td>
+			@for (var i = 1; i <= item.Rating; i++)
+            {
+                <span class="starGlowN"></span>
+            }
+                  @for (var i = (item.Rating + 1); i <= 5; i++)
+            {
+                <span class="starFadeN"></span>
+            }
+				</td>
+                
+        </tr>
+}
+    </tbody>
+</table>

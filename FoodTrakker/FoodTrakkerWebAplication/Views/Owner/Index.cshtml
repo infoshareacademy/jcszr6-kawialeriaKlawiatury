@@ -1,5 +1,4 @@
-﻿@using FoodTrakker_WebBusinessLogic.Model
-@model FoodTrakkerWebAplication.Models.ViewModel.FoodTruckEventViewModel
+﻿@model FoodTrakkerWebAplication.Models.ViewModel.FoodTruckEventViewModel
 
 @{
 	ViewData["Title"] = "Index";
@@ -9,17 +8,71 @@
 
 
 <div class="container">
+	<br />
 	<div class="row">
-		<a asp-controller="Owner" asp-action="CreateFoodTruck">Add new food truck!</a>
+		<a asp-controller="Owner" asp-action="CreateFoodTruck" class="btn btn-light"><i class="bi bi-plus-square"></i> Add new food truck!</a>
 	</div>
 	<h1>Food Trucks</h1>
 	<div class="row">
-		<partial name="partials/_FoodTruckList" model="Model"/>
+		<partial name="partials/_FoodTruckList" model="Model" />
 	</div>
-
+	<br />
+	<div class="row">
+		<a asp-controller="Owner" asp-action="CreateEvent" class="btn btn-light"><i class="bi bi-plus-square"></i> Add new event!</a>
+	</div>
 	<h1>Events</h1>
 	<div class="row">
-		<partial name="partials/_EventsList" model="Model"/>
+		<partial name="partials/_EventsList" model="Model" />
 	</div>
-
 </div>
+
+
+<form id="deleteFoodTruckForm" asp-action="DeleteFoodTruck">
+	<input type="hidden" id="foodTruckId" name="Id"/>
+</form>
+
+<form id="deleteEventForm" asp-action="DeleteEvent">
+	<input type="hidden" id="eventId" name="Id"/>
+</form>
+
+
+@section Scripts{
+	<script>
+		$(function() {
+            $('.deleteFoodTruck').click(function(e) {
+                swal({
+                    title: "Are You sure?",
+                    text: "Are You sure you want to delete this food truck?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((confirm) => {
+                    if (confirm) {
+                        var btn = $(this);
+                        var id = btn.data("id");
+                        $('#foodTruckId').val(id);
+                        $('#deleteFoodTruckForm').submit();
+					}
+				});
+            });
+		});
+				$(function() {
+            $('.deleteEvent').click(function(e) {
+                swal({
+                    title: "Are You sure?",
+                    text: "Are You sure you want to delete this event?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((confirm) => {
+                    if (confirm) {
+                        var btn = $(this);
+                        var id = btn.data("id");
+                        $('#eventId').val(id);
+                        $('#deleteEventForm').submit();
+					}
+				});
+            });
+		});
+	</script>
+}
