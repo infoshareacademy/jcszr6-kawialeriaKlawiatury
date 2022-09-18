@@ -53,6 +53,7 @@ namespace FoodTrakker.Repository
             return Task.FromResult(_context.FoodTrucks
                 .Include(f => f.Location)
                 .Include(f => f.Type)
+                .Include(f => f.Reviews)
                 .ToList());
         }
 

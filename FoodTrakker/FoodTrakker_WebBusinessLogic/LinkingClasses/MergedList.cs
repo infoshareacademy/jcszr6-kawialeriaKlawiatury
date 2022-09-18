@@ -1,11 +1,15 @@
 ﻿using FoodTrakker.Core.Model;
 namespace FoodTrakker.Core.LinkingClasses;
 
-    public class MergedList
+    public class  MergedList
     {
-        public FoodTruck foodTruck { get; set; }
-        public Review review { get; set; }
-        public Location location { get; set; }
-        public User user { get; set; }
+
+        public FoodTruck FoodTruck { get; set; }
+        //public Review Review { get; set; }
+        //public Location Location { get; set; } 
+        public User User { get; set; }
+
+
+    
     }
 
