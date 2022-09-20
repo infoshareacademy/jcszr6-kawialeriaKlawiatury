@@ -12,11 +12,14 @@ namespace FoodTrakker.Services
     {
         private readonly IFoodTruckRepository _foodTruckRepository;
         private readonly IUserRepository _userRepository;
+        
+
         public MergedListService(IFoodTruckRepository foodTruckRepositor,
             IUserRepository userRepository)
         {
             _foodTruckRepository = foodTruckRepositor;
             _userRepository=userRepository; 
+            
         }
         //public async Task<MergedList> GetFoodTrucksAsync(string userId)
         //{
