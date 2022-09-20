@@ -1,6 +1,4 @@
-﻿
-
-using FoodTrakker.Core.Model;
+﻿using FoodTrakker.Core.Model;
 
 namespace FoodTrakker.Api.IntegrationTests.Mock
 {
@@ -29,5 +27,7 @@ namespace FoodTrakker.Api.IntegrationTests.Mock
                 Name = "Dummy",
             }
         };
+
+        public static List<Event> EmptyEventList = new List<Event>();
     }
 }

@@ -1,5 +1,7 @@
 ﻿
 
+using FoodTrakker.Core.Model;
+
 namespace FoodTrakker.Api.IntegrationTests
 {
     public class EventControllerTests
@@ -41,5 +43,53 @@ namespace FoodTrakker.Api.IntegrationTests
             //assert
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
+
+
+        [Fact]
+        public async Task Get_ForEmptyEventList_ReturnOk()
+        {
+            //arrange
+
+            _eventRepository
+                .Setup(e => e.GetAsync())
+                .Returns(Task.FromResult(FakeDbEvents.EmptyEventList));
+            //act
+            var response = await _client.GetAsync("/api/Event");
+
+            //assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public async Task GetEventById_ForValidRequest_ReturnOk()
+        {
+            //arrange
+
+            _eventRepository
+                .Setup(e => e.GetAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult(FakeDbEvents.Events[0]));
+            //act
+            var response = await _client.GetAsync("/api/Event/1");
+
+            //assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public async Task GetEventById_ForInvalidRequest_ReturnNotFound()
+        {
+            //arrange
+
+            _eventRepository
+                .Setup(e => e.GetAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult<Event>(null));
+            //act
+            var response = await _client.GetAsync("/api/Event/0");
+
+            //assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
+
+
     }
 }

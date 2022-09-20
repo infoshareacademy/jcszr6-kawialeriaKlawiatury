@@ -23,9 +23,9 @@ namespace FoodTrakker.Api.Controllers
 
         // GET api/<EventController>/5
         [HttpGet("{id}")]
-        public ActionResult<Event> GetEventById(int id)
+        public async Task<ActionResult<Event>> GetEventById(int id)
         {
-            var eventById = _eventService.GetEventAsync(id);
+            var eventById = await _eventService.GetEventAsync(id);
 
             if (eventById is null)
             {
