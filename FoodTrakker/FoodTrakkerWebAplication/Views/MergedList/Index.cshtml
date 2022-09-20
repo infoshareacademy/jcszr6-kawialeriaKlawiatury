@@ -1,0 +1,48 @@
+﻿@*@using System.Collections;*@
+
+@model IEnumerable<FoodTruckDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>FoodTrucks List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Location.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().AvgRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Description)
+            </th>
+        </tr>
+    </thead>
+        
+         @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvgRating)
+              
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                
+            </tr>
+        }
+</table>

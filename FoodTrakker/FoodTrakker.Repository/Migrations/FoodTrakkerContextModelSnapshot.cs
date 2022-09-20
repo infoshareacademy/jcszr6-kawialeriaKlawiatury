@@ -79,6 +79,9 @@ namespace FoodTrakker.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("AvgRating")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -265,6 +268,8 @@ namespace FoodTrakker.Repository.Migrations
 
                     b.HasIndex("FoodTruckId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Reviews");
                 });
 
@@ -288,6 +293,9 @@ namespace FoodTrakker.Repository.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -390,21 +398,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "01e44725-366a-4664-9315-6d52422ad076",
+                            ConcurrencyStamp = "fc4b03e5-0eef-4887-9e39-3878ae823fec",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "d805306b-1981-432f-8f20-cd950a3dd396",
+                            ConcurrencyStamp = "1e05cef1-72ed-4074-9f7f-9c2a0d2d7f9b",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "12916309-4b49-4e30-a67d-e85372b222cc",
+                            ConcurrencyStamp = "df3f7929-a99c-4496-b138-0d43ed053d9b",
                             Name = "User",
                             NormalizedName = "USER"
                         });

@@ -53,6 +53,7 @@ namespace FoodTrakker.Repository
             return Task.FromResult(_context.FoodTrucks
                 .Include(f => f.Location)
                 .Include(f => f.Type)
+                .Include(f => f.Reviews) // tutaj 
                 .ToList());
         }
 
@@ -61,6 +62,7 @@ namespace FoodTrakker.Repository
             return _context.FoodTrucks
                 .Include(f => f.Location)
                 .Include(f => f.Type).SingleOrDefaultAsync(f => f.Id == Id);
+                
         }
         public Task<List<FoodTruck>> GetOwnerFoodTrucks(string ownerId)
         {

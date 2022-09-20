@@ -32,7 +32,7 @@ namespace FoodTrakker.Repository
             var foodTruck = await _context.FoodTrucks.AsTracking().FirstOrDefaultAsync(f => f.Id == foodTruckId);
             var user = await _context.Users.Include(u => u.FavouriteFoodTrucks).AsTracking()
                 .FirstOrDefaultAsync(u => u.Id.Equals(userId));
-           user.FavouriteFoodTrucks.Remove(foodTruck);
+            user.FavouriteFoodTrucks.Remove(foodTruck);
             var result = await _context.SaveChangesAsync();
 
             return foodTruck;

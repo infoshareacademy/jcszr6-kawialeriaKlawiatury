@@ -16,6 +16,7 @@ namespace FoodTrakker.Core.Model
         public DateTime Date { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+
         [IntegerValidator(MinValue = 1, MaxValue = 10)]
         public int Rating { get; set; }
         [ForeignKey("UserId")]
