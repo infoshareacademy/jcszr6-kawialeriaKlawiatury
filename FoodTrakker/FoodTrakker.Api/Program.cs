@@ -4,6 +4,9 @@ using FoodTrakker.Repository.Contracts;
 using FoodTrakker.Repository.Data;
 using FoodTrakker.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("FoodTrakker.Api.IntegrationTests")]
 
 var builder = WebApplication.CreateBuilder(args);
 
