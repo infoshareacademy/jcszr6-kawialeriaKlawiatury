@@ -393,21 +393,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "c05c2622-1860-4c8d-9cd2-8df2d194505e",
+                            ConcurrencyStamp = "bb9b1d05-6fdf-4c13-8677-5b2c0727f34a",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "57a02442-f7b9-4231-9d09-c4ec00a61579",
+                            ConcurrencyStamp = "264454c9-2770-49ad-a055-af152c4a05af",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "b9720dc1-6c4c-4970-9280-025ae752897f",
+                            ConcurrencyStamp = "acaf5663-d3f9-4877-ac7e-411f91103dd1",
                             Name = "User",
                             NormalizedName = "USER"
                         });

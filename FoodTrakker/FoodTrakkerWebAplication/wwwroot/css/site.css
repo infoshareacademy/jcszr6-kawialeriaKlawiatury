@@ -18,6 +18,12 @@ html {
     font-style: normal;
     font-weight: 100;
 }
+.FTbox {
+    text-align:center;
+    width: 100%;
+    margin: 0 auto;
+    display: inline-block;
+}
 
 header {
     height: 72px;
@@ -110,10 +116,13 @@ body {
 }
 
 .FTCard {
-    min-height: 350px;
+    display: block;
+    width: 100%;
+
 }
 
 .FTCardbutton {
+
 }
 
 .FTImageCarousel {
@@ -135,16 +144,7 @@ body {
 }
 
 .FTNameButton {
-    background-color: #fff9e9;
-    border: 3px solid #faf1d9;
-    display: inline-block;
-    cursor: pointer;
-    color: #000000;
-    font-family: Verdana;
-    font-size: 18px;
-    padding: 4px 8px;
-    text-decoration: none;
-    text-shadow: 0px -1px 15px #fcf3d9;
+
 }
 
 .FTNameButton:hover {
