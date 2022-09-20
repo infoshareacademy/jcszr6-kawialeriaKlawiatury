@@ -1,11 +1,4 @@
-﻿using FluentAssertions;
-using FoodTrakker.Api.IntegrationTests.Mock;
-using FoodTrakker.BusinessLogic.Models;
-using FoodTrakker.Repository.Contracts;
-using FoodTrakker.Repository.Data;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
-using Moq;
+﻿
 
 namespace FoodTrakker.Api.IntegrationTests
 {
