@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using FoodTrakker.Repository;
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Contracts;
 using Microsoft.AspNetCore.Http;
-using System;
 
 namespace FoodTrakker.Services
 {
@@ -14,9 +12,10 @@ namespace FoodTrakker.Services
         private readonly IRepository<Review, int> _reviewRepository;
         private readonly IRepository<User, string> _userRepository;
         private readonly IMapper _mapper;
-        public FoodTruckService(IFoodTruckRepository foodTruckRepository, 
-            IRepository<FoodTruckType, int> foodTruckTypeRepository, 
-            IMapper mapper, 
+
+        public FoodTruckService(IFoodTruckRepository foodTruckRepository,
+            IRepository<FoodTruckType, int> foodTruckTypeRepository,
+            IMapper mapper,
             IRepository<Review, int> reviewRepository,
             IRepository<User, string> userRepository
             )
@@ -32,6 +31,7 @@ namespace FoodTrakker.Services
         {
             return _foodTruckRepository.GetAsync();
         }
+
         public Task<FoodTruck> GetFoodTruckAsync(int Id)
         {
             return _foodTruckRepository.GetAsync(Id);
@@ -69,7 +69,6 @@ namespace FoodTrakker.Services
                 }
             }
             return foodTrucksToShow;
-
         }
 
         public Task<List<FoodTruck>> GetOwnerFoodTrucks(string ownerId)
@@ -91,6 +90,7 @@ namespace FoodTrakker.Services
         {
             return _foodTruckRepository.DeleteAsync(foodTruckId);
         }
+
         public Task<List<FoodTruck>> FindFoodTruckAsync(string Name)
         {
             return _foodTruckRepository.FindFoodTruckAsync(Name);
@@ -106,6 +106,7 @@ namespace FoodTrakker.Services
             }
             return true;
         }
+
         public Task<List<FoodTruck>> FindByCityAsync(string City)
         {
             return _foodTruckRepository.FindByCityAsync(City);
@@ -126,9 +127,10 @@ namespace FoodTrakker.Services
             var foodTrucks = await _foodTruckRepository.GetFullFoodTruckInfoAsync();
             var user = await _userRepository.GetAsync(userId);
             var foodTrucksByUserLocation = foodTrucks.Where(f => f.Location.City.Contains(user.Location)).ToList();
-            
+
             return foodTrucksByUserLocation;
         }
+
         public async Task<List<FoodTruck>> GetFoodTruckNotInUserLocation(string userId)
         {
             var foodTrucks = await _foodTruckRepository.GetFullFoodTruckInfoAsync();
@@ -137,7 +139,6 @@ namespace FoodTrakker.Services
 
             return foodTrucksNotInLocation;
         }
-
 
         //public async Task<IEnumerable<string>> GetFoodTruckReviewRates()
         //{
@@ -150,6 +151,7 @@ namespace FoodTrakker.Services
             var types = await _foodTruckTypeRepository.GetAsync();
             return types.Select(x => x.Name);
         }
+
         //public Task<List<FoodTruck>> FindByEventAsync(string EventName)
         //{
         //    return _foodTruckRepository.FindByEventAsync(EventName);
@@ -164,22 +166,21 @@ namespace FoodTrakker.Services
             var fileName = Guid.NewGuid().ToString() + name + "." + type[1].ToString();
             var imagePath = CheckDirectory();
             var filePath = Path.Combine(imagePath, fileName);
-            
+
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
                 image.CopyTo(fileStream);
             };
-            
+
             return fileName;
         }
-
 
         public async Task<bool> DeleteImageFile(int id)
         {
             var foodTruckToDelete = await GetFullFoodTruckInfoAsync(id);
             if (foodTruckToDelete.ImageName == "food_truck.png")
             {
-                 return false;
+                return false;
             }
             var fileName = foodTruckToDelete.ImageName;
             var imagePath = CheckDirectory();
@@ -199,15 +200,17 @@ namespace FoodTrakker.Services
             return imagePath;
         }
 
-        public async Task<(double,int)> AvgRatingCount(int Id)
+        public async Task<(double, int)> AvgRatingCount(int Id)
         {
             return await _foodTruckRepository.AvgRatingAndReviewCount(Id);
         }
+
         public async Task<bool> HasFoodTruckReviewFromUser(int foodTruckId, string userId)
         {
-           return await _foodTruckRepository.HasFoodTruckReviewFromUser(foodTruckId, userId);
+            return await _foodTruckRepository.HasFoodTruckReviewFromUser(foodTruckId, userId);
         }
-        public async Task<bool>IsAddedToFav(int id, string userId)
+
+        public async Task<bool> IsAddedToFav(int id, string userId)
         {
             return await _foodTruckRepository.IsAddedToFav(id, userId);
         }

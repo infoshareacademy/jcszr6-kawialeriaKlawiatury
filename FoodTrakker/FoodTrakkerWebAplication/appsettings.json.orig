@@ -1,0 +1,18 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+<<<<<<< HEAD
+    "FoodTrakkerDb": "Server=localhost;Database=FoodTrakkerDb;Trusted_Connection=True;MultipleActiveResultSets=True;"
+=======
+    "FoodTrakkerDb": "Server=(localdb)\\MSSQLLocalDB;Database=FoodTrakkerDb;Trusted_Connection=True;MultipleActiveResultSets=True;"
+>>>>>>> 6838e00bf03121d0fb565d85572b6db3b3f01e65
+  }
+}
+
+  

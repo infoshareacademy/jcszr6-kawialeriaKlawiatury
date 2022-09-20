@@ -12,15 +12,25 @@ namespace FoodTrakker.Services
         private readonly IFoodTruckRepository _foodTruckRepository;
         private readonly IRepository<FoodTruckType, int> _foodTruckTypeRepository;
         private readonly IRepository<Review, int> _reviewRepository;
+        private readonly IRepository<User, string> _userRepository;
         private readonly IMapper _mapper;
+<<<<<<< HEAD
 
         public FoodTruckService(IFoodTruckRepository foodTruckRepository, IRepository<FoodTruckType, int> foodTruckTypeRepository, IMapper mapper, IRepository<Review, int> reviewRepository)
+=======
+        public FoodTruckService(IFoodTruckRepository foodTruckRepository, 
+            IRepository<FoodTruckType, int> foodTruckTypeRepository, 
+            IMapper mapper, 
+            IRepository<Review, int> reviewRepository,
+            IRepository<User, string> userRepository
+            )
+>>>>>>> 6838e00bf03121d0fb565d85572b6db3b3f01e65
         {
             _foodTruckRepository = foodTruckRepository;
             _foodTruckTypeRepository = foodTruckTypeRepository;
             _reviewRepository = reviewRepository;
             _mapper = mapper;
-
+            _userRepository = userRepository;
         }
 
         public Task<List<FoodTruck>> GetFoodTrucksAsync()
@@ -116,6 +126,24 @@ namespace FoodTrakker.Services
             return _foodTruckRepository.FindByTypeAsync(Type);
         }
 
+        public async Task<List<FoodTruck>> GetFoodTrucksByUserLocation(string userId)
+        {
+            var foodTrucks = await _foodTruckRepository.GetFullFoodTruckInfoAsync();
+            var user = await _userRepository.GetAsync(userId);
+            var foodTrucksByUserLocation = foodTrucks.Where(f => f.Location.City.Contains(user.Location)).ToList();
+            
+            return foodTrucksByUserLocation;
+        }
+        public async Task<List<FoodTruck>> GetFoodTruckNotInUserLocation(string userId)
+        {
+            var foodTrucks = await _foodTruckRepository.GetFullFoodTruckInfoAsync();
+            var foodTrucksForLocation = await GetFoodTrucksByUserLocation(userId);
+            var foodTrucksNotInLocation = foodTrucks.Except(foodTrucksForLocation).ToList();
+
+            return foodTrucksNotInLocation;
+        }
+
+
         //public async Task<IEnumerable<string>> GetFoodTruckReviewRates()
         //{
         //    var rates = await _reviewRepository.GetAsync();
@@ -177,7 +205,6 @@ namespace FoodTrakker.Services
             return imagePath;
         }
 
-=======
         public async Task<(double,int)> AvgRatingCount(int Id)
         {
             return await _foodTruckRepository.AvgRatingAndReviewCount(Id);
@@ -190,6 +217,11 @@ namespace FoodTrakker.Services
         {
             return await _foodTruckRepository.IsAddedToFav(id, userId);
         }
->>>>>>> 705856e2d51548694781efb2bf370c76f001c982
+=======
+        //public async Task<double?> AvgRatingCount(int Id)
+        //{
+        //    return await _foodTruckRepository.AvgRatingCount(Id);
+        //}
+>>>>>>> 6838e00bf03121d0fb565d85572b6db3b3f01e65
     }
 }
