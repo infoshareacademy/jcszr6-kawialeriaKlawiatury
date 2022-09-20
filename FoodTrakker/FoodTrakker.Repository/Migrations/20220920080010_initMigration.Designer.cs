@@ -4,6 +4,7 @@ using FoodTrakker.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTrakker.Repository.Migrations
 {
     [DbContext(typeof(FoodTrakkerContext))]
-    partial class FoodTrakkerContextModelSnapshot : ModelSnapshot
+    [Migration("20220920080010_initMigration")]
+    partial class initMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,9 +80,6 @@ namespace FoodTrakker.Repository.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("AvgRating")
-                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -259,10 +258,7 @@ namespace FoodTrakker.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-<<<<<<< HEAD
                         .IsRequired()
-=======
->>>>>>> 6838e00bf03121d0fb565d85572b6db3b3f01e65
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -270,8 +266,6 @@ namespace FoodTrakker.Repository.Migrations
                     b.HasAlternateKey("UserId", "FoodTruckId");
 
                     b.HasIndex("FoodTruckId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -401,33 +395,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-<<<<<<< HEAD
-                            ConcurrencyStamp = "01e44725-366a-4664-9315-6d52422ad076",
-=======
-                            ConcurrencyStamp = "fc4b03e5-0eef-4887-9e39-3878ae823fec",
->>>>>>> 6838e00bf03121d0fb565d85572b6db3b3f01e65
+                            ConcurrencyStamp = "c05c2622-1860-4c8d-9cd2-8df2d194505e",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-<<<<<<< HEAD
-                            ConcurrencyStamp = "d805306b-1981-432f-8f20-cd950a3dd396",
-=======
-                            ConcurrencyStamp = "1e05cef1-72ed-4074-9f7f-9c2a0d2d7f9b",
->>>>>>> 6838e00bf03121d0fb565d85572b6db3b3f01e65
+                            ConcurrencyStamp = "57a02442-f7b9-4231-9d09-c4ec00a61579",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-<<<<<<< HEAD
-                            ConcurrencyStamp = "12916309-4b49-4e30-a67d-e85372b222cc",
-=======
-                            ConcurrencyStamp = "df3f7929-a99c-4496-b138-0d43ed053d9b",
->>>>>>> 6838e00bf03121d0fb565d85572b6db3b3f01e65
+                            ConcurrencyStamp = "b9720dc1-6c4c-4970-9280-025ae752897f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -591,13 +573,9 @@ namespace FoodTrakker.Repository.Migrations
 
                     b.HasOne("FoodTrakker.Core.Model.User", "User")
                         .WithMany()
-<<<<<<< HEAD
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-=======
-                        .HasForeignKey("UserId");
->>>>>>> 6838e00bf03121d0fb565d85572b6db3b3f01e65
 
                     b.Navigation("FoodTruck");
 
