@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FoodTrakkerWebAplication</title>
     <link rel="stylesheet" href="~/css/cerulean.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/searchbar2.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -40,7 +41,7 @@
                     <div class="align-items-center">
                         <form class="row row-cols-lg-auto my-lg-0" method="get" asp-controller="Home" asp-action="Index" style="padding-right: 25px;">
                             <div class="col-12" style="padding-right: 0;">
-                                <input name="searchString" type="text" class="form-control" placeholder="Search Food Truck..." />
+                                @*<input name="searchString" type="text" class="form-control" placeholder="Search Food Truck..." />*@
                             </div>
                             <div class="col-12 d-none d-md-none d-lg-block" style="padding-left: 0;">
                             </div>
@@ -64,7 +65,12 @@
         </nav>
     </header>
     <div>
-       <partial name="_SliderPartial" />
+       <partial name="_SearchBlockPartial" />
+    </div>
+    <div>
+        <partial name="_SliderPartial" />
+    </div>
+
     </div>
     <div class="container-fluid">
         <main role="main" class="pb-3">
