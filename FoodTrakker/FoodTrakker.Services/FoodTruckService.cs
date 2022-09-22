@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using FoodTrakker.BusinessLogic.Repository;
+using FoodTrakker.Core.LinkingClasses;
 using FoodTrakker.Core.Model;
 using FoodTrakker.Repository.Contracts;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace FoodTrakker.Services
 {
@@ -11,20 +14,22 @@ namespace FoodTrakker.Services
         private readonly IRepository<FoodTruckType, int> _foodTruckTypeRepository;
         private readonly IRepository<Review, int> _reviewRepository;
         private readonly IRepository<User, string> _userRepository;
+        private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
 
         public FoodTruckService(IFoodTruckRepository foodTruckRepository,
             IRepository<FoodTruckType, int> foodTruckTypeRepository,
             IMapper mapper,
             IRepository<Review, int> reviewRepository,
-            IRepository<User, string> userRepository
-            )
+            IRepository<User, string> userRepository,
+            IEventRepository eventRepository)
         {
             _foodTruckRepository = foodTruckRepository;
             _foodTruckTypeRepository = foodTruckTypeRepository;
             _reviewRepository = reviewRepository;
             _mapper = mapper;
             _userRepository = userRepository;
+            _eventRepository = eventRepository;
         }
 
         public Task<List<FoodTruck>> GetFoodTrucksAsync()
@@ -121,6 +126,10 @@ namespace FoodTrakker.Services
         {
             return _foodTruckRepository.FindByTypeAsync(Type);
         }
+        //public Task<List<FoodTruckEvent>> FindByEventAsync(string Event)
+        //{
+        //    return _foodTruckRepository.FindByTypeAsync(Event);
+        //}
 
         public async Task<List<FoodTruck>> GetFoodTrucksByUserLocation(string userId)
         {
@@ -213,6 +222,17 @@ namespace FoodTrakker.Services
         public async Task<bool> IsAddedToFav(int id, string userId)
         {
             return await _foodTruckRepository.IsAddedToFav(id, userId);
+        }
+
+        public async Task<List<FoodTruck>> FindByEventAsync(string eventName)
+        {
+            var events = await _eventRepository.GetFullEventInfoAsync();
+            var eventQuery = events.ToList().SingleOrDefault(e => e.Name.ToLower().Contains(eventName));
+            if (eventQuery is null)
+            {
+                return new List<FoodTruck>();
+            }
+            return await _eventRepository.GetEventFoodTrucks(eventQuery);
         }
     }
 }

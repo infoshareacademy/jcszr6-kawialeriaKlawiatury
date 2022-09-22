@@ -13,13 +13,15 @@ namespace FoodTrakkerWebAplication.Controllers
         private readonly FoodTruckService _foodTruckService;
         private readonly UserService _userService;
         private readonly IMapper _mapper;
+        private readonly EventService _eventService;
 
 
-        public FoodTrucksController(FoodTruckService foodTruckService, IMapper mapper, UserService userService)
+        public FoodTrucksController(EventService eventService, FoodTruckService foodTruckService, IMapper mapper, UserService userService)
         {
             _foodTruckService = foodTruckService;
             _userService = userService;
             _mapper = mapper;
+            _eventService = _eventService;
 
         }
 
@@ -43,10 +45,10 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 foodTrucks = await _foodTruckService.FindByTypeAsync(Type);
             }
-            //else if (!String.IsNullOrEmpty(EventName))
-            //{
-            //    foodTrucks = await _foodTruckService.FindByEventAsync(EventName);
-            //}
+            else if (!String.IsNullOrEmpty(EventName))
+            {
+                foodTrucks = await _foodTruckService.FindByEventAsync(EventName);
+            }
             else
             {
                 foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();

@@ -2,6 +2,7 @@
 using FoodTrakker.Repository.Contracts;
 using FoodTrakker.Repository.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace FoodTrakker.Repository
 {
@@ -53,7 +54,7 @@ namespace FoodTrakker.Repository
             return Task.FromResult(_context.FoodTrucks
                 .Include(f => f.Location)
                 .Include(f => f.Type)
-                .Include(f => f.Reviews) // tutaj 
+                .Include(f => f.Reviews) // tutaj
                 .ToList());
         }
 
@@ -62,7 +63,6 @@ namespace FoodTrakker.Repository
             return _context.FoodTrucks
                 .Include(f => f.Location)
                 .Include(f => f.Type).SingleOrDefaultAsync(f => f.Id == Id);
-                
         }
         public Task<List<FoodTruck>> GetOwnerFoodTrucks(string ownerId)
         {
@@ -76,13 +76,13 @@ namespace FoodTrakker.Repository
         {
             double avg = 0;
             var count = await _context.Reviews.CountAsync(r => r.FoodTruckId == Id);
-           
-            if(count != 0) 
+
+            if(count != 0)
               avg = await _context.Reviews.Where(r => r.FoodTruckId == Id).AverageAsync(r => r.Rating);
-           
+
             return (avg, count);
         }
-        
+
         public async Task<bool> HasFoodTruckReviewFromUser(int foodTruckId, string userId)
         {
             var result = await _context.FoodTrucks.SingleOrDefaultAsync(f => f.Id == foodTruckId &&
@@ -101,11 +101,11 @@ namespace FoodTrakker.Repository
         }
 
 
-        //Task<List<FoodTruck>> IFoodTruckRepository.FindByEventAsync(string Event)
+        //Task<List<FoodTruck>> IFoodTruckRepository.FindByEventAsync(string EventName)
         //{
-        //    return _context.FoodTruckEvents.Where(f => f.FoodTruck.FoodTruckEvents.Contains(Event))
+        //    return _context.FoodTruckEvents.Where(f => f.FoodTruck.FoodTruckEvents.Contains(EventName))
         //        .Include(f => f.Location)
-        //        .Include(f => f.Type)
+        //        .Include(f => f.FoodTruck.Name)
         //        .ToListAsync();
         //}
 
