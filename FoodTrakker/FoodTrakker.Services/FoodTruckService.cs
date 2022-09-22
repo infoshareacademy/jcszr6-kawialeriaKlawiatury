@@ -144,13 +144,7 @@ namespace FoodTrakker.Services
 
             return foodTrucksNotInLocation;
         }
-
-        //public async Task<IEnumerable<string>> GetFoodTruckReviewRates()
-        //{
-        //    var rates = await _reviewRepository.GetAsync();
-        //    return rates.Select(x => x.Rating.ToString());
-        //}
-
+        
         public async Task<IEnumerable<string>> GetFoodTruckTypeNames()
         {
             var types = await _foodTruckTypeRepository.GetAsync();
@@ -218,7 +212,7 @@ namespace FoodTrakker.Services
         public async Task<List<FoodTruck>> FindByEventAsync(string eventName)
         {
             var events = await _eventRepository.GetFullEventInfoAsync();
-            var eventQuery = events.ToList().SingleOrDefault(e => e.Name.ToLower().Contains(eventName));
+            var eventQuery = events.ToList().SingleOrDefault(e => e.Name.ToLower().Contains(eventName.ToLower()));
             if (eventQuery is null)
             {
                 return new List<FoodTruck>();
