@@ -25,7 +25,7 @@ namespace FoodTrakkerWebAplication.Controllers
 
         }
 
-        public async Task<ActionResult> Index(string EventName, string Type, string searchString, string citySearchString, string streetSearchString)
+        public async Task<ActionResult> Index(string EventName, string Type, string searchString, string citySearchString, string streetSearchString, int averageRating)
         {
 
             var foodTrucks = new List<FoodTruck>();
@@ -48,6 +48,22 @@ namespace FoodTrakkerWebAplication.Controllers
             else if (!String.IsNullOrEmpty(EventName))
             {
                 foodTrucks = await _foodTruckService.FindByEventAsync(EventName);
+            }
+            else if (averageRating !=0)
+            {
+                var foodTrucksToFilter = await _foodTruckService.GetFullFoodTruckInfoAsync();
+                var foodTrucksDtos = _mapper.Map<List<FoodTruckDto>>(foodTrucksToFilter);
+                foreach (var dto in foodTrucksDtos)
+                {
+                    (dto.AvgRating, dto.ReviewsTotalCount) = await _foodTruckService.AvgRatingCount(dto.Id);
+                }
+                var foodTruckTypeDtos = new FoodTruckTypeDto { FoodTrucks = foodTrucksDtos.Where(e => e.AvgRating >= averageRating) };
+                foodTruckTypeDtos.FoodTruckTypeName = await _foodTruckService.GetFoodTruckTypeNames();
+
+                return View(foodTruckTypeDtos);
+
+                /*foodTrucks = await _foodTruckService.FindByEventAsync(EventName)*/
+                ;
             }
             else
             {

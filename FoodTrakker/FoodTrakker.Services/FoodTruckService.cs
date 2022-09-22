@@ -126,11 +126,7 @@ namespace FoodTrakker.Services
         {
             return _foodTruckRepository.FindByTypeAsync(Type);
         }
-        //public Task<List<FoodTruckEvent>> FindByEventAsync(string Event)
-        //{
-        //    return _foodTruckRepository.FindByTypeAsync(Event);
-        //}
-
+        
         public async Task<List<FoodTruck>> GetFoodTrucksByUserLocation(string userId)
         {
             var foodTrucks = await _foodTruckRepository.GetFullFoodTruckInfoAsync();
@@ -160,12 +156,7 @@ namespace FoodTrakker.Services
             var types = await _foodTruckTypeRepository.GetAsync();
             return types.Select(x => x.Name);
         }
-
-        //public Task<List<FoodTruck>> FindByEventAsync(string EventName)
-        //{
-        //    return _foodTruckRepository.FindByEventAsync(EventName);
-        //}
-
+        
         public string AddImageToFoodTruck(string name, IFormFile image)
         {
             if (image == null)
