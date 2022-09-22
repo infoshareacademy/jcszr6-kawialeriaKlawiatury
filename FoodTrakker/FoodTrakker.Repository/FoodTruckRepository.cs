@@ -13,11 +13,6 @@ namespace FoodTrakker.Repository
         {
             _context = context;
         }
-
-        //Task<List<FoodTruck>> FindByEventAsync(string EventName)
-        //{
-
-        //}
         public Task<List<FoodTruck>> FindByCityAsync(string City)
         {
             return _context.FoodTrucks.Where(f => f.Location.City.Contains(City))
@@ -54,7 +49,7 @@ namespace FoodTrakker.Repository
             return Task.FromResult(_context.FoodTrucks
                 .Include(f => f.Location)
                 .Include(f => f.Type)
-                .Include(f => f.Reviews) // tutaj
+                .Include(f => f.Reviews) 
                 .ToList());
         }
 
@@ -100,14 +95,6 @@ namespace FoodTrakker.Repository
             await _context.SaveChangesAsync();
         }
 
-
-        //Task<List<FoodTruck>> IFoodTruckRepository.FindByEventAsync(string EventName)
-        //{
-        //    return _context.FoodTruckEvents.Where(f => f.FoodTruck.FoodTruckEvents.Contains(EventName))
-        //        .Include(f => f.Location)
-        //        .Include(f => f.FoodTruck.Name)
-        //        .ToListAsync();
-        //}
 
     }
 }
