@@ -20,8 +20,21 @@ namespace FoodTrakkerWebAplication.Controllers
         }
 
         // GET: EventController
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchEventByName)
         {
+            var searchedEvents = new List<Event>();
+            if (!String.IsNullOrEmpty(searchEventByName))
+            {
+                searchedEvents = await _eventService.FindEventAsync(searchEventByName);
+                var searchedEventsDto = _mapper.Map<ICollection<Event>,
+                    ICollection<Event>>(searchedEvents); ;
+                return View((IEnumerable<EventDto>)searchedEventsDto);
+            }
+            //else
+            //{
+            //    searchedEvents = (List<Event>)await _eventService.GetFullEventInfoAsync();
+            //}
+
             var events = await _eventService.GetEventsAsync();
             var eventsDto = _mapper.Map<ICollection<Event>, ICollection<EventDto>>(events);
             return View(eventsDto);

@@ -46,7 +46,7 @@ namespace FoodTrakker.Repository
         {
             return _context.Events
                 .Include(ev => ev.FoodTruckEvents)
-                .SingleOrDefaultAsync(ev => ev.Id == Id);          
+                .SingleOrDefaultAsync(ev => ev.Id == Id);
         }
 
         public Task<List<Event>> GetOwnerEvents(string ownerId)
@@ -75,7 +75,14 @@ namespace FoodTrakker.Repository
             return Task.FromResult(foodTrucks);
         }
 
-
-
+        Task<List<Event>> IEventRepository.FindEventAsync(string Name)
+        {
+            return _context.Events.Where(e => e.Name.ToLower().Contains(Name.ToLower()))
+                .Include(e => e.Location)
+                .Include(e => e.Description)
+                .Include(e => e.StartDate)
+                .Include(e => e.EndDate)
+                .ToListAsync();
+        }
     }
 }

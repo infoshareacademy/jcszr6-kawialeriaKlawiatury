@@ -98,5 +98,9 @@ namespace FoodTrakker.Services
             return _eventRepository.GetFoodTrucksExceptAsync(@event);
         }
 
+        public Task<List<Event>> FindEventAsync(string Name)
+        {
+            return _eventRepository.FindEventAsync(Name);
+        }
     }
 }

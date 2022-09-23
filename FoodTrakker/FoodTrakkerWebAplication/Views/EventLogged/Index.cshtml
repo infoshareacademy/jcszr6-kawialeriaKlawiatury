@@ -5,6 +5,18 @@
 }
 
 <div class="container">
+    <h1>Welcome to the world of mobile cuisine!</h1>
+    <div class="row">
+        <form asp-controller="Event" asp-action="Index" method="get" class="col-2 ">
+            <div style="margin-right: 5px">
+                Event <input type="text" name="SearchString" />
+                <input type="submit" value="Filter" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
 	<h1>Events list</h1>
 
 	<div class="row container-fluid">
