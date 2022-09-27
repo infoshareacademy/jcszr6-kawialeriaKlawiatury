@@ -2545,14 +2545,14 @@ textarea.form-control-lg {
   align-items: stretch;
   width: 100%;
 }
-.input-group > .form-control,
-.input-group > .form-select,
-.input-group > .form-floating {
-  position: relative;
-  flex: 1 1 auto;
-  width: 1%;
-  min-width: 0;
-}
+    .input-group > .form-control,
+    .input-group > .form-select,
+    .input-group > .form-floating {
+        position: center;
+        flex: 1 1 auto;
+        width: 100%;
+        min-width: 0;
+    }
 .input-group > .form-control:focus,
 .input-group > .form-select:focus,
 .input-group > .form-floating:focus-within {
