@@ -2,6 +2,7 @@
 using FoodTrakker.Repository.Contracts;
 using FoodTrakker.Repository.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace FoodTrakker.Repository
 {
@@ -12,11 +13,6 @@ namespace FoodTrakker.Repository
         {
             _context = context;
         }
-
-        //Task<List<FoodTruck>> FindByEventAsync(string EventName)
-        //{
-
-        //}
         public Task<List<FoodTruck>> FindByCityAsync(string City)
         {
             return _context.FoodTrucks.Where(f => f.Location.City.Contains(City))
@@ -53,6 +49,7 @@ namespace FoodTrakker.Repository
             return Task.FromResult(_context.FoodTrucks
                 .Include(f => f.Location)
                 .Include(f => f.Type)
+                .Include(f => f.Reviews) 
                 .ToList());
         }
 
@@ -74,13 +71,13 @@ namespace FoodTrakker.Repository
         {
             double avg = 0;
             var count = await _context.Reviews.CountAsync(r => r.FoodTruckId == Id);
-           
-            if(count != 0) 
+
+            if(count != 0)
               avg = await _context.Reviews.Where(r => r.FoodTruckId == Id).AverageAsync(r => r.Rating);
-           
+
             return (avg, count);
         }
-        
+
         public async Task<bool> HasFoodTruckReviewFromUser(int foodTruckId, string userId)
         {
             var result = await _context.FoodTrucks.SingleOrDefaultAsync(f => f.Id == foodTruckId &&
@@ -98,14 +95,6 @@ namespace FoodTrakker.Repository
             await _context.SaveChangesAsync();
         }
 
-
-        //Task<List<FoodTruck>> IFoodTruckRepository.FindByEventAsync(string Event)
-        //{
-        //    return _context.FoodTruckEvents.Where(f => f.FoodTruck.FoodTruckEvents.Contains(Event))
-        //        .Include(f => f.Location)
-        //        .Include(f => f.Type)
-        //        .ToListAsync();
-        //}
 
     }
 }

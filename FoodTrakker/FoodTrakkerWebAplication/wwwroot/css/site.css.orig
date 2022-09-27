@@ -14,9 +14,15 @@ html {
 }
 
 * {
+<<<<<<< HEAD
+    /*font-family: 'Rubik Maze', cursive;
+    font-style: normal;
+    font-weight: 400;*/
+=======
     font-family: "Roboto";
     font-style: normal;
     font-weight: 100;
+>>>>>>> 6838e00bf03121d0fb565d85572b6db3b3f01e65
 }
 
 header {

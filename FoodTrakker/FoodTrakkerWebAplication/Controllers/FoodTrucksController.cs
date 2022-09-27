@@ -13,17 +13,19 @@ namespace FoodTrakkerWebAplication.Controllers
         private readonly FoodTruckService _foodTruckService;
         private readonly UserService _userService;
         private readonly IMapper _mapper;
+        private readonly EventService _eventService;
 
 
-        public FoodTrucksController(FoodTruckService foodTruckService, IMapper mapper, UserService userService)
+        public FoodTrucksController(EventService eventService, FoodTruckService foodTruckService, IMapper mapper, UserService userService)
         {
             _foodTruckService = foodTruckService;
             _userService = userService;
             _mapper = mapper;
+            _eventService = _eventService;
 
         }
 
-        public async Task<ActionResult> Index(string EventName, string Type, string searchString, string citySearchString, string streetSearchString)
+        public async Task<ActionResult> Index(string EventName, string Type, string searchString, string citySearchString, string streetSearchString, int averageRating)
         {
 
             var foodTrucks = new List<FoodTruck>();
@@ -43,10 +45,23 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 foodTrucks = await _foodTruckService.FindByTypeAsync(Type);
             }
-            //else if (!String.IsNullOrEmpty(EventName))
-            //{
-            //    foodTrucks = await _foodTruckService.FindByEventAsync(EventName);
-            //}
+            else if (!String.IsNullOrEmpty(EventName))
+            {
+                foodTrucks = await _foodTruckService.FindByEventAsync(EventName);
+            }
+            else if (averageRating !=0)
+            {
+                var foodTrucksToFilter = await _foodTruckService.GetFullFoodTruckInfoAsync();
+                var foodTrucksDtos = _mapper.Map<List<FoodTruckDto>>(foodTrucksToFilter);
+                foreach (var dto in foodTrucksDtos)
+                {
+                    (dto.AvgRating, dto.ReviewsTotalCount) = await _foodTruckService.AvgRatingCount(dto.Id);
+                }
+                var foodTruckTypeDtos = new FoodTruckTypeDto { FoodTrucks = foodTrucksDtos.Where(e => e.AvgRating >= averageRating) };
+                foodTruckTypeDtos.FoodTruckTypeName = await _foodTruckService.GetFoodTruckTypeNames();
+
+                return View(foodTruckTypeDtos);
+            }
             else
             {
                 foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
@@ -56,9 +71,6 @@ namespace FoodTrakkerWebAplication.Controllers
 
             var foodTruckDto = _mapper.Map<ICollection<FoodTruck>,
                 ICollection<FoodTruckDto>>(foodTrucks);
-
-            //var foodTruckReviewRate = new FoodTruckTypeDto { FoodTrucks = foodTruckDto };
-            //foodTruckReviewRate.FoodTruckReviewRate = await _foodTruckService.GetFoodTruckReviewRates();
 
             var foodTruckTypeDto = new FoodTruckTypeDto { FoodTrucks = foodTruckDto };
             foodTruckTypeDto.FoodTruckTypeName = await _foodTruckService.GetFoodTruckTypeNames();

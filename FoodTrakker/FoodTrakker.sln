@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodTrakker.Repository", "F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodTrakker.Services", "FoodTrakker.Services\FoodTrakker.Services.csproj", "{BD78AEA8-9B84-452C-9075-2C2483B7470D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTrakker.Api", "FoodTrakker.Api\FoodTrakker.Api.csproj", "{F27FE100-0BE7-4835-B215-94416F6CF726}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodTrakker.Api", "FoodTrakker.Api\FoodTrakker.Api.csproj", "{F27FE100-0BE7-4835-B215-94416F6CF726}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTrakker.Api.IntegrationTests", "FoodTrakker.Api.IntegrationTests\FoodTrakker.Api.IntegrationTests.csproj", "{A0453FDF-8FC2-4B0E-A1F9-DF548224633A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{F27FE100-0BE7-4835-B215-94416F6CF726}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F27FE100-0BE7-4835-B215-94416F6CF726}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F27FE100-0BE7-4835-B215-94416F6CF726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0453FDF-8FC2-4B0E-A1F9-DF548224633A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0453FDF-8FC2-4B0E-A1F9-DF548224633A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0453FDF-8FC2-4B0E-A1F9-DF548224633A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0453FDF-8FC2-4B0E-A1F9-DF548224633A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

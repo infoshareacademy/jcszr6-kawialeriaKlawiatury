@@ -24,16 +24,14 @@
 				</button>
 				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between FTManuItemWrapper">
 					<ul class="navbar-nav flex-grow-1">
-						@*<li class="nav-item FTNavPadding">*@
-						@*<a class="nav-link text-dark FTButton" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-truck"></i> Events</a> @*Natalia*@
-						@*</li>*@
-						<li class="nav-item FTNavPadding">
+							<li class="nav-item FTNavPadding">
 							<div class="dropdown">
 								<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 									<i class="bi bi-eyeglasses"></i> Show
 								</a>
 
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<li><a class="dropdown-item" asp-controller="MergedList" asp-action="Index"><i class="bi bi-truck"></i> List</a></li>
 									<li><a class="dropdown-item" asp-controller="FoodTrucks" asp-action="Index"><i class="bi bi-truck"></i> Food Trucks</a></li>
 									@if (User.Identity.IsAuthenticated)
 									{

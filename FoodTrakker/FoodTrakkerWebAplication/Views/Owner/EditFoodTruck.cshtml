@@ -17,7 +17,7 @@
 	<hr />
 	<div class="row">
 		<div class="col-md-4">
-			<form asp-action="EditFoodTruck">
+			<form asp-action="EditFoodTruck" enctype="multipart/form-data">
 				<partial name="partials/_CreateEdit" model="@Model" />
 				<select asp-for="@Model.Type" asp-items="@types" name="typeId" class="form-select"></select>
 				<br>

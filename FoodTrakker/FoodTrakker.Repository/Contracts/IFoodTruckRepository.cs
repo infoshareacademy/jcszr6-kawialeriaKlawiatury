@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrakker.Core.LinkingClasses;
 
 namespace FoodTrakker.Repository.Contracts
 {
@@ -15,9 +16,8 @@ namespace FoodTrakker.Repository.Contracts
         public Task<List<FoodTruck>> FindFoodTruckAsync(string Name);
         public Task<List<FoodTruck>> FindByCityAsync(string City);
         public Task<List<FoodTruck>> FindByStreetAsync(string City);
-        
         public Task<List<FoodTruck>> FindByTypeAsync(string Type);
-        //public Task<List<FoodTruck>> FindByEventAsync(string Event);
+        
         Task<(double, int)> AvgRatingAndReviewCount(int Id);
         Task<bool> HasFoodTruckReviewFromUser(int foodTruckId, string userId);
         Task<bool> IsAddedToFav(int id, string userId);

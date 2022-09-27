@@ -19,7 +19,7 @@ namespace FoodTrakkerWebAplication.Controllers
         //private readonly IRepository<FoodTruck> _foodTruckRepository;
 
 
-        public HomeController(ILogger<HomeController> logger,FoodTruckService foodTruckService, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger, FoodTruckService foodTruckService, IMapper mapper)
         {
             _logger = logger;
             _foodTruckService = foodTruckService;
@@ -28,6 +28,7 @@ namespace FoodTrakkerWebAplication.Controllers
 
         public async Task<IActionResult> Index(string searchString)
         {
+
             var foodTrucks = new List<FoodTruck>();
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -35,21 +36,12 @@ namespace FoodTrakkerWebAplication.Controllers
             }
             else
             {
-                foodTrucks = await _foodTruckService.GetFoodTrucksAsync();
+                foodTrucks = await _foodTruckService.GetRandomFoodTrucks(6);
             }
 
-            Random random = new Random();
-            var foodTruckDtos = new List<FoodTruckDto>();
-            var counter = 0;
-            if (foodTrucks != null)
-            {
-                while (counter < 6 && counter < foodTrucks.Count)
-                {
-                    int randomNumber = random.Next(0, foodTrucks.Count);
-                    foodTruckDtos.Add(_mapper.Map<FoodTruck, FoodTruckDto>(foodTrucks[randomNumber]));
-                    counter++;
-                }
-            }
+
+
+            var foodTruckDtos = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks);
 
             return View(foodTruckDtos);
         }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTrakker.Repository.Migrations
 {
     [DbContext(typeof(FoodTrakkerContext))]
-    [Migration("20220820185649_initialMigration")]
-    partial class initialMigration
+    [Migration("20220920080010_initMigration")]
+    partial class initMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -83,6 +83,9 @@ namespace FoodTrakker.Repository.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LocationId")
@@ -237,9 +240,6 @@ namespace FoodTrakker.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AuthorID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -247,7 +247,7 @@ namespace FoodTrakker.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FoodTruckId")
+                    b.Property<int>("FoodTruckId")
                         .HasColumnType("int");
 
                     b.Property<int>("Rating")
@@ -257,7 +257,13 @@ namespace FoodTrakker.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("UserId", "FoodTruckId");
 
                     b.HasIndex("FoodTruckId");
 
@@ -284,6 +290,9 @@ namespace FoodTrakker.Repository.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -386,21 +395,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "be87d2f6-8ca3-4182-b4ac-73976475e531",
+                            ConcurrencyStamp = "c05c2622-1860-4c8d-9cd2-8df2d194505e",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "ec74f740-1a83-4af5-9e79-69bc72ad9551",
+                            ConcurrencyStamp = "57a02442-f7b9-4231-9d09-c4ec00a61579",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "e843c86d-5958-4aea-a7fc-52d6d22804a6",
+                            ConcurrencyStamp = "b9720dc1-6c4c-4970-9280-025ae752897f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -556,9 +565,21 @@ namespace FoodTrakker.Repository.Migrations
 
             modelBuilder.Entity("FoodTrakker.Core.Model.Review", b =>
                 {
-                    b.HasOne("FoodTrakker.Core.Model.FoodTruck", null)
+                    b.HasOne("FoodTrakker.Core.Model.FoodTruck", "FoodTruck")
                         .WithMany("Reviews")
-                        .HasForeignKey("FoodTruckId");
+                        .HasForeignKey("FoodTruckId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FoodTrakker.Core.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FoodTruck");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FoodTruckUser", b =>

@@ -20,22 +20,41 @@
 				<input type="submit" value="Filter" />
 			</div>
 		</form>
-		<form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-			<div style="margin-right: 5px">
-				Street <input type="input-group" name="StreetSearchString" />
-				<input type="submit" value="Filter" />
-			</div>
-		</form>
-		<form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-			<div style="margin-right: 5px">
-				<p>Cuisine</p>
-				@Html.DropDownListFor(m => m.FoodTrucks.FirstOrDefault().Type,
-				new SelectList(Model.FoodTruckTypeName),
-				".....")
+        <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
+            <div style="margin-right: 5px">
+                Street <input type="input-group" name="StreetSearchString" />
+                <input type="submit" value="Filter" />
+            </div>
+        </form>
+        <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
+            <div style="margin-right: 5px">
+                Event <input type="input-group" name="EventName" />
+                <input type="submit" value="Filter" />
+            </div>
+        </form>
+        <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
+            <div style="margin-right: 5px">
+                <p>Cuisine</p>
+                @Html.DropDownListFor(m => m.FoodTrucks.FirstOrDefault().Type,
+                    new SelectList(Model.FoodTruckTypeName),
+                    ".....")
 
-				<input type="submit" value="Filter" />
-			</div>
-		</form>
+                <input type="submit" value="Filter" />
+            </div>
+        </form>
+        <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
+            <div style="margin-right: 5px">
+                <p>Rating</p>
+                <select name = "averageRating" selected = "0">
+					@for (int i = 1; i <= 5; i++)
+					{
+						<option value = "@i">@i</option>
+					}
+                </select>
+
+                <input type="submit" value="Filter" />
+            </div>
+        </form>
 
 	</div>
 

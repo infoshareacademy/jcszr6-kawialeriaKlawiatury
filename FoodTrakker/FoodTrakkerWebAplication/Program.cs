@@ -25,6 +25,7 @@ builder.Services.AddScoped<FavouritesFoodTruckService>();
 builder.Services.AddScoped<LocationService>();
 builder.Services.AddScoped<TypeService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<MergedListService>();
 
 var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>

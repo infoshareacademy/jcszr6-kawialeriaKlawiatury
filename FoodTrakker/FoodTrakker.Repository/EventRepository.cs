@@ -23,6 +23,7 @@ namespace FoodTrakker.Repository
             {
                 var foodTruckId = foodTruckEvent.FoodTruckId;
                 var foodTruck = _context.FoodTrucks
+                    .Include(f => f.Location)
                     .SingleOrDefault(f => f.Id == foodTruckId);
                 var type = _context.Types.SingleOrDefault(t => t.Id == foodTruck.TypeId);
 
