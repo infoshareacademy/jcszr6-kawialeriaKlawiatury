@@ -64,13 +64,13 @@ namespace FoodTrakker.Repository.Data
             //    .HasForeignKey(r => r.FoodTruckId)
             //    ;
 
-            //modelBuilder.Entity<Review>()
-            //    .HasOne<User>(r => r.User)
-            //    .WithMany(u => u.Reviews);
+            modelBuilder.Entity<Review>()
+                .HasOne<User>(r => r.User)
+                .WithMany(u => u.Reviews);
 
-            //modelBuilder.Entity<Review>()
-            //    .HasOne<FoodTruck>(r => r.FoodTruck)
-            //    .WithMany(f => f.Reviews);
+            modelBuilder.Entity<Review>()
+                .HasOne<FoodTruck>(r => r.FoodTruck)
+                .WithMany(f => f.Reviews);
 
 
             modelBuilder.Entity<FoodTruck>()

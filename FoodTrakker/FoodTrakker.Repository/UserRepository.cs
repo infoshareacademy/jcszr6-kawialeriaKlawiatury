@@ -48,11 +48,11 @@ namespace FoodTrakker.Repository
 
         public async Task<List<Review>> UserReviews(string userId)
         {
-            var user = await _context.Users.Include(u => (u as User).Reviews)
-               .FirstOrDefaultAsync(u => u.Id.Equals(userId));
-            var reviews = user.Reviews;
-
-            return reviews;
+            var userReviews = await _context.Reviews.Where(r => r.UserId == userId)
+                .Include(r => r.FoodTruck)
+                .ToListAsync();
+          
+            return userReviews;
         }
 
         public async Task<User> GetAllUserData(string userId)
