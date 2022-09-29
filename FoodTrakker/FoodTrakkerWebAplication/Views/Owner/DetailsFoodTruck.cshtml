@@ -29,7 +29,7 @@
 				@Model.Description
 			</dd>
 			<dt class="col-sm-2">
-				<label asp-for="@Model.Location.ZIPCode"></label>
+				<label asp-for="@Model.Location.ZIPCode">Postal Code</label>
 			</dt>
 			<dd class="col-sm-10">
 				@Model.Location.ZIPCode
@@ -46,22 +46,33 @@
 			<dd class="col-sm-10">
 				@Model.Location.Street
 			</dd>
+			<dt class="col-sm-2">
+				<label "Navigate"></label>
+			</dt>
+			@*<dd class="col-sm-10">
+				<a href="https://www.google.com/maps/dir/@Model.Location.City%20/@Model.Location.Street%20"</a>Wskazówki Dojazdu
+			</dd>*@
 		</dl>
 		<a asp-controller="Owner" asp-action="EditFoodTruck" asp-route-id="@Model.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
 		<br></br>
 		<h4>Reviews</h4>
 		@await Component.InvokeAsync("FoodTruckReview", @Model.Id)
 	</div>
+	@*<div class="col-2">
+		<img src="~/img/FoodTruckImg/@Model.ImageName" class="card-img-top FTImage" alt="@Model.Name" asp-append-version="true">
+	</div>*@
 
 	<div class="col-6">
 		<div class="gmap_canvas">
-			<iframe width="700" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=@Model.Location.City%20/@Model.Location.Street%20&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
-			</iframe><br><style>
+			<iframe width="700" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=@Model.Location.City%20/@Model.Location.Street%20&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="1" scrolling="no" marginheight="1" marginwidth="1">
+			</iframe><br>
+			<style>
 							 .mapouter {
 								 position: relative;
 								 text-align: right;
 								 height: 500px;
 								 width: 700px;
+								 
 								
 							 }
 							 .gmap_canvas {
@@ -69,6 +80,8 @@
 								 background: none !important;
 								 height: 500px;
 								 width: 700px;
-							 }</style>
+							 }
+			</style>
 		</div>
 	</div>
+</div>
