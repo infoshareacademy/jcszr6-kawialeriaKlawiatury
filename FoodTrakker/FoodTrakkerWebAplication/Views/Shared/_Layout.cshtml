@@ -30,7 +30,7 @@
                                 <a class="dropdown-item" asp-controller="FoodTrucks" asp-action="Index"><i class="bi bi-truck"></i> Food Trucks</a>
                                 @if (User.Identity.IsAuthenticated)
                                 {  
-                                 <a class="dropdown-item" asp-controller="EventLogged" asp-action="Index"><i class="bi bi-calendar2-event"></i>Event</a>
+                                 <a class="dropdown-item" asp-controller="EventLogged" asp-action="Index"><i class="bi bi-calendar2-event"></i> Event</a>
                                 }
                                 else
                                 {
@@ -68,12 +68,6 @@
         </nav>
     </header>
     <div>
-       @*<partial name="_SearchBlockPartial" />*@
-    </div>
-    <div>
-        @*<partial name="_SliderPartial" />*@
-    </div>
-
     </div>
     <div class="container-fluid">
         <main role="main" class="pb-3">
