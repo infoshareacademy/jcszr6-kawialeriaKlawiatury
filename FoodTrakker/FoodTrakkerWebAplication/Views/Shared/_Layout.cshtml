@@ -44,7 +44,7 @@
                     <div class="align-items-center">
                         <form class="row row-cols-lg-auto my-lg-0" method="get" asp-controller="Home" asp-action="Index" style="padding-right: 25px;">
                             <div class="col-12" style="padding-right: 0;">
-                                @*<input name="searchString" type="text" class="form-control" placeholder="Search Food Truck..." />*@
+                                <input name="searchString" type="text" class=" d-sm-block d-md-none form-control" placeholder="Search Food Truck..." />
                             </div>
                             <div class="col-12 d-none d-md-none d-lg-block" style="padding-left: 0;">
                             </div>
@@ -68,10 +68,10 @@
         </nav>
     </header>
     <div>
-       <partial name="_SearchBlockPartial" />
+       @*<partial name="_SearchBlockPartial" />*@
     </div>
     <div>
-        <partial name="_SliderPartial" />
+        @*<partial name="_SliderPartial" />*@
     </div>
 
     </div>
