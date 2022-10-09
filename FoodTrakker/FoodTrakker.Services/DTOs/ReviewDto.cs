@@ -11,6 +11,7 @@ namespace FoodTrakker.Services.DTOs
        
         public int Id { get; set; }
         public int? FoodTruckId { get; set; }
+        public string? FoodTruckName { get; set; }
         public DateTime Date { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

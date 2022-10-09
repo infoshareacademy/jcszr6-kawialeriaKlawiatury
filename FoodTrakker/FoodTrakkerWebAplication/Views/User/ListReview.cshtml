@@ -9,9 +9,9 @@
 <table class="table">
     <thead>
         <tr>
-           
+
             <th>
-                @Html.DisplayNameFor(model => model.FoodTruckId)
+                @Html.DisplayNameFor(model => model.FoodTruckName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Date)
@@ -29,33 +29,34 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.FoodTruckId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-           <td>
-			@for (var i = 1; i <= item.Rating; i++)
-            {
-                <span class="starGlowN"></span>
-            }
-                  @for (var i = (item.Rating + 1); i <= 5; i++)
-            {
-                <span class="starFadeN"></span>
-            }
-				</td>
-                
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    <a asp-controller="FoodTrucks" asp-action="Details" asp-route-id="@item.FoodTruckId" class="FTNameButton">@item.FoodTruckName</a>
+                <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                        @for (var i = 1; i <= item.Rating; i++)
+                        {
+                        <span class="starGlowN"></span>
+                        }
+                        
+                        @for (var i = (item.Rating + 1); i <= 5; i++)
+                        {
+                        <span class="starFadeN"></span>
+                        }
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>

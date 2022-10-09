@@ -144,6 +144,7 @@ namespace FoodTrakkerWebAplication.Controllers
             var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
             reviews = await _favouritesFoodTruckService.UserReviews(x.Value);
             reviewsDto = _mapper.Map<List<Review>, List<ReviewDto>>(reviews);
+                       
             if (reviewsDto!= null)
             {
 

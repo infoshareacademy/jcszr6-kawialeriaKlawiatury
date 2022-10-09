@@ -13,7 +13,10 @@ namespace FoodTrakker.Services.Profiles
     {
         public ReviewProfile()
         {
-            CreateMap<Review, ReviewDto>().ReverseMap();
+            CreateMap<Review, ReviewDto>()
+                .ForMember(dest => dest.FoodTruckName,
+                opt => opt.MapFrom(src => src.FoodTruck.Name));
+            CreateMap<ReviewDto, Review>();
         } 
     }
 }
