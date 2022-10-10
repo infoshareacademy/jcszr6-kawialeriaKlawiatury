@@ -59,6 +59,20 @@
                     </form>
                 </li>
                 <li>
+                    <form asp-controller="FoodTrucks" asp-action="Index" method="get">
+                        <div class="input-group mb-3">
+                            <select class="form-control" selected="0">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                            <input class="btn btn-primary" type="submit" id="button-addon2;" value="Filter" />
+                            <div class="input-group-append">
+                            </div>
+                    </form>
+                </li>
+                <li>
                     <a href="#" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16"></></svg>
                         <br></br>
@@ -81,60 +95,10 @@
         </div>
         <div class="b-example-divider b-example-vr"></div>
     </div>
-    
+
+
     <div class="col-sm-8 row">
         <p></p>
-<div class="container">
-	<h1>Welcome to the world of mobile cuisine!</h1>
-	<div class="row">
-		<form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-			<div style="margin-right: 5px">
-				Truck <input type="text" name="SearchString" />
-				<input type="submit" value="Filter" />
-			</div>
-		</form>
-
-		<form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-			<div style="margin-right: 5px">
-				City <input type="input-group" name="CitySearchString" />
-				<input type="submit" value="Filter" />
-			</div>
-		</form>
-        <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-            <div style="margin-right: 5px">
-                Street <input type="input-group" name="StreetSearchString" />
-                <input type="submit" value="Filter" />
-            </div>
-        </form>
-        <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-            <div style="margin-right: 5px">
-                Event <input type="input-group" name="EventName" />
-                <input type="submit" value="Filter" />
-            </div>
-        </form>
-        <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-            <div style="margin-right: 5px">
-                <p>Cuisine</p>
-                @Html.DropDownListFor(m => m.FoodTrucks.FirstOrDefault().Type,
-                    new SelectList(Model.FoodTruckTypeName),
-                    ".....")
-
-                <input type="submit" value="Filter" />
-            </div>
-        </form>
-        <form asp-controller="FoodTrucks" asp-action="Index" method="get" class="col-2 ">
-            <div style="margin-right: 5px">
-                <p>Rating</p>
-                <select name = "averageRating" selected = "0">
-					@for (int i = 1; i <= 5; i++)
-					{
-						<option value = "@i">@i</option>
-					}
-                </select>
-
-                <input type="submit" value="Filter" />
-            </div>
-        </form>
 
 
         
