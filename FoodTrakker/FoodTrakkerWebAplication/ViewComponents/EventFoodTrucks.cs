@@ -28,5 +28,6 @@ namespace FoodTrakkerWebAplication.ViewComponents
 
             return View(foodTrucksDto);
         }
+        
     }
 }

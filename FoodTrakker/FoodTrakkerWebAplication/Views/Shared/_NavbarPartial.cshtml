@@ -1,0 +1,56 @@
+﻿<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/img/logo.png" class="img-fluid" alt="FoodTrakker!">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item active">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-controller="MergedList" asp-action="Index"><i class="bi bi-card-list"></i> List</a>
+                            <a class="dropdown-item" asp-controller="FoodTrucks" asp-action="Index"><i class="bi bi-truck"></i> Food Trucks</a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                <a class="dropdown-item" asp-controller="EventLogged" asp-action="Index"><i class="bi bi-calendar2-event"></i> Event</a>
+                                }
+                                else
+                                {
+                                <a class="dropdown-item" asp-controller="Event" asp-action="Index"><i class="bi bi-calendar2-event"></i> Event</a>
+                                }
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="About"><i class="bi bi-cup-hot-fill"></i> About</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="align-items-center">
+                    <form class="row row-cols-lg-auto my-lg-0" method="get" asp-controller="Home" asp-action="Index" style="padding-right: 25px;">
+                        <div class="col-12" style="padding-right: 0;">
+                            <input name="searchString" type="text" class=" d-sm-block d-md-none form-control" placeholder="Search Food Truck..." />
+                        </div>
+                        <div class="col-12 d-none d-md-none d-lg-block" style="padding-left: 0;">
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    @if (User.IsInRole(Roles.Administrator) || User.IsInRole(Roles.Owner))
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li>
+                                <a class="nav-link m-2" asp-area="" asp-controller="Owner" asp-action="Index" style=""><i class="bi bi-speedometer2"></i> Dashboard</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+                <div>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
