@@ -55,7 +55,7 @@ namespace FoodTrakker.Services
         public async Task<List<FoodTruck>> GetRandomFoodTrucks(int number)
         {
             var foodTrucksToShow = new List<FoodTruck>();
-            var foodTrucks = await GetFoodTrucksAsync();
+            var foodTrucks = await GetFullFoodTruckInfoAsync();
             var counter = 0;
             var randomNumberControll = new List<int>();
             Random random = new Random();

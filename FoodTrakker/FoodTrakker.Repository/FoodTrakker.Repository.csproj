@@ -24,4 +24,8 @@
     <ProjectReference Include="..\FoodTrakker_WebBusinessLogic\FoodTrakker.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
