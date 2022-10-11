@@ -19,9 +19,9 @@
             {
                 _logger.LogError(e, e.Message);
 
-                context.Response.StatusCode = 500;
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-                await context.Response.WriteAsync("Something went wrong!");
+                context.Response.Redirect("/Home/Error500");
             }
         }
     }

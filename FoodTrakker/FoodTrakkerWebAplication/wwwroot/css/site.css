@@ -21,7 +21,7 @@ html {
 
 header {
     height: 72px;
-    
+
 }
 
 body {
@@ -33,7 +33,7 @@ body {
 .FTnav {
     z-index: 2;
 
-    
+
 }
 
 .FTButton {
@@ -106,7 +106,7 @@ body {
     padding: 4px 8px;
     text-decoration: none;
     text-shadow: 0px -1px 15px #fcf3d9;
-    
+
 }
 
 .FTCard {
@@ -118,7 +118,7 @@ body {
 
 .FTImageCarousel {
     height: 500px;
-    
+
 }
 
 .FTImage {
@@ -131,7 +131,7 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
     width: auto;
-    
+
 }
 
 .FTNameButton {
@@ -188,3 +188,7 @@ body {
 }
 
 
+.Error500{
+    width: 700px;
+    height: 470px;
+}
