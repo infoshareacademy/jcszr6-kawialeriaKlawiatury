@@ -47,7 +47,7 @@ namespace FoodTrakker.Repository.Data
                 .WithMany(e=>e.FoodTruckEvents)
                 .HasForeignKey(fe => fe.EventId);
 
-            modelBuilder.Entity<User>()              
+            modelBuilder.Entity<User>()
                 .Ignore(u => u.FavouriteFoodTrucks);
             modelBuilder.Entity<User>()
                 .Ignore(u => u.Reviews);

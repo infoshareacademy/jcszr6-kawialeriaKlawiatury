@@ -20,8 +20,8 @@ namespace FoodTrakkerWebAplication.Controllers
 
         private readonly IMapper _mapper;
         public MergedListController(FoodTruckService foodTruckService,
-            UserService userService, 
-            LocationService locationService, 
+            UserService userService,
+            LocationService locationService,
             MergedListService mergedListService,
             ReviewService reviewService,
             IMapper mapper)
@@ -63,6 +63,7 @@ namespace FoodTrakkerWebAplication.Controllers
             var foodTrucksDto = _mapper.Map<List<FoodTruckDto>>(foodTrucks);
 
             return View(foodTrucksDto);
+
         }
 
 
