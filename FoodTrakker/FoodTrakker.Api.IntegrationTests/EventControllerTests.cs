@@ -1,6 +1,4 @@
-﻿
-
-using FoodTrakker.Core.Model;
+﻿using FoodTrakker.Core.Model;
 
 namespace FoodTrakker.Api.IntegrationTests
 {
@@ -44,7 +42,6 @@ namespace FoodTrakker.Api.IntegrationTests
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
 
-
         [Fact]
         public async Task Get_ForEmptyEventList_ReturnOk()
         {
@@ -54,7 +51,7 @@ namespace FoodTrakker.Api.IntegrationTests
                 .Setup(e => e.GetAsync())
                 .Returns(Task.FromResult(FakeDbEvents.EmptyEventList));
             //act
-            var response = await _client.GetAsync("/api/Event");
+            var response =  await _client.GetAsync("/api/Event");
 
             //assert
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
@@ -71,9 +68,27 @@ namespace FoodTrakker.Api.IntegrationTests
                 .Returns(Task.FromResult(FakeDbEvents.Events.Single(e => e.Id == Id)));
             //act
             var response = await _client.GetAsync($"/api/Event/{Id}");
-            //var body = await response.Content.ReadFromJsonAsync<Event>();
+            //var result = await response.Content.ReadFromJsonAsync<Event>();
             //assert
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        public async Task GetEventById_ForValidRequest_ReturnCorrectObject(int Id)
+        {
+            //arrange
+            var testObject = FakeDbEvents.Events[Id - 1];
+
+            _eventRepository
+                .Setup(e => e.GetAsync(Id))
+                .Returns(Task.FromResult(FakeDbEvents.Events.Single(e => e.Id == Id)));
+            //act
+            var response = await _client.GetAsync($"/api/Event/{Id}");
+            var result = await response.Content.ReadFromJsonAsync<Event>();
+            //assert
+            result.Should().BeEquivalentTo(testObject);
         }
 
         [Fact]
@@ -84,13 +99,12 @@ namespace FoodTrakker.Api.IntegrationTests
             _eventRepository
                 .Setup(e => e.GetAsync(It.IsAny<int>()))
                 .Returns(Task.FromResult<Event>(null));
+
             //act
-            var response = await _client.GetAsync("/api/Event/0");
+            Action response = () => _client.GetAsync($"/api/Event/0");
 
             //assert
-            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+            response.Should().Throw<NullReferenceException>();
         }
-
-
     }
 }
