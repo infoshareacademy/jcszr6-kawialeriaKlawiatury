@@ -1,4 +1,6 @@
-﻿using FoodTrakker.Core.Model;
+﻿using AutoMapper;
+using FoodTrakker.Api.Models;
+using FoodTrakker.Core.Model;
 using FoodTrakker.Services;
 using FoodTrakker.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -13,14 +15,19 @@ namespace FoodTrakker.Api.Controllers
     public class EventController : ControllerBase
     {
         private readonly EventService _eventService;
-        public EventController(EventService eventService)
+        private readonly IMapper _mapper; 
+        public EventController(EventService eventService,IMapper mapper)
         {
             _eventService = eventService;
+            _mapper = mapper;
         }
         // GET: api/<EventController>
         [HttpGet]
         public IActionResult Get() => Ok(_eventService.GetEventsAsync());
-
+        //public Task<ICollection<Event>> Get()
+        //{
+        //    return _eventService.GetEventsAsync();
+        //}
         // GET api/<EventController>/5
         [HttpGet("{id}")]
         public Task<Event?> GetEventById(int id)
@@ -37,21 +44,12 @@ namespace FoodTrakker.Api.Controllers
 
         // POST api/<EventController>
         [HttpPost]
-        public Task<Event> CreateEvent(int id)
+        public async Task<EventApiGet> CreateEvent(EventApiPost eventDto)
         {
-            
-            var eventToAdd = _eventService.GetEventAsync(id);
-            var events = _eventService.GetEventsAsync();
-            events.Result.Add(new Event
-            {
-              Name = eventToAdd.Result.Name,
-              Description = eventToAdd.Result.Description,
-              StartDate = eventToAdd.Result.StartDate,
-              EndDate = eventToAdd.Result.EndDate
-              
-            }); 
+            var @event = _mapper.Map<Event>(eventDto);
+            var eventWithId = await _eventService.AddEventAsyncWithReturn(@event);
 
-            return Task.FromResult(eventToAdd.Result);
+            return _mapper.Map<EventApiGet>(eventWithId);
         }
     
 
@@ -62,16 +60,18 @@ namespace FoodTrakker.Api.Controllers
     {
             var events = _eventService.GetEventsAsync();
             var eventToUpdate = events.Result.SingleOrDefault(e => e.Id == eventUpdate.Id);
+            var eventToUpdateApi = _mapper.Map<EventApiPost>(eventToUpdate);
 
-            eventToUpdate.Name = eventUpdate.Name;
-            eventToUpdate.Description = eventUpdate.Description;
-            eventToUpdate.StartDate = eventUpdate.StartDate;
-            eventToUpdate.EndDate = eventUpdate.EndDate;
-            eventToUpdate.Location = eventUpdate.Location;
+            eventToUpdateApi.Name = eventUpdate.Name;
+            eventToUpdateApi.Description = eventUpdate.Description;
+            eventToUpdateApi.StartDate = eventUpdate.StartDate;
+            eventToUpdateApi.EndDate = eventUpdate.EndDate;
+            eventToUpdateApi.Location = eventUpdate.Location;
+            eventToUpdateApi.OwnerId = eventUpdate.OwnerId;
 
-            if (eventToUpdate is null)
+            if (eventToUpdateApi is null)
         {
-            throw new ArgumentNullException(nameof(eventToUpdate));
+            throw new ArgumentNullException(nameof(eventToUpdateApi));
         }
 
 
@@ -81,19 +81,12 @@ namespace FoodTrakker.Api.Controllers
 
     // DELETE api/<EventController>/5
     [HttpDelete("{id:int}")]
-        public Task Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var events = _eventService.GetEventsAsync();
-            var eventToDelete = events.Result.SingleOrDefault(e => e.Id == id);
+            await _eventService.DeleteEvent(id);
+            return Ok();
 
-            if (eventToDelete == null)
-            {
-                throw new NullReferenceException();
-            }
-
-            events.Result.Remove(eventToDelete);
             
-            return Task.CompletedTask;
         }
 
     }

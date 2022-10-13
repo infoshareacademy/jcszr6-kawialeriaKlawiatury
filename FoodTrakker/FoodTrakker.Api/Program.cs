@@ -12,6 +12,7 @@ builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<EventService>();
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpContextAccessor();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -19,9 +20,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb"));
-    // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb"),
+    builder =>
+    {
+        builder.EnableRetryOnFailure(2, TimeSpan.FromSeconds(5), null);
+    });
 });
+    // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

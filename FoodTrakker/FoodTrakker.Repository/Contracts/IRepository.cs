@@ -9,5 +9,6 @@ namespace FoodTrakker.Repository.Contracts
         public Task AddAsync(T entity);
         public Task DeleteAsync(IndexType id);
         public Task UpdateAsync(T entity);
+        public Task<T> AddAsyncWithReturn(T entity);
     }
 }

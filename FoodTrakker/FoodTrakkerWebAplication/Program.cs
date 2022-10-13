@@ -29,7 +29,9 @@ builder.Services.AddScoped<MergedListService>();
 
 var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
-  { options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb"));
+  {
+      options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb"));
+      
      // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     });
 

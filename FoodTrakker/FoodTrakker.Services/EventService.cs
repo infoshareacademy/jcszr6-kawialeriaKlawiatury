@@ -43,6 +43,10 @@ namespace FoodTrakker.Services
         {
             return _eventRepository.AddAsync(@event);
         }
+        public async Task<Event> AddEventAsyncWithReturn(Event @event)
+        {
+            return await _eventRepository.AddAsyncWithReturn(@event);
+        }
 
         public List<FoodTruckEvent> AddFoodTrucks(List<int> foodTruckId, Event @event)
         {
