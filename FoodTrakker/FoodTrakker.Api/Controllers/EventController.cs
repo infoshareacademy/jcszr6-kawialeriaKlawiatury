@@ -15,8 +15,8 @@ namespace FoodTrakker.Api.Controllers
     public class EventController : ControllerBase
     {
         private readonly EventService _eventService;
-        private readonly IMapper _mapper; 
-        public EventController(EventService eventService,IMapper mapper)
+        private readonly IMapper _mapper;
+        public EventController(EventService eventService, IMapper mapper)
         {
             _eventService = eventService;
             _mapper = mapper;
@@ -51,42 +51,31 @@ namespace FoodTrakker.Api.Controllers
 
             return _mapper.Map<EventApiGet>(eventWithId);
         }
-    
+
 
         // PUT api/<EventController>/5
-    [HttpPut("{id}")]
-   
-    public Task<Event> UpdateEvent(Event eventUpdate)
-    {
-            var events = _eventService.GetEventsAsync();
-            var eventToUpdate = events.Result.SingleOrDefault(e => e.Id == eventUpdate.Id);
-            var eventToUpdateApi = _mapper.Map<EventApiPost>(eventToUpdate);
+        [HttpPut("{id}")]
 
-            eventToUpdateApi.Name = eventUpdate.Name;
-            eventToUpdateApi.Description = eventUpdate.Description;
-            eventToUpdateApi.StartDate = eventUpdate.StartDate;
-            eventToUpdateApi.EndDate = eventUpdate.EndDate;
-            eventToUpdateApi.Location = eventUpdate.Location;
-            eventToUpdateApi.OwnerId = eventUpdate.OwnerId;
-
-            if (eventToUpdateApi is null)
+        public async Task<ActionResult<Event>> UpdateEvent([FromRoute]int id,EventApiPost eventApiPost)
         {
-            throw new ArgumentNullException(nameof(eventToUpdateApi));
+           
+            var eventUpdateGet = _mapper.Map<EventApiGet>(eventApiPost);
+            eventUpdateGet.Id = id;
+            var eventToUpdate = _mapper.Map<Event>(eventUpdateGet);
+            await _eventService.UpdateEvent(eventToUpdate);
+
+            return Ok();
+
         }
 
-
-
-            return Task.FromResult(eventToUpdate);
-    }
-
-    // DELETE api/<EventController>/5
-    [HttpDelete("{id:int}")]
+        // DELETE api/<EventController>/5
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
             await _eventService.DeleteEvent(id);
             return Ok();
 
-            
+
         }
 
     }

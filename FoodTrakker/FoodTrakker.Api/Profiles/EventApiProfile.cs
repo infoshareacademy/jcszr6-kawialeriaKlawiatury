@@ -10,6 +10,7 @@ namespace FoodTrakker.Api.Profiles
         {
             CreateMap<Event, EventApiPost>().ReverseMap();
             CreateMap<Event, EventApiGet>().ReverseMap();
+            CreateMap<EventApiPost, EventApiGet>().ReverseMap();
         }
     }
 }
