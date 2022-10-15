@@ -61,14 +61,21 @@ namespace FoodTrakker.Api.Controllers
 
         public async Task<ActionResult<Event>> UpdateEvent([FromRoute]int id,EventApiPost eventApiPost)
         {
-            var eventUpdateId = await _eventService.GetEventAsync(id);
-            if (eventUpdateId is null)
+            var existingEvent = await _eventService.GetEventAsync(id);
+            if (existingEvent is null)
             {
                 return NotFound();
             }
-            var eventUpdate = _mapper.Map<Event>(eventApiPost);
-            eventUpdate.Id = id;
-            await _eventService.UpdateEvent(eventUpdate);
+
+            existingEvent.Description = eventApiPost.Description;
+            existingEvent.Location = eventApiPost.Location;
+            existingEvent.Name = eventApiPost.Name;
+            existingEvent.OwnerId = eventApiPost.OwnerId;
+            existingEvent.EndDate = eventApiPost.EndDate;
+            existingEvent.StartDate = eventApiPost.StartDate;
+            
+
+            await _eventService.UpdateEvent(existingEvent);
 
             return Ok();
 
