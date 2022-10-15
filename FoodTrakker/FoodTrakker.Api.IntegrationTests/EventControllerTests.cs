@@ -162,6 +162,45 @@ namespace FoodTrakker.Api.IntegrationTests
             result.Should().BeEquivalentTo(returnedEvent);
         }
 
+        [Theory]
+        [InlineData(2)]
+        public async Task Delete_ForProperInput_ReturnOk(int Id)
+        {
+            //arrange
+            _eventRepository
+                .Setup(e => e.DeleteAsync(Id))
+                .Returns(Task.FromResult(Task.FromResult(FakeDbEvents.Events.Single(e => e.Id == Id))));
+            //act
+            var responce = await _client.DeleteAsync($"/api/Event/{Id}");
+
+            //assert
+            responce.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public async Task Delete_ForProperInput_InvokeDeleteAsyncMethodOnce()
+        {
+            //arrange
+            int Id = 1;
+            //act
+            var responce = await _client.DeleteAsync($"/api/Event/{Id}");
+            //assert
+            _eventRepository.Verify(e => e.DeleteAsync(It.Is<int>(x => x == Id)), Times.Once);
+        }
+
+        [Theory]
+        [InlineData(1)]
+        public async Task Delete_ForInvalidInput_ReturnBadRequest(int Id)
+        {
+            //arrange
+
+            //act
+            var responce = await _client.DeleteAsync($"/api/Event/{Id}");
+
+            //assert
+            responce.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
+        }
+
 
 
     }
