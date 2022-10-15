@@ -7,16 +7,19 @@ namespace FoodTrakker.Repository
 {
     public class UserRepository : Repository<User, string> , IUserRepository
     {
-       
+
         public UserRepository(FoodTrakkerContext context) : base(context)
         {
-          
+
         }
 
         public async Task<FoodTruck> AddFavFoodTrucToUserAsync(string userId,int foodTruckId)
         {
-            
-            var foodTruck = await _context.FoodTrucks.FirstOrDefaultAsync(f => f.Id == foodTruckId);
+
+            var foodTruck = await _context.FoodTrucks
+                .Include(f => f.Location)
+                .FirstOrDefaultAsync(f => f.Id == foodTruckId);
+
             var user = await _context.Users.Include(u => u.FavouriteFoodTrucks)
                 .FirstOrDefaultAsync(u => u.Id.Equals(userId));
             _context.Attach(user);
@@ -29,7 +32,10 @@ namespace FoodTrakker.Repository
         }
         public async Task<FoodTruck> RemoveFavFoodTruckFromUserAsync(string userId, int foodTruckId)
         {
-            var foodTruck = await _context.FoodTrucks.AsTracking().FirstOrDefaultAsync(f => f.Id == foodTruckId);
+            var foodTruck = await _context.FoodTrucks
+                .AsTracking()
+                .Include(f => f.Location)
+                .FirstOrDefaultAsync(f => f.Id == foodTruckId);
             var user = await _context.Users.Include(u => u.FavouriteFoodTrucks).AsTracking()
                 .FirstOrDefaultAsync(u => u.Id.Equals(userId));
             user.FavouriteFoodTrucks.Remove(foodTruck);
@@ -51,7 +57,7 @@ namespace FoodTrakker.Repository
             var userReviews = await _context.Reviews.Where(r => r.UserId == userId)
                 .Include(r => r.FoodTruck)
                 .ToListAsync();
-          
+
             return userReviews;
         }
 
