@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<EventService>();
 builder.Services.AddScoped<IFoodTruckRepository, FoodTruckRepository>();
-builder.Services.AddScoped<FoodTruckService>();
+builder.Services.AddScoped<EventService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

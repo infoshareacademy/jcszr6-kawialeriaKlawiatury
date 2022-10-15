@@ -23,6 +23,7 @@ namespace FoodTrakker.Api.Controllers
 
         // GET: api/<FoodTruckController>
         [HttpGet]
+       
         public IActionResult Get() => Ok(_foodTruckService.GetFoodTrucksAsync());
 
         // GET api/<FoodTruckController>/5
@@ -40,7 +41,7 @@ namespace FoodTrakker.Api.Controllers
 
         // POST api/<FoodTruckController>
         [HttpPost]
-        public async Task<FoodTruckApiGet> CreateFoodTruck(FoodTTruckApiPost foodTruckDto)
+        public async Task<FoodTruckApiGet> CreateFoodTruck(FoodTruckApiPost foodTruckDto)
         {
             var @foodTruck = _mapper.Map<FoodTruck>(foodTruckDto);
             var foodTruckWithId = await _foodTruckService.AddFoodTruckAsyncWithReturn(@foodTruck);
@@ -59,9 +60,8 @@ namespace FoodTrakker.Api.Controllers
             foodTruckToUpdateApi.Name = foodTruckUpdate.Name;
             foodTruckToUpdateApi.Description = foodTruckUpdate.Description;
             foodTruckToUpdateApi.LocationId = foodTruckUpdate.LocationId;
-            foodTruckToUpdateApi.Location = foodTruckUpdate.Location;
             foodTruckToUpdateApi.TypeId = foodTruckUpdate.TypeId;
-            foodTruckToUpdateApi.Type = foodTruckUpdate.Type;
+            foodTruckToUpdateApi.OwnerId = foodTruckUpdate.OwnerId;
 
             if (foodTruckToUpdateApi is null)
             {
