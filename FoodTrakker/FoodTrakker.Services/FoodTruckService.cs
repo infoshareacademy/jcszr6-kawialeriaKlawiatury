@@ -101,6 +101,11 @@ namespace FoodTrakker.Services
             return _foodTruckRepository.FindFoodTruckAsync(Name);
         }
 
+        public async Task<FoodTruck> AddFoodTruckAsyncWithReturn(FoodTruck @foodTruck)
+        {
+            return await _foodTruckRepository.AddAsyncWithReturn(@foodTruck);
+        }
+
         public async Task<bool> IsNameUnique(string name)
         {
             var foodTrucks = await GetFoodTrucksAsync();
