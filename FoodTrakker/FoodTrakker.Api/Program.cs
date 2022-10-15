@@ -1,4 +1,5 @@
-using FoodTrakker.BusinessLogic.Models;
+
+using FoodTrakker.Core.Model;
 using FoodTrakker.Repository;
 using FoodTrakker.Repository.Contracts;
 using FoodTrakker.Repository.Data;
@@ -14,7 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<EventService>();
 builder.Services.AddScoped<IFoodTruckRepository, FoodTruckRepository>();
-builder.Services.AddScoped<EventService>();
+builder.Services.AddScoped<FoodTruckService>();
+
+builder.Services.AddScoped<IRepository<User, string>, UserRepository>();
+builder.Services.AddScoped<IRepository<FoodTruckType, int>, Repository<FoodTruckType, int>>();
+builder.Services.AddScoped<IRepository<Review, int>, Repository<Review, int>>();
 
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

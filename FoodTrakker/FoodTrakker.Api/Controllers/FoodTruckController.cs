@@ -15,6 +15,7 @@ namespace FoodTrakker.Api.Controllers
     {
         private readonly FoodTruckService _foodTruckService;
         private readonly IMapper _mapper;
+
         public FoodTruckController(FoodTruckService foodTruckService, IMapper mapper)
         {
             _foodTruckService = foodTruckService;
