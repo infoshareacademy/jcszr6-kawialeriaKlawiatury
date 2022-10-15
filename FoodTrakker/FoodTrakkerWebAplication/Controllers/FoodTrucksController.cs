@@ -91,6 +91,11 @@ namespace FoodTrakkerWebAplication.Controllers
             var foodTruckTypeDto = new FoodTruckTypeDto { FoodTrucks = foodTruckDto };
             foodTruckTypeDto.FoodTruckTypeName = await _foodTruckService.GetFoodTruckTypeNames();
 
+            foreach (var ftBto in foodTruckTypeDto.FoodTrucks)
+            {
+                (ftBto.AvgRating, ftBto.ReviewsTotalCount) = await _foodTruckService.AvgRatingCount(ftBto.Id);
+            }
+
             return View(foodTruckTypeDto);
         }
 
