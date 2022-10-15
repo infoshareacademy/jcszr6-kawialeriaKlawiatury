@@ -23,23 +23,26 @@ namespace FoodTrakker.Api.Controllers
         }
         // GET: api/<EventController>
         [HttpGet]
-        public IActionResult Get() => Ok(_eventService.GetEventsAsync());
-        //public Task<ICollection<Event>> Get()
-        //{
-        //    return _eventService.GetEventsAsync();
-        //}
+      // public IActionResult Get() => Ok(_eventService.GetEventsAsync());
+        public async Task<ICollection<EventApiGet>> Get()
+        {
+            var events = await _eventService.GetEventsAsync();
+            var eventsApiGet = _mapper.Map<ICollection<Event>,ICollection<EventApiGet>>(events);
+            return eventsApiGet;
+        }
         // GET api/<EventController>/5
         [HttpGet("{id}")]
-        public Task<Event?> GetEventById(int id)
+        public async Task<EventApiGet?> GetEventById(int id)
         {
-            var eventById = _eventService.GetEventAsync(id);
+            var eventById = await _eventService.GetEventAsync(id);
+            var eventByIdApiGet = _mapper.Map<EventApiGet>(eventById);
 
             if (eventById is null)
             {
                 throw new NullReferenceException();
             }
 
-            return Task.FromResult<Event?>(eventById.Result);
+            return eventByIdApiGet;
         }
 
         // POST api/<EventController>
