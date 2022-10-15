@@ -1,5 +1,6 @@
 ﻿using FoodTrakker.Core.Model;
 using FoodTrakker.Services;
+using FoodTrakker.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -37,19 +38,28 @@ namespace FoodTrakker.Api.Controllers
 
         // POST api/<EventController>
         [HttpPost]
-        public Task<Event> CreateEvent(int id)
+        public async Task<IActionResult> Post([FromBody] EventDto @event)
         {
-            var eventToAdd = _eventService.GetEventAsync(id);
-            var events = _eventService.GetEventsAsync();
-            events.Result.Add(new Event
+            var e = new Event
             {
-                Name = eventToAdd.Result.Name,
-                Description = eventToAdd.Result.Description,
-                StartDate = eventToAdd.Result.StartDate,
-                EndDate = eventToAdd.Result.EndDate
-            });
+                Id = @event.Id,
+                Name = @event.Name
+            };
 
-            return Task.FromResult(eventToAdd.Result);
+
+            await _eventService.AddEventAsync(e);
+
+            //var eventToAdd = _eventService.GetEventAsync(id);
+            //var events = _eventService.GetEventsAsync();
+            //events.Result.Add(new Event
+            //{
+            //    Name = eventToAdd.Result.Name,
+            //    Description = eventToAdd.Result.Description,
+            //    StartDate = eventToAdd.Result.StartDate,
+            //    EndDate = eventToAdd.Result.EndDate
+            //});
+
+            return Ok();
         }
 
         // PUT api/<EventController>/5

@@ -1,4 +1,7 @@
 ﻿using FoodTrakker.Core.Model;
+using FoodTrakker.Services.DTOs;
+using System.Text;
+using System.Text.Json;
 
 namespace FoodTrakker.Api.IntegrationTests
 {
@@ -51,10 +54,40 @@ namespace FoodTrakker.Api.IntegrationTests
                 .Setup(e => e.GetAsync())
                 .Returns(Task.FromResult(FakeDbEvents.EmptyEventList));
             //act
-            var response =  await _client.GetAsync("/api/Event");
+            var response = await _client.GetAsync("/api/Event");
 
             //assert
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public async Task Post_ForEmptyEventList_ReturnOk()
+        {
+            //arrange
+            EventDto @event = new EventDto
+            {
+                Id = 5,
+                Name = "Dummy1",
+                Description = "Test",
+                Location = "testLocation",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(1),
+            };
+            //_eventRepository
+            //    .Setup(e => e.AddAsync())
+            //    .Returns(Task.FromResult(FakeDbEvents.EmptyEventList));
+            var serializeOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+            var json = JsonSerializer.Serialize(@event, serializeOptions);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            //act
+            var response = await _client.PostAsJsonAsync("/api/Event", @event);
+
+            //assert
+            _eventRepository.Verify(e => e.AddAsync(It.Is<Event>(x => x.Id == @event.Id && x.Name == @event.Name)), Times.Once);
         }
 
         [Theory]
@@ -101,10 +134,10 @@ namespace FoodTrakker.Api.IntegrationTests
                 .Returns(Task.FromResult<Event>(null));
 
             //act
-            Action response = () => _client.GetAsync($"/api/Event/0");
+            var response = await _client.GetAsync($"/api/Event/0");
 
             //assert
-            response.Should().Throw<NullReferenceException>();
+            //response.Should().Throw<NullReferenceException>();
         }
     }
 }
