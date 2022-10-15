@@ -128,5 +128,41 @@ namespace FoodTrakker.Api.IntegrationTests
             //assert
             _eventRepository.Verify(e => e.AddAsyncWithReturn(It.Is<Event>(x => eventApiPost.Description == x.Description && x.Name == eventApiPost.Name)), Times.Once);
         }
+
+        [Fact]
+        public async Task Post_ForProperInput_ReturnCreatedObject()
+        {
+            //arrange
+            EventApiPost eventApiPost = new EventApiPost
+            {
+                Name = "Dummy1",
+                Description = "Test",
+                Location = "testLocation",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(1),
+            };
+
+            var returnedEvent = new Event
+            {
+                Name = eventApiPost.Name,
+                Description = eventApiPost.Description,
+                Location = eventApiPost.Location,
+                StartDate = eventApiPost.StartDate,
+                EndDate = eventApiPost.EndDate
+            };
+
+            _eventRepository
+                .Setup(e => e.AddAsyncWithReturn(It.IsAny<Event>()))
+                .Returns(Task.FromResult(returnedEvent));
+
+            //act
+            var response = await _client.PostAsJsonAsync("/api/Event", eventApiPost);
+            var result = await response.Content.ReadFromJsonAsync<Event>();
+            //assert
+            result.Should().BeEquivalentTo(returnedEvent);
+        }
+
+
+
     }
 }
