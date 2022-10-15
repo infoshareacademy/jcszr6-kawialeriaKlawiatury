@@ -5,6 +5,7 @@ using FoodTrakker.Services;
 using FoodTrakker.Repository;
 using FoodTrakker.Services.DTOs;
 using FoodTrakkerWebAplication.Models.ViewModel;
+using System.Security.Claims;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
@@ -64,7 +65,22 @@ namespace FoodTrakkerWebAplication.Controllers
             }
             else
             {
-                foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
+                var foodTrucksNotInLocation = new List<FoodTruck>();
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (userId != null)
+                {
+                    foodTrucks = await _foodTruckService.GetFoodTrucksByUserLocation(userId);
+                    foodTrucksNotInLocation = await _foodTruckService.GetFoodTruckNotInUserLocation(userId);
+                    foreach (var foodTruck in foodTrucksNotInLocation)
+                    {
+                        foodTrucks.Add(foodTruck);
+                    }
+                }
+
+                if (userId == null)
+                {
+                    foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
+                }
             }
 
 
@@ -98,6 +114,7 @@ namespace FoodTrakkerWebAplication.Controllers
 
             return View(foodTruckDto);
         }
+
 
     }
 }
