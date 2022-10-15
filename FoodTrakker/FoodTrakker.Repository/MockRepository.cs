@@ -54,5 +54,10 @@ namespace FoodTrakker.Repository
         {
             throw new NotImplementedException();
         }
+
+        public Task<T> AddAsyncWithReturn(T entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

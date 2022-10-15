@@ -1,4 +1,6 @@
-﻿using FoodTrakker.Core.Model;
+﻿using AutoMapper;
+using FoodTrakker.Api.Models;
+using FoodTrakker.Core.Model;
 using FoodTrakker.Services;
 using FoodTrakker.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -12,92 +14,71 @@ namespace FoodTrakker.Api.Controllers
     public class EventController : ControllerBase
     {
         private readonly EventService _eventService;
-
-        public EventController(EventService eventService)
+        private readonly IMapper _mapper;
+        public EventController(EventService eventService, IMapper mapper)
         {
             _eventService = eventService;
+            _mapper = mapper;
         }
 
         // GET: api/<EventController>
         [HttpGet]
-        public IActionResult Get() => Ok(_eventService.GetEventsAsync());
-
+      // public IActionResult Get() => Ok(_eventService.GetEventsAsync());
+        public async Task<ICollection<EventApiGet>> Get()
+        {
+            var events = await _eventService.GetEventsAsync();
+            var eventsApiGet = _mapper.Map<ICollection<Event>,ICollection<EventApiGet>>(events);
+            return eventsApiGet;
+        }
         // GET api/<EventController>/5
         [HttpGet("{id}")]
-        public async Task<Event?> GetEventById(int id)
+        public async Task<EventApiGet?> GetEventById(int id)
         {
             var eventById = await _eventService.GetEventAsync(id);
+            var eventByIdApiGet = _mapper.Map<EventApiGet>(eventById);
 
             if (eventById is null)
             {
                 throw new NullReferenceException();
             }
 
-            return eventById;
+            return eventByIdApiGet;
         }
 
         // POST api/<EventController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] EventDto @event)
+        public async Task<EventApiGet> CreateEvent(EventApiPost eventDto)
         {
-            var e = new Event
-            {
-                Id = @event.Id,
-                Name = @event.Name
-            };
+            var @event = _mapper.Map<Event>(eventDto);
+            var eventWithId = await _eventService.AddEventAsyncWithReturn(@event);
 
-
-            await _eventService.AddEventAsync(e);
-
-            //var eventToAdd = _eventService.GetEventAsync(id);
-            //var events = _eventService.GetEventsAsync();
-            //events.Result.Add(new Event
-            //{
-            //    Name = eventToAdd.Result.Name,
-            //    Description = eventToAdd.Result.Description,
-            //    StartDate = eventToAdd.Result.StartDate,
-            //    EndDate = eventToAdd.Result.EndDate
-            //});
-
-            return Ok();
+            return _mapper.Map<EventApiGet>(eventWithId);
         }
+
 
         // PUT api/<EventController>/5
         [HttpPut("{id}")]
-        public Task<Event> UpdateEvent(Event eventUpdate)
+
+        public async Task<ActionResult<Event>> UpdateEvent([FromRoute]int id,EventApiPost eventApiPost)
         {
-            var events = _eventService.GetEventsAsync();
-            var eventToUpdate = events.Result.SingleOrDefault(e => e.Id == eventUpdate.Id);
+           
+            var eventUpdateGet = _mapper.Map<EventApiGet>(eventApiPost);
+            eventUpdateGet.Id = id;
+            var eventToUpdate = _mapper.Map<Event>(eventUpdateGet);
+            await _eventService.UpdateEvent(eventToUpdate);
 
-            eventToUpdate.Name = eventUpdate.Name;
-            eventToUpdate.Description = eventUpdate.Description;
-            eventToUpdate.StartDate = eventUpdate.StartDate;
-            eventToUpdate.EndDate = eventUpdate.EndDate;
-            eventToUpdate.Location = eventUpdate.Location;
+            return Ok();
 
-            if (eventToUpdate is null)
-            {
-                throw new ArgumentNullException(nameof(eventToUpdate));
-            }
-
-            return Task.FromResult(eventToUpdate);
         }
 
         // DELETE api/<EventController>/5
         [HttpDelete("{id:int}")]
-        public Task Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var events = _eventService.GetEventsAsync();
-            var eventToDelete = events.Result.SingleOrDefault(e => e.Id == id);
+            await _eventService.DeleteEvent(id);
+            return Ok();
 
-            if (eventToDelete == null)
-            {
-                throw new NullReferenceException();
-            }
 
-            events.Result.Remove(eventToDelete);
-
-            return Task.CompletedTask;
         }
     }
 }
