@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTrakker.Repository.Migrations
 {
     [DbContext(typeof(FoodTrakkerContext))]
-    [Migration("20220920080010_initMigration")]
-    partial class initMigration
+    [Migration("20221015083122_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -395,21 +395,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "c05c2622-1860-4c8d-9cd2-8df2d194505e",
+                            ConcurrencyStamp = "9d3cb622-73c9-47a6-8838-fdbd4aff2ff5",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "57a02442-f7b9-4231-9d09-c4ec00a61579",
+                            ConcurrencyStamp = "de6e503a-03b7-4ce0-8518-c60e452e3a67",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "b9720dc1-6c4c-4970-9280-025ae752897f",
+                            ConcurrencyStamp = "a2720a5f-77e2-48b4-a4c1-fa811636f8c6",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -468,12 +468,10 @@ namespace FoodTrakker.Repository.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -510,12 +508,10 @@ namespace FoodTrakker.Repository.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -572,7 +568,7 @@ namespace FoodTrakker.Repository.Migrations
                         .IsRequired();
 
                     b.HasOne("FoodTrakker.Core.Model.User", "User")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -657,6 +653,11 @@ namespace FoodTrakker.Repository.Migrations
                 {
                     b.Navigation("FoodTruckEvents");
 
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("FoodTrakker.Core.Model.User", b =>
+                {
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

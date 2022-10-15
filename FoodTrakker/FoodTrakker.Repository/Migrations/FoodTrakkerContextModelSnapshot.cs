@@ -17,7 +17,7 @@ namespace FoodTrakker.Repository.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -393,21 +393,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-                            ConcurrencyStamp = "613f268c-3378-4407-9fc9-dca30f2a2756",
+                            ConcurrencyStamp = "9d3cb622-73c9-47a6-8838-fdbd4aff2ff5",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-                            ConcurrencyStamp = "59864499-a0db-4883-9759-25dda68f17b2",
+                            ConcurrencyStamp = "de6e503a-03b7-4ce0-8518-c60e452e3a67",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-                            ConcurrencyStamp = "b518fb13-8cb3-4654-8f8a-cb8890fa7ad9",
+                            ConcurrencyStamp = "a2720a5f-77e2-48b4-a4c1-fa811636f8c6",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -466,12 +466,10 @@ namespace FoodTrakker.Repository.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -508,12 +506,10 @@ namespace FoodTrakker.Repository.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -570,7 +566,7 @@ namespace FoodTrakker.Repository.Migrations
                         .IsRequired();
 
                     b.HasOne("FoodTrakker.Core.Model.User", "User")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -655,6 +651,11 @@ namespace FoodTrakker.Repository.Migrations
                 {
                     b.Navigation("FoodTruckEvents");
 
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("FoodTrakker.Core.Model.User", b =>
+                {
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

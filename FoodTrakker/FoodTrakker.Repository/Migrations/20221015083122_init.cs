@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodTrakker.Repository.Migrations
 {
-    public partial class initMigration : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -147,8 +147,8 @@ namespace FoodTrakker.Repository.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -192,8 +192,8 @@ namespace FoodTrakker.Repository.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -321,9 +321,9 @@ namespace FoodTrakker.Repository.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "df456c69-021b-1234-a852-b32678f1alec", "b9720dc1-6c4c-4970-9280-025ae752897f", "User", "USER" },
-                    { "df456c89-021b-4342-a852-b32678f1alec", "57a02442-f7b9-4231-9d09-c4ec00a61579", "Owner", "OWNER" },
-                    { "df510c89-042b-4342-a852-b32678f1c1ce", "c05c2622-1860-4c8d-9cd2-8df2d194505e", "Administrator", "ADMINISTRATOR" }
+                    { "df456c69-021b-1234-a852-b32678f1alec", "a2720a5f-77e2-48b4-a4c1-fa811636f8c6", "User", "USER" },
+                    { "df456c89-021b-4342-a852-b32678f1alec", "de6e503a-03b7-4ce0-8518-c60e452e3a67", "Owner", "OWNER" },
+                    { "df510c89-042b-4342-a852-b32678f1c1ce", "9d3cb622-73c9-47a6-8838-fdbd4aff2ff5", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
