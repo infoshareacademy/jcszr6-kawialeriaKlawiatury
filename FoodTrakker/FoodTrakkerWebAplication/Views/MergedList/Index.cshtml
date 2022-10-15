@@ -5,10 +5,20 @@
 @{
     ViewData["Title"] = "Index";
 }
+<partial name="_NavbarPartial" />
+@if (User.IsInRole(Roles.Administrator))
+{ 
+    <ul class="navbar-nav flex-grow-1">
+        <li>
+            <a class="nav-link m-2" asp-area="" asp-controller="Owner" asp-action="Index" style=""><i class="bi bi-display"></i> My Panel</a>
+        </li>
+    </ul>
+}
 
-<h1>FoodTrucks List</h1>
+<h1>Avalible Food Trucks</h1>
+<br></br>
 
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
@@ -25,24 +35,23 @@
             </th>
         </tr>
     </thead>
-        
-         @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AvgRating)
-              
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                
-            </tr>
-        }
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvgRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+        </tr>
+    }
 </table>

@@ -3,11 +3,11 @@ using FoodTrakker.Repository;
 using FoodTrakker.Repository.Contracts;
 using FoodTrakker.Repository.Data;
 using FoodTrakker.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using FoodTrakker.Services.IdentityServices;
+using FoodTrakkerWebAplication.Middleware;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,9 +31,8 @@ var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
   {
       options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb"));
-      
-     // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-    });
+      // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+  });
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {
@@ -45,7 +44,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Lockout.AllowedForNewUsers = true;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.MaxFailedAccessAttempts = 3;
-   
+
     options.User.RequireUniqueEmail = true;
 })
     .AddRoles<IdentityRole>()
@@ -63,7 +62,7 @@ builder.Services.AddScoped<ITypeRepository, TypeRepository>();
 builder.Services.AddScoped<IRepository<FoodTruckType, int>, Repository<FoodTruckType, int>>();
 builder.Services.AddScoped<IRepository<Review, int>, Repository<Review, int>>();
 
-
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
@@ -75,13 +74,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication(); ;
 
 app.UseAuthorization();
 
