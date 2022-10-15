@@ -1,4 +1,6 @@
-﻿using FoodTrakker.Core.Model;
+﻿using AutoMapper;
+using FoodTrakker.Api.Models;
+using FoodTrakker.Core.Model;
 using FoodTrakker.Services.DTOs;
 using System.Text.Json;
 
@@ -9,6 +11,7 @@ namespace FoodTrakker.Api.IntegrationTests
         private HttpClient _client;
         private WebApplicationFactory<Program> _factory;
         private Mock<IEventRepository> _eventRepository = new Mock<IEventRepository>();
+
 
         public EventControllerTests()
         {
@@ -102,16 +105,15 @@ namespace FoodTrakker.Api.IntegrationTests
             var response = await _client.GetAsync($"/api/Event/50");
 
             //assert
-            response.StatusCode.Should().Be(System.Net.HttpStatusCode.InternalServerError);
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
         }
 
         [Fact]
         public async Task Post_ForProperInput_InvokeAddAsyncMethodOnce()
         {
             //arrange
-            EventDto @event = new EventDto
+            EventApiPost eventApiPost = new EventApiPost
             {
-                Id = 5,
                 Name = "Dummy1",
                 Description = "Test",
                 Location = "testLocation",
@@ -119,17 +121,12 @@ namespace FoodTrakker.Api.IntegrationTests
                 EndDate = DateTime.Now.AddDays(1),
             };
 
-            var serializeOptions = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true
-            };
 
             //act
-            var response = await _client.PostAsJsonAsync("/api/Event", @event);
+            var response = await _client.PostAsJsonAsync("/api/Event", eventApiPost);
 
             //assert
-            _eventRepository.Verify(e => e.AddAsync(It.Is<Event>(x => x.Id == @event.Id && x.Name == @event.Name)), Times.Once);
+            _eventRepository.Verify(e => e.AddAsyncWithReturn(It.Is<Event>(x => eventApiPost.Description == x.Description && x.Name == eventApiPost.Name)), Times.Once);
         }
     }
 }

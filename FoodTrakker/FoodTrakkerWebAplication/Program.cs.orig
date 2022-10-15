@@ -3,11 +3,11 @@ using FoodTrakker.Repository;
 using FoodTrakker.Repository.Contracts;
 using FoodTrakker.Repository.Data;
 using FoodTrakker.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using FoodTrakker.Services.IdentityServices;
+using FoodTrakkerWebAplication.Middleware;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,12 +25,20 @@ builder.Services.AddScoped<FavouritesFoodTruckService>();
 builder.Services.AddScoped<LocationService>();
 builder.Services.AddScoped<TypeService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<MergedListService>();
 
 var option = builder.Configuration.GetConnectionString("FoodTrakkerDb");
 builder.Services.AddDbContext<FoodTrakkerContext>(options =>
-  { options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb"));
+  {
+      options.UseSqlServer(builder.Configuration.GetConnectionString("FoodTrakkerDb"));
+<<<<<<< HEAD
+      // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+  });
+=======
+      
      // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     });
+>>>>>>> 30d77d61a0bbdae0fc36179b9b5401e1e9e361f6
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {
@@ -42,7 +50,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Lockout.AllowedForNewUsers = true;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.MaxFailedAccessAttempts = 3;
-   
+
     options.User.RequireUniqueEmail = true;
 })
     .AddRoles<IdentityRole>()
@@ -54,16 +62,13 @@ builder.Services.AddScoped<IRepository<Event, int>, EventRepository>();
 builder.Services.AddScoped<IFoodTruckRepository, FoodTruckRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
-<<<<<<< HEAD
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ITypeRepository, TypeRepository>();
-=======
-builder.Services.AddScoped<IRepository<FoodTruckType>, Repository<FoodTruckType>>();
-builder.Services.AddScoped<IRepository<Review>, Repository<Review>>();
+builder.Services.AddScoped<IRepository<FoodTruckType, int>, Repository<FoodTruckType, int>>();
+builder.Services.AddScoped<IRepository<Review, int>, Repository<Review, int>>();
 
->>>>>>> feat/FTsearch
-
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
@@ -75,13 +80,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication(); ;
 
 app.UseAuthorization();
 
