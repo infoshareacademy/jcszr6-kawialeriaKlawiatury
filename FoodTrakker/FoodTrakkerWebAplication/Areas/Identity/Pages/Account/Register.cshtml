@@ -9,13 +9,13 @@
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card shadow-2-strong" style="border-radius: 1rem;">
-          <div class="card-body p-5 text-center">
+					<div class="card-body p-5 text-center">
 
-            <@*h3 class="mb-5">Register</h3>*@
+            @*h3 class="mb-5">Register</h3>*@
 
 			<form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 				<h2>Create a new account</h2>
-				<hr />
+				<hr/>
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 				<div class="form-floating">
 					<input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" />
@@ -89,7 +89,7 @@
     </div>
   </div>
 </section>
-
+</br></br><br/></br>
 @*<div class="container">
 	<h1>@ViewData["Title"]</h1>
 	<div class="row">
