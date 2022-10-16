@@ -31,6 +31,10 @@ namespace FoodTrakker.Repository
         public async Task DeleteAsync(IndexType id)
         {
             var objectToDelete = await GetAsync(id);
+            if(objectToDelete == null)
+            {
+                return;
+            }
             _context.Remove(objectToDelete);
             await _context.SaveChangesAsync(true);
         }

@@ -85,6 +85,11 @@ namespace FoodTrakker.Api.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
+            var eventToDelete = await _eventService.GetEventAsync(id);
+            if (eventToDelete is null)
+            {
+                return NotFound();
+            }
             await _eventService.DeleteEvent(id);
             return Ok();
 
