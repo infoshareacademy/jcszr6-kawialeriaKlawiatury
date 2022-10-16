@@ -165,3 +165,19 @@ body {
 #centered{
     margin-left: 50px;
 }
+
+
+.centerSearch{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.removeDec {
+    text-decoration: none;
+    color: white;
+    text-transform: lowercase;
+}
+
+.removeDec:hover {
+    color: #96acdb;
+}

@@ -1,28 +1,37 @@
 ﻿@using Microsoft.AspNetCore.Identity
 
-<div>
-    <body>
-        <form class="row domain-search bg-pblue d-none d-lg-block">
-            <div class="row">
-                <div>
-                    <h1 style="color:whitesmoke; text-align:center; font-size:64px;">Find your favourite Food Truck!</h1>
-                    <div>
-                        <p style="color:whitesmoke; text-align:center; ">Enter a city or name of a food truck to see where the delicious food is waiting for you</p>
-                    </div>
-                    <br>
-                    </br>
-                </div>
-                <br>
-                </br>
-            </div>
-            <div style="margin-left:20%; align-content:center; width:60%" class="align-content-lg-center">
+@{
+	var types = ViewBag.Types;
+}
 
-                <div style="align-items:center" class="input-group">
-                    <input style="align-items:center" name="searchString" type="search" class="form-control" placeholder="Search by type, name, or city...">
-                    <span class="input-group-addon"><input type="submit" value="search" class="btn btn-primary"></span>
-                </div>
-                <p><strong>mexican</strong><strong>thai</strong><strong>vegetarian</strong><strong>burger</strong></p>
-            </div>
-        </form>
-    </body>
+<div>
+	<body>
+		<form class="row domain-search bg-pblue d-none d-lg-block centerSearch">
+			<div class="row">
+				<div>
+					<h1 style="color:whitesmoke; text-align:center; font-size:64px;">Find your favourite Food Truck!</h1>
+					<div>
+						<p style="color:whitesmoke; text-align:center; ">Enter a name of a food truck to see where the delicious food is waiting for you</p>
+					</div>
+					<br>
+					</br>
+				</div>
+				<br>
+				</br>
+			</div>
+			<div style="margin-left:20%; align-content:center; width:60%" class="align-content-lg-center">
+
+				<div style="align-items:center" class="input-group">
+					<input style="align-items:center" name="searchString" type="search" class="form-control" placeholder="Search food truck...">
+					<span class="input-group-addon"><input type="submit" value="search" class="btn btn-primary"></span>
+				</div>
+				<p>
+					@foreach (var type in types)
+					{
+							<strong><a asp-controller="FoodTrucks" asp-action="Index" asp-route-Type="@type.Name" class="removeDec">@type.Name</a></strong>
+						@* <strong>@type.Name</strong>*@
+					}
+			</div>
+		</form>
+	</body>
 </div>

@@ -14,16 +14,21 @@ namespace FoodTrakkerWebAplication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly FoodTruckService _foodTruckService;
+        private readonly TypeService _typeService;
         private readonly IMapper _mapper;
         //private readonly IRepository<Event> _eventRepository;
         //private readonly IRepository<FoodTruck> _foodTruckRepository;
 
 
-        public HomeController(ILogger<HomeController> logger, FoodTruckService foodTruckService, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger,
+            FoodTruckService foodTruckService,
+            TypeService typeService,
+            IMapper mapper)
         {
             _logger = logger;
             _foodTruckService = foodTruckService;
             _mapper = mapper;
+            _typeService = typeService;
         }
 
         public async Task<IActionResult> Index(string searchString)
@@ -40,7 +45,7 @@ namespace FoodTrakkerWebAplication.Controllers
             }
 
 
-
+            ViewBag.Types = await _typeService.GetRandomTypesAsync(4);
             var foodTruckDtos = _mapper.Map<List<FoodTruck>, List<FoodTruckDto>>(foodTrucks);
 
             return View(foodTruckDtos);
