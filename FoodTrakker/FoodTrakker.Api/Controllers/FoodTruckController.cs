@@ -24,7 +24,7 @@ namespace FoodTrakker.Api.Controllers
 
         // GET: api/<FoodTruckController>
         [HttpGet]
-       
+
         public IActionResult Get() => Ok(_foodTruckService.GetFoodTrucksAsync());
 
         // GET api/<FoodTruckController>/5
