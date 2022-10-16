@@ -181,3 +181,8 @@ body {
 .removeDec:hover {
     color: #96acdb;
 }
+
+.foodTruckListView{
+    margin-left: 290px;
+    padding-left: 20px;
+}
