@@ -127,7 +127,7 @@ body {
 }
 
 .starFade {
-    background-image: url('/img/StarGlow.png');
+    background-image: url('/img/StarFade.png');
     min-width: 26px;
     min-height: 26px;
     display: inline-block;
