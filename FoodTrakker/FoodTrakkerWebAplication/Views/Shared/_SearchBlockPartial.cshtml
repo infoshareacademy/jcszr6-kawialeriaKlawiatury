@@ -23,7 +23,7 @@
 
 				<div style="align-items:center" class="input-group">
 					<input style="align-items:center" name="searchString" type="search" class="form-control" placeholder="Search food truck...">
-					<span class="input-group-addon"><input type="submit" value="search" class="btn btn-primary"></span>
+					<span class="input-group-addon"><input type="submit" asp-controller="FoodTrucks" asp-action="Index" value="search" class="btn btn-primary"></span>
 				</div>
 				<p>
 					@foreach (var type in types)
