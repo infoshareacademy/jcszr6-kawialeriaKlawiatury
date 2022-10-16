@@ -18,11 +18,23 @@ namespace FoodTrakker.Repository
         {
             await _context.AddAsync(entity);
             await _context.SaveChangesAsync();
+
+        }
+        public async Task<T> AddAsyncWithReturn(T entity)
+        {
+            var x = await _context.AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return x.Entity;
+
         }
 
         public async Task DeleteAsync(IndexType id)
         {
             var objectToDelete = await GetAsync(id);
+            if(objectToDelete == null)
+            {
+                return;
+            }
             _context.Remove(objectToDelete);
             await _context.SaveChangesAsync(true);
         }
@@ -39,6 +51,10 @@ namespace FoodTrakker.Repository
 
         public async Task UpdateAsync(T entity)
         {
+            if (entity == null)
+            {
+                return;
+            }
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
