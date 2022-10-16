@@ -21,7 +21,7 @@ namespace FoodTrakkerWebAplication.Controllers
         private readonly FavouritesFoodTruckService _favouritesFoodTruckService;
         private readonly UserService _userService;
         private readonly IMapper _mapper;
-        
+
 
         public UserController(EventService eventService, FoodTruckService foodTruckService,
             ReviewService reviewService,FavouritesFoodTruckService favouritesFoodTruckService,
@@ -34,11 +34,11 @@ namespace FoodTrakkerWebAplication.Controllers
             _favouritesFoodTruckService = favouritesFoodTruckService;
             _userService = userService;
             _mapper = mapper;
-            
+
         }
         public async Task<ActionResult> Index()
         {
-           
+
             var foodTrucks = await _foodTruckService.GetFullFoodTruckInfoAsync();
             var foodTruckDto = _mapper.Map<ICollection<FoodTruck>,
                 ICollection<FoodTruckDto>>(foodTrucks);
@@ -54,13 +54,13 @@ namespace FoodTrakkerWebAplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateReview(ReviewDto reviewDto)
-        { 
+        {
             User user = null;
             var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
             user = await _userService.GetUserAsync(x.Value);
             var review = _mapper.Map<Review>(reviewDto);
             review.Id = 0;
-            review.User = user; 
+            review.User = user;
             if (!ModelState.IsValid)
             {
                 return View(review);
@@ -68,7 +68,7 @@ namespace FoodTrakkerWebAplication.Controllers
 
             try
             {
-               await _reviewService.AddReview(review);       
+               await _reviewService.AddReview(review);
                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "Thank You for Your opinion!");
                return RedirectToAction("Details","FoodTrucks",new { id = reviewDto.FoodTruckId });
             }
@@ -86,11 +86,12 @@ namespace FoodTrakkerWebAplication.Controllers
                 var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
 
                foodTruck= await _favouritesFoodTruckService.AddFoodTruckToFavourites(id, x.Value);
+                
                foodTruckDto = _mapper.Map<FoodTruck,FoodTruckDto>(foodTruck);
                foodTruckDto.IsAddedToFav = await _foodTruckService.IsAddedToFav(id, x.Value);
                foodTruckDto.HasCurrentUserReview = await _foodTruckService.HasFoodTruckReviewFromUser(id, x.Value);
                ViewBag.Alert = AlertsService.ShowAlert(Alerts.Success, "You've got new favourite FoodTruck!");
-                
+
             }catch(Exception ex)
             {
                 ViewBag.Alert = AlertsService.ShowAlert(Alerts.Danger, "Something went wrong!");
@@ -103,7 +104,7 @@ namespace FoodTrakkerWebAplication.Controllers
         {
             FoodTruck foodTruck = null;
             FoodTruckDto foodTruckDto = null;
-         
+
             try
             {
                 var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
@@ -128,7 +129,7 @@ namespace FoodTrakkerWebAplication.Controllers
             ICollection<FoodTruckDto> foodTrucksDto = null;
             var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
             foodTrucks = await _favouritesFoodTruckService.FavFoodTrucks(x.Value);
-            foodTrucksDto = _mapper.Map<ICollection<FoodTruck>,ICollection<FoodTruckDto>>(foodTrucks);    
+            foodTrucksDto = _mapper.Map<ICollection<FoodTruck>,ICollection<FoodTruckDto>>(foodTrucks);
             if (foodTrucksDto!= null)
             {
 
@@ -144,7 +145,7 @@ namespace FoodTrakkerWebAplication.Controllers
             var x = User.Claims.FirstOrDefault(c => c.Type == @"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
             reviews = await _favouritesFoodTruckService.UserReviews(x.Value);
             reviewsDto = _mapper.Map<List<Review>, List<ReviewDto>>(reviews);
-                       
+
             if (reviewsDto!= null)
             {
 
@@ -153,6 +154,6 @@ namespace FoodTrakkerWebAplication.Controllers
 
             return NotFound();
         }
-      
+
     }
 }

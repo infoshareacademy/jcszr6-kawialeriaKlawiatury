@@ -13,11 +13,7 @@ html {
     min-height: 100%;
 }
 
-* {
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 100;
-}
+
 .FTbox {
     text-align:center;
     width: 100%;
@@ -65,10 +61,6 @@ body {
         top: 1px;
     }
 
-.FTNavPadding {
-    padding-left: 10px;
-
-}
 
 .FTLoginButton {
     box-shadow: inset 0px 1px 0px 0px #ffffff;
@@ -123,25 +115,6 @@ body {
 
 
 
-.FTImageCarousel {
-    height: 500px;
-
-}
-
-.FTImage {
-    filter: blur(5px);
-}
-
-.FTCarousel {
-    top: 0;
-    left: 0;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    width: auto;
-
-}
-
-
 
 .FTNameButton:hover {
     background-color: #f5e3b0;
@@ -154,32 +127,32 @@ body {
 }
 
 .starFade {
-    background-image: url('/img/StarGlow.png');
-    min-width: 20px;
-    min-height: 20px;
+    background-image: url('/img/StarFade.png');
+    min-width: 26px;
+    min-height: 26px;
     display: inline-block;
     cursor: pointer;
 }
 
 .starFadeN {
     background-image: url('/img/StarFade.png');
-    min-width: 20px;
-    min-height: 20px;
+    min-width: 26px;
+    min-height: 26px;
     display: inline-block;
 }
 
 .starGlow {
     background-image: url('/img/StarGlow.png');
-    min-width: 20px;
-    min-height: 20px;
+    min-width: 26px;
+    min-height: 26px;
     display: inline-block;
     cursor: pointer;
 }
 
 .starGlowN {
     background-image: url('/img/StarGlow.png');
-    min-width: 20px;
-    min-height: 20px;
+    min-width: 26px;
+    min-height: 26px;
     display: inline-block;
 }
 
@@ -187,4 +160,29 @@ body {
 #Error500{
     width: 700px;
     height: 470px;
+}
+
+#centered{
+    margin-left: 50px;
+}
+
+
+.centerSearch{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.removeDec {
+    text-decoration: none;
+    color: white;
+    text-transform: lowercase;
+}
+
+.removeDec:hover {
+    color: #96acdb;
+}
+
+.foodTruckListView{
+    margin-left: 290px;
+    padding-left: 20px;
 }

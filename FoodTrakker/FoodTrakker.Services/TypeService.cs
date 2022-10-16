@@ -26,5 +26,31 @@ namespace FoodTrakker.Services
             return _typeRepository.GetAsync(Id);
         }
 
+        public async Task<List<FoodTruckType>> GetRandomTypesAsync(int number)
+        {
+            var typesToShow = new List<FoodTruckType>();
+            var types = await GetTypesAsync();
+            var counter = 0;
+            var randomNumberControll = new List<int>();
+            Random random = new Random();
+            if (types != null)
+            {
+                while (counter < number && counter < types.Count)
+                {
+                    int randomNumber = random.Next(0, types.Count);
+                    if (randomNumberControll.Contains(randomNumber))
+                    {
+                        continue;
+                    }
+                    randomNumberControll.Add(randomNumber);
+                    typesToShow.Add(types[randomNumber]);
+                    counter++;
+                }
+            }
+            return typesToShow;
+        }
+
+
+
     }
 }
