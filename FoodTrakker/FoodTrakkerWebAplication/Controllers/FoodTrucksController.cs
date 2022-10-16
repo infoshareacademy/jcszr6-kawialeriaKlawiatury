@@ -6,6 +6,7 @@ using FoodTrakker.Repository;
 using FoodTrakker.Services.DTOs;
 using FoodTrakkerWebAplication.Models.ViewModel;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FoodTrakkerWebAplication.Controllers
 {
@@ -95,6 +96,15 @@ namespace FoodTrakkerWebAplication.Controllers
             {
                 (ftBto.AvgRating, ftBto.ReviewsTotalCount) = await _foodTruckService.AvgRatingCount(ftBto.Id);
             }
+
+            ViewBag.RatingList = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "1", Value = "1"},
+                new SelectListItem{Text = "2", Value = "2"},
+                new SelectListItem{Text = "3", Value = "3"},
+                new SelectListItem{Text = "4", Value = "4"},
+                new SelectListItem{Text = "5", Value = "5"},
+            };
 
             return View(foodTruckTypeDto);
         }

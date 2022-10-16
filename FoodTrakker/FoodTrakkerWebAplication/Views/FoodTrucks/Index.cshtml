@@ -65,18 +65,13 @@
 				<li>
 					<form asp-controller="FoodTrucks" asp-action="Index" method="get">
 						<div class="input-group mb-3">
-							<select class="form-control" >
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-@*								@for (int i = 1; i <= 5; i++)
+							<select class="form-control" name="averageRating">
+								@for (int i = 1; i <= 5; i++)
 								{
 									<option value="@i">@i</option>
-								}*@
+								}
 							</select>
-							<input class="btn btn-primary" name="averageRating" type="submit" id="button-addon2;" value="Filter" />
+							<input class="btn btn-primary" type="submit" id="button-addon2;" value="Filter"/>
 							<div class="input-group-append">
 							</div>
 					</form>
@@ -143,7 +138,6 @@
 						@Html.ActionLink("More info", "Details", new {id = item.Id}, new {@class="btn btn-primary"})
 					</div>
 					<div class="card-footer text-muted">
-
 					</div>
 				</div>
 			</div>
