@@ -12,18 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodTrakker.Repository.Migrations
 {
     [DbContext(typeof(FoodTrakkerContext))]
-<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-<<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220917130145_initialMigration.Designer.cs
-    [Migration("20220917130145_initialMigration")]
-    partial class initialMigration
-========
-    [Migration("20220825121457_Initial")]
-    partial class Initial
->>>>>>>> NewestBranchToWorkOnIT:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-=======
-    [Migration("20220920090028_Init")]
-    partial class Init
->>>>>>> FrontEnd:FoodTrakker/FoodTrakker.Repository/Migrations/20220920090028_Init.Designer.cs
+    [Migration("20221021085314_Inital")]
+    partial class Inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -268,14 +258,7 @@ namespace FoodTrakker.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-<<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220917130145_initialMigration.Designer.cs
                         .IsRequired()
-========
->>>>>>>> NewestBranchToWorkOnIT:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-=======
-                        .IsRequired()
->>>>>>> FrontEnd:FoodTrakker/FoodTrakker.Repository/Migrations/20220920090028_Init.Designer.cs
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -412,45 +395,21 @@ namespace FoodTrakker.Repository.Migrations
                         new
                         {
                             Id = "df510c89-042b-4342-a852-b32678f1c1ce",
-<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-<<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220917130145_initialMigration.Designer.cs
-                            ConcurrencyStamp = "01e44725-366a-4664-9315-6d52422ad076",
-========
-                            ConcurrencyStamp = "fc4b03e5-0eef-4887-9e39-3878ae823fec",
->>>>>>>> NewestBranchToWorkOnIT:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-=======
-                            ConcurrencyStamp = "bb9b1d05-6fdf-4c13-8677-5b2c0727f34a",
->>>>>>> FrontEnd:FoodTrakker/FoodTrakker.Repository/Migrations/20220920090028_Init.Designer.cs
+                            ConcurrencyStamp = "abe723b0-4405-44fb-8532-dea3af76b5e7",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "df456c89-021b-4342-a852-b32678f1alec",
-<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-<<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220917130145_initialMigration.Designer.cs
-                            ConcurrencyStamp = "d805306b-1981-432f-8f20-cd950a3dd396",
-========
-                            ConcurrencyStamp = "1e05cef1-72ed-4074-9f7f-9c2a0d2d7f9b",
->>>>>>>> NewestBranchToWorkOnIT:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-=======
-                            ConcurrencyStamp = "264454c9-2770-49ad-a055-af152c4a05af",
->>>>>>> FrontEnd:FoodTrakker/FoodTrakker.Repository/Migrations/20220920090028_Init.Designer.cs
+                            ConcurrencyStamp = "d67540ec-8084-422e-bfc9-5841d93026fe",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = "df456c69-021b-1234-a852-b32678f1alec",
-<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-<<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220917130145_initialMigration.Designer.cs
-                            ConcurrencyStamp = "12916309-4b49-4e30-a67d-e85372b222cc",
-========
-                            ConcurrencyStamp = "df3f7929-a99c-4496-b138-0d43ed053d9b",
->>>>>>>> NewestBranchToWorkOnIT:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-=======
-                            ConcurrencyStamp = "acaf5663-d3f9-4877-ac7e-411f91103dd1",
->>>>>>> FrontEnd:FoodTrakker/FoodTrakker.Repository/Migrations/20220920090028_Init.Designer.cs
+                            ConcurrencyStamp = "8246f018-1e9e-44aa-a086-63525ee846e3",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -613,20 +572,10 @@ namespace FoodTrakker.Repository.Migrations
                         .IsRequired();
 
                     b.HasOne("FoodTrakker.Core.Model.User", "User")
-                        .WithMany()
-<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-<<<<<<<< HEAD:FoodTrakker/FoodTrakker.Repository/Migrations/20220917130145_initialMigration.Designer.cs
+                        .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-========
-                        .HasForeignKey("UserId");
->>>>>>>> NewestBranchToWorkOnIT:FoodTrakker/FoodTrakker.Repository/Migrations/20220825121457_Initial.Designer.cs
-=======
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
->>>>>>> FrontEnd:FoodTrakker/FoodTrakker.Repository/Migrations/20220920090028_Init.Designer.cs
 
                     b.Navigation("FoodTruck");
 
@@ -708,6 +657,11 @@ namespace FoodTrakker.Repository.Migrations
                 {
                     b.Navigation("FoodTruckEvents");
 
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("FoodTrakker.Core.Model.User", b =>
+                {
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
